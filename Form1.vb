@@ -27,7 +27,7 @@ Public Class Form1
         Dim d11, d12, d22 As Double
         Dim E_steel, shaft_radius, shaft_overhang_radius, I1_shaft, I2_overhung As Double
         Dim JP_imp, JA_imp As Double
-        Dim om1, om2, om3, om4, om10, om20, term1, term2 As Double
+        Dim om10, om20, term1, term2 As Double
         Dim om_krit1, om_krit2 As Double
 
         E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
@@ -36,8 +36,8 @@ Public Class Form1
         L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
         massa = NumericUpDown4.Value                        'Weight waaier [kg]
 
-        C1 = NumericUpDown6.Value * 10 ^ 6                  '[N/mm]
-        C2 = NumericUpDown7.Value * 10 ^ 6                  '[N/mm]
+        C1 = NumericUpDown6.Value * 1000                    '[N/mm]
+        C2 = NumericUpDown7.Value * 1000                    '[N/mm]
         shaft_radius = NumericUpDown8.Value / 2             '[mm] as tussen de lagers radius
         shaft_overhang_radius = NumericUpDown9.Value / 2    '[mm] as tussen de lagers radius
         JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
@@ -66,21 +66,21 @@ Public Class Form1
         d22 += (L2 - L3) / (E_steel * I2_overhung)
         d22 *= 1000                                             '[1/(meter.N)]
 
-        speed_rad = -3060                   'Init value
-        For i = 1 To 1000                   'Array size
-            speed_rad += 30                 'run from -3000 to +3000
-            om1 = 1 / (d22 * JP_imp * speed_rad)
-            om2 = Sqrt(d22 / (massa * (d11 * d22 - d12 ^ 2)))
-            om3 = om2
-            om4 = JP_imp / JA_imp * speed_rad
+        'speed_rad = -3060                   'Init value
+        'For i = 1 To 1000                   'Array size
+        '    speed_rad += 30                 'run from -3000 to +3000
+        '    om1 = 1 / (d22 * JP_imp * speed_rad)
+        '    om2 = Sqrt(d22 / (massa * (d11 * d22 - d12 ^ 2)))
+        '    om3 = om2
+        '    om4 = JP_imp / JA_imp * speed_rad
 
-            '--------- store in array for later use -----
-            omega0(i) = speed_rad          '[Hz] waaier snelheid in Hz
-            omega1(i) = om1 'rad_to_hz(om1)           '[Hz]
-            omega2(i) = om2 'rad_to_hz(om2)           '[Hz]
-            omega3(i) = om3 'rad_to_hz(om3)           '[Hz]
-            omega4(i) = om4 'rad_to_hz(om4)           '[Hz]
-        Next
+        '    '--------- store in array for later use -----
+        '    omega0(i) = speed_rad          '[Hz] waaier snelheid in Hz
+        '    omega1(i) = om1 'rad_to_hz(om1)           '[Hz]
+        '    omega2(i) = om2 'rad_to_hz(om2)           '[Hz]
+        '    omega3(i) = om3 'rad_to_hz(om3)           '[Hz]
+        '    omega4(i) = om4 'rad_to_hz(om4)           '[Hz]
+        'Next
 
         TextBox16.Clear()
         '----------------------- formel 5.33 ------------------------
@@ -120,17 +120,6 @@ Public Class Form1
         TextBox3.Text = d12.ToString("0.###e0")                     'gamma en delta
         TextBox4.Text = d22.ToString("0.###e0")                     'beta
 
-        TextBox7.Text = Math.Round(rad_to_hz(om1), 1).ToString         'Omega 1 [Hz]
-        TextBox8.Text = Math.Round(rad_to_hz(om2), 0).ToString         'Omega 2 [Hz]
-        TextBox9.Text = Math.Round(rad_to_hz(om3), 0).ToString         'Omega 3 [Hz]
-        TextBox10.Text = Math.Round(rad_to_hz(om4), 0).ToString        'Omega 4 [Hz]
-
-        TextBox37.Text = Math.Round(om1, 0).ToString            'Omega 1 [Rad/s]
-        TextBox38.Text = Math.Round(om2, 0).ToString            'Omega 2 [Rad/s]
-        TextBox39.Text = Math.Round(om3, 0).ToString            'Omega 3 [Rad/s]
-        TextBox36.Text = Math.Round(om4, 0).ToString            'Omega 4 [Rad/s]
-
-
         TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString    'om_krit1 [Hz]
         TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString    'om_krit2 [Hz]
 
@@ -139,7 +128,6 @@ Public Class Form1
 
         TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
         TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
-
 
         TextBox1.Text = Math.Round(rad_to_hz(om_krit1) * 60, 0).ToString   'om_krit1 [rmp]
         TextBox13.Text = Math.Round(rad_to_hz(om_krit2) * 60, 0).ToString  'om_krit2 [rmp]
@@ -155,14 +143,14 @@ Public Class Form1
     Private Sub draw_chart1()
 
         Dim hh, limit As Integer
-        Dim om10, om20 As Double
+        Dim om10, om20, krit1 As Double
 
         Try
             Chart1.Series.Clear()
             Chart1.ChartAreas.Clear()
             Chart1.Titles.Clear()
 
-            For hh = 0 To 7
+            For hh = 0 To 8
                 Chart1.Series.Add("s" & hh.ToString)
                 Chart1.Series(hh).ChartType = SeriesChartType.Line
                 Chart1.Series(hh).IsVisibleInLegend = False
@@ -170,12 +158,14 @@ Public Class Form1
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
-            Chart1.Titles.Add("Campbell diagram, anisotropic short bearings, flex shaft")
-            Chart1.Titles(0).Font = New Font("Arial", 16, System.Drawing.FontStyle.Bold)
+            Chart1.Titles.Add("Campbell diagram, overhung, anisotropic short bearings, flex shaft")
+            Chart1.Titles(0).Font = New Font("Arial", 14, System.Drawing.FontStyle.Bold)
 
             Chart1.Series(0).Name = "Omg1"
-            Chart1.Series(0).Color = Color.LightGreen
+            Chart1.Series(0).Color = Color.Black
             Chart1.Series(0).BorderWidth = 1
+            Chart1.Series(5).Color = Color.Black
+            Chart1.Series(5).BorderWidth = 2
 
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Hoeksnelheid waaier[rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
@@ -189,36 +179,33 @@ Public Class Form1
 
             Double.TryParse(TextBox34.Text, om10)
             Double.TryParse(TextBox35.Text, om20)
+            Double.TryParse(TextBox32.Text, krit1)
 
             Chart1.Series(6).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
             Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
+            Chart1.Series(8).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
+
 
             Chart1.Series(6).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(6).Points(0).MarkerSize = 10
             Chart1.Series(7).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(7).Points(0).MarkerSize = 10
+            Chart1.Series(8).Points(0).MarkerStyle = MarkerStyle.Diamond
+            Chart1.Series(8).Points(0).MarkerSize = 15
+
 
             limit = 4000                'Limit in [rad/s]
             For hh = 1 To 1000          'Array size
-
-                If omega0(hh) < limit And omega0(hh) > 0 Then
-                    Chart1.Series(4).Points.AddXY(omega0(hh), omega0(hh))
-                End If
-                ' If omega1(hh) < limit And omega1(hh) > -limit Then Chart1.Series(0).Points.AddXY(omega0(hh), omega1(hh))
-                ' If omega2(hh) < limit And omega2(hh) > -limit Then Chart1.Series(1).Points.AddXY(omega0(hh), omega2(hh))
-                ' If omega3(hh) < limit And omega3(hh) > -limit Then Chart1.Series(2).Points.AddXY(omega0(hh), omega3(hh))
-                ' If omega4(hh) < limit And omega4(hh) > -limit Then Chart1.Series(3).Points.AddXY(omega0(hh), omega4(hh))
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
                 End If
                 TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
             Next
+            Chart1.Series(0).Points.AddXY(0, 0)
+            Chart1.Series(0).Points.AddXY(limit / 2, limit / 2)
+            Chart1.Series(0).Points.AddXY(limit, limit)
 
-            Chart1.Series(0).Points(10).Label = "Omega 1 (tegenloop)"       'Add Remark 
-            Chart1.Series(1).Points(100).Label = "Omega 2 (meeloop)"        'Add Remark 
-            Chart1.Series(2).Points(100).Label = "Omega 3 (tegenloop)"      'Add Remark 
-            Chart1.Series(3).Points(80).Label = "Omega 4 (meeloop)"         'Add Remark 
-            Chart1.Series(4).Points(100).Label = "Onbalans"                 'Add Remark 
+            Chart1.Series(0).Points(1).Label = "Onbalans"       'Add Remark 
         Catch ex As Exception
             'MessageBox.Show("nnnnnn")
         End Try
