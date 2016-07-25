@@ -7,13 +7,13 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Globalization
 
 Public Class Form1
-    Dim omega0(4001) As Double           'Excitation equal to waaier Hz
-    Dim omega1(4001) As Double           'For calculation on Eigen frequency
-    Dim omega2(4001) As Double           'For calculation on Eigen frequency
-    Dim omega3(4001) As Double           'For calculation on Eigen frequency
-    Dim omega4(4001) As Double           'For calculation on Eigen frequency
+    Dim omega0(1001) As Double           'Excitation equal to waaier Hz
+    Dim omega1(1001) As Double           'For calculation on Eigen frequency
+    Dim omega2(1001) As Double           'For calculation on Eigen frequency
+    Dim omega3(1001) As Double           'For calculation on Eigen frequency
+    Dim omega4(1001) As Double           'For calculation on Eigen frequency
 
-    Dim form533(4000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
+    Dim form533(1000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged
@@ -66,8 +66,9 @@ Public Class Form1
         d22 += (L2 - L3) / (E_steel * I2_overhung)
         d22 *= 1000                                             '[1/(meter.N)]
 
-        For i = 1 To 4000                        'Waaier hoeksnelheid [rad/s]
-            speed_rad = i - 2000                 'run from -200 to +200
+        speed_rad = -3060                   'Init value
+        For i = 1 To 1000                   'Array size
+            speed_rad += 30                 'run from -3000 to +3000
             om1 = 1 / (d22 * JP_imp * speed_rad)
             om2 = Sqrt(d22 / (massa * (d11 * d22 - d12 ^ 2)))
             om3 = om2
@@ -75,21 +76,23 @@ Public Class Form1
 
             '--------- store in array for later use -----
             omega0(i) = speed_rad          '[Hz] waaier snelheid in Hz
-            omega1(i) = rad_to_hz(om1)           '[Hz]
-            omega2(i) = rad_to_hz(om2)           '[Hz]
-            omega3(i) = rad_to_hz(om3)           '[Hz]
-            omega4(i) = rad_to_hz(om4)           '[Hz]
+            omega1(i) = om1 'rad_to_hz(om1)           '[Hz]
+            omega2(i) = om2 'rad_to_hz(om2)           '[Hz]
+            omega3(i) = om3 'rad_to_hz(om3)           '[Hz]
+            omega4(i) = om4 'rad_to_hz(om4)           '[Hz]
         Next
 
-        '----------------------- formel 5.33 ------------------------
         TextBox16.Clear()
-        For i = 1 To 4000                   'Waaier hoeksnelheid [rad/s]
-            speed_rad = i - 2000              'run from -200 to +200
-            form533(i, 0) = speed_rad                                         'Waaier hoeksnelheid [rad/s]
+        '----------------------- formel 5.33 ------------------------
+        speed_rad = -3060                   'Init value
+        For i = 1 To 1000                   'Array size
+            speed_rad += 30                 'run from -3000 to +3000 [rad/s]
+            form533(i, 0) = speed_rad       'Waaier hoeksnelheid [rad/s]
 
-            form533(i, 1) = -1 + speed_rad ^ 2 * d11 * massa
-            form533(i, 1) /= d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2) * JP_imp * speed_rad
+            form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
+            form533(i, 1) /= (d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2)) * JP_imp * speed_rad
             form533(i, 1) += JA_imp / JP_imp * speed_rad
+
         Next
 
         '----------- Omega kritisch #1 ------------------
@@ -117,22 +120,36 @@ Public Class Form1
         TextBox3.Text = d12.ToString("0.###e0")                     'gamma en delta
         TextBox4.Text = d22.ToString("0.###e0")                     'beta
 
-        TextBox7.Text = Math.Round(rad_to_hz(om1), 1).ToString            'Omega 1 [Hz]
-        TextBox8.Text = Math.Round(rad_to_hz(om2), 1).ToString            'Omega 2 [Hz]
-        TextBox9.Text = Math.Round(rad_to_hz(om3), 1).ToString            'Omega 3 [Hz]
-        TextBox10.Text = Math.Round(rad_to_hz(om4), 1).ToString           'Omega 4 [Hz]
+        TextBox7.Text = Math.Round(rad_to_hz(om1), 1).ToString         'Omega 1 [Hz]
+        TextBox8.Text = Math.Round(rad_to_hz(om2), 0).ToString         'Omega 2 [Hz]
+        TextBox9.Text = Math.Round(rad_to_hz(om3), 0).ToString         'Omega 3 [Hz]
+        TextBox10.Text = Math.Round(rad_to_hz(om4), 0).ToString        'Omega 4 [Hz]
 
-        TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString       'om_krit1 [Hz]
-        TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString       'om_krit2 [Hz]
+        TextBox37.Text = Math.Round(om1, 0).ToString            'Omega 1 [Rad/s]
+        TextBox38.Text = Math.Round(om2, 0).ToString            'Omega 2 [Rad/s]
+        TextBox39.Text = Math.Round(om3, 0).ToString            'Omega 3 [Rad/s]
+        TextBox36.Text = Math.Round(om4, 0).ToString            'Omega 4 [Rad/s]
 
-        TextBox11.Text = Math.Round(rad_to_hz(om10), 1).ToString          'Omega 10 bij stilstand
-        TextBox12.Text = Math.Round(rad_to_hz(om20), 1).ToString          'Omega 20 bij stilstand
+
+        TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString    'om_krit1 [Hz]
+        TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString    'om_krit2 [Hz]
+
+        TextBox11.Text = Math.Round(rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
+        TextBox12.Text = Math.Round(rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
+
+        TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
+        TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
+
 
         TextBox1.Text = Math.Round(rad_to_hz(om_krit1) * 60, 0).ToString   'om_krit1 [rmp]
         TextBox13.Text = Math.Round(rad_to_hz(om_krit2) * 60, 0).ToString  'om_krit2 [rmp]
 
+        TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
+        TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
+
         TextBox30.Text = I1_shaft.ToString("0.###e0")                   'Buigtraagheidsmoment [m^4]
         TextBox31.Text = I2_overhung.ToString("0.###e0")                'Buigtraagheidsmoment [m^4]
+
     End Sub
 
     Private Sub draw_chart1()
@@ -162,31 +179,38 @@ Public Class Form1
 
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Hoeksnelheid waaier[rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
-            ' Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
+            Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
+            Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
+            Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -3000
+            Chart1.ChartAreas("ChartArea0").AxisX.Maximum = +3000
+            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = +3000
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
             Chart1.Series(0).YAxisType = AxisType.Primary
 
-            Double.TryParse(TextBox11.Text, om10)
-            Double.TryParse(TextBox12.Text, om20)
+            Double.TryParse(TextBox34.Text, om10)
+            Double.TryParse(TextBox35.Text, om20)
 
-            Chart1.Series(6).Points.AddXY(0, om10)            'Omega 10
-            Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20
+            Chart1.Series(6).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
+            Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
 
             Chart1.Series(6).Points(0).MarkerStyle = MarkerStyle.Circle
-            Chart1.Series(6).Points(0).MarkerSize = 20
+            Chart1.Series(6).Points(0).MarkerSize = 10
             Chart1.Series(7).Points(0).MarkerStyle = MarkerStyle.Circle
-            Chart1.Series(7).Points(0).MarkerSize = 20
+            Chart1.Series(7).Points(0).MarkerSize = 10
 
-            limit = 5000          'Limit in Hz
-            For hh = 1 To 4000           'Waaier hoeksnelheid [rad/s]
+            limit = 4000                'Limit in [rad/s]
+            For hh = 1 To 1000          'Array size
 
-                If omega0(hh) < limit And omega0(hh) > -limit Then Chart1.Series(4).Points.AddXY(omega0(hh), omega0(hh))
-                If omega1(hh) < limit And omega1(hh) > -limit Then Chart1.Series(0).Points.AddXY(omega0(hh), omega1(hh))
-                If omega2(hh) < limit And omega2(hh) > -limit Then Chart1.Series(1).Points.AddXY(omega0(hh), omega2(hh))
-                If omega3(hh) < limit And omega3(hh) > -limit Then Chart1.Series(2).Points.AddXY(omega0(hh), omega3(hh))
-                If omega4(hh) < limit And omega4(hh) > -limit Then Chart1.Series(3).Points.AddXY(omega0(hh), omega4(hh))
-                If form533(hh, 1) < limit And form533(hh, 1) > -limit Then Chart1.Series(5).Points.AddXY(form533(hh, 0), form533(hh, 1))
-
+                If omega0(hh) < limit And omega0(hh) > 0 Then
+                    Chart1.Series(4).Points.AddXY(omega0(hh), omega0(hh))
+                End If
+                ' If omega1(hh) < limit And omega1(hh) > -limit Then Chart1.Series(0).Points.AddXY(omega0(hh), omega1(hh))
+                ' If omega2(hh) < limit And omega2(hh) > -limit Then Chart1.Series(1).Points.AddXY(omega0(hh), omega2(hh))
+                ' If omega3(hh) < limit And omega3(hh) > -limit Then Chart1.Series(2).Points.AddXY(omega0(hh), omega3(hh))
+                ' If omega4(hh) < limit And omega4(hh) > -limit Then Chart1.Series(3).Points.AddXY(omega0(hh), omega4(hh))
+                If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
+                    Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
+                End If
                 TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
             Next
 

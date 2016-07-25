@@ -22,9 +22,9 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -148,6 +148,14 @@ Partial Class Form1
         Me.NumericUpDown20 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown21 = New System.Windows.Forms.NumericUpDown()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TextBox32 = New System.Windows.Forms.TextBox()
+        Me.TextBox33 = New System.Windows.Forms.TextBox()
+        Me.TextBox34 = New System.Windows.Forms.TextBox()
+        Me.TextBox35 = New System.Windows.Forms.TextBox()
+        Me.TextBox36 = New System.Windows.Forms.TextBox()
+        Me.TextBox37 = New System.Windows.Forms.TextBox()
+        Me.TextBox38 = New System.Windows.Forms.TextBox()
+        Me.TextBox39 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -222,6 +230,14 @@ Partial Class Form1
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox36)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox37)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox38)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox39)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox34)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox35)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox33)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox32)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox31)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Label49)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TextBox30)
@@ -273,7 +289,7 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.Controls.Add(Me.Button1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Chart1)
         Me.SplitContainer1.Size = New System.Drawing.Size(1239, 649)
-        Me.SplitContainer1.SplitterDistance = 370
+        Me.SplitContainer1.SplitterDistance = 415
         Me.SplitContainer1.TabIndex = 59
         '
         'TextBox31
@@ -320,9 +336,9 @@ Partial Class Form1
         '
         Me.TextBox1.BackColor = System.Drawing.Color.Gainsboro
         Me.TextBox1.Enabled = False
-        Me.TextBox1.Location = New System.Drawing.Point(291, 586)
+        Me.TextBox1.Location = New System.Drawing.Point(367, 586)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(40, 20)
         Me.TextBox1.TabIndex = 61
         Me.TextBox1.Text = "-"
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -330,9 +346,9 @@ Partial Class Form1
         'TextBox13
         '
         Me.TextBox13.Enabled = False
-        Me.TextBox13.Location = New System.Drawing.Point(291, 613)
+        Me.TextBox13.Location = New System.Drawing.Point(367, 613)
         Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox13.Size = New System.Drawing.Size(40, 20)
         Me.TextBox13.TabIndex = 60
         Me.TextBox13.Text = "-"
         Me.TextBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -412,9 +428,9 @@ Partial Class Form1
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(14, 558)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(215, 18)
+        Me.Label21.Size = New System.Drawing.Size(261, 18)
         Me.Label21.TabIndex = 58
-        Me.Label21.Text = "Eigen freq om20 [Hz] (stilstand)"
+        Me.Label21.Text = "Eigen freq om20 [r/s,Hz] (stilstand dot)"
         '
         'Label1
         '
@@ -429,9 +445,9 @@ Partial Class Form1
         'TextBox11
         '
         Me.TextBox11.Enabled = False
-        Me.TextBox11.Location = New System.Drawing.Point(291, 532)
+        Me.TextBox11.Location = New System.Drawing.Point(322, 532)
         Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox11.Size = New System.Drawing.Size(40, 20)
         Me.TextBox11.TabIndex = 57
         Me.TextBox11.Text = "-"
         Me.TextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -452,9 +468,9 @@ Partial Class Form1
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.Location = New System.Drawing.Point(14, 531)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(215, 18)
+        Me.Label22.Size = New System.Drawing.Size(265, 18)
         Me.Label22.TabIndex = 56
-        Me.Label22.Text = "Eigen freq om10 [Hz] (stilstand)"
+        Me.Label22.Text = "Eigen freq om10 [r/s,Hz] (stilstand, dot)"
         '
         'Label4
         '
@@ -469,9 +485,9 @@ Partial Class Form1
         'TextBox12
         '
         Me.TextBox12.Enabled = False
-        Me.TextBox12.Location = New System.Drawing.Point(292, 559)
+        Me.TextBox12.Location = New System.Drawing.Point(323, 559)
         Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox12.Size = New System.Drawing.Size(40, 20)
         Me.TextBox12.TabIndex = 55
         Me.TextBox12.Text = "-"
         Me.TextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -492,9 +508,9 @@ Partial Class Form1
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(14, 612)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(193, 18)
+        Me.Label19.Size = New System.Drawing.Size(210, 18)
         Me.Label19.TabIndex = 52
-        Me.Label19.Text = "Omega kritisch #2 [Hz, rpm]"
+        Me.Label19.Text = "Omega kritisch #2 [r/s,Hz,rpm]"
         '
         'NumericUpDown9
         '
@@ -509,9 +525,9 @@ Partial Class Form1
         'TextBox5
         '
         Me.TextBox5.Enabled = False
-        Me.TextBox5.Location = New System.Drawing.Point(217, 586)
+        Me.TextBox5.Location = New System.Drawing.Point(322, 586)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(65, 20)
+        Me.TextBox5.Size = New System.Drawing.Size(40, 20)
         Me.TextBox5.TabIndex = 51
         Me.TextBox5.Text = "-"
         Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -532,9 +548,9 @@ Partial Class Form1
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.Location = New System.Drawing.Point(14, 585)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(193, 18)
+        Me.Label20.Size = New System.Drawing.Size(210, 18)
         Me.Label20.TabIndex = 50
-        Me.Label20.Text = "Omega kritisch #1 [Hz, rpm]"
+        Me.Label20.Text = "Omega kritisch #1 [r/s,Hz,rpm]"
         '
         'Label11
         '
@@ -549,9 +565,9 @@ Partial Class Form1
         'TextBox6
         '
         Me.TextBox6.Enabled = False
-        Me.TextBox6.Location = New System.Drawing.Point(217, 613)
+        Me.TextBox6.Location = New System.Drawing.Point(321, 613)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(65, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(40, 20)
         Me.TextBox6.TabIndex = 49
         Me.TextBox6.Text = "-"
         Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -562,9 +578,9 @@ Partial Class Form1
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(14, 504)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(164, 18)
+        Me.Label18.Size = New System.Drawing.Size(185, 18)
         Me.Label18.TabIndex = 46
-        Me.Label18.Text = "Eigen frequentie #4 [Hz]"
+        Me.Label18.Text = "Eigen frequentie #4 [r/s,Hz]"
         '
         'Label12
         '
@@ -579,9 +595,9 @@ Partial Class Form1
         'TextBox10
         '
         Me.TextBox10.Enabled = False
-        Me.TextBox10.Location = New System.Drawing.Point(291, 505)
+        Me.TextBox10.Location = New System.Drawing.Point(322, 505)
         Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox10.Size = New System.Drawing.Size(40, 20)
         Me.TextBox10.TabIndex = 45
         Me.TextBox10.Text = "-"
         Me.TextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -603,9 +619,9 @@ Partial Class Form1
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(14, 477)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(164, 18)
+        Me.Label15.Size = New System.Drawing.Size(185, 18)
         Me.Label15.TabIndex = 44
-        Me.Label15.Text = "Eigen frequentie #3 [Hz]"
+        Me.Label15.Text = "Eigen frequentie #3 [r/s,Hz]"
         '
         'NumericUpDown2
         '
@@ -625,9 +641,9 @@ Partial Class Form1
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(14, 450)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(164, 18)
+        Me.Label16.Size = New System.Drawing.Size(185, 18)
         Me.Label16.TabIndex = 43
-        Me.Label16.Text = "Eigen frequentie #2 [Hz]"
+        Me.Label16.Text = "Eigen frequentie #2 [r/s,Hz]"
         '
         'NumericUpDown3
         '
@@ -645,16 +661,16 @@ Partial Class Form1
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(14, 423)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(164, 18)
+        Me.Label17.Size = New System.Drawing.Size(185, 18)
         Me.Label17.TabIndex = 42
-        Me.Label17.Text = "Eigen frequentie #1 [Hz]"
+        Me.Label17.Text = "Eigen frequentie #1 [r/s,Hz]"
         '
         'TextBox7
         '
         Me.TextBox7.Enabled = False
-        Me.TextBox7.Location = New System.Drawing.Point(291, 424)
+        Me.TextBox7.Location = New System.Drawing.Point(322, 424)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(40, 20)
         Me.TextBox7.TabIndex = 41
         Me.TextBox7.Text = "-"
         Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -674,9 +690,9 @@ Partial Class Form1
         'TextBox8
         '
         Me.TextBox8.Enabled = False
-        Me.TextBox8.Location = New System.Drawing.Point(291, 451)
+        Me.TextBox8.Location = New System.Drawing.Point(322, 451)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox8.Size = New System.Drawing.Size(40, 20)
         Me.TextBox8.TabIndex = 40
         Me.TextBox8.Text = "-"
         Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -684,9 +700,9 @@ Partial Class Form1
         'TextBox9
         '
         Me.TextBox9.Enabled = False
-        Me.TextBox9.Location = New System.Drawing.Point(291, 478)
+        Me.TextBox9.Location = New System.Drawing.Point(322, 478)
         Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(58, 20)
+        Me.TextBox9.Size = New System.Drawing.Size(40, 20)
         Me.TextBox9.TabIndex = 39
         Me.TextBox9.Text = "-"
         Me.TextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -750,9 +766,9 @@ Partial Class Form1
         'TextBox4
         '
         Me.TextBox4.Enabled = False
-        Me.TextBox4.Location = New System.Drawing.Point(291, 397)
+        Me.TextBox4.Location = New System.Drawing.Point(307, 397)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(59, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(56, 20)
         Me.TextBox4.TabIndex = 10
         Me.TextBox4.Text = "-"
         Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -770,9 +786,9 @@ Partial Class Form1
         'TextBox3
         '
         Me.TextBox3.Enabled = False
-        Me.TextBox3.Location = New System.Drawing.Point(291, 370)
+        Me.TextBox3.Location = New System.Drawing.Point(307, 370)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(59, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(56, 20)
         Me.TextBox3.TabIndex = 9
         Me.TextBox3.Text = "-"
         Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -780,36 +796,37 @@ Partial Class Form1
         'TextBox2
         '
         Me.TextBox2.Enabled = False
-        Me.TextBox2.Location = New System.Drawing.Point(291, 343)
+        Me.TextBox2.Location = New System.Drawing.Point(307, 343)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(59, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(56, 20)
         Me.TextBox2.TabIndex = 1
         Me.TextBox2.Text = "-"
         Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(18, 604)
+        Me.Button1.Location = New System.Drawing.Point(84, 623)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(67, 21)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'Chart1
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart1.Series.Add(Series2)
-        Me.Chart1.Size = New System.Drawing.Size(865, 649)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Size = New System.Drawing.Size(820, 649)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
         '
@@ -1547,6 +1564,86 @@ Partial Class Form1
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
         '
+        'TextBox32
+        '
+        Me.TextBox32.Enabled = False
+        Me.TextBox32.Location = New System.Drawing.Point(275, 587)
+        Me.TextBox32.Name = "TextBox32"
+        Me.TextBox32.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox32.TabIndex = 65
+        Me.TextBox32.Text = "-"
+        Me.TextBox32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox33
+        '
+        Me.TextBox33.Enabled = False
+        Me.TextBox33.Location = New System.Drawing.Point(274, 613)
+        Me.TextBox33.Name = "TextBox33"
+        Me.TextBox33.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox33.TabIndex = 66
+        Me.TextBox33.Text = "-"
+        Me.TextBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox34
+        '
+        Me.TextBox34.Enabled = False
+        Me.TextBox34.Location = New System.Drawing.Point(276, 532)
+        Me.TextBox34.Name = "TextBox34"
+        Me.TextBox34.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox34.TabIndex = 68
+        Me.TextBox34.Text = "-"
+        Me.TextBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox35
+        '
+        Me.TextBox35.Enabled = False
+        Me.TextBox35.Location = New System.Drawing.Point(277, 559)
+        Me.TextBox35.Name = "TextBox35"
+        Me.TextBox35.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox35.TabIndex = 67
+        Me.TextBox35.Text = "-"
+        Me.TextBox35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox36
+        '
+        Me.TextBox36.Enabled = False
+        Me.TextBox36.Location = New System.Drawing.Point(276, 505)
+        Me.TextBox36.Name = "TextBox36"
+        Me.TextBox36.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox36.TabIndex = 72
+        Me.TextBox36.Text = "-"
+        Me.TextBox36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox37
+        '
+        Me.TextBox37.Enabled = False
+        Me.TextBox37.Location = New System.Drawing.Point(276, 424)
+        Me.TextBox37.Name = "TextBox37"
+        Me.TextBox37.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox37.TabIndex = 71
+        Me.TextBox37.Text = "-"
+        Me.TextBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox38
+        '
+        Me.TextBox38.Enabled = False
+        Me.TextBox38.Location = New System.Drawing.Point(276, 451)
+        Me.TextBox38.Name = "TextBox38"
+        Me.TextBox38.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox38.TabIndex = 70
+        Me.TextBox38.Text = "-"
+        Me.TextBox38.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox39
+        '
+        Me.TextBox39.Enabled = False
+        Me.TextBox39.Location = New System.Drawing.Point(276, 478)
+        Me.TextBox39.Name = "TextBox39"
+        Me.TextBox39.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox39.TabIndex = 69
+        Me.TextBox39.Text = "-"
+        Me.TextBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1731,4 +1828,12 @@ Partial Class Form1
     Friend WithEvents Label49 As Label
     Friend WithEvents TextBox30 As TextBox
     Friend WithEvents TextBox31 As TextBox
+    Friend WithEvents TextBox33 As TextBox
+    Friend WithEvents TextBox32 As TextBox
+    Friend WithEvents TextBox34 As TextBox
+    Friend WithEvents TextBox35 As TextBox
+    Friend WithEvents TextBox36 As TextBox
+    Friend WithEvents TextBox37 As TextBox
+    Friend WithEvents TextBox38 As TextBox
+    Friend WithEvents TextBox39 As TextBox
 End Class
