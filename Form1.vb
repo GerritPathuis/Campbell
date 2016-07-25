@@ -15,8 +15,27 @@ Public Class Form1
 
     Dim form533(1000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
+    Public Shared fan() As String =
+     {
+     "Vrije invoer; 471;66;0;15;  15;  3,7;0,0185;0,00925;400;400",
+     "Aufgabe A5.5; 472;66;0;15;  15;  3,7;0,0185;0,00925;400;400",
+     "T33_Tetrapak; 1000;500;100;180;180;1125;450   ;230; 40; 40"}
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim words() As String
+        ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged
+        '-------Fill combobox1, Fan type selection------------------
+        For hh = 0 To (fan.Length - 1)            'Fill combobox3 with steel data
+            words = fan(hh).Split(";")
+            ComboBox1.Items.Add(words(0))
+        Next hh
+
+        If ComboBox1.Items.Count > 0 Then
+            ComboBox1.SelectedIndex = 1                 'Select Fan data
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged
         Calc_nr6()
         draw_chart1()
     End Sub
@@ -73,13 +92,6 @@ Public Class Form1
         '    om2 = Sqrt(d22 / (massa * (d11 * d22 - d12 ^ 2)))
         '    om3 = om2
         '    om4 = JP_imp / JA_imp * speed_rad
-
-        '    '--------- store in array for later use -----
-        '    omega0(i) = speed_rad          '[Hz] waaier snelheid in Hz
-        '    omega1(i) = om1 'rad_to_hz(om1)           '[Hz]
-        '    omega2(i) = om2 'rad_to_hz(om2)           '[Hz]
-        '    omega3(i) = om3 'rad_to_hz(om3)           '[Hz]
-        '    omega4(i) = om4 'rad_to_hz(om4)           '[Hz]
         'Next
 
         TextBox16.Clear()
@@ -171,9 +183,9 @@ Public Class Form1
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
             Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
-            Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -3000
-            Chart1.ChartAreas("ChartArea0").AxisX.Maximum = +3000
-            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = +3000
+            Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
+            Chart1.ChartAreas("ChartArea0").AxisX.Maximum = NumericUpDown22.Value
+            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown23.Value
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
             Chart1.Series(0).YAxisType = AxisType.Primary
 
@@ -194,7 +206,7 @@ Public Class Form1
             Chart1.Series(8).Points(0).MarkerSize = 15
 
 
-            limit = 4000                'Limit in [rad/s]
+            limit = NumericUpDown5.Value               'Limit in [rad/s]
             For hh = 1 To 1000          'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
@@ -273,4 +285,38 @@ Public Class Form1
     Private Function rad_to_hz(rads As Double)
         Return (rads / (2 * PI))
     End Function
+    ' "Aufgabe A5.5; 471;66;0;15;  15;  3.7;0.0185;0.00925;400;400",
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Dim words() As String
+
+        If (ComboBox1.SelectedIndex > 0) Then      'Prevent exceptions
+            words = fan(ComboBox1.SelectedIndex).Split(";")
+            NumericUpDown1.Value = Convert.ToDouble(words(1))   'Tussen de lagers
+            NumericUpDown2.Value = Convert.ToDouble(words(2))   'overhung
+            NumericUpDown3.Value = Convert.ToDouble(words(3))   'Star deel in de waaier
+            NumericUpDown8.Value = Convert.ToDouble(words(4))   'As dikte tussen de lagers
+            NumericUpDown9.Value = Convert.ToDouble(words(5))   'As dikte
+            NumericUpDown4.Value = Convert.ToDouble(words(6))   'Weight
+            NumericUpDown10.Value = Convert.ToDouble(words(7))  'Jp
+            NumericUpDown11.Value = Convert.ToDouble(words(8))  'Ja
+            NumericUpDown6.Value = Convert.ToDouble(words(9))   'Stiffness bearing/support buiten
+            NumericUpDown7.Value = Convert.ToDouble(words(10))  'Stiffness bearing/support binnen
+        End If
+
+        If (ComboBox1.SelectedIndex = 2) Then       'T33
+            NumericUpDown6.DecimalPlaces = 0        'Stiffness bearing/support buiten
+            NumericUpDown7.DecimalPlaces = 0        'Stiffness bearing/support buiten
+            NumericUpDown10.DecimalPlaces = 0       'JP
+            NumericUpDown11.DecimalPlaces = 0       'JA
+        Else
+            NumericUpDown6.DecimalPlaces = 1
+            NumericUpDown7.DecimalPlaces = 1
+            NumericUpDown10.DecimalPlaces = 3
+            NumericUpDown11.DecimalPlaces = 4
+        End If
+
+    End Sub
+
+
 End Class
