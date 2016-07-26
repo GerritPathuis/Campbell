@@ -13,10 +13,10 @@ Public Class Form1
 
     'naam;tussen de lagers;overhang;star in waaier;dia tussen lagers; dia overhang;JP;JA;C_spring lager;C_spring lager;overhungY/N
     Public Shared fan() As String = {
-     "Vrije invoer; 471;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
-     "Aufgabe A5.5; 472;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
-     "T33_Tetrapak; 1000;500;100;180;180;1125;450;230;130;130;Y",
-     "T33_Lummes; 2500;2500;000;400;0;1525;700;350;89;89;N"}
+     "Vrije invoer;Q16..;inlet/dia/Type; 471;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
+     "Machinendynamik;Test;Aufgabe A5.5; 472;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
+     "Tetrapak;Bedum 3;1800/1825/T33;1000;500;100;180;180;1125;450;230;130;130;Y",
+     "Foster Wheeler;Q16.0071;2600/2610/T33; 2380;2380;000;400;0;1525;864;432;89;89;N"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim words() As String
@@ -118,9 +118,9 @@ Public Class Form1
         End If
         TextBox16.Clear()
         '----------------------- formel 5.33 ------------------------
-        speed_rad = -3060                   'Init value
+        speed_rad = -3006                   'Init value
         For i = 1 To 1000                   'Array size
-            speed_rad += 30                 'run from -3000 to +3000 [rad/s]
+            speed_rad += 6                 'run from -3000 to +3000 [rad/s]
             form533(i, 0) = speed_rad       'Waaier hoeksnelheid [rad/s]
 
             form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
@@ -219,14 +219,12 @@ Public Class Form1
             Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
             Chart1.Series(8).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
 
-
             Chart1.Series(6).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(6).Points(0).MarkerSize = 10
             Chart1.Series(7).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(7).Points(0).MarkerSize = 10
             Chart1.Series(8).Points(0).MarkerStyle = MarkerStyle.Diamond
             Chart1.Series(8).Points(0).MarkerSize = 15
-
 
             limit = NumericUpDown5.Value               'Limit in [rad/s]
             For hh = 1 To 1000          'Array size
@@ -313,17 +311,20 @@ Public Class Form1
 
         If (ComboBox1.SelectedIndex > 0) Then      'Prevent exceptions
             words = fan(ComboBox1.SelectedIndex).Split(";")
-            NumericUpDown1.Value = Convert.ToDouble(words(1))   'Tussen de lagers
-            NumericUpDown2.Value = Convert.ToDouble(words(2))   'overhung
-            NumericUpDown3.Value = Convert.ToDouble(words(3))   'Star deel in de waaier
-            NumericUpDown8.Value = Convert.ToDouble(words(4))   'As dikte tussen de lagers
-            NumericUpDown9.Value = Convert.ToDouble(words(5))   'As dikte
-            NumericUpDown4.Value = Convert.ToDouble(words(6))   'Weight
-            NumericUpDown10.Value = Convert.ToDouble(words(7))  'Jp
-            NumericUpDown11.Value = Convert.ToDouble(words(8))  'Ja
-            NumericUpDown6.Value = Convert.ToDouble(words(9))   'Stiffness bearing/support buiten
-            NumericUpDown7.Value = Convert.ToDouble(words(10))  'Stiffness bearing/support binnen
-            If String.Compare(words(11), "N") Then
+            TextBox7.Text = words(0)
+            TextBox8.Text = words(1)
+            TextBox9.Text = words(2)
+            NumericUpDown1.Value = Convert.ToDouble(words(3))   'Tussen de lagers
+            NumericUpDown2.Value = Convert.ToDouble(words(4))   'overhung
+            NumericUpDown3.Value = Convert.ToDouble(words(5))   'Star deel in de waaier
+            NumericUpDown8.Value = Convert.ToDouble(words(6))   'As dikte tussen de lagers
+            NumericUpDown9.Value = Convert.ToDouble(words(7))   'As dikte
+            NumericUpDown4.Value = Convert.ToDouble(words(8))   'Weight
+            NumericUpDown10.Value = Convert.ToDouble(words(9))  'Jp
+            NumericUpDown11.Value = Convert.ToDouble(words(10))  'Ja
+            NumericUpDown6.Value = Convert.ToDouble(words(11))  'Stiffness bearing/support buiten
+            NumericUpDown7.Value = Convert.ToDouble(words(12))  'Stiffness bearing/support binnen
+            If String.Compare(words(13), "N") Then
                 RadioButton1.Checked = True
                 RadioButton2.Checked = False
             Else
@@ -334,16 +335,18 @@ Public Class Form1
 
 
         '-------- decimal places ---------------------
-        If (ComboBox1.SelectedIndex = 2) Then       'T33
-            NumericUpDown6.DecimalPlaces = 0        'Stiffness bearing/support buiten
-            NumericUpDown7.DecimalPlaces = 0        'Stiffness bearing/support buiten
-            NumericUpDown10.DecimalPlaces = 0       'JP
-            NumericUpDown11.DecimalPlaces = 0       'JA
+        If (ComboBox1.SelectedIndex = 1) Then       'Test from Maschinendynamik
+            NumericUpDown4.DecimalPlaces = 1        'Massa 
+            NumericUpDown6.DecimalPlaces = 1        'Stiffness bearing/support buiten
+            NumericUpDown7.DecimalPlaces = 1        'Stiffness bearing/support buiten
+            NumericUpDown10.DecimalPlaces = 3       'JP
+            NumericUpDown11.DecimalPlaces = 4       'JA
         Else
-            NumericUpDown6.DecimalPlaces = 1
-            NumericUpDown7.DecimalPlaces = 1
-            NumericUpDown10.DecimalPlaces = 3
-            NumericUpDown11.DecimalPlaces = 4
+            NumericUpDown6.DecimalPlaces = 0
+            NumericUpDown4.DecimalPlaces = 0
+            NumericUpDown7.DecimalPlaces = 0
+            NumericUpDown10.DecimalPlaces = 0
+            NumericUpDown11.DecimalPlaces = 0
         End If
 
     End Sub
