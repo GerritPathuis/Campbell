@@ -15,7 +15,7 @@ Public Class Form1
     Public Shared fan() As String = {
      "Vrije invoer;Q16..;inlet/dia/Type; 471;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
      "Machinendynamik;Test;Aufgabe A5.5; 472;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
-     "Tetrapak;Bedum 3;1800/1825/T33;1000;500;100;180;180;1125;450;230;130;130;Y",
+     "Tetrapak;Bedum 3;1800/1825/T33;1000;500;100;180;180;1125;450;230;20;20;Y",
      "Foster Wheeler;Q16.0071;2600/2610/T33; 2380;2380;000;400;0;1525;864;432;89;89;N"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -287,8 +287,9 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged
         Dim Dia, hoog, massa, Iz, Ix As Double
+        Dim sp1, sp2, spc As Double
 
         Dia = NumericUpDown20.Value / 1000          '[m]
         hoog = NumericUpDown21.Value / 1000         '[m]
@@ -300,6 +301,14 @@ Public Class Form1
         TextBox23.Text = Round(Iz, 0).ToString
         TextBox24.Text = Round(Ix, 0).ToString
         TextBox25.Text = Round(massa, 0).ToString
+
+        sp1 = NumericUpDown24.Value
+        sp2 = NumericUpDown25.Value
+
+        spc = sp1 * sp2 / (sp1 + sp2)
+
+        TextBox10.Text = Round(spc, 1).ToString
+        TextBox36.Text = Round(sp1 + sp2, 1).ToString
     End Sub
     'Converts Radial per second to Hz
     Private Function rad_to_hz(rads As Double)

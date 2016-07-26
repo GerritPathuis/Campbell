@@ -1147,6 +1147,71 @@
         Ow==
 </value>
   </data>
+  <data name="TextBox29.Text" xml:space="preserve">
+    <value>Dynamics of Rotating Machines page 107,    0.4 - 2.0 kN/mm
+ 
+API 684 Sleeve bearing 89 kN/mm
+API 684 Tilting pad bearing 125 kN/mm
+
+SKF rollager 110-150 kN/mm
+
+Maschinendynamik seite 34
+8x Stahlfeder Machinefundamente  = 5-10 kN/mm
+8x Industrie vibratie demper 3 kN/mm = 24 kN/mm
+Walzlager (d50 mm) = 250-500 kN/mm
+Walzlager (d100 mm) = 500-1000 kN/mm
+
+FS Dynamics used probably 18 kN/mm on Bedum 3</value>
+  </data>
+  <data name="PictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAQ0AAADFCAYAAABO3qdlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAACf5JREFUeF7t2uGu67gKgNG+/0vvEVItcZjYBpukbvmWhG67bXBSc/hz5/UHAAEM
+        DQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACHp
+        Q+P1ev0TOBP39B1OvCeGRlHc03c48Z4YGkVxT9/hxHv66qGxW79yvuTquNNu/cr5kqvjBOlP8dRLttqr
+        Z5DPPXmckK/jBOlP8dRLttqrZ5DPPXmckK/jBOlP8cRL2rrRc34pP5rbSJ6OO9i60XN+KT+a20iejhOk
+        P8UTL2nrRs+pni8kR8cdbN3oOdXzheToOEH6UzzxkrZu9Jzq+UJydNzB1o2eUz1fSI6OE6Q/xd0v2avp
+        Pat6fiP7dWTr1fSeVT2/kf06TpD+FHe/ZK+m96zq+Y3s15GtV9N7VvX8RvbrOEH6U9z9kr2a3rOq5zey
+        X0e2Xk3vWdXzG9mv4wTpT3HnS87qsT5e12SvjkyzeqyP1zXZq+ME6U9hXzISM7M9rI/XNdm7GjOzPayP
+        1zXZq+ME6U+x85Kj/d5avX2V8lciYrTfW6u3r1L+Spwg/Sl2XnK031urt69KvpfU0xEx2u+t1dtXJd9L
+        6uk4QfpT7L5kL8dbq3q+l9TTEdXL8daqnu8l9XScIP0pdl/yKidax+6vlu8hNXVEXeVE69j91fI9pKaO
+        E6Q/RcZL2rxoner5HlJTxwqbF61TPd9Dauo4QfpTZLykzYvWqZ7vITV1rLB50TrV8z2kpo4TpD9F1ku2
+        3NUa1fNnpK6OVS13tUb1/Bmpq+ME6U+R9ZItd7VG9fwZqatjVctdrVE9f0bq6jhB+lNkviT5e/kjUlvH
+        DvL38kekto4TpD9F5kuSv5c/IrV17CB/L39Eaus4QfpTnPiS+D/u6TuceE8MjaK4p+9w4j0xNIrinr7D
+        iffE0CiKe/oOJ94T3QIghKEBIIShASCEoQEghKEBIIShASCEoQEghKFxqE/+f/Kn/PcA1qnPVQ23kKD9
+        hzc6quM3+V3c5KbeP4bK/0j4TX4bt7jJ8w+h7ZH/baHZ9fa5set6rdFrV3tGa5Zeb5+9ucKzR+iaNqd9
+        12tXe3RYs3Ws4Zfc5GnGq6bV3zPWrdn6iM21+bN6nvOu9ui/yWe7x65bs3Xk4JdNIA1qQ7Pfhf7bJ9ZH
+        IrV7ZI8NzX4X+m93rCMHv+xNdhs8c13I9xYzes/Vfk+NK7buVTT6c2PXr0Lr/R17+DVvohv1qmmfXLdG
+        a2Kn9sisrjY7N/oM0f3o45fc1GvGWYPfuS7fr3Ka0ZoY1RaRfC1Sd3fdGq0hhl8ygTSkDc2zbum/zdaF
+        fG/Rvjd6Tf+9x+Za3ho2rNF6b7+mcyNr2MOv+YBPNC3/UHAXOusBDA38EjrrAU/8A5YzdAB3obsAhDA0
+        AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0
+        AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0AIQwNACEMDQAhDA0
+        AISkD43X6/VP4EzcE1YxNIrinrCKoVEU94RVXz00dutXzpdcHYBXerc81Yyt9uoZ5D9zT/g96d3yVDO2
+        2qtnkP/MPeH3pHfLE81o60bP+aX8aG4jeToAr/RueaIZbd3oOdXzheToALzSu+WJZrR1o+dUzxeSowPw
+        Su+Wu5uxV9N7VvX8RvbrALzSu+XuZuzV9J5VPb+R/ToAr/RuubsZezW9Z1XPb2S/DsArvVvubMZZPdbH
+        65rs1QF4pXeLbcZIzMz2sD5e12SvDsArvVt2mnG031urt69S/koAXundstOMo/3eWr19VfK9pJ4OwCu9
+        W3absZfjrVU930vq6QC80rtltxmvcqJ17P5q+R5SUwfgld4tGc1o86J1qud7SE0dgFd6t2Q0o82L1qme
+        7yE1dQBe6d2S1Ywtd7VG9fwZqasD8ErvlqxmbLmrNarnz0hdHYBXerdkNiP5e/kjUlsH4JXeLZnNSP5e
+        /ojU1gF4pXcLzfgduCesYmgUxT1hFUOjKO4JqxgaRXFPWMXQKIp7wiqGRlHcE1YxNIrinrCKoVEU94RV
+        DI2iuCesYmgUxT1hFUOjKO4JqxgaRZ1yT1XPXqWfOfL8me+a/qvJw+nAmVbuyeZ4837VJ34PfUbkvMxn
+        S3/L9uO1wJmi99Tb48n9VVfvfvfvoetHzsp8rvQ3lIfTgTNF7ymyp1fXrrfPjV3Xa41eu9ozWrP0evvs
+        zRVXe+zfdL2rtfa/eq19t38Xdp+mc67WsuRVehs9OM4RvSfvHrtPf89Yt2brIzbX5s/qXa1HcuTzbL+w
+        OU3vczNbX5VX6U0eTgfOtHJPNsfm2e9C/+0T6yOR2ld2c2Z7m17OrNZsfVVepTd5OB04U9Y96dyrOk+u
+        C/neYkbvudo/q9HO0WGN9ujPmt2v940+X0WjP+/Kq/TWe2icJeuedO5VnSfXrdGa2KktVtZXzuzlzGpp
+        s/WIvEpv8nA6cKboPfX26L9f7blzXb5f5TSjNTGqLSL5V2Y1vWf2ciK1rtZX5VV6k4fTgTOt3JPNsXme
+        dUv/bbYu5HuL9r3Ra/rvPTbXmtXwnmGj0Z81u1/v630Wev/VWpa8Sm+jB8c57rinT9z3J86sjqFR1B33
+        9In7/sSZ1TE0irrjnp647zueGzEMjaK4J6xiaBTFPWEVQ6Mo7gmrGBpFcU9YxdAoinvCKoZGUdwTVjE0
+        iuKesIqhURT3hFUMjaK4J6xiaBTFPWEVQ6Mo7gmrGBpFcU9Y9dVDY7d+5XzJ1QF4pXfLU83Yaq+eQf4z
+        94Tfk94tTzVjq716BvnP3BN+T3q3PNGMtm70nF/Kj+Y2kqcD8Ervliea0daNnlM9X0iODsArvVueaEZb
+        N3pO9XwhOToAr/RuubsZezW9Z1XPb2S/DsArvVvubsZeTe9Z1fMb2a8D8ErvlrubsVfTe1b1/Eb26wC8
+        0rvlzmac1WN9vK7JXh2AV3q32GaMxMxsD+vjdU326gC80rtlpxlH+721evsq5a8E4JXeLTvNONrvrdXb
+        VyXfS+rpALzSu2W3GXs53lrV872kng7AK71bdpvxKidax+6vlu8hNXUAXundktGMNi9ap3q+h9TUAXil
+        d0tGM9q8aJ3q+R5SUwfgld4tWc3YcldrVM+fkbo6AK/0bslqxpa7WqN6/ozU1QF4pXdLZjOSv5c/IrV1
+        AF7p3ZLZjOTv5Y9IbR2AV3q30IzfgXvCKoZGUdwTVjE0iuKesIqhURT3hFV0C4AQhgaAEIYGgBCGBoAQ
+        hgaAEIYGgBCGBoAQhgaAEIYGgBCGBoAQhgaAEIYGgBCGBoAQhgaAEIYGgBCGBoCAv7//AL0wBL4pRYkW
+        AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlh9QHzAIcAAAAAAAAAMwAAZgAAmQAAzAAA/wArAAArMwArZgArmQArzAAr/wBVAABVMwBVZgBV
