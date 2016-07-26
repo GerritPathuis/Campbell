@@ -8,18 +8,16 @@ Imports System.Globalization
 
 Public Class Form1
     Dim omega0(1001) As Double           'Excitation equal to waaier Hz
-    Dim omega1(1001) As Double           'For calculation on Eigen frequency
-    Dim omega2(1001) As Double           'For calculation on Eigen frequency
-    Dim omega3(1001) As Double           'For calculation on Eigen frequency
-    Dim omega4(1001) As Double           'For calculation on Eigen frequency
-
     Dim form533(1000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
-    Public Shared fan() As String =
-     {
-     "Vrije invoer; 471;66;0;15;  15;  3,7;0,0185;0,00925;400;400",
-     "Aufgabe A5.5; 472;66;0;15;  15;  3,7;0,0185;0,00925;400;400",
-     "T33_Tetrapak; 1000;500;100;180;180;1125;450   ;230; 40; 40"}
+
+    'naam;tussen de lagers;overhang;star in waaier;dia tussen lagers; dia overhang;JP;JA;C_spring lager;C_spring lager;overhungY/N
+    Public Shared fan() As String = {
+     "Vrije invoer; 471;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
+     "Aufgabe A5.5; 472;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
+     "T33_Tetrapak; 1000;500;100;180;180;1125;450;230;130;130;Y",
+     "T33_Lummes; 2500;2500;000;400;0;1525;700;350;89;89;N"}
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim words() As String
         ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
@@ -35,7 +33,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged
         Calc_nr6()
         draw_chart1()
     End Sub
@@ -66,34 +64,58 @@ Public Class Form1
         I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
         I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
-        '---------------- Tabelle 5.1 Nr 4 ---------------------------
-        '--------------- d11= Alfa ------------------------
-        d11 = L2 ^ 2 / (C1 * L1 ^ 2)
-        d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
-        d11 += L1 * L2 ^ 2 / (3 * E_steel * I1_shaft)
-        d11 += (L2 ^ 3 - L3 ^ 3) / (3 * E_steel * I2_overhung)
-        d11 /= 1000                                             '[m/N]
-        '--------------- d12= Delta en Gamma -------------
-        d12 = L2 / (C1 * L1 ^ 2)
-        d12 += (L1 + L2) / (C2 * L1 ^ 2)
-        d12 += L1 * L2 / (3 * E_steel * I1_shaft)
-        d12 += (L2 ^ 2 - L3 ^ 2) / (2 * E_steel * I2_overhung)  '[1/N]
 
-        '--------------- d22= Beta ----------------
-        d22 = (1 / C1 + 1 / C2) / L1 ^ 2
-        d22 += L1 / (3 * E_steel * I1_shaft)
-        d22 += (L2 - L3) / (E_steel * I2_overhung)
-        d22 *= 1000                                             '[1/(meter.N)]
+        If RadioButton1.Checked Then
+            '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
+            '--------------- d11= Alfa --------------------------------
+            Label1.Text = "L1, lengte tussen de lagers [mm]"
+            Label2.Text = "L2, Overhang [mm]"
+            Label3.Visible = True
+            NumericUpDown3.Visible = True
+            Label11.Visible = True
+            NumericUpDown9.Visible = True
+            TextBox31.Visible = True
+            d11 = L2 ^ 2 / (C1 * L1 ^ 2)
+            d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
+            d11 += L1 * L2 ^ 2 / (3 * E_steel * I1_shaft)
+            d11 += (L2 ^ 3 - L3 ^ 3) / (3 * E_steel * I2_overhung)
+            d11 /= 1000                                             '[m/N]
+            '--------------- d12= Delta en Gamma -------------
+            d12 = L2 / (C1 * L1 ^ 2)
+            d12 += (L1 + L2) / (C2 * L1 ^ 2)
+            d12 += L1 * L2 / (3 * E_steel * I1_shaft)
+            d12 += (L2 ^ 2 - L3 ^ 2) / (2 * E_steel * I2_overhung)  '[1/N]
 
-        'speed_rad = -3060                   'Init value
-        'For i = 1 To 1000                   'Array size
-        '    speed_rad += 30                 'run from -3000 to +3000
-        '    om1 = 1 / (d22 * JP_imp * speed_rad)
-        '    om2 = Sqrt(d22 / (massa * (d11 * d22 - d12 ^ 2)))
-        '    om3 = om2
-        '    om4 = JP_imp / JA_imp * speed_rad
-        'Next
+            '--------------- d22= Beta ----------------
+            d22 = (1 / C1 + 1 / C2) / L1 ^ 2
+            d22 += L1 / (3 * E_steel * I1_shaft)
+            d22 += (L2 - L3) / (E_steel * I2_overhung)
+            d22 *= 1000                                             '[1/(meter.N)]
+        Else
+            '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
+            '--------------- d11= Alfa ----------------------------------------
+            Label1.Text = "L1, lengte lager#1-waaier [mm]"
+            Label2.Text = "L2, lengte waaier-lager#2 [mm]"
+            Label3.Visible = False
+            NumericUpDown3.Visible = False
+            Label11.Visible = False
+            NumericUpDown9.Visible = False
+            TextBox31.Visible = False
+            d11 = L2 ^ 2 / (C1 * (L1 + L2) ^ 2)
+            d11 += L1 ^ 2 / (C2 * (L1 + L2) ^ 2)
+            d11 += (L1 ^ 2 * L2 ^ 2) / (3 * E_steel * I1_shaft * (L1 + L2))
+            d11 /= 1000                                             '[m/N]
+            '--------------- d12= Delta en Gamma -------------
+            d12 = L2 / (C1 * (L1 + L2) ^ 2)
+            d12 += L1 / (C2 * (L1 + L2) ^ 2)
+            d12 += (L1 * L2 * (L2 - L1)) / (3 * E_steel * I1_shaft * (L1 + L2)) '[1/N]
 
+            '--------------- d22= Beta ----------------
+            d22 = (1 / C1 + 1 / C2) / (L1 + L2) ^ 2
+            d22 += (L1 ^ 3 + L2 ^ 3) / (3 * E_steel * I1_shaft * (L1 + L2) ^ 2)
+            d22 *= 1000                                             '[1/(meter.N)]
+
+        End If
         TextBox16.Clear()
         '----------------------- formel 5.33 ------------------------
         speed_rad = -3060                   'Init value
@@ -211,7 +233,7 @@ Public Class Form1
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
                 End If
-                TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
+                'TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
             Next
             Chart1.Series(0).Points.AddXY(0, 0)
             Chart1.Series(0).Points.AddXY(limit / 2, limit / 2)
@@ -285,7 +307,6 @@ Public Class Form1
     Private Function rad_to_hz(rads As Double)
         Return (rads / (2 * PI))
     End Function
-    ' "Aufgabe A5.5; 471;66;0;15;  15;  3.7;0.0185;0.00925;400;400",
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim words() As String
@@ -302,8 +323,17 @@ Public Class Form1
             NumericUpDown11.Value = Convert.ToDouble(words(8))  'Ja
             NumericUpDown6.Value = Convert.ToDouble(words(9))   'Stiffness bearing/support buiten
             NumericUpDown7.Value = Convert.ToDouble(words(10))  'Stiffness bearing/support binnen
+            If String.Compare(words(11), "N") Then
+                RadioButton1.Checked = True
+                RadioButton2.Checked = False
+            Else
+                RadioButton1.Checked = False
+                RadioButton2.Checked = True
+            End If
         End If
 
+
+        '-------- decimal places ---------------------
         If (ComboBox1.SelectedIndex = 2) Then       'T33
             NumericUpDown6.DecimalPlaces = 0        'Stiffness bearing/support buiten
             NumericUpDown7.DecimalPlaces = 0        'Stiffness bearing/support buiten
