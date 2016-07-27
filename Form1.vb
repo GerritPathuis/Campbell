@@ -33,7 +33,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
         Calc_nr6()
         draw_chart1()
     End Sub
@@ -189,6 +189,7 @@ Public Class Form1
                 Chart1.Series(hh).ChartType = SeriesChartType.Line
                 Chart1.Series(hh).IsVisibleInLegend = False
             Next
+            Chart1.Series(5).ChartType = SeriesChartType.Point
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
@@ -199,13 +200,19 @@ Public Class Form1
             Chart1.Series(0).Color = Color.Black
             Chart1.Series(0).BorderWidth = 1
             Chart1.Series(5).Color = Color.Black
-            Chart1.Series(5).BorderWidth = 2
+            Chart1.Series(5).BorderWidth = 1
 
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Hoeksnelheid waaier[rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
             Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
-            Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
+
+            If CheckBox1.Checked Then           'Flip
+                Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
+            Else
+                Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
+            End If
+
             Chart1.ChartAreas("ChartArea0").AxisX.Maximum = NumericUpDown22.Value
             Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown23.Value
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
@@ -229,9 +236,13 @@ Public Class Form1
             limit = NumericUpDown5.Value               'Limit in [rad/s]
             For hh = 1 To 1000          'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
-                    Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
+                    If CheckBox1.Checked Then
+                        Chart1.Series(5).Points.AddXY(Abs(form533(hh, 1)), form533(hh, 0))
+                    Else
+                        Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
+                    End If
+                    'TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
                 End If
-                'TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
             Next
             Chart1.Series(0).Points.AddXY(0, 0)
             Chart1.Series(0).Points.AddXY(limit / 2, limit / 2)

@@ -22,9 +22,9 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -149,6 +149,8 @@ Partial Class Form1
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TextBox38 = New System.Windows.Forms.TextBox()
+        Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.TextBox29 = New System.Windows.Forms.TextBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
@@ -173,8 +175,7 @@ Partial Class Form1
         Me.NumericUpDown20 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown21 = New System.Windows.Forms.NumericUpDown()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TextBox37 = New System.Windows.Forms.TextBox()
-        Me.TextBox38 = New System.Windows.Forms.TextBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -928,23 +929,24 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea3)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend3.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend3)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.Chart1.Series.Add(Series3)
         Me.Chart1.Size = New System.Drawing.Size(820, 590)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
         '
         'GroupBox12
         '
+        Me.GroupBox12.Controls.Add(Me.CheckBox1)
         Me.GroupBox12.Controls.Add(Me.Label53)
         Me.GroupBox12.Controls.Add(Me.NumericUpDown23)
         Me.GroupBox12.Controls.Add(Me.Label50)
@@ -953,7 +955,7 @@ Partial Class Form1
         Me.GroupBox12.Controls.Add(Me.NumericUpDown5)
         Me.GroupBox12.Location = New System.Drawing.Point(16, 10)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(308, 53)
+        Me.GroupBox12.Size = New System.Drawing.Size(479, 53)
         Me.GroupBox12.TabIndex = 39
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Chart settings"
@@ -1019,7 +1021,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(450, 18)
+        Me.Button1.Location = New System.Drawing.Point(635, 26)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(67, 21)
         Me.Button1.TabIndex = 0
@@ -1611,6 +1613,27 @@ Partial Class Form1
         Me.TabPage5.Text = "Massa traagheid + springs"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'TextBox38
+        '
+        Me.TextBox38.Enabled = False
+        Me.TextBox38.Location = New System.Drawing.Point(901, 112)
+        Me.TextBox38.Multiline = True
+        Me.TextBox38.Name = "TextBox38"
+        Me.TextBox38.Size = New System.Drawing.Size(310, 94)
+        Me.TextBox38.TabIndex = 66
+        Me.TextBox38.Text = "Bedum 3 oplossingen" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1) Fan tussen de lagers" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2) Frame vast zetten op de vloer " &
+    "en frame vullen met beton"
+        '
+        'TextBox37
+        '
+        Me.TextBox37.Enabled = False
+        Me.TextBox37.Location = New System.Drawing.Point(901, 27)
+        Me.TextBox37.Multiline = True
+        Me.TextBox37.Name = "TextBox37"
+        Me.TextBox37.Size = New System.Drawing.Size(310, 62)
+        Me.TextBox37.TabIndex = 65
+        Me.TextBox37.Text = "Fundatie gewicht 3x rotor gewicht"
+        '
         'TextBox29
         '
         Me.TextBox29.Enabled = False
@@ -1865,26 +1888,15 @@ Partial Class Form1
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
         '
-        'TextBox37
+        'CheckBox1
         '
-        Me.TextBox37.Enabled = False
-        Me.TextBox37.Location = New System.Drawing.Point(901, 27)
-        Me.TextBox37.Multiline = True
-        Me.TextBox37.Name = "TextBox37"
-        Me.TextBox37.Size = New System.Drawing.Size(310, 62)
-        Me.TextBox37.TabIndex = 65
-        Me.TextBox37.Text = "Fundatie gewicht 3x rotor gewicht"
-        '
-        'TextBox38
-        '
-        Me.TextBox38.Enabled = False
-        Me.TextBox38.Location = New System.Drawing.Point(901, 112)
-        Me.TextBox38.Multiline = True
-        Me.TextBox38.Name = "TextBox38"
-        Me.TextBox38.Size = New System.Drawing.Size(310, 94)
-        Me.TextBox38.TabIndex = 66
-        Me.TextBox38.Text = "Bedum 3 oplossingen" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1) Fan tussen de lagers" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2) Frame vast zetten op de vloer " &
-    "en frame vullen met beton"
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(334, 19)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(87, 17)
+        Me.CheckBox1.TabIndex = 6
+        Me.CheckBox1.Text = "Flip quadrant"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -2117,4 +2129,5 @@ Partial Class Form1
     Friend WithEvents TextBox29 As TextBox
     Friend WithEvents TextBox38 As TextBox
     Friend WithEvents TextBox37 As TextBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
