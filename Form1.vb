@@ -33,7 +33,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
         Calc_nr6()
         draw_chart1()
     End Sub
@@ -114,19 +114,19 @@ Public Class Form1
             d22 = (1 / C1 + 1 / C2) / (L1 + L2) ^ 2
             d22 += (L1 ^ 3 + L2 ^ 3) / (3 * E_steel * I1_shaft * (L1 + L2) ^ 2)
             d22 *= 1000                                             '[1/(meter.N)]
-
         End If
+
         TextBox16.Clear()
         '----------------------- formel 5.33 ------------------------
-        speed_rad = -3006                   'Init value
-        For i = 1 To 1000                   'Array size
-            speed_rad += 6                 'run from -3000 to +3000 [rad/s]
+        speed_rad = -NumericUpDown23.Value
+        'speed_rad = -3006                                  'Init value
+        For i = 1 To 1000                                   'Array size
+            speed_rad += NumericUpDown23.Value * 2 / 1000    'increment step [rad/s]
             form533(i, 0) = speed_rad       'Waaier hoeksnelheid [rad/s]
 
             form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
             form533(i, 1) /= (d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2)) * JP_imp * speed_rad
             form533(i, 1) += JA_imp / JP_imp * speed_rad
-
         Next
 
         '----------- Omega kritisch #1 ------------------
@@ -140,7 +140,6 @@ Public Class Form1
         om_krit2 -= Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
         om_krit2 *= 0.5
         om_krit2 = Sqrt(1 / om_krit2)
-
 
         '------------ om10 en om20 (bij stilstand)---formule 5.32--------
         term1 = (d11 * massa + d22 * JA_imp) / (2 * massa * JA_imp * (d11 * d22 - d12 ^ 2))
@@ -186,69 +185,80 @@ Public Class Form1
 
             For hh = 0 To 8
                 Chart1.Series.Add("s" & hh.ToString)
-                Chart1.Series(hh).ChartType = SeriesChartType.Line
+                Chart1.Series(hh).ChartType = SeriesChartType.Point
                 Chart1.Series(hh).IsVisibleInLegend = False
             Next
-            Chart1.Series(5).ChartType = SeriesChartType.Point
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
             Chart1.Titles.Add("Campbell diagram, overhung, anisotropic short bearings, flex shaft")
             Chart1.Titles(0).Font = New Font("Arial", 14, System.Drawing.FontStyle.Bold)
 
-            Chart1.Series(0).Name = "Omg1"
+            Chart1.Series(0).Name = "Omg1"              'Onbalans lijn
             Chart1.Series(0).Color = Color.Black
-            Chart1.Series(0).BorderWidth = 1
-            Chart1.Series(5).Color = Color.Black
-            Chart1.Series(5).BorderWidth = 1
+            Chart1.Series(0).BorderWidth = 2
 
+            Chart1.Series(5).Color = Color.Black        'Formule 5.33
+            Chart1.Series(5).BorderWidth = 1
+            Chart1.Series(8).Color = Color.Black
+
+            '--------------- Legends and titles ---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Hoeksnelheid waaier[rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
             Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
 
+            '--------- Chart min size---------------
             If CheckBox1.Checked Then           'Flip
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
             Else
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
             End If
 
+            '--------- Chart max size---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Maximum = NumericUpDown22.Value
             Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown23.Value
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
-            Chart1.Series(0).YAxisType = AxisType.Primary
 
+            '-------- snijpunten -----------
             Double.TryParse(TextBox34.Text, om10)
             Double.TryParse(TextBox35.Text, om20)
             Double.TryParse(TextBox32.Text, krit1)
-
             Chart1.Series(6).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
             Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
             Chart1.Series(8).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
-
             Chart1.Series(6).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(6).Points(0).MarkerSize = 10
             Chart1.Series(7).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(7).Points(0).MarkerSize = 10
-            Chart1.Series(8).Points(0).MarkerStyle = MarkerStyle.Diamond
-            Chart1.Series(8).Points(0).MarkerSize = 15
 
-            limit = NumericUpDown5.Value               'Limit in [rad/s]
-            For hh = 1 To 1000          'Array size
+            Chart1.Series(8).Points(0).MarkerStyle = MarkerStyle.Star10
+            Chart1.Series(8).Points(0).MarkerSize = 25
+
+            '---------------- draw formule 5.33 -------------------------------
+            limit = NumericUpDown23.Value                       'Limit in [rad/s]
+            For hh = 1 To 1000                                  'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     If CheckBox1.Checked Then
                         Chart1.Series(5).Points.AddXY(Abs(form533(hh, 1)), form533(hh, 0))
                     Else
                         Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
                     End If
-                    'TextBox16.Text &= Environment.NewLine & omega0(hh).ToString & ", In= " & form533(hh, 0).ToString & ", Out= " & form533(hh, 1)
                 End If
             Next
+
+            Chart1.Series(5).Points(0).MarkerStyle = MarkerStyle.Circle
+            Chart1.Series(5).Points(0).MarkerSize = 12
+
+
+            '--------draw onbalanslijn----------
+            Chart1.Series(0).ChartType = SeriesChartType.Line
             Chart1.Series(0).Points.AddXY(0, 0)
             Chart1.Series(0).Points.AddXY(limit / 2, limit / 2)
             Chart1.Series(0).Points.AddXY(limit, limit)
 
             Chart1.Series(0).Points(1).Label = "Onbalans"       'Add Remark 
+
         Catch ex As Exception
             'MessageBox.Show("nnnnnn")
         End Try

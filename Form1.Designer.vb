@@ -22,9 +22,9 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -89,17 +89,14 @@ Partial Class Form1
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label53 = New System.Windows.Forms.Label()
         Me.NumericUpDown23 = New System.Windows.Forms.NumericUpDown()
         Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
         Me.NumericUpDown22 = New System.Windows.Forms.NumericUpDown()
-        Me.NumericUpDown5 = New System.Windows.Forms.NumericUpDown()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.Label46 = New System.Windows.Forms.Label()
@@ -175,7 +172,6 @@ Partial Class Form1
         Me.NumericUpDown20 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown21 = New System.Windows.Forms.NumericUpDown()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -204,7 +200,6 @@ Partial Class Form1
         Me.GroupBox12.SuspendLayout()
         CType(Me.NumericUpDown23, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown22, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
@@ -929,17 +924,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea3)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea6)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend3.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend3)
+        Legend6.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend6)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart1.Series.Add(Series3)
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.Chart1.Series.Add(Series6)
         Me.Chart1.Size = New System.Drawing.Size(820, 590)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -950,20 +945,28 @@ Partial Class Form1
         Me.GroupBox12.Controls.Add(Me.Label53)
         Me.GroupBox12.Controls.Add(Me.NumericUpDown23)
         Me.GroupBox12.Controls.Add(Me.Label50)
-        Me.GroupBox12.Controls.Add(Me.Label48)
         Me.GroupBox12.Controls.Add(Me.NumericUpDown22)
-        Me.GroupBox12.Controls.Add(Me.NumericUpDown5)
         Me.GroupBox12.Location = New System.Drawing.Point(16, 10)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(479, 53)
+        Me.GroupBox12.Size = New System.Drawing.Size(545, 53)
         Me.GroupBox12.TabIndex = 39
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Chart settings"
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(225, 19)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(87, 17)
+        Me.CheckBox1.TabIndex = 6
+        Me.CheckBox1.Text = "Flip quadrant"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Label53
         '
         Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(187, 20)
+        Me.Label53.Location = New System.Drawing.Point(109, 21)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(33, 13)
         Me.Label53.TabIndex = 5
@@ -972,9 +975,9 @@ Partial Class Form1
         'NumericUpDown23
         '
         Me.NumericUpDown23.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown23.Location = New System.Drawing.Point(226, 16)
+        Me.NumericUpDown23.Location = New System.Drawing.Point(148, 17)
         Me.NumericUpDown23.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
-        Me.NumericUpDown23.Minimum = New Decimal(New Integer() {500, 0, 0, 0})
+        Me.NumericUpDown23.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.NumericUpDown23.Name = "NumericUpDown23"
         Me.NumericUpDown23.Size = New System.Drawing.Size(50, 20)
         Me.NumericUpDown23.TabIndex = 4
@@ -983,41 +986,22 @@ Partial Class Form1
         'Label50
         '
         Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(92, 20)
+        Me.Label50.Location = New System.Drawing.Point(14, 21)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(33, 13)
         Me.Label50.TabIndex = 3
         Me.Label50.Text = "AxisX"
         '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(6, 20)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(28, 13)
-        Me.Label48.TabIndex = 2
-        Me.Label48.Text = "Limit"
-        '
         'NumericUpDown22
         '
         Me.NumericUpDown22.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown22.Location = New System.Drawing.Point(131, 16)
-        Me.NumericUpDown22.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NumericUpDown22.Minimum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown22.Location = New System.Drawing.Point(53, 17)
+        Me.NumericUpDown22.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
+        Me.NumericUpDown22.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.NumericUpDown22.Name = "NumericUpDown22"
         Me.NumericUpDown22.Size = New System.Drawing.Size(50, 20)
         Me.NumericUpDown22.TabIndex = 1
-        Me.NumericUpDown22.Value = New Decimal(New Integer() {2500, 0, 0, 0})
-        '
-        'NumericUpDown5
-        '
-        Me.NumericUpDown5.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown5.Location = New System.Drawing.Point(40, 16)
-        Me.NumericUpDown5.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
-        Me.NumericUpDown5.Name = "NumericUpDown5"
-        Me.NumericUpDown5.Size = New System.Drawing.Size(50, 20)
-        Me.NumericUpDown5.TabIndex = 0
-        Me.NumericUpDown5.Value = New Decimal(New Integer() {3000, 0, 0, 0})
+        Me.NumericUpDown22.Value = New Decimal(New Integer() {5000, 0, 0, 0})
         '
         'Button1
         '
@@ -1032,8 +1016,6 @@ Partial Class Form1
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.TextBox16)
-        Me.TabPage3.Controls.Add(Me.TextBox15)
-        Me.TabPage3.Controls.Add(Me.TextBox14)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
@@ -1050,27 +1032,6 @@ Partial Class Form1
         Me.TextBox16.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.TextBox16.Size = New System.Drawing.Size(346, 603)
         Me.TextBox16.TabIndex = 3
-        '
-        'TextBox15
-        '
-        Me.TextBox15.Enabled = False
-        Me.TextBox15.Location = New System.Drawing.Point(18, 20)
-        Me.TextBox15.Multiline = True
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(346, 69)
-        Me.TextBox15.TabIndex = 2
-        Me.TextBox15.Text = "Massa traagheid waaier" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Centre line Ia= 0.5 x m x r^2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "90 deg Center line Ip= (1/" &
-    "2) x m x r^2 + (1/12 x m x L^2)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
-        'TextBox14
-        '
-        Me.TextBox14.Enabled = False
-        Me.TextBox14.Location = New System.Drawing.Point(18, 104)
-        Me.TextBox14.Multiline = True
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.Size = New System.Drawing.Size(346, 78)
-        Me.TextBox14.TabIndex = 1
-        Me.TextBox14.Text = "Maschinendynamik" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Tabelle 5.1 Nr 3 en 4 (seite 328)"
         '
         'TabPage4
         '
@@ -1621,8 +1582,7 @@ Partial Class Form1
         Me.TextBox38.Name = "TextBox38"
         Me.TextBox38.Size = New System.Drawing.Size(310, 94)
         Me.TextBox38.TabIndex = 66
-        Me.TextBox38.Text = "Bedum 3 oplossingen" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1) Fan tussen de lagers" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2) Frame vast zetten op de vloer " &
-    "en frame vullen met beton"
+        Me.TextBox38.Text = resources.GetString("TextBox38.Text")
         '
         'TextBox37
         '
@@ -1888,16 +1848,6 @@ Partial Class Form1
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
         '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(334, 19)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(87, 17)
-        Me.CheckBox1.TabIndex = 6
-        Me.CheckBox1.Text = "Flip quadrant"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1939,7 +1889,6 @@ Partial Class Form1
         Me.GroupBox12.PerformLayout()
         CType(Me.NumericUpDown23, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown22, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
@@ -2020,8 +1969,6 @@ Partial Class Form1
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TextBox15 As TextBox
-    Friend WithEvents TextBox14 As TextBox
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox13 As TextBox
     Friend WithEvents TextBox16 As TextBox
@@ -2108,9 +2055,7 @@ Partial Class Form1
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents GroupBox12 As GroupBox
     Friend WithEvents Label50 As Label
-    Friend WithEvents Label48 As Label
     Friend WithEvents NumericUpDown22 As NumericUpDown
-    Friend WithEvents NumericUpDown5 As NumericUpDown
     Friend WithEvents Label53 As Label
     Friend WithEvents NumericUpDown23 As NumericUpDown
     Friend WithEvents SplitContainer2 As SplitContainer
