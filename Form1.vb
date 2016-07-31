@@ -7,9 +7,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Globalization
 
 Public Class Form1
-    Dim omega0(1001) As Double           'Excitation equal to waaier Hz
-    Dim form533(1000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
-
+    Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
     'naam;tussen de lagers;overhang;star in waaier;dia tussen lagers; dia overhang;JP;JA;C_spring lager;C_spring lager;overhungY/N
     Public Shared fan() As String = {
@@ -33,7 +31,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
         Calc_nr6()
         draw_chart1()
     End Sub
@@ -45,136 +43,146 @@ Public Class Form1
         Dim E_steel, shaft_radius, shaft_overhang_radius, I1_shaft, I2_overhung As Double
         Dim JP_imp, JA_imp As Double
         Dim om10, om20, term1, term2 As Double
-        Dim om_krit1, om_krit2 As Double
+        Dim om_krit1, om_krit2, omega_asym As Double
 
-        E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
-        L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
-        L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
-        L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
-        massa = NumericUpDown4.Value                        'Weight waaier [kg]
+        Try
+            E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
+            L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
+            L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
+            L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
+            massa = NumericUpDown4.Value                        'Weight waaier [kg]
 
-        C1 = NumericUpDown6.Value * 1000                    '[N/mm]
-        C2 = NumericUpDown7.Value * 1000                    '[N/mm]
-        shaft_radius = NumericUpDown8.Value / 2             '[mm] as tussen de lagers radius
-        shaft_overhang_radius = NumericUpDown9.Value / 2    '[mm] as tussen de lagers radius
-        JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
-        JA_imp = NumericUpDown11.Value                      '[kg.m2] Massa Traagheid haaks op hartlijn (JA= 1/16.m.D^2(1+4/3(h/D)^2))
+            C1 = NumericUpDown6.Value * 1000                    '[N/mm]
+            C2 = NumericUpDown7.Value * 1000                    '[N/mm]
+            shaft_radius = NumericUpDown8.Value / 2             '[mm] as tussen de lagers radius
+            shaft_overhang_radius = NumericUpDown9.Value / 2    '[mm] as tussen de lagers radius
+            JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
+            JA_imp = NumericUpDown11.Value                      '[kg.m2] Massa Traagheid haaks op hartlijn (JA= 1/16.m.D^2(1+4/3(h/D)^2))
 
-        'I circel is PI/4 * r^4
-        I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
-        I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
+            'I circel is PI/4 * r^4
+            I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
+            I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
 
-        If RadioButton1.Checked Then
-            '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
-            '--------------- d11= Alfa --------------------------------
-            Label1.Text = "L1, lengte tussen de lagers [mm]"
-            Label2.Text = "L2, Overhang [mm]"
-            Label3.Visible = True
-            NumericUpDown3.Visible = True
-            Label11.Visible = True
-            NumericUpDown9.Visible = True
-            TextBox31.Visible = True
-            d11 = L2 ^ 2 / (C1 * L1 ^ 2)
-            d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
-            d11 += L1 * L2 ^ 2 / (3 * E_steel * I1_shaft)
-            d11 += (L2 ^ 3 - L3 ^ 3) / (3 * E_steel * I2_overhung)
-            d11 /= 1000                                             '[m/N]
-            '--------------- d12= Delta en Gamma -------------
-            d12 = L2 / (C1 * L1 ^ 2)
-            d12 += (L1 + L2) / (C2 * L1 ^ 2)
-            d12 += L1 * L2 / (3 * E_steel * I1_shaft)
-            d12 += (L2 ^ 2 - L3 ^ 2) / (2 * E_steel * I2_overhung)  '[1/N]
+            If RadioButton1.Checked Then
+                '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
+                '--------------- d11= Alfa --------------------------------
+                Label1.Text = "L1, lengte tussen de lagers [mm]"
+                Label2.Text = "L2, Overhang [mm]"
+                Label3.Visible = True
+                NumericUpDown3.Visible = True
+                Label11.Visible = True
+                NumericUpDown9.Visible = True
+                TextBox31.Visible = True
+                d11 = L2 ^ 2 / (C1 * L1 ^ 2)
+                d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
+                d11 += L1 * L2 ^ 2 / (3 * E_steel * I1_shaft)
+                d11 += (L2 ^ 3 - L3 ^ 3) / (3 * E_steel * I2_overhung)
+                d11 /= 1000                                             '[m/N]
+                '--------------- d12= Delta en Gamma -------------
+                d12 = L2 / (C1 * L1 ^ 2)
+                d12 += (L1 + L2) / (C2 * L1 ^ 2)
+                d12 += L1 * L2 / (3 * E_steel * I1_shaft)
+                d12 += (L2 ^ 2 - L3 ^ 2) / (2 * E_steel * I2_overhung)  '[1/N]
 
-            '--------------- d22= Beta ----------------
-            d22 = (1 / C1 + 1 / C2) / L1 ^ 2
-            d22 += L1 / (3 * E_steel * I1_shaft)
-            d22 += (L2 - L3) / (E_steel * I2_overhung)
-            d22 *= 1000                                             '[1/(meter.N)]
-        Else
-            '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
-            '--------------- d11= Alfa ----------------------------------------
-            Label1.Text = "L1, lengte lager#1-waaier [mm]"
-            Label2.Text = "L2, lengte waaier-lager#2 [mm]"
-            Label3.Visible = False
-            NumericUpDown3.Visible = False
-            Label11.Visible = False
-            NumericUpDown9.Visible = False
-            TextBox31.Visible = False
-            d11 = L2 ^ 2 / (C1 * (L1 + L2) ^ 2)
-            d11 += L1 ^ 2 / (C2 * (L1 + L2) ^ 2)
-            d11 += (L1 ^ 2 * L2 ^ 2) / (3 * E_steel * I1_shaft * (L1 + L2))
-            d11 /= 1000                                             '[m/N]
-            '--------------- d12= Delta en Gamma -------------
-            d12 = L2 / (C1 * (L1 + L2) ^ 2)
-            d12 += L1 / (C2 * (L1 + L2) ^ 2)
-            d12 += (L1 * L2 * (L2 - L1)) / (3 * E_steel * I1_shaft * (L1 + L2)) '[1/N]
+                '--------------- d22= Beta ----------------
+                d22 = (1 / C1 + 1 / C2) / L1 ^ 2
+                d22 += L1 / (3 * E_steel * I1_shaft)
+                d22 += (L2 - L3) / (E_steel * I2_overhung)
+                d22 *= 1000                                             '[1/(meter.N)]
+            Else
+                '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
+                '--------------- d11= Alfa ----------------------------------------
+                Label1.Text = "L1, lengte lager#1-waaier [mm]"
+                Label2.Text = "L2, lengte waaier-lager#2 [mm]"
+                Label3.Visible = False
+                NumericUpDown3.Visible = False
+                Label11.Visible = False
+                NumericUpDown9.Visible = False
+                TextBox31.Visible = False
+                d11 = L2 ^ 2 / (C1 * (L1 + L2) ^ 2)
+                d11 += L1 ^ 2 / (C2 * (L1 + L2) ^ 2)
+                d11 += (L1 ^ 2 * L2 ^ 2) / (3 * E_steel * I1_shaft * (L1 + L2))
+                d11 /= 1000                                             '[m/N]
+                '--------------- d12= Delta en Gamma -------------
+                d12 = L2 / (C1 * (L1 + L2) ^ 2)
+                d12 += L1 / (C2 * (L1 + L2) ^ 2)
+                d12 += (L1 * L2 * (L2 - L1)) / (3 * E_steel * I1_shaft * (L1 + L2)) '[1/N]
 
-            '--------------- d22= Beta ----------------
-            d22 = (1 / C1 + 1 / C2) / (L1 + L2) ^ 2
-            d22 += (L1 ^ 3 + L2 ^ 3) / (3 * E_steel * I1_shaft * (L1 + L2) ^ 2)
-            d22 *= 1000                                             '[1/(meter.N)]
-        End If
+                '--------------- d22= Beta ----------------
+                d22 = (1 / C1 + 1 / C2) / (L1 + L2) ^ 2
+                d22 += (L1 ^ 3 + L2 ^ 3) / (3 * E_steel * I1_shaft * (L1 + L2) ^ 2)
+                d22 *= 1000                                             '[1/(meter.N)]
+            End If
 
-        TextBox16.Clear()
-        '----------------------- formel 5.33 ------------------------
-        speed_rad = -NumericUpDown23.Value
-        'speed_rad = -3006                                  'Init value
-        For i = 1 To 1000                                   'Array size
-            speed_rad += NumericUpDown23.Value * 2 / 1000    'increment step [rad/s]
-            form533(i, 0) = speed_rad       'Waaier hoeksnelheid [rad/s]
+            TextBox16.Clear()
 
-            form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
-            form533(i, 1) /= (d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2)) * JP_imp * speed_rad
-            form533(i, 1) += JA_imp / JP_imp * speed_rad
-        Next
+            '----------------------- formel 5.33 ------------------------
+            speed_rad = -NumericUpDown22.Value
+            For i = 1 To 2000                                       'Array size
+                speed_rad += NumericUpDown22.Value * 2 / 2000       'increment step [rad/s]
+                form533(i, 0) = speed_rad                           'Waaier hoeksnelheid [rad/s]
 
-        '----------- Omega kritisch #1 ------------------
-        om_krit1 = (d11 * massa + d22 * (JA_imp - JP_imp))
-        om_krit1 += Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
-        om_krit1 *= 0.5
-        om_krit1 = Sqrt(1 / om_krit1)
+                form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
+                form533(i, 1) /= (d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2)) * JP_imp * speed_rad
+                form533(i, 1) += JA_imp / JP_imp * speed_rad
+            Next
 
-        '----------- Omega kritisch #2 ------------------
-        om_krit2 = (d11 * massa + d22 * (JA_imp - JP_imp))
-        om_krit2 -= Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
-        om_krit2 *= 0.5
-        om_krit2 = Sqrt(1 / om_krit2)
+            '----------- Omega kritisch #1 ------------------
+            om_krit1 = (d11 * massa + d22 * (JA_imp - JP_imp))
+            om_krit1 += Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
+            om_krit1 *= 0.5
+            om_krit1 = Sqrt(1 / om_krit1)
 
-        '------------ om10 en om20 (bij stilstand)---formule 5.32--------
-        term1 = (d11 * massa + d22 * JA_imp) / (2 * massa * JA_imp * (d11 * d22 - d12 ^ 2))
-        term2 = 4 * massa * JA_imp * (d11 * d22 - d12 ^ 2) / (d11 * massa + d22 * JA_imp) ^ 2
-        term2 = 1 - term2
+            '----------- Omega kritisch #2 ------------------
+            om_krit2 = (d11 * massa + d22 * (JA_imp - JP_imp))
+            om_krit2 -= Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
+            om_krit2 *= 0.5
+            om_krit2 = Sqrt(1 / om_krit2)
 
-        om10 = Sqrt(term1 * (1 + Sqrt(term2)))
-        om20 = Sqrt(term1 * (1 - Sqrt(term2)))
+            '------------ om10 en om20 (bij stilstand)---formule 5.32--------
+            term1 = (d11 * massa + d22 * JA_imp) / (2 * massa * JA_imp * (d11 * d22 - d12 ^ 2))
+            term2 = 4 * massa * JA_imp * (d11 * d22 - d12 ^ 2) / (d11 * massa + d22 * JA_imp) ^ 2
+            term2 = 1 - term2
 
-        TextBox2.Text = d11.ToString("0.###e0")                     'alfa
-        TextBox3.Text = d12.ToString("0.###e0")                     'gamma en delta
-        TextBox4.Text = d22.ToString("0.###e0")                     'beta
+            om10 = Sqrt(term1 * (1 + Sqrt(term2)))
+            om20 = Sqrt(term1 * (1 - Sqrt(term2)))
 
-        TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString    'om_krit1 [Hz]
-        TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString    'om_krit2 [Hz]
+            '---------- omega _asymptote----------------
+            omega_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
+            omega_asym = Sqrt(omega_asym)
 
-        TextBox11.Text = Math.Round(rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
-        TextBox12.Text = Math.Round(rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
+            TextBox2.Text = d11.ToString("0.###e0")                     'alfa
+            TextBox3.Text = d12.ToString("0.###e0")                     'gamma en delta
+            TextBox4.Text = d22.ToString("0.###e0")                     'beta
 
-        TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
-        TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
+            TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
+            TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
 
-        TextBox1.Text = Math.Round(rad_to_hz(om_krit1) * 60, 0).ToString   'om_krit1 [rmp]
-        TextBox13.Text = Math.Round(rad_to_hz(om_krit2) * 60, 0).ToString  'om_krit2 [rmp]
+            TextBox11.Text = Math.Round(rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
+            TextBox12.Text = Math.Round(rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
 
-        TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
-        TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
+            TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
+            TextBox15.Text = Math.Round(rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
+            TextBox39.Text = Math.Round(rad_to_hz(omega_asym) * 60, 0).ToString     'Omega asymptote
 
-        TextBox30.Text = I1_shaft.ToString("0.###e0")                   'Buigtraagheidsmoment [m^4]
-        TextBox31.Text = I2_overhung.ToString("0.###e0")                'Buigtraagheidsmoment [m^4]
+            TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
+            TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
 
+            TextBox1.Text = Math.Round(rad_to_hz(om_krit1) * 60, 0).ToString   'om_krit1 [rmp]
+            TextBox13.Text = Math.Round(rad_to_hz(om_krit2) * 60, 0).ToString  'om_krit2 [rmp]
+
+            TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
+            TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
+
+            TextBox30.Text = I1_shaft.ToString("0.###e0")                   'Buigtraagheidsmoment [m^4]
+            TextBox31.Text = I2_overhung.ToString("0.###e0")                'Buigtraagheidsmoment [m^4]
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub draw_chart1()
-
         Dim hh, limit As Integer
         Dim om10, om20, krit1 As Double
 
@@ -183,11 +191,12 @@ Public Class Form1
             Chart1.ChartAreas.Clear()
             Chart1.Titles.Clear()
 
-            For hh = 0 To 8
+            For hh = 0 To 5
                 Chart1.Series.Add("s" & hh.ToString)
                 Chart1.Series(hh).ChartType = SeriesChartType.Point
                 Chart1.Series(hh).IsVisibleInLegend = False
             Next
+            Chart1.Series(5).ChartType = SeriesChartType.Line
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
@@ -198,18 +207,18 @@ Public Class Form1
             Chart1.Series(0).Color = Color.Black
             Chart1.Series(0).BorderWidth = 2
 
-            Chart1.Series(5).Color = Color.Black        'Formule 5.33
-            Chart1.Series(5).BorderWidth = 1
-            Chart1.Series(8).Color = Color.Black
+            Chart1.Series(1).Color = Color.Black        'Formule 5.33
+            Chart1.Series(1).BorderWidth = 1
+            Chart1.Series(4).Color = Color.Black
 
             '--------------- Legends and titles ---------------
-            Chart1.ChartAreas("ChartArea0").AxisX.Title = "Hoeksnelheid waaier[rad/s]"
+            Chart1.ChartAreas("ChartArea0").AxisX.Title = "Angular speed impeller [rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
             Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
             Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
 
             '--------- Chart min size---------------
-            If CheckBox1.Checked Then           'Flip
+            If CheckBox1.Checked Then                           'Flip
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
             Else
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
@@ -217,47 +226,40 @@ Public Class Form1
 
             '--------- Chart max size---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Maximum = NumericUpDown22.Value
-            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown23.Value
+            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown22.Value
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
 
             '-------- snijpunten -----------
             Double.TryParse(TextBox34.Text, om10)
             Double.TryParse(TextBox35.Text, om20)
             Double.TryParse(TextBox32.Text, krit1)
-            Chart1.Series(6).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
-            Chart1.Series(7).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
-            Chart1.Series(8).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
-            Chart1.Series(6).Points(0).MarkerStyle = MarkerStyle.Circle
-            Chart1.Series(6).Points(0).MarkerSize = 10
-            Chart1.Series(7).Points(0).MarkerStyle = MarkerStyle.Circle
-            Chart1.Series(7).Points(0).MarkerSize = 10
-
-            Chart1.Series(8).Points(0).MarkerStyle = MarkerStyle.Star10
-            Chart1.Series(8).Points(0).MarkerSize = 25
+            Chart1.Series(2).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
+            Chart1.Series(3).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
+            Chart1.Series(4).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
+            Chart1.Series(2).Points(0).MarkerStyle = MarkerStyle.Circle
+            Chart1.Series(2).Points(0).MarkerSize = 10
+            Chart1.Series(3).Points(0).MarkerStyle = MarkerStyle.Circle
+            Chart1.Series(3).Points(0).MarkerSize = 10
+            Chart1.Series(4).Points(0).MarkerStyle = MarkerStyle.Star10
+            Chart1.Series(4).Points(0).MarkerSize = 25
 
             '---------------- draw formule 5.33 -------------------------------
-            limit = NumericUpDown23.Value                       'Limit in [rad/s]
-            For hh = 1 To 1000                                  'Array size
+            limit = NumericUpDown22.Value                       'Limit in [rad/s]
+            For hh = 1 To 2000                                  'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     If CheckBox1.Checked Then
-                        Chart1.Series(5).Points.AddXY(Abs(form533(hh, 1)), form533(hh, 0))
+                        Chart1.Series(1).Points.AddXY(Abs(form533(hh, 1)), form533(hh, 0))
                     Else
-                        Chart1.Series(5).Points.AddXY(form533(hh, 1), form533(hh, 0))
+                        Chart1.Series(1).Points.AddXY(form533(hh, 1), form533(hh, 0))
                     End If
                 End If
             Next
 
-            Chart1.Series(5).Points(0).MarkerStyle = MarkerStyle.Circle
-            Chart1.Series(5).Points(0).MarkerSize = 12
-
-
             '--------draw onbalanslijn----------
-            Chart1.Series(0).ChartType = SeriesChartType.Line
-            Chart1.Series(0).Points.AddXY(0, 0)
-            Chart1.Series(0).Points.AddXY(limit / 2, limit / 2)
-            Chart1.Series(0).Points.AddXY(limit, limit)
-
-            Chart1.Series(0).Points(1).Label = "Onbalans"       'Add Remark 
+            Chart1.Series(5).Points.AddXY(0, 0)
+            Chart1.Series(5).Points.AddXY(limit / 2, limit / 2)
+            Chart1.Series(5).Points.AddXY(limit, limit)
+            Chart1.Series(5).Points(1).Label = "Unbalance"       'Add Remark 
 
         Catch ex As Exception
             'MessageBox.Show("nnnnnn")
