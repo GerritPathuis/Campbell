@@ -115,8 +115,6 @@ Public Class Form1
                 d22 *= 1000                                             '[1/(meter.N)]
             End If
 
-            TextBox16.Clear()
-
             '----------------------- formel 5.33 ------------------------
             speed_rad = -NumericUpDown22.Value
             For i = 1 To 2000                                       'Array size
@@ -177,6 +175,14 @@ Public Class Form1
 
             TextBox30.Text = I1_shaft.ToString("0.###e0")                   'Buigtraagheidsmoment [m^4]
             TextBox31.Text = I2_overhung.ToString("0.###e0")                'Buigtraagheidsmoment [m^4]
+
+            ' ------- Check sanity -------
+            If L3 > L2 Then
+                NumericUpDown3.BackColor = Color.Red
+            Else
+                NumericUpDown3.BackColor = Color.Yellow
+            End If
+
         Catch ex As Exception
 
         End Try
@@ -313,7 +319,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged
         Dim Dia, hoog, massa, Iz, Ix As Double
         Dim sp1, sp2, spc As Double
 
@@ -335,6 +341,18 @@ Public Class Form1
 
         TextBox10.Text = Round(spc, 1).ToString
         TextBox36.Text = Round(sp1 + sp2, 1).ToString
+
+        '-------- Berekening veerconstante staal-----------------
+        Dim Breed, Dik, Lang, Veer_C, E_carbon As Double
+
+        Breed = NumericUpDown5.Value                    '[mm]
+        Dik = NumericUpDown23.Value                     '[mm]
+        Lang = NumericUpDown26.Value                    '[mm]
+        E_carbon = NumericUpDown27.Value                '[kN/mm2]
+        Veer_C = E_carbon * Breed * Dik / Lang          '[kN/mm]
+
+        TextBox40.Text = Round(Veer_C, 0).ToString      '1 plaat
+        TextBox41.Text = Round(Veer_C * 4, 0).ToString  'doos 4 platen
     End Sub
     'Converts Radial per second to Hz
     Private Function rad_to_hz(rads As Double)
