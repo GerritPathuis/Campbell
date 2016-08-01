@@ -191,25 +191,19 @@ Public Class Form1
             Chart1.ChartAreas.Clear()
             Chart1.Titles.Clear()
 
-            For hh = 0 To 5
+            For hh = 0 To 6
                 Chart1.Series.Add("s" & hh.ToString)
                 Chart1.Series(hh).ChartType = SeriesChartType.Point
                 Chart1.Series(hh).IsVisibleInLegend = False
+                Chart1.Series(hh).Color = Color.Black
             Next
-            Chart1.Series(5).ChartType = SeriesChartType.Line
+            Chart1.Series(5).ChartType = SeriesChartType.Line       'Onbalans lijn
+            Chart1.Series(6).ChartType = SeriesChartType.Line       'X=0 lijn
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
             Chart1.Titles.Add("Campbell diagram, overhung, anisotropic short bearings, flex shaft")
             Chart1.Titles(0).Font = New Font("Arial", 14, System.Drawing.FontStyle.Bold)
-
-            Chart1.Series(0).Name = "Omg1"              'Onbalans lijn
-            Chart1.Series(0).Color = Color.Black
-            Chart1.Series(0).BorderWidth = 2
-
-            Chart1.Series(1).Color = Color.Black        'Formule 5.33
-            Chart1.Series(1).BorderWidth = 1
-            Chart1.Series(4).Color = Color.Black
 
             '--------------- Legends and titles ---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Angular speed impeller [rad/s]"
@@ -244,6 +238,7 @@ Public Class Form1
             Chart1.Series(4).Points(0).MarkerSize = 25
 
             '---------------- draw formule 5.33 -------------------------------
+            Chart1.Series(1).BorderWidth = 1        'Formule 5.33
             limit = NumericUpDown22.Value                       'Limit in [rad/s]
             For hh = 1 To 2000                                  'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
@@ -260,6 +255,14 @@ Public Class Form1
             Chart1.Series(5).Points.AddXY(limit / 2, limit / 2)
             Chart1.Series(5).Points.AddXY(limit, limit)
             Chart1.Series(5).Points(1).Label = "Unbalance"       'Add Remark 
+            Chart1.Series(5).BorderWidth = 3
+
+            '--------X=0 lijn----------
+            If Not CheckBox1.Checked Then
+                Chart1.Series(6).Points.AddXY(0, 0)
+                Chart1.Series(6).Points.AddXY(0, limit)
+                Chart1.Series(6).BorderWidth = 3
+            End If
 
         Catch ex As Exception
             'MessageBox.Show("nnnnnn")
