@@ -5,19 +5,40 @@ Imports System.Math
 Imports System.Collections.Generic
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Globalization
+Imports System.Threading
+'Imports Word = Microsoft.Office.Interop.Word
+Imports System.Runtime.InteropServices
 
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
-    'naam;tussen de lagers;overhang;star in waaier;dia tussen lagers; dia overhang;JP;JA;C_spring lager;C_spring lager;overhungY/N
+    'Naam
+    'Model
+    'Tekst
+    'L1-Tussen de lagers
+    'L2-overhung
+    'L3-Star deel in de waaier
+    'As dikte tussen de lagers
+    'As dikte
+    'Weight impeller
+    'Jp
+    'Ja
+    'Stiffness bearing/support buiten
+    'Stiffness bearing/support binnen
+    'overhungY/N
     Public Shared fan() As String = {
-     "Vrije invoer;Q16..;inlet/dia/Type; 471;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
-     "Machinendynamik;Test;Aufgabe A5.5; 472;66;0;15;15;3,7;0,0185;0,00925;400;400;Y",
-     "Tetrapak;Bedum 3;1800/1825/T33;1000;500;100;180;180;1125;450;230;20;20;Y",
-     "Foster Wheeler;Q16.0071;2600/2610/T33; 2380;2380;000;400;0;1525;864;432;89;89;N"}
+     "Vrije invoer;Q16..;inlet/dia/Type;                    471;66;0;15;15;         3.7;0.0185;0.00925;400;400;Y",
+     "Machinendynamik;Test #1, overhung;Aufgabe A5.5;                 472;66;0;15;15;         3.7;0.0185;0.00925;400;400;Y",
+     "Dynamics Rotating Machines;Test #2, tussen lagers;Example 3.5.1;     250;250;000;200;111;    122.7;0.6134;2.8625;1.0;1.0;N",
+     "Tetrapak;Bedum 3;1800/1825/T33;                       1000;500;100;180;180;   1125;450;230;20;20;Y",
+     "Foster Wheeler;Q16.0071;2600/2610/T33;                2380;2380;000;400;0;    1525;864;432;89;89;N"
+     }
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim words() As String
+
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")      'Decimal separator "."
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")    'Decimal separator "."
         ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
 
         '-------Fill combobox1, Fan type selection------------------
@@ -31,11 +52,11 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged
-        Calc_nr6()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged
+        Calc_nr()
         draw_chart1()
     End Sub
-    Private Sub Calc_nr6()
+    Private Sub Calc_nr()
         Dim i As Integer
         Dim L1, L2, L3, massa, speed_rad As Double
         Dim C1, C2 As Double
@@ -46,7 +67,8 @@ Public Class Form1
         Dim om_krit1, om_krit2, omega_asym As Double
 
         Try
-            E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
+            E_steel = 210.0 * 10 ^ 3                        'Young N/mm^2
+
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
             L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
@@ -66,7 +88,6 @@ Public Class Form1
 
             If RadioButton1.Checked Then
                 '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
-                '--------------- d11= Alfa --------------------------------
                 Label1.Text = "L1, lengte tussen de lagers [mm]"
                 Label2.Text = "L2, Overhang [mm]"
                 Label3.Visible = True
@@ -74,6 +95,7 @@ Public Class Form1
                 Label11.Visible = True
                 NumericUpDown9.Visible = True
                 TextBox31.Visible = True
+                '--------------- d11= Alfa --------------------------------
                 d11 = L2 ^ 2 / (C1 * L1 ^ 2)
                 d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
                 d11 += L1 * L2 ^ 2 / (3 * E_steel * I1_shaft)
@@ -100,17 +122,21 @@ Public Class Form1
                 Label11.Visible = False
                 NumericUpDown9.Visible = False
                 TextBox31.Visible = False
+
+                '--------------- d11= Alfa --------------------------------
                 d11 = L2 ^ 2 / (C1 * (L1 + L2) ^ 2)
                 d11 += L1 ^ 2 / (C2 * (L1 + L2) ^ 2)
                 d11 += (L1 ^ 2 * L2 ^ 2) / (3 * E_steel * I1_shaft * (L1 + L2))
                 d11 /= 1000                                             '[m/N]
+
                 '--------------- d12= Delta en Gamma -------------
-                d12 = L2 / (C1 * (L1 + L2) ^ 2)
+                d12 = -L2 / (C1 * (L1 + L2) ^ 2)
                 d12 += L1 / (C2 * (L1 + L2) ^ 2)
                 d12 += (L1 * L2 * (L2 - L1)) / (3 * E_steel * I1_shaft * (L1 + L2)) '[1/N]
 
                 '--------------- d22= Beta ----------------
-                d22 = (1 / C1 + 1 / C2) / (L1 + L2) ^ 2
+                d22 = (1 / C1 + 1 / C2)
+                d22 /= (L1 + L2) ^ 2
                 d22 += (L1 ^ 3 + L2 ^ 3) / (3 * E_steel * I1_shaft * (L1 + L2) ^ 2)
                 d22 *= 1000                                             '[1/(meter.N)]
             End If
@@ -257,11 +283,13 @@ Public Class Form1
             Next
 
             '--------draw onbalanslijn----------
-            Chart1.Series(5).Points.AddXY(0, 0)
-            Chart1.Series(5).Points.AddXY(limit / 2, limit / 2)
-            Chart1.Series(5).Points.AddXY(limit, limit)
-            Chart1.Series(5).Points(1).Label = "Unbalance"       'Add Remark 
-            Chart1.Series(5).BorderWidth = 3
+            If CheckBox2.Checked Then
+                Chart1.Series(5).Points.AddXY(0, 0)
+                Chart1.Series(5).Points.AddXY(limit / 2, limit / 2)
+                Chart1.Series(5).Points.AddXY(limit, limit)
+                Chart1.Series(5).Points(1).Label = "Unbalance"       'Add Remark 
+                Chart1.Series(5).BorderWidth = 3
+            End If
 
             '--------X=0 lijn----------
             If Not CheckBox1.Checked Then
@@ -319,7 +347,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged
         Dim Dia, hoog, massa, Iz, Ix As Double
         Dim sp1, sp2, spc As Double
 
@@ -330,8 +358,8 @@ Public Class Form1
         Iz = 0.5 * massa * (Dia / 2) ^ 2
         Ix = massa / 12 * (3 * (Dia / 2) ^ 2 + hoog ^ 2)
 
-        TextBox23.Text = Round(Iz, 0).ToString
-        TextBox24.Text = Round(Ix, 0).ToString
+        TextBox23.Text = Round(Iz, 2).ToString
+        TextBox24.Text = Round(Ix, 2).ToString
         TextBox25.Text = Round(massa, 0).ToString
 
         sp1 = NumericUpDown24.Value
@@ -353,6 +381,15 @@ Public Class Form1
 
         TextBox40.Text = Round(Veer_C, 0).ToString      '1 plaat
         TextBox41.Text = Round(Veer_C * 4, 0).ToString  'doos 4 platen
+
+        '-------- Eigenfrequen+ gewicht geeft veerconstante staal-----------------
+        Dim gewicht, eigenfreq, C_Veer_support As Double
+
+        gewicht = NumericUpDown30.Value                     '[kg]
+        eigenfreq = NumericUpDown31.Value * 2 * PI          '[Hz]
+        C_Veer_support = eigenfreq ^ 2 * gewicht / 10 ^ 6   '[kN/mm]
+
+        TextBox42.Text = Round(C_Veer_support, 0).ToString  'doos 4 platen
     End Sub
     'Converts Radial per second to Hz
     Private Function rad_to_hz(rads As Double)
@@ -364,17 +401,17 @@ Public Class Form1
 
         If (ComboBox1.SelectedIndex > 0) Then      'Prevent exceptions
             words = fan(ComboBox1.SelectedIndex).Split(";")
-            TextBox7.Text = words(0)
-            TextBox8.Text = words(1)
-            TextBox9.Text = words(2)
-            NumericUpDown1.Value = Convert.ToDouble(words(3))   'Tussen de lagers
-            NumericUpDown2.Value = Convert.ToDouble(words(4))   'overhung
-            NumericUpDown3.Value = Convert.ToDouble(words(5))   'Star deel in de waaier
+            TextBox7.Text = words(0)                            'Naam
+            TextBox8.Text = words(1)                            'Model
+            TextBox9.Text = words(2)                            'Tekst
+            NumericUpDown1.Value = Convert.ToDouble(words(3))   'L1-Tussen de lagers
+            NumericUpDown2.Value = Convert.ToDouble(words(4))   'L2-overhung
+            NumericUpDown3.Value = Convert.ToDouble(words(5))   'L3-Star deel in de waaier
             NumericUpDown8.Value = Convert.ToDouble(words(6))   'As dikte tussen de lagers
             NumericUpDown9.Value = Convert.ToDouble(words(7))   'As dikte
             NumericUpDown4.Value = Convert.ToDouble(words(8))   'Weight
             NumericUpDown10.Value = Convert.ToDouble(words(9))  'Jp
-            NumericUpDown11.Value = Convert.ToDouble(words(10))  'Ja
+            NumericUpDown11.Value = Convert.ToDouble(words(10)) 'Ja
             NumericUpDown6.Value = Convert.ToDouble(words(11))  'Stiffness bearing/support buiten
             NumericUpDown7.Value = Convert.ToDouble(words(12))  'Stiffness bearing/support binnen
             If String.Compare(words(13), "N") Then
@@ -388,7 +425,7 @@ Public Class Form1
 
 
         '-------- decimal places ---------------------
-        If (ComboBox1.SelectedIndex = 1) Then       'Test from Maschinendynamik
+        If (ComboBox1.SelectedIndex = 1) Or (ComboBox1.SelectedIndex = 2) Then  'Test
             NumericUpDown4.DecimalPlaces = 1        'Massa 
             NumericUpDown6.DecimalPlaces = 1        'Stiffness bearing/support buiten
             NumericUpDown7.DecimalPlaces = 1        'Stiffness bearing/support buiten
