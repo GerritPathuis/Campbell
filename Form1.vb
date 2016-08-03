@@ -48,11 +48,11 @@ Public Class Form1
         Next hh
 
         If ComboBox1.Items.Count > 0 Then
-            ComboBox1.SelectedIndex = 1                 'Select Fan data
+            ComboBox1.SelectedIndex = 2                 'Select Fan data
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
         Calc_nr()
         draw_chart1()
     End Sub
@@ -85,6 +85,11 @@ Public Class Form1
             I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
             I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
+            If JA_imp > JP_imp Then
+                GroupBox1.Text = "Massa traagheid waaier (walsvormig !!) "
+            Else
+                GroupBox1.Text = "Massa traagheid waaier (schijfvormig)"
+            End If
 
             If RadioButton1.Checked Then
                 '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
@@ -142,6 +147,7 @@ Public Class Form1
             End If
 
             '----------------------- formel 5.33 ------------------------
+            TextBox16.Clear()
             speed_rad = -NumericUpDown22.Value
             For i = 1 To 2000                                       'Array size
                 speed_rad += NumericUpDown22.Value * 2 / 2000       'increment step [rad/s]
@@ -150,6 +156,8 @@ Public Class Form1
                 form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
                 form533(i, 1) /= (d22 - ((d11 * d22 - d12 ^ 2) * massa * speed_rad ^ 2)) * JP_imp * speed_rad
                 form533(i, 1) += JA_imp / JP_imp * speed_rad
+
+                ' TextBox16.Text += form533(i, 0).ToString & ",  " & form533(i, 1).ToString & vbCrLf
             Next
 
             '----------- Omega kritisch #1 ------------------
@@ -176,9 +184,9 @@ Public Class Form1
             omega_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
             omega_asym = Sqrt(omega_asym)
 
-            TextBox2.Text = d11.ToString("0.###e0")                     'alfa
-            TextBox3.Text = d12.ToString("0.###e0")                     'gamma en delta
-            TextBox4.Text = d22.ToString("0.###e0")                     'beta
+            TextBox2.Text = d11.ToString((("0.00 E0")))                     'alfa
+            TextBox3.Text = d12.ToString((("0.00 E0")))                     'gamma en delta
+            TextBox4.Text = d22.ToString((("0.00 E0")))                     'beta
 
             TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
             TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
@@ -199,8 +207,8 @@ Public Class Form1
             TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
             TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
 
-            TextBox30.Text = I1_shaft.ToString("0.###e0")                   'Buigtraagheidsmoment [m^4]
-            TextBox31.Text = I2_overhung.ToString("0.###e0")                'Buigtraagheidsmoment [m^4]
+            TextBox30.Text = I1_shaft.ToString((("0.00 E0")))                   'Buigtraagheidsmoment [m^4]
+            TextBox31.Text = I2_overhung.ToString((("0.00 E0")))                'Buigtraagheidsmoment [m^4]
 
             ' ------- Check sanity -------
             If L3 > L2 Then
@@ -234,7 +242,7 @@ Public Class Form1
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
-            Chart1.Titles.Add("Campbell diagram, overhung, anisotropic short bearings, flex shaft")
+            Chart1.Titles.Add("Campbell diagram, overhung, isotropic short bearings, flex shaft")
             Chart1.Titles(0).Font = New Font("Arial", 14, System.Drawing.FontStyle.Bold)
 
             '--------------- Legends and titles ---------------
@@ -267,9 +275,15 @@ Public Class Form1
             Chart1.Series(3).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(3).Points(0).MarkerSize = 10
             Chart1.Series(4).Points(0).MarkerStyle = MarkerStyle.Star10
-            Chart1.Series(4).Points(0).MarkerSize = 25
+            Chart1.Series(4).Points(0).MarkerSize = 20
 
             '---------------- draw formule 5.33 -------------------------------
+            If CheckBox3.Checked Then
+                Chart1.Series(1).ChartType = SeriesChartType.Point
+            Else
+                Chart1.Series(1).ChartType = SeriesChartType.Line
+            End If
+
             Chart1.Series(1).BorderWidth = 1        'Formule 5.33
             limit = NumericUpDown22.Value                       'Limit in [rad/s]
             For hh = 1 To 2000                                  'Array size
@@ -304,40 +318,49 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, TabPage4.Enter, NumericUpDown17.ValueChanged, NumericUpDown16.ValueChanged, NumericUpDown15.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown12.ValueChanged, NumericUpDown18.ValueChanged, NumericUpDown14.ValueChanged, NumericUpDown19.ValueChanged
-        Dim length_L, length_A, length_B, massa, diam_tussen, diam_overhung, young As Double
+        Dim length_L, length_A, length_B, mmassa, diam_tussen, diam_overhung, young As Double
         Dim C_tussen, I_as_tussen, I_as_overhung, fr_krit As Double
 
-        length_L = NumericUpDown12.Value
-        length_A = NumericUpDown13.Value
+        length_L = NumericUpDown12.Value / 1000
+        length_A = NumericUpDown13.Value / 1000
         length_B = length_L - length_A
-        massa = NumericUpDown15.Value
-        diam_tussen = NumericUpDown16.Value
-        diam_overhung = NumericUpDown19.Value
-        young = NumericUpDown17.Value * 1000                            '[N/mm2]
+        mmassa = NumericUpDown15.Value                                  '[kg]
+        diam_tussen = NumericUpDown16.Value / 1000                      '[mm]
+
+        young = NumericUpDown17.Value * 10 ^ 9                          '[N/m2]
 
         '-------------- Tussen de lagers -----------------
-        I_as_tussen = PI / 4 * (diam_tussen / 2) ^ 4                    '[mm4]
-        C_tussen = 3 * young * I_as_tussen * length_L * 1000 / (length_A ^ 2 * length_B ^ 2)
-        fr_krit = 1 / (2 * PI) * Sqrt(C_tussen / massa) * 60        '[rmp]
+        I_as_tussen = PI / 4 * (diam_tussen / 2) ^ 4                    '[m4]
+        C_tussen = 3 * young * I_as_tussen * length_L
+        C_tussen /= (length_A ^ 2 * length_B ^ 2)
+        fr_krit = Sqrt(C_tussen / mmassa)                               '[Rad/sec]
+        fr_krit /= (2 * PI)                                             '[Hz]
 
-        TextBox17.Text = Round(length_B, 0).ToString
-        TextBox18.Text = Round(I_as_tussen / 10 ^ 6, 0).ToString
-        TextBox19.Text = Round(C_tussen / 1000, 0).ToString
-        TextBox20.Text = Round(fr_krit, 0).ToString                     '[rpm]
-        TextBox27.Text = Round(fr_krit / 60, 0).ToString                '[Hz]
+        TextBox17.Text = Round(length_B * 1000, 0).ToString
+        TextBox18.Text = I_as_tussen.ToString((("0.00 E0")))
+        TextBox19.Text = C_tussen.ToString((("0.00 E0")))                   'Buigstijfheid
+        TextBox20.Text = Round(fr_krit, 0).ToString                     '[Hz]
+        TextBox27.Text = Round(fr_krit * 60, 0).ToString                '[rpm]
+
 
         '-------------- Overhung -----------------
-        I_as_overhung = PI / 4 * (diam_overhung / 2) ^ 4                '[mm4]
         Dim Overhung_L, Overhung_A, C_Overhung, fr_krit_overhung As Double
-        Overhung_L = NumericUpDown14.Value
-        Overhung_A = NumericUpDown18.Value
-        C_Overhung = 3 * young * I_as_overhung * 1000 / (Overhung_A ^ 2 * (Overhung_A + Overhung_L))
-        fr_krit_overhung = 1 / (2 * PI) * Sqrt(C_Overhung / massa) * 60 '[rmp]
 
-        TextBox26.Text = Round(I_as_overhung / 10 ^ 6, 0).ToString
-        TextBox21.Text = Round(C_Overhung / 1000, 0).ToString
-        TextBox22.Text = Round(fr_krit_overhung, 0).ToString            '[rpm]   
-        TextBox28.Text = Round(fr_krit_overhung / 60, 0).ToString       '[Hz]
+        diam_overhung = NumericUpDown19.Value / 1000                     '[m]
+        Overhung_L = NumericUpDown14.Value / 1000
+        Overhung_A = NumericUpDown18.Value / 1000                        'Overhung
+
+        I_as_overhung = PI / 4 * (diam_overhung / 2) ^ 4                '[m4]
+        C_Overhung = 3 * young * I_as_overhung
+        C_Overhung /= (Overhung_A ^ 2 * (Overhung_A + Overhung_L))
+
+        fr_krit_overhung = Sqrt(C_Overhung / mmassa)                    '[Rad/sec]
+        fr_krit_overhung /= (2 * PI)                                    '[Hz]
+
+        TextBox26.Text = I_as_overhung.ToString((("0.00 E0")))
+        TextBox21.Text = C_Overhung.ToString((("0.00 E0")))                 'Buigstijfheid
+        TextBox22.Text = Round(fr_krit_overhung, 0).ToString            '[Hz]   
+        TextBox28.Text = Round(fr_krit_overhung * 60, 0).ToString       '[rpm]
 
         '---------------- Check lengtes --------------------
         If length_A > length_L * 0.95 Then   'Residual torque too big,  problem in choosen bouderies
@@ -395,7 +418,7 @@ Public Class Form1
     Private Function rad_to_hz(rads As Double)
         Return (rads / (2 * PI))
     End Function
-
+    'Reading data into the comboxes
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim words() As String
 
@@ -424,13 +447,13 @@ Public Class Form1
         End If
 
 
-        '-------- decimal places ---------------------
+        '-------- decimal places for presenting data ---------------------
         If (ComboBox1.SelectedIndex = 1) Or (ComboBox1.SelectedIndex = 2) Then  'Test
             NumericUpDown4.DecimalPlaces = 1        'Massa 
             NumericUpDown6.DecimalPlaces = 1        'Stiffness bearing/support buiten
             NumericUpDown7.DecimalPlaces = 1        'Stiffness bearing/support buiten
             NumericUpDown10.DecimalPlaces = 3       'JP
-            NumericUpDown11.DecimalPlaces = 4       'JA
+            NumericUpDown11.DecimalPlaces = 3       'JA
         Else
             NumericUpDown6.DecimalPlaces = 0
             NumericUpDown4.DecimalPlaces = 0
@@ -441,5 +464,7 @@ Public Class Form1
 
     End Sub
 
-
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'Under construction
+    End Sub
 End Class
