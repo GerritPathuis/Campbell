@@ -147,7 +147,6 @@ Public Class Form1
             End If
 
             '----------------------- formel 5.33 ------------------------
-            TextBox16.Clear()
             speed_rad = -NumericUpDown22.Value
             For i = 1 To 2000                                       'Array size
                 speed_rad += NumericUpDown22.Value * 2 / 2000       'increment step [rad/s]
@@ -242,8 +241,12 @@ Public Class Form1
 
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
-            Chart1.Titles.Add("Campbell diagram, overhung, isotropic short bearings, flex shaft")
-            Chart1.Titles(0).Font = New Font("Arial", 14, System.Drawing.FontStyle.Bold)
+            If RadioButton1.Checked Then
+                Chart1.Titles.Add("Campbell diagram, overhung, isotropic short bearings, flex shaft, no damping")
+            Else
+                Chart1.Titles.Add("Campbell diagram, between bearing, isotropic short bearings, flex shaft, no damping")
+            End If
+            Chart1.Titles(0).Font = New Font("Arial", 12, System.Drawing.FontStyle.Bold)
 
             '--------------- Legends and titles ---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Title = "Angular speed impeller [rad/s]"
@@ -370,7 +373,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged
         Dim Dia, hoog, massa, Iz, Ix As Double
         Dim sp1, sp2, spc As Double
 
@@ -413,6 +416,16 @@ Public Class Form1
         C_Veer_support = eigenfreq ^ 2 * gewicht / 10 ^ 6   '[kN/mm]
 
         TextBox42.Text = Round(C_Veer_support, 0).ToString  'doos 4 platen
+
+        '-------- Eigenfrequentie door gewicht en veerconstante support-----------------
+        Dim gewicht2, eigenfreq2, C_Veer_support2 As Double
+
+        gewicht2 = NumericUpDown28.Value                        '[kg]
+        C_Veer_support2 = NumericUpDown29.Value                 '[Hz]
+        eigenfreq2 = Sqrt(C_Veer_support2 * 10 ^ 6 / gewicht2)  '[Rad/sec]
+        eigenfreq2 /= 2 * PI                                    '[Hz]
+
+        TextBox43.Text = Round(eigenfreq2, 0).ToString       '
     End Sub
     'Converts Radial per second to Hz
     Private Function rad_to_hz(rads As Double)
