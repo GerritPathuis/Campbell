@@ -53,6 +53,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
+        GroupBox12.Text = "Chart settings"
         Calc_nr()
         draw_chart1()
     End Sub
@@ -484,7 +485,7 @@ Public Class Form1
         Dim oTable As Word.Table
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
         Dim row, font_sizze As Integer
-
+        Dim ufilename As String
 
         'Start Word and open the document template. 
         font_sizze = 9
@@ -670,16 +671,18 @@ Public Class Form1
         oPara4.Range.InlineShapes.Item(1).Width = 310
 
         Try
-            oDoc.SaveAs("C:\temp\Campbell_diagram_sample.docx")
-            ' oDoc.Close()
+            ufilename = "C:\temp\" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & "_Campbell_diagram.docx"
+            GroupBox12.Text = "File saved at " & ufilename
+            oDoc.SaveAs(ufilename)
+            oDoc.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)  ' Show the exception's message.
         Finally
             'quit Word
-            'If Not IsNothing(oWord) Then
-            '    oWord.Quit()
-            '    oWord = Nothing
-            'End If
+            If Not IsNothing(oWord) Then
+                oWord.Quit()
+                oWord = Nothing
+            End If
         End Try
 
     End Sub
