@@ -126,10 +126,13 @@ eigenfrequentie stoel en gewicht en bereken C
  </value>
   </data>
   <data name="TextBox29.Text" xml:space="preserve">
-    <value>API 684 Sleeve bearing 89 kN/mm
-API 684 Tilting pad bearing 125 kN/mm
+    <value>VTK motor support @ impellar side 640 kN/mm
+VTK motor support @ other side 1200 kN/mm
 
 SKF rollager 110-150 kN/mm
+
+API 684 Sleeve bearing 89 kN/mm
+API 684 Tilting pad bearing 125 kN/mm
 
 Maschinendynamik seite 34
 8x Stahlfeder Machinefundamente  = 5-10 kN/mm
