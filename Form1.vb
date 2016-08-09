@@ -7,7 +7,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Globalization
 Imports System.Threading
 Imports Word = Microsoft.Office.Interop.Word
-Imports System.Runtime.InteropServices
+
 
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
@@ -596,13 +596,13 @@ Public Class Form1
         oTable.Cell(row, 1).Range.Text = "As dikte overhang"
         oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
         oTable.Cell(row, 3).Range.Text = "[mm]"
-        row += 1
-        row += 1
+
+        row += 2
         oTable.Rows.Item(14).Range.Font.Bold = True
         oTable.Rows.Item(14).Range.Font.Size = font_sizze
         oTable.Cell(row, 1).Range.Text = "Massa traagheid waaier"
-        row += 1
 
+        row += 1
         oTable.Cell(row, 1).Range.Text = "Jp, hartlijn waaier (schijf Ja<Jp)"
         oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
         oTable.Cell(row, 3).Range.Text = "[kg.m2]"
@@ -671,18 +671,18 @@ Public Class Form1
         oPara4.Range.InlineShapes.Item(1).Width = 310
 
         Try
-            ufilename = "C:\temp\" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & "_Campbell_diagram.docx"
-            GroupBox12.Text = "File saved at " & ufilename
-            oDoc.SaveAs(ufilename)
-            oDoc.Close()
+            'ufilename = "C:\temp\" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & "_Campbell_diagram.docx"
+            'GroupBox12.Text = "File saved at " & ufilename
+            'oDoc.SaveAs(ufilename)
+            'oDoc.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)  ' Show the exception's message.
         Finally
-            'quit Word
-            If Not IsNothing(oWord) Then
-                oWord.Quit()
-                oWord = Nothing
-            End If
+            ''quit Word
+            'If Not IsNothing(oWord) Then
+            '    oWord.Quit()
+            '    oWord = Nothing
+            'End If
         End Try
 
     End Sub
