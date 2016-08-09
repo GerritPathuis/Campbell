@@ -479,210 +479,210 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim oWord As Word.Application = Nothing
-        oWord = New Word.Application
+        Dim oWord As Word.Application ' = Nothing
+
         Dim oDoc As Word.Document
         Dim oTable As Word.Table
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
 
-        'Start Word and open the document template. 
-        font_sizze = 9
-        oWord = CreateObject("Word.Application")
-        oWord.Visible = True
-        oDoc = oWord.Documents.Add
-
-        'Insert a paragraph at the beginning of the document. 
-        oPara1 = oDoc.Content.Paragraphs.Add
-        oPara1.Range.Text = "VTK Engineering"
-        oPara1.Range.Font.Name = "Arial"
-        oPara1.Range.Font.Size = font_sizze + 3
-        oPara1.Range.Font.Bold = True
-        oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
-        oPara1.Range.InsertParagraphAfter()
-
-        oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
-        oPara2.Range.Font.Size = font_sizze + 1
-        oPara2.Format.SpaceAfter = 1
-        oPara2.Range.Font.Bold = False
-        oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage)" & vbCrLf
-        oPara2.Range.InsertParagraphAfter()
-
-        '----------------------------------------------
-        'Insert a table, fill it with data and change the column widths.
-        oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 2)
-        oTable.Range.ParagraphFormat.SpaceAfter = 1
-        oTable.Range.Font.Size = font_sizze
-        oTable.Range.Font.Bold = False
-        oTable.Rows.Item(1).Range.Font.Bold = True
-
-        row = 1
-        oTable.Cell(row, 1).Range.Text = "Project Name"
-        oTable.Cell(row, 2).Range.Text = TextBox7.Text
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Project number "
-        oTable.Cell(row, 2).Range.Text = TextBox8.Text
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Selection "
-        oTable.Cell(row, 2).Range.Text = ComboBox1.SelectedItem
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Author "
-        oTable.Cell(row, 2).Range.Text = Environment.UserName
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Date "
-        oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-
-        oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
-        oTable.Columns.Item(2).Width = oWord.InchesToPoints(2)
-        oTable.Rows.Item(1).Range.Font.Bold = True
-        oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
-
-        '----------------------------------------------
-        'Insert a 16 x 3 table, fill it with data and change the column widths.
-        oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
-        oTable.Range.ParagraphFormat.SpaceAfter = 1
-        oTable.Range.Font.Size = font_sizze
-        oTable.Range.Font.Bold = False
-        oTable.Rows.Item(1).Range.Font.Bold = True
-        oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
-        row = 1
-        oTable.Cell(row, 1).Range.Text = "Input Data"
-        row += 1
-        If RadioButton1.Checked Then
-            oTable.Cell(row, 1).Range.Text = "Fan type"
-            oTable.Cell(row, 2).Range.Text = "Overhung"
-        ElseIf RadioButton2.Checked Then
-            oTable.Cell(row, 1).Range.Text = "Fan type"
-            oTable.Cell(row, 2).Range.Text = "Between bearings"
-        End If
-
-        row += 2
-        oTable.Rows.Item(4).Range.Font.Bold = True
-        oTable.Rows.Item(4).Range.Font.Size = font_sizze
-        oTable.Cell(row, 1).Range.Text = "Fan Housing"
-        row += 1
-
-        oTable.Cell(row, 1).Range.Text = "L1, lengte tussen lagers"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
-        oTable.Cell(row, 3).Range.Text = "[mm]"
-
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "L2, overhang incl L3"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
-        oTable.Cell(row, 3).Range.Text = "[mm]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "L3, starre lengte in waaier"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown3.Value
-        oTable.Cell(row, 3).Range.Text = "[mm]"
-
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Massa waaier"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown4.Value
-        oTable.Cell(row, 3).Range.Text = "[kg]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "C1 lager-stoel buiten"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown6.Value
-        oTable.Cell(row, 3).Range.Text = "[kN/mm]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "C2 lager-stoel binnen"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown7.Value
-        oTable.Cell(row, 3).Range.Text = "[kN/mm]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "As dikte tussen lagers"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown8.Value
-        oTable.Cell(row, 3).Range.Text = "[mm]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "As dikte overhang"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
-        oTable.Cell(row, 3).Range.Text = "[mm]"
-
-        row += 2
-        oTable.Rows.Item(14).Range.Font.Bold = True
-        oTable.Rows.Item(14).Range.Font.Size = font_sizze
-        oTable.Cell(row, 1).Range.Text = "Massa traagheid waaier"
-
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Jp, hartlijn waaier (schijf Ja<Jp)"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
-        oTable.Cell(row, 3).Range.Text = "[kg.m2]"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Ja, haaks hartlijn waaier (wals Ja<Jp)"
-        oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
-        oTable.Cell(row, 3).Range.Text = "[kg.m2]"
-
-        oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
-        oTable.Columns.Item(2).Width = oWord.InchesToPoints(1.2)
-        oTable.Columns.Item(3).Width = oWord.InchesToPoints(1.3)
-
-        oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
-
-
-        'Insert a 5 x 7 table, fill it with data and change the column widths.
-        oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
-        oTable.Range.ParagraphFormat.SpaceAfter = 1
-        oTable.Range.Font.Size = font_sizze
-        oTable.Range.Font.Bold = False
-        oTable.Rows.Item(1).Range.Font.Bold = True
-        oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
-        row = 1
-        oTable.Cell(row, 1).Range.Text = "Output"
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Buigtraagheidsmoment as"
-        oTable.Cell(row, 2).Range.Text = TextBox30.Text
-        oTable.Cell(row, 3).Range.Text = "[mm^4]"
-        If RadioButton1.Checked Then
-            oTable.Cell(row, 4).Range.Text = TextBox31.Text
-        End If
-
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Omega kritisch #1"
-        oTable.Cell(row, 2).Range.Text = TextBox32.Text
-        oTable.Cell(row, 3).Range.Text = "[rad/s]"
-        oTable.Cell(row, 4).Range.Text = TextBox5.Text
-        oTable.Cell(row, 5).Range.Text = "[Hz]"
-        oTable.Cell(row, 6).Range.Text = TextBox1.Text
-        oTable.Cell(row, 7).Range.Text = "[rpm]"
-
-        row += 1
-        oTable.Cell(row, 1).Range.Text = "Omega kritisch #2"
-        oTable.Cell(row, 2).Range.Text = TextBox33.Text
-        oTable.Cell(row, 3).Range.Text = "[rad/s]"
-        oTable.Cell(row, 4).Range.Text = TextBox6.Text
-        oTable.Cell(row, 5).Range.Text = "[Hz]"
-        oTable.Cell(row, 6).Range.Text = TextBox13.Text
-        oTable.Cell(row, 7).Range.Text = "[rpm]"
-
-        row += 1
-        oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
-        oTable.Columns.Item(2).Width = oWord.InchesToPoints(0.9)
-        oTable.Columns.Item(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
-        oTable.Columns.Item(4).Width = oWord.InchesToPoints(0.4)
-        oTable.Columns.Item(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
-        oTable.Columns.Item(6).Width = oWord.InchesToPoints(0.5)
-        oTable.Columns.Item(7).Width = oWord.InchesToPoints(0.45)   '"[rpm]"
-
-        '------------------save picture ---------------- 
-        Chart1.SaveImage("c:\Temp\MainChart.gif", System.Drawing.Imaging.ImageFormat.Gif)
-        oPara4 = oDoc.Content.Paragraphs.Add
-        oPara4.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-        oPara4.Range.InlineShapes.AddPicture("c:\Temp\MainChart.gif")
-        oPara4.Range.InlineShapes.Item(1).LockAspectRatio = True
-        oPara4.Range.InlineShapes.Item(1).Width = 310
-
         Try
-            'ufilename = "C:\temp\" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & "_Campbell_diagram.docx"
-            'GroupBox12.Text = "File saved at " & ufilename
-            'oDoc.SaveAs(ufilename)
-            'oDoc.Close()
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 9
+            oWord = CreateObject("Word.Application")
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = True
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = False
+            oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage)" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = False
+            oTable.Rows.Item(1).Range.Font.Bold = True
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox7.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox8.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Selection "
+            oTable.Cell(row, 2).Range.Text = ComboBox1.SelectedItem
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author "
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date "
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+
+            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns.Item(2).Width = oWord.InchesToPoints(2)
+            oTable.Rows.Item(1).Range.Font.Bold = True
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a 16 x 3 table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = False
+            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Input Data"
+            row += 1
+            If RadioButton1.Checked Then
+                oTable.Cell(row, 1).Range.Text = "Fan type"
+                oTable.Cell(row, 2).Range.Text = "Overhung"
+            ElseIf RadioButton2.Checked Then
+                oTable.Cell(row, 1).Range.Text = "Fan type"
+                oTable.Cell(row, 2).Range.Text = "Between bearings"
+            End If
+
+            row += 2
+            oTable.Rows.Item(4).Range.Font.Bold = True
+            oTable.Rows.Item(4).Range.Font.Size = font_sizze
+            oTable.Cell(row, 1).Range.Text = "Fan Housing"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "L1, lengte tussen lagers"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "L2, overhang incl L3"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "L3, starre lengte in waaier"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown3.Value
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Massa waaier"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown4.Value
+            oTable.Cell(row, 3).Range.Text = "[kg]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "C1 lager-stoel buiten"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown6.Value
+            oTable.Cell(row, 3).Range.Text = "[kN/mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "C2 lager-stoel binnen"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown7.Value
+            oTable.Cell(row, 3).Range.Text = "[kN/mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "As dikte tussen lagers"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown8.Value
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "As dikte overhang"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            row += 2
+            oTable.Rows.Item(14).Range.Font.Bold = True
+            oTable.Rows.Item(14).Range.Font.Size = font_sizze
+            oTable.Cell(row, 1).Range.Text = "Massa traagheid waaier"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Jp, hartlijn waaier (schijf Ja<Jp)"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
+            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Ja, haaks hartlijn waaier (wals Ja<Jp)"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
+            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
+
+            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
+            oTable.Columns.Item(2).Width = oWord.InchesToPoints(1.2)
+            oTable.Columns.Item(3).Width = oWord.InchesToPoints(1.3)
+
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+
+            'Insert a 5 x 7 table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = False
+            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Output"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Buigtraagheidsmoment as"
+            oTable.Cell(row, 2).Range.Text = TextBox30.Text
+            oTable.Cell(row, 3).Range.Text = "[mm^4]"
+            If RadioButton1.Checked Then
+                oTable.Cell(row, 4).Range.Text = TextBox31.Text
+            End If
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Omega kritisch #1"
+            oTable.Cell(row, 2).Range.Text = TextBox32.Text
+            oTable.Cell(row, 3).Range.Text = "[rad/s]"
+            oTable.Cell(row, 4).Range.Text = TextBox5.Text
+            oTable.Cell(row, 5).Range.Text = "[Hz]"
+            oTable.Cell(row, 6).Range.Text = TextBox1.Text
+            oTable.Cell(row, 7).Range.Text = "[rpm]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Omega kritisch #2"
+            oTable.Cell(row, 2).Range.Text = TextBox33.Text
+            oTable.Cell(row, 3).Range.Text = "[rad/s]"
+            oTable.Cell(row, 4).Range.Text = TextBox6.Text
+            oTable.Cell(row, 5).Range.Text = "[Hz]"
+            oTable.Cell(row, 6).Range.Text = TextBox13.Text
+            oTable.Cell(row, 7).Range.Text = "[rpm]"
+
+            row += 1
+            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
+            oTable.Columns.Item(2).Width = oWord.InchesToPoints(0.9)
+            oTable.Columns.Item(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
+            oTable.Columns.Item(4).Width = oWord.InchesToPoints(0.4)
+            oTable.Columns.Item(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
+            oTable.Columns.Item(6).Width = oWord.InchesToPoints(0.5)
+            oTable.Columns.Item(7).Width = oWord.InchesToPoints(0.45)   '"[rpm]"
+
+            '------------------save picture ---------------- 
+
+            Chart1.SaveImage("c:\Temp\MainChart.gif", System.Drawing.Imaging.ImageFormat.Gif)
+            oPara4 = oDoc.Content.Paragraphs.Add
+            oPara4.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+            oPara4.Range.InlineShapes.AddPicture("c:\Temp\MainChart.gif")
+            oPara4.Range.InlineShapes.Item(1).LockAspectRatio = True
+            oPara4.Range.InlineShapes.Item(1).Width = 310
+
+            '--------------Save file word file------------------
+            'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
+            ufilename = "C:\temp\" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & "_Campbell_diagram.docx"
+            GroupBox12.Text = "File saved at " & ufilename
+            oWord.ActiveDocument.SaveAs(ufilename)
+            ' oDoc.Close() 
+            ' oWord.Quit()
         Catch ex As Exception
-            MessageBox.Show(ex.Message)  ' Show the exception's message.
-        Finally
-            ''quit Word
-            'If Not IsNothing(oWord) Then
-            '    oWord.Quit()
-            '    oWord = Nothing
-            'End If
+            MessageBox.Show("Line 683, " & ex.Message)  ' Show the exception's message.
         End Try
 
     End Sub
