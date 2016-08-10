@@ -536,8 +536,11 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Date "
             oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
-            oTable.Columns.Item(2).Width = oWord.InchesToPoints(2)
+            'oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            'oTable.Columns.Item(2).Width = oWord.InchesToPoints(2)
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(2)
+
             oTable.Rows.Item(1).Range.Font.Bold = True
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
@@ -601,8 +604,8 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[mm]"
 
             row += 2
-            oTable.Rows.Item(14).Range.Font.Bold = True
-            oTable.Rows.Item(14).Range.Font.Size = font_sizze
+            oTable.Rows.Item(row).Range.Font.Bold = True
+            oTable.Rows.Item(row).Range.Font.Size = font_sizze
             oTable.Cell(row, 1).Range.Text = "Massa traagheid waaier"
 
             row += 1
@@ -614,10 +617,13 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
-            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
-            oTable.Columns.Item(2).Width = oWord.InchesToPoints(1.2)
-            oTable.Columns.Item(3).Width = oWord.InchesToPoints(1.3)
+            'oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
+            'oTable.Columns.Item(2).Width = oWord.InchesToPoints(1.2)
+            'oTable.Columns.Item(3).Width = oWord.InchesToPoints(1.3)
 
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
 
@@ -657,12 +663,20 @@ Public Class Form1
             oTable.Cell(row, 7).Range.Text = "[rpm]"
 
             row += 1
-            oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
-            oTable.Columns.Item(2).Width = oWord.InchesToPoints(0.9)
-            oTable.Columns.Item(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
-            oTable.Columns.Item(4).Width = oWord.InchesToPoints(0.4)
-            oTable.Columns.Item(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
-            oTable.Columns.Item(6).Width = oWord.InchesToPoints(0.5)
+            'oTable.Columns.Item(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
+            'oTable.Columns.Item(2).Width = oWord.InchesToPoints(0.9)
+            'oTable.Columns.Item(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
+            'oTable.Columns.Item(4).Width = oWord.InchesToPoints(0.4)
+            'oTable.Columns.Item(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
+            'oTable.Columns.Item(6).Width = oWord.InchesToPoints(0.5)
+            'oTable.Columns.Item(7).Width = oWord.InchesToPoints(0.45)   '"[rpm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(0.9)
+            oTable.Columns(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
+            oTable.Columns(4).Width = oWord.InchesToPoints(0.4)
+            oTable.Columns(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
+            oTable.Columns(6).Width = oWord.InchesToPoints(0.5)
             oTable.Columns.Item(7).Width = oWord.InchesToPoints(0.45)   '"[rpm]"
 
             '------------------save picture ---------------- 
