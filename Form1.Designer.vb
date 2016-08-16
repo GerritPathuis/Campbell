@@ -2252,7 +2252,7 @@ Partial Class Form1
         Me.NumericUpDown22.Name = "NumericUpDown22"
         Me.NumericUpDown22.Size = New System.Drawing.Size(50, 20)
         Me.NumericUpDown22.TabIndex = 1
-        Me.NumericUpDown22.Value = New Decimal(New Integer() {2000, 0, 0, 0})
+        Me.NumericUpDown22.Value = New Decimal(New Integer() {1000, 0, 0, 0})
         '
         'Button1
         '
