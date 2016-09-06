@@ -95,7 +95,7 @@ Public Class Form1
 
             If RadioButton1.Checked Then
                 '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
-                Label1.Text = "L1, lengte tussen de lagers [mm]"
+                Label1.Text = "L1, aslengte tussen de lagers [mm]"
                 Label2.Text = "L2, Overhang [mm]"
                 Label3.Visible = True
                 NumericUpDown3.Visible = True
@@ -122,8 +122,8 @@ Public Class Form1
             Else
                 '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
                 '--------------- d11= Alfa ----------------------------------------
-                Label1.Text = "L1, lengte lager#1-waaier [mm]"
-                Label2.Text = "L2, lengte waaier-lager#2 [mm]"
+                Label1.Text = "L1, aslengte lager#1-waaier [mm]"
+                Label2.Text = "L2, aslengte waaier-lager#2 [mm]"
                 Label3.Visible = False
                 NumericUpDown3.Visible = False
                 Label11.Visible = False
@@ -515,7 +515,7 @@ Public Class Form1
 
             '----------------------------------------------
             'Insert a table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 2)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = False
@@ -528,8 +528,8 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Project number "
             oTable.Cell(row, 2).Range.Text = TextBox8.Text
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Selection "
-            oTable.Cell(row, 2).Range.Text = ComboBox1.SelectedItem
+            oTable.Cell(row, 1).Range.Text = "Fan type "
+            oTable.Cell(row, 2).Range.Text = TextBox9.Text
             row += 1
             oTable.Cell(row, 1).Range.Text = "Author "
             oTable.Cell(row, 2).Range.Text = Environment.UserName
@@ -566,21 +566,29 @@ Public Class Form1
             oTable.Rows.Item(4).Range.Font.Bold = True
             oTable.Rows.Item(4).Range.Font.Size = font_sizze
             oTable.Cell(row, 1).Range.Text = "Fan Housing"
-            row += 1
 
-            oTable.Cell(row, 1).Range.Text = "L1, lengte tussen lagers"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            If RadioButton1.Checked Then    'Overhung "
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "L1, lengte tussen lagers"
+                oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
+                oTable.Cell(row, 3).Range.Text = "[mm]"
 
-            row += 1
-            oTable.Cell(row, 1).Range.Text = "L2, overhang incl L3"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
-            oTable.Cell(row, 3).Range.Text = "[mm]"
-
-            If RadioButton1.Checked Then    'Not applicable for"between bearings"
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "L2, overhang incl L3"
+                oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
+                oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "L3, starre lengte in waaier"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown3.Value
+                oTable.Cell(row, 3).Range.Text = "[mm]"
+            Else                            'Between bearings
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "As lengte lager #1 - waaier"
+                oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
+                oTable.Cell(row, 3).Range.Text = "[mm]"
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "As lengte lager #2 - waaier"
+                oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
 
@@ -600,10 +608,13 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "As dikte tussen lagers"
             oTable.Cell(row, 2).Range.Text = NumericUpDown8.Value
             oTable.Cell(row, 3).Range.Text = "[mm]"
-            row += 1
-            oTable.Cell(row, 1).Range.Text = "As dikte overhang"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            If RadioButton1.Checked Then    'Overhung "
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "As dikte overhang"
+                oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
+                oTable.Cell(row, 3).Range.Text = "[mm]"
+            End If
 
             row += 2
             oTable.Rows.Item(row).Range.Font.Bold = True
