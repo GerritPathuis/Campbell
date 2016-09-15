@@ -702,4 +702,76 @@ Public Class Form1
         End Try
 
     End Sub
+    'Dynamics of Rotating Machines, page 178 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, TabPage3.Enter, NumericUpDown39.ValueChanged, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged
+        Dim dia, omega, visco, length, f_load, clear As Double
+        Dim Sss, Sommerfeld, Epsilon As Double
+
+
+        Try
+            dia = NumericUpDown39.Value / 1000              '[m]
+            omega = NumericUpDown33.Value * 2 * PI / 60     '[rad/s]
+            visco = NumericUpDown35.Value                   '[Pa.s]
+            length = NumericUpDown38.Value / 1000           '[m]
+            f_load = NumericUpDown36.Value                  '[N]
+            clear = NumericUpDown37.Value / 1000            '[m]
+
+            Sss = dia * omega * visco * length ^ 3 / (8 * f_load * clear ^ 2)
+            Sommerfeld = (Sss / PI) * (dia / length) ^ 2
+
+            itterate(Sommerfeld)
+            TextBox44.Text = Math.Round(Sss, 5).ToString
+            TextBox16.Text = Math.Round(Sommerfeld, 5).ToString
+            TextBox45.Text = Epsilon.ToString
+        Catch ex As Exception
+            MessageBox.Show("Line 727 " & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
+
+    Private Sub itterate(sommerf As Double)
+        Dim omg1, omg2, omg3 As Double
+        Dim T1, T2, T3 As Double
+        Dim jjr As Integer
+
+        omg1 = 0        'Start lower limit [-]
+        omg2 = 1.0      'Start upper limit [-]
+        omg3 = 0.5      'In the middle [-]
+
+        T1 = calc_epsilon(sommerf, omg1)
+        T2 = calc_epsilon(sommerf, omg2)
+        T3 = calc_epsilon(sommerf, omg3)
+
+        ''-------------Iteratie 30x halveren moet voldoende zijn ---------------
+        For jjr = 0 To 30
+            If T1 * T3 < 0 Then
+                omg2 = omg3
+            Else
+                omg1 = omg3
+            End If
+            omg3 = (omg1 + omg2) / 2
+            T1 = calc_epsilon(sommerf, omg1)
+            T2 = calc_epsilon(sommerf, omg2)
+            T3 = calc_epsilon(sommerf, omg3)
+        Next jjr
+        'TextBox45.Text = Math.Round(omg3, 6).ToString
+        TextBox45.Text = omg3.ToString
+
+
+        'If T3 > 1 Then   'Residual torque too big,  problem in choosen bouderies
+        '    TextBox84.BackColor = Color.Red
+        'Else
+        '    TextBox84.BackColor = SystemColors.Window
+        'End If
+    End Sub
+
+    Private Function calc_epsilon(som As Double, eps As Double)
+        Dim deviation As Double
+
+        'Formula (5.83) page 178, 
+        deviation = eps ^ 8 - 4 * eps ^ 6 + (6 - som ^ 2 * (16 - PI ^ 2)) * eps ^ 4
+        deviation -= (4 + PI ^ 2 * som ^ 2) * eps ^ 2 + 1
+
+        Return (deviation)
+    End Function
+
 End Class
