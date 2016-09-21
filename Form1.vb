@@ -702,76 +702,150 @@ Public Class Form1
         End Try
 
     End Sub
-    'Dynamics of Rotating Machines, page 178 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, TabPage3.Enter, NumericUpDown39.ValueChanged, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged
-        Dim dia, omega, visco, length, f_load, clear As Double
-        Dim Sss, Sommerfeld, Epsilon As Double
 
+    Private Sub calc_rolling_element_bearings()
+        Dim dia_ball, length_roller, alfa, no_balls, no_rollers As Double
+        Dim K_ball, K_roller As Double
+        Dim Kvv_ball, Kvv_roller As Double
+        Dim force_ball, force_roller As Double
+
+        K_ball = 13 * 10 ^ 6        '[N^2/3.m^-4/3]
+        K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
+        alfa = Math.PI * 0 / 180      'Pressure angle [radials]
+
+        dia_ball = NumericUpDown43.Value / 1000         '[m]
+        length_roller = NumericUpDown32.Value / 1000    '[m]
+        force_ball = NumericUpDown40.Value * 1000       '[N]
+        force_roller = NumericUpDown45.Value * 1000     '[N]
+        no_balls = NumericUpDown34.Value                '[-]
+        no_rollers = NumericUpDown41.Value              '[-]
+
+        Kvv_ball = K_ball * no_balls ^ (2 / 3) * dia_ball ^ (1 / 3) * force_ball ^ (1 / 3) * Math.Cos(alfa) ^ (5 / 3)   '[N/m]
+        Kvv_ball /= 10 ^ 6              '[kN/mm]   
+        Kvv_roller = K_roller * no_rollers ^ 0.9 * length_roller ^ 0.8 * force_roller ^ 0.1 * Math.Cos(alfa) ^ 1.9 '[N/m]
+        Kvv_roller /= 10 ^ 6            '[kN/mm]   
+
+        TextBox46.Text = Math.Round(Kvv_ball, 0).ToString
+        TextBox47.Text = Math.Round(Kvv_roller, 0).ToString
+    End Sub
+    Private Sub calc_dydrodynamic_bearing()
+        Dim dia, omega, visco, length, f_load, clearance As Double
+        Dim Sommerfeld, Epsilon As Double
 
         Try
-            dia = NumericUpDown39.Value / 1000              '[m]
-            omega = NumericUpDown33.Value * 2 * PI / 60     '[rad/s]
-            visco = NumericUpDown35.Value                   '[Pa.s]
-            length = NumericUpDown38.Value / 1000           '[m]
-            f_load = NumericUpDown36.Value                  '[N]
-            clear = NumericUpDown37.Value / 1000            '[m]
+            dia = NumericUpDown49.Value / 1000              '[m]
+            omega = NumericUpDown42.Value * 2 * PI / 60     '[rad/s]
+            visco = NumericUpDown44.Value                   '[Pa.s]
+            length = NumericUpDown48.Value / 1000           '[m]
+            f_load = NumericUpDown46.Value * 1000           '[kN]
+            clearance = NumericUpDown47.Value / 1000            '[m]
 
-            Sss = dia * omega * visco * length ^ 3 / (8 * f_load * clear ^ 2)
-            Sommerfeld = (Sss / PI) * (dia / length) ^ 2
+            'Formula 5.84
+            Sommerfeld = dia * omega * visco * length ^ 3 / (8 * f_load * clearance ^ 2)
 
-            itterate(Sommerfeld)
-            TextBox44.Text = Math.Round(Sss, 5).ToString
-            TextBox16.Text = Math.Round(Sommerfeld, 5).ToString
-            TextBox45.Text = Epsilon.ToString
+            If Not Double.IsNaN(Sommerfeld) Then
+                itterate(Sommerfeld)
+
+                TextBox50.Text = Math.Round(Sommerfeld, 5).ToString
+                TextBox49.Text = Epsilon.ToString
+            End If
         Catch ex As Exception
-            MessageBox.Show("Line 727 " & ex.Message)  ' Show the exception's message.
+            MessageBox.Show("Line 753 " & ex.Message)  ' Show the exception's message.
         End Try
     End Sub
 
     Private Sub itterate(sommerf As Double)
-        Dim omg1, omg2, omg3 As Double
-        Dim T1, T2, T3 As Double
+        Dim Exc1, Exc2, Exc3, Exc_fin As Double
+        Dim Dev1, Dev2, Dev3 As Double
+        Dim H_nul, Kvv As Double
         Dim jjr As Integer
 
-        omg1 = 0        'Start lower limit [-]
-        omg2 = 1.0      'Start upper limit [-]
-        omg3 = 0.5      'In the middle [-]
+        Exc1 = 0        'Start lower limit [-]
+        Exc2 = 1.0      'Start upper limit [-]
+        Exc3 = 0.5      'In the middle [-]
 
-        T1 = calc_epsilon(sommerf, omg1)
-        T2 = calc_epsilon(sommerf, omg2)
-        T3 = calc_epsilon(sommerf, omg3)
+        Dev1 = calc_epsilon(sommerf, Exc1)
+        Dev2 = calc_epsilon(sommerf, Exc2)
+        Dev3 = calc_epsilon(sommerf, Exc3)
 
-        ''-------------Iteratie 30x halveren moet voldoende zijn ---------------
-        For jjr = 0 To 30
-            If T1 * T3 < 0 Then
-                omg2 = omg3
+        MessageBox.Show("Exc1= " & Exc1.ToString & ", Exc2= " & Exc2.ToString & ", Exc3= " & Exc3.ToString & vbCrLf & "Dev1= " & Dev1.ToString & ", Dev2= " & Dev2.ToString & ", Dev3= " & Dev3.ToString)
+
+        '-------------Iteratie 30x halveren moet voldoende zijn ---------------
+        '---------- Exc= excentricity, looking for Deviation is zero ---------
+        For jjr = 0 To 10
+            If Dev1 * Dev3 < 0 Then
+                Exc2 = Exc3
             Else
-                omg1 = omg3
+                Exc1 = Exc3
             End If
-            omg3 = (omg1 + omg2) / 2
-            T1 = calc_epsilon(sommerf, omg1)
-            T2 = calc_epsilon(sommerf, omg2)
-            T3 = calc_epsilon(sommerf, omg3)
+            Exc3 = (Exc1 + Exc2) / 2
+            Dev1 = calc_epsilon(sommerf, Exc1)
+            Dev2 = calc_epsilon(sommerf, Exc2)
+            Dev3 = calc_epsilon(sommerf, Exc3)
+
+            ' MessageBox.Show("Dev1= " & Dev1.ToString & ", Dev2= " & Dev2.ToString & ", Dev3= " & Dev3.ToString & " Exc1= " & Exc1.ToString & ", Exc2= " & Exc2.ToString & ", Exc3= " & Exc3.ToString)
         Next jjr
-        'TextBox45.Text = Math.Round(omg3, 6).ToString
-        TextBox45.Text = omg3.ToString
 
+        TextBox49.Text = Exc3.ToString
 
-        'If T3 > 1 Then   'Residual torque too big,  problem in choosen bouderies
-        '    TextBox84.BackColor = Color.Red
-        'Else
-        '    TextBox84.BackColor = SystemColors.Window
-        'End If
+        Exc_fin = NumericUpDown33.Value ^ 2
+
+        H_nul = 1 / ((Math.PI ^ 2 * (1 - Exc_fin) + 16 * Exc_fin) ^ 3 / 2)
+        Kvv = H_nul * 4 * (Math.PI ^ 2 * (1 + 2 * Exc_fin ^ 2) + 32 * Exc_fin * (1 + Exc_fin) / (1 - Exc_fin))
+
+        TextBox48.Text = Kvv.ToString
+
+        draw_Chart2(sommerf)
     End Sub
 
-    Private Function calc_epsilon(som As Double, eps As Double)
-        Dim deviation As Double
+    Private Function calc_epsilon(sommerf As Double, eps As Double)
+        Dim deviation, som2 As Double
+
+        som2 = sommerf ^ 2
 
         'Formula (5.83) page 178, 
-        deviation = eps ^ 8 - 4 * eps ^ 6 + (6 - som ^ 2 * (16 - PI ^ 2)) * eps ^ 4
-        deviation -= (4 + PI ^ 2 * som ^ 2) * eps ^ 2 + 1
+        deviation = eps ^ 8 - 4 * eps ^ 6 + (6 - som2 * (16 - PI ^ 2)) * eps ^ 4 - (4 + PI ^ 2 * som2) * eps ^ 2 + 1
 
         Return (deviation)
     End Function
 
+    Private Sub draw_Chart2(sommerf As Double)
+        Dim x, y As Double
+        Try
+            'Clear all series And chart areas so we can re-add them
+            Chart2.Series.Clear()
+            Chart2.ChartAreas.Clear()
+            Chart2.Titles.Clear()
+            Chart2.Series.Add("Series0")
+            Chart2.ChartAreas.Add("ChartArea0")
+            Chart2.Series(0).ChartArea = "ChartArea0"
+            Chart2.Series(0).ChartType = DataVisualization.Charting.SeriesChartType.Line
+            Chart2.Titles.Add("Excentricity Calculation" & vbCrLf & "Formula 5.83")
+            Chart2.Titles(0).Font = New Font("Arial", 12, System.Drawing.FontStyle.Bold)
+            Chart2.Series(0).Name = "Koppel[%]"
+            Chart2.Series(0).Color = Color.Blue
+            Chart2.Series(0).IsVisibleInLegend = False
+            Chart2.ChartAreas("ChartArea0").AxisX.Minimum = 0
+            Chart2.ChartAreas("ChartArea0").AxisX.Maximum = 1
+            Chart2.ChartAreas("ChartArea0").AxisX.MinorTickMark.Enabled = True
+            Chart2.ChartAreas("ChartArea0").AxisY.Title = "Excentricity [-]"
+            Chart2.ChartAreas("ChartArea0").AxisX.Title = "Formula 5.83 [-]"
+
+            For x = 0 To 1.01 Step 0.01
+                y = calc_epsilon(sommerf, x)
+                Chart2.Series(0).Points.AddXY(x, y)
+            Next x
+
+        Catch ex As Exception
+            'MessageBox.Show(ex.Message &"Error 845")  ' Show the exception's message.
+        End Try
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged
+        'Dynamics of Rotating Machines, page 178 
+
+        calc_rolling_element_bearings()
+        calc_dydrodynamic_bearing()
+    End Sub
 End Class
