@@ -755,13 +755,15 @@ Public Class Form1
         End Try
     End Sub
     Private Sub itterate(sommerf As Double)
-        Dim Ecc1, Ecc2, Ecc3, Exc_fin As Double
+        Dim Ecc1, Ecc2, Ecc3, Exc_fin2 As Double
         Dim Dev1, Dev2, Dev3 As Double
-        Dim H_nul, Kvv, force, clearance As Double
+        Dim H_nul, Kvv, Kuu, force, clearance As Double
+        Dim Cvv, Cuu, rads As Double
         Dim jjr As Integer
 
         force = NumericUpDown46.Value * 1000        '[N]
         clearance = NumericUpDown47.Value / 1000    '[m]
+        rads = NumericUpDown42.Value * 2 * PI / 60  '[rad/sec]
 
         Ecc1 = 0        'Start lower limit of eccentricity [-]
         Ecc2 = 1.0      'Start upper limit of eccentricity [-]
@@ -784,7 +786,6 @@ Public Class Form1
             Dev1 = calc_epsilon(sommerf, Ecc1)
             Dev2 = calc_epsilon(sommerf, Ecc2)
             Dev3 = calc_epsilon(sommerf, Ecc3)
-            ' If sommerf > 0 Then MessageBox.Show("Sommerf=" & sommerf.ToString & vbCrLf & "Ecc1= " & Ecc1.ToString & ", Ecc2= " & Ecc2.ToString & ", Ecc3= " & Ecc3.ToString & vbCrLf & "Dev1= " & Dev1.ToString & ", Dev2= " & Dev2.ToString & ", Dev3= " & Dev3.ToString)
         Next jjr
         TextBox49.Text = Round(Ecc3, 2).ToString
 
@@ -801,15 +802,37 @@ Public Class Form1
             TextBox49.BackColor = Color.LightGreen
         End If
 
-
         'Dynamics of Rotating Machines ISBN 9780511780509, page 179
 
-        Exc_fin = Ecc3 ^ 2
-        H_nul = 1 / ((Math.PI ^ 2 * (1 - Exc_fin) + 16 * Exc_fin) ^ 1.5)
-        Kvv = H_nul * 4 * (Math.PI ^ 2 * (1 + 2 * Exc_fin ^ 2) + 32 * Exc_fin * (1 + Exc_fin) / (1 - Exc_fin))
+        '-------------- Vertical stiffness------------------------
+
+        Exc_fin2 = Ecc3 ^ 2
+        H_nul = 1 / ((PI ^ 2 * (1 - Exc_fin2) + 16 * Exc_fin2) ^ 1.5)
+        Kvv = H_nul * 4 * (PI ^ 2 * (1 + 2 * Exc_fin2) + 32 * Exc_fin2 * (1 + Exc_fin2) / (1 - Exc_fin2))
         Kvv = Kvv * force / clearance       '[N/m]
         Kvv /= 10 ^ 6                       '[kN/mm]
-        TextBox48.Text = Round(Kvv, 1).ToString
+
+        '-------------- Horizontal stiffness -------------------------
+        Kuu = H_nul * 4 * (PI ^ 2 * (2 - Exc_fin2) + 16 * Exc_fin2)
+        Kuu = Kuu * force / clearance       '[N/m]
+        Kuu /= 10 ^ 6                       '[kN/mm]
+
+        '-------------- Vertical damping -------------------------
+        Cvv = H_nul * (2 * PI * (PI ^ 2 * (1 - Exc_fin2) ^ 2 + 48 * Exc_fin2)) / (Ecc3 * (1 - Exc_fin2) ^ 0.5)
+        Cvv = Cvv * force / (clearance * rads)  '[Ns/m]
+        Cvv /= 10 ^ 3                           '[kNs/m]
+
+        '-------------- Vertical damping -------------------------
+        Cuu = H_nul * (2 * PI * (1 - Exc_fin2) ^ 0.5 * (PI ^ 2 * (1 + 2 * Exc_fin2) - 16 * Exc_fin2)) / Ecc3
+        Cuu = Cuu * force / (clearance * rads)  '[Ns/m]
+        Cuu /= 10 ^ 3                           '[kNs/m]
+
+        TextBox48.Text = Round(Kvv, 1).ToString     'Vertical stiffness [kN/mm]
+        TextBox16.Text = Round(Kuu, 1).ToString     'Horizontal stiffness [kN/mm]
+
+        TextBox44.Text = Round(Cvv, 1).ToString     'Vertical damping [kNs/m]
+        TextBox45.Text = Round(Cuu, 1).ToString     'Horizontal damping [kNs/m]
+
         draw_Chart2(sommerf)
     End Sub
 
