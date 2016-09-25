@@ -713,6 +713,8 @@ Public Class Form1
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
         alfa = Math.PI * 0 / 180      'Pressure angle [radials]
 
+        NumericUpDown43.Value = NumericUpDown35.Value * 0.8 'Ball diameter is 80% van de lager breedte
+        NumericUpDown32.Value = NumericUpDown36.Value * 0.8 'Total rollers length is 80% van de lager breedte
         dia_ball = NumericUpDown43.Value / 1000         '[m]
         length_roller = NumericUpDown32.Value / 1000    '[m]
         force_ball = NumericUpDown40.Value * 1000       '[N]
@@ -881,12 +883,47 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged
         'Dynamics of Rotating Machines , page 178 
 
         calc_rolling_element_bearings()
         calc_dydrodynamic_bearing()
     End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, TabPage6.Enter, NumericUpDown50.ValueChanged, NumericUpDown39.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged
+        Dim p_pump, stiff_dimless, stiffness, area_recess As Double
+        Dim clear_procent, h0_clearance, Journal_dia As Double
+        Dim no_pockets, b_pocket, L_pocket As Double    'pocket dimensions
+        Dim L_rim As Double                           'length next to the pocket
+        Dim omtrek As Double                            'journal omtrek
 
+        'Hydrostatic brearing orifice type
+
+
+        '---------- pocket sizing------------ 
+        no_pockets = NumericUpDown38.Value              '[-] No pockets
+        b_pocket = NumericUpDown53.Value / 1000         '[m] Pocket width
+        Journal_dia = NumericUpDown51.Value / 1000      '[m] Journal diameter
+        omtrek = PI * Journal_dia
+
+        If no_pockets < 1 Then no_pockets = 2
+        L_pocket = omtrek * 0.5 / no_pockets            '[m] pocket length
+
+        NumericUpDown37.Value = L_pocket * 1000         '[mm]
+
+        stiff_dimless = NumericUpDown39.Value           '[-] Stiffness dimensionless
+        clear_procent = NumericUpDown54.Value           '[-] Stiffness dimensionless
+
+        L_rim = NumericUpDown52.Value / 1000            '[m] Bearing rim width
+
+        h0_clearance = Journal_dia * clear_procent / 100  '[m]
+
+        p_pump = NumericUpDown50.Value * 10 ^ 5     '[N/m2] lubricating pump pressure
+        stiffness = no_pockets * 3 * L_pocket * (L_rim + b_pocket) * p_pump * stiff_dimless / h0_clearance
+        area_recess = no_pockets * b_pocket * L_pocket * 10 ^ 6     '[pockets [mm2]
+
+        TextBox51.Text = Round(stiffness / 10 ^ 6, 0).ToString      '[kN/mm]
+        TextBox52.Text = h0_clearance * 1000.ToString               '[mm]
+        TextBox53.Text = Round(area_recess, 0).ToString                       '[mm2]
+    End Sub
 End Class
