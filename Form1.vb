@@ -12,6 +12,10 @@ Imports Word = Microsoft.Office.Interop.Word
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
+    '----------- directory's-----------
+    Dim dirpath_Eng As String = "N:\Engineering\VBasic\Fan_sizing_input\"
+    Dim dirpath_Rap As String = "N:\Engineering\VBasic\Fan_rapport_copy\"
+    Dim dirpath_Home As String = "C:\Temp\"
     'Naam
     'Model
     'Tekst
@@ -691,14 +695,20 @@ Public Class Form1
 
             '--------------Save file word file------------------
             'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
-            ufilename = "N:\Engineering\VBasic\Rapport_copy\Campbell_report_" & DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss") & ".docx"
+            ufilename = dirpath_Rap & "Campbell_report_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
-            If Directory.Exists("N:\Engineering\VBasic\Rapport_copy") Then
-                GroupBox12.Text = "File saved at " & ufilename
-                oWord.ActiveDocument.SaveAs(ufilename)
+            If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
+            If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
+            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+
+            If Directory.Exists(dirpath_Rap) Then
+                oWord.ActiveDocument.SaveAs(dirpath_Rap & ufilename)
+            Else
+                oWord.ActiveDocument.SaveAs(dirpath_Home & ufilename)
             End If
+
         Catch ex As Exception
-            MessageBox.Show("Bestaat directory N:\Engineering\VBasic\Rapport_copy\ ? " & ex.Message)  ' Show the exception's message.
+            MessageBox.Show("Error 713" & ex.Message)  ' Show the exception's message.
         End Try
 
     End Sub
