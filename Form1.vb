@@ -36,8 +36,9 @@ Public Class Form1
      "Dynamics Rotating Machines;Test #2, tussen lagers;Example 3.5.1;     250;250;000;200;111;    122.7;0.6134;2.8625;1.0;1.0;N",
      "Tetrapak;Bedum 3;1800/1825/T33;                       750;562;263;180;130;    968;450;230;400;400;Y",
      "Foster Wheeler;Q16.0071;2600/2610/T33;                2380;2380;000;400;0;    1525;864;432;89;89;N",
-     "Tecnimont;P16.0078;HD2 407/1230/T16B;                 850;850;000;190;0;      528;52;26;190;190;N"
+     "Tecnimont;P16.0078;HD2 407/1230/T16B;                 850;850;000;190;0;      346;64;32;428;428;N"
      }
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim words() As String
@@ -549,7 +550,7 @@ Public Class Form1
 
             '----------------------------------------------
             'Insert a 16 x 3 table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 14, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = False
@@ -573,49 +574,49 @@ Public Class Form1
 
             If RadioButton1.Checked Then    'Overhung "
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "L1, lengte tussen lagers"
+                oTable.Cell(row, 1).Range.Text = "L1, Bearing distance"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
 
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "L2, overhang incl L3"
+                oTable.Cell(row, 1).Range.Text = "L2, Overhung length incl. L3"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "L3, starre lengte in waaier"
+                oTable.Cell(row, 1).Range.Text = "L3, Rigid length in imppeller"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown3.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "As lengte lager #1 - waaier"
+                oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #1 -- impeller"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "As lengte lager #2 - waaier"
+                oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #2 -- impeller"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Massa waaier"
+            oTable.Cell(row, 1).Range.Text = "Weight impeller"
             oTable.Cell(row, 2).Range.Text = NumericUpDown4.Value
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C1 lager-stoel buiten"
+            oTable.Cell(row, 1).Range.Text = "C1 Stiffness outside bearing"
             oTable.Cell(row, 2).Range.Text = NumericUpDown6.Value
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C2 lager-stoel binnen"
+            oTable.Cell(row, 1).Range.Text = "C2 Stiffness inside bearing"
             oTable.Cell(row, 2).Range.Text = NumericUpDown7.Value
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "As dikte tussen lagers"
+            oTable.Cell(row, 1).Range.Text = "Shaft dia. at impeller"
             oTable.Cell(row, 2).Range.Text = NumericUpDown8.Value
             oTable.Cell(row, 3).Range.Text = "[mm]"
 
             If RadioButton1.Checked Then    'Overhung "
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "As dikte overhang"
+                oTable.Cell(row, 1).Range.Text = "Shaft dia. overhung"
                 oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
@@ -623,14 +624,14 @@ Public Class Form1
             row += 2
             oTable.Rows.Item(row).Range.Font.Bold = True
             oTable.Rows.Item(row).Range.Font.Size = font_sizze
-            oTable.Cell(row, 1).Range.Text = "Massa traagheid waaier"
+            oTable.Cell(row, 1).Range.Text = "Rotation Inertia impeller"
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Jp, hartlijn waaier (schijf Ja<Jp)"
+            oTable.Cell(row, 1).Range.Text = "Jp, inertia (center line)"
             oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Ja, haaks hartlijn waaier (wals Ja<Jp)"
+            oTable.Cell(row, 1).Range.Text = "Ja, inertia (radial line)"
             oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
@@ -639,17 +640,17 @@ Public Class Form1
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
-            'Insert a 5 x 7 table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
+            'Insert a 4 x 7 table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = False
             oTable.Rows.Item(1).Range.Font.Bold = True
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Output"
+            oTable.Cell(row, 1).Range.Text = "Results"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Buigtraagheidsmoment as"
+            oTable.Cell(row, 1).Range.Text = "Shaft area moment of inertia"
             oTable.Cell(row, 2).Range.Text = TextBox30.Text
             oTable.Cell(row, 3).Range.Text = "[mm^4]"
             If RadioButton1.Checked Then
@@ -657,7 +658,7 @@ Public Class Form1
             End If
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Omega kritisch #1"
+            oTable.Cell(row, 1).Range.Text = "Omega critical #1"
             oTable.Cell(row, 2).Range.Text = TextBox32.Text
             oTable.Cell(row, 3).Range.Text = "[rad/s]"
             oTable.Cell(row, 4).Range.Text = TextBox5.Text
@@ -666,7 +667,7 @@ Public Class Form1
             oTable.Cell(row, 7).Range.Text = "[rpm]"
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Omega kritisch #2"
+            oTable.Cell(row, 1).Range.Text = "Omega critical #2"
             oTable.Cell(row, 2).Range.Text = TextBox33.Text
             oTable.Cell(row, 3).Range.Text = "[rad/s]"
             oTable.Cell(row, 4).Range.Text = TextBox6.Text
@@ -692,6 +693,7 @@ Public Class Form1
             oPara4.Range.InlineShapes.Item(1).LockAspectRatio = True
             oPara4.Range.InlineShapes.Item(1).Width = 310
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
 
             '--------------Save file word file------------------
             'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx

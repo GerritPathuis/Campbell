@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -1894,9 +1894,9 @@ Partial Class Form1
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(11, 116)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(282, 16)
+        Me.Label4.Size = New System.Drawing.Size(214, 16)
         Me.Label4.TabIndex = 5
-        Me.Label4.Text = "C1 lager-stoel buiten [kN/mm] (400=Hydrodyn)"
+        Me.Label4.Text = "C1 outer bearing stiffness [kN/mm] "
         '
         'Label2
         '
@@ -1904,9 +1904,9 @@ Partial Class Form1
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(11, 41)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(160, 16)
+        Me.Label2.Size = New System.Drawing.Size(159, 16)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "L2, Overhang incl L3 [mm]"
+        Me.Label2.Text = "L2, Overhung incl L3 [mm]"
         '
         'Label3
         '
@@ -1914,9 +1914,9 @@ Partial Class Form1
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(11, 66)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(193, 16)
+        Me.Label3.Size = New System.Drawing.Size(196, 16)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "L3, Starre lengte in waaier [mm]"
+        Me.Label3.Text = "L3, Rigid length in impeller [mm]"
         '
         'Label1
         '
@@ -1924,9 +1924,9 @@ Partial Class Form1
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(11, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(200, 16)
+        Me.Label1.Size = New System.Drawing.Size(161, 16)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "L1, lengte tussen de lagers [mm]"
+        Me.Label1.Text = "L1, bearing distance [mm]"
         '
         'NumericUpDown8
         '
@@ -1945,9 +1945,9 @@ Partial Class Form1
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(11, 141)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(286, 16)
+        Me.Label5.Size = New System.Drawing.Size(213, 16)
         Me.Label5.TabIndex = 6
-        Me.Label5.Text = "C2 lager-stoel binnen [kN/mm] (400=Hydrodyn)"
+        Me.Label5.Text = "C2 inner bearing stiffness [kN/mm] "
         '
         'NumericUpDown7
         '
@@ -1990,9 +1990,9 @@ Partial Class Form1
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(11, 91)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(118, 16)
+        Me.Label6.Size = New System.Drawing.Size(127, 16)
         Me.Label6.TabIndex = 7
-        Me.Label6.Text = "Massa waaier [kg]"
+        Me.Label6.Text = "Weight impeller [kg]"
         '
         'NumericUpDown4
         '
@@ -2057,9 +2057,9 @@ Partial Class Form1
         Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label49.Location = New System.Drawing.Point(11, 216)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(215, 16)
+        Me.Label49.Size = New System.Drawing.Size(220, 16)
         Me.Label49.TabIndex = 63
-        Me.Label49.Text = "Buig traagheidsmoment as [mm^4]"
+        Me.Label49.Text = "Shaft area moment of inertia [mm^4]"
         '
         'NumericUpDown1
         '
@@ -2079,9 +2079,9 @@ Partial Class Form1
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(11, 166)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(172, 16)
+        Me.Label12.Size = New System.Drawing.Size(206, 16)
         Me.Label12.TabIndex = 21
-        Me.Label12.Text = "As dikte tussen lagers [mm]"
+        Me.Label12.Text = "Shaft dia. between bearings [mm]"
         '
         'TextBox31
         '
@@ -2179,7 +2179,7 @@ Partial Class Form1
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(96, 18)
         Me.Label15.TabIndex = 69
-        Me.Label15.Text = "Project naam"
+        Me.Label15.Text = "Project name"
         '
         'TextBox8
         '
@@ -2196,9 +2196,9 @@ Partial Class Form1
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(10, 39)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(146, 18)
+        Me.Label16.Size = New System.Drawing.Size(141, 18)
         Me.Label16.TabIndex = 70
-        Me.Label16.Text = "VTK Project nummer"
+        Me.Label16.Text = "VTK Project number"
         '
         'TextBox7
         '
@@ -2230,7 +2230,7 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(403, 66)
         Me.GroupBox1.TabIndex = 59
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Massa traagheid waaier"
+        Me.GroupBox1.Text = "Rotational inertia impeller"
         '
         'Label14
         '
@@ -2238,9 +2238,9 @@ Partial Class Form1
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(6, 39)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(284, 16)
+        Me.Label14.Size = New System.Drawing.Size(218, 16)
         Me.Label14.TabIndex = 36
-        Me.Label14.Text = "Ja, Haaks hartlijn waaier [kg.m2] (wals Ja > Jp)"
+        Me.Label14.Text = "Ja, radial line [kg.m2] (wals Ja > Jp)"
         '
         'NumericUpDown11
         '
@@ -2262,9 +2262,9 @@ Partial Class Form1
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(6, 16)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(256, 16)
+        Me.Label13.Size = New System.Drawing.Size(264, 16)
         Me.Label13.TabIndex = 34
-        Me.Label13.Text = "Jp, Hartlijn waaier [kg.m2]    (schijf Ja < Jp)"
+        Me.Label13.Text = "Jp, centre line shaft [kg.m2]    (schijf Ja < Jp)"
         '
         'NumericUpDown10
         '
@@ -2302,17 +2302,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea3)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend3.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend3)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.Chart1.Series.Add(Series3)
         Me.Chart1.Size = New System.Drawing.Size(820, 624)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -2490,16 +2490,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend4)
         Me.Chart2.Location = New System.Drawing.Point(388, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.Chart2.Series.Add(Series4)
         Me.Chart2.Size = New System.Drawing.Size(499, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
