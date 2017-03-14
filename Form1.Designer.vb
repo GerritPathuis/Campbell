@@ -24,12 +24,12 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -1655,9 +1655,9 @@ Partial Class Form1
         Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label48.Location = New System.Drawing.Point(10, 195)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(190, 16)
+        Me.Label48.Size = New System.Drawing.Size(206, 16)
         Me.Label48.TabIndex = 69
-        Me.Label48.Text = "Omega asymptote [r/s,Hz,rpm]"
+        Me.Label48.Text = "Omega asymptote [rad/s,Hz,rpm]"
         '
         'TextBox12
         '
@@ -1685,9 +1685,9 @@ Partial Class Form1
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(9, 169)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(185, 16)
+        Me.Label19.Size = New System.Drawing.Size(201, 16)
         Me.Label19.TabIndex = 52
-        Me.Label19.Text = "Omega kritisch #2 [r/s,Hz,rpm]"
+        Me.Label19.Text = "Omega kritisch #2 [rad/s,Hz,rpm]"
         '
         'Label22
         '
@@ -1695,9 +1695,9 @@ Partial Class Form1
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.Location = New System.Drawing.Point(9, 92)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(235, 16)
+        Me.Label22.Size = New System.Drawing.Size(251, 16)
         Me.Label22.TabIndex = 56
-        Me.Label22.Text = "Eigen freq om10 [r/s,Hz] (stilstand, dot)"
+        Me.Label22.Text = "Eigen freq om10 [rad/s,Hz] (stilstand, dot)"
         '
         'TextBox35
         '
@@ -1756,9 +1756,9 @@ Partial Class Form1
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.Location = New System.Drawing.Point(9, 143)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(185, 16)
+        Me.Label20.Size = New System.Drawing.Size(201, 16)
         Me.Label20.TabIndex = 50
-        Me.Label20.Text = "Omega kritisch #1 [r/s,Hz,rpm]"
+        Me.Label20.Text = "Omega kritisch #1 [rad/s,Hz,rpm]"
         '
         'TextBox3
         '
@@ -1776,9 +1776,9 @@ Partial Class Form1
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(9, 117)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(232, 16)
+        Me.Label21.Size = New System.Drawing.Size(248, 16)
         Me.Label21.TabIndex = 58
-        Me.Label21.Text = "Eigen freq om20 [r/s,Hz] (stilstand dot)"
+        Me.Label21.Text = "Eigen freq om20 [rad/s,Hz] (stilstand dot)"
         '
         'TextBox32
         '
@@ -1926,9 +1926,9 @@ Partial Class Form1
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(11, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(161, 16)
+        Me.Label1.Size = New System.Drawing.Size(222, 16)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "L1, bearing distance [mm]"
+        Me.Label1.Text = "L1, distance between bearings [mm]"
         '
         'NumericUpDown8
         '
@@ -2304,17 +2304,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea5.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea5)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend5.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend5)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        Series5.ChartArea = "ChartArea1"
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.Chart1.Series.Add(Series5)
         Me.Chart1.Size = New System.Drawing.Size(820, 624)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -2492,16 +2492,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend6)
         Me.Chart2.Location = New System.Drawing.Point(388, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.Chart2.Series.Add(Series6)
         Me.Chart2.Size = New System.Drawing.Size(499, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -3619,7 +3619,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Campbell diagram for shafts, V2.2b"
+        Me.Text = "Campbell diagram for shafts, V2.2c"
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
