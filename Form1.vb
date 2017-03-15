@@ -60,6 +60,8 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
         GroupBox12.Text = "Chart settings"
+        TextBox54.Text = TextBox23.Text 'Inertia hart line
+        TextBox55.Text = TextBox24.Text
         Calc_nr()
         draw_chart1()
     End Sub
@@ -93,10 +95,13 @@ Public Class Form1
             I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
             If JA_imp > JP_imp Then
-                GroupBox1.Text = "Massa traagheid waaier (walsvormig !!) "
+                GroupBox1.Text = "Massa traagheid waaier (walsvormig NOK) "
+                GroupBox1.BackColor = Color.Red
             Else
-                GroupBox1.Text = "Massa traagheid waaier (schijfvormig)"
+                GroupBox1.Text = "Massa traagheid waaier (schijfvormig OK)"
+                GroupBox1.BackColor = Color.White
             End If
+
 
             If RadioButton1.Checked Then
                 '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
@@ -391,8 +396,8 @@ Public Class Form1
         Iz = 0.5 * massa * (Dia / 2) ^ 2
         Ix = massa / 12 * (3 * (Dia / 2) ^ 2 + hoog ^ 2)
 
-        TextBox23.Text = Round(Iz, 2).ToString
-        TextBox24.Text = Round(Ix, 2).ToString
+        TextBox23.Text = Round(Iz, 1).ToString
+        TextBox24.Text = Round(Ix, 1).ToString
         TextBox25.Text = Round(massa, 0).ToString
 
         sp1 = NumericUpDown24.Value
@@ -550,7 +555,7 @@ Public Class Form1
 
             '----------------------------------------------
             'Insert a 16 x 3 table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 14, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = False
