@@ -630,14 +630,14 @@ Public Class Form1
             oTable.Rows.Item(row).Range.Font.Bold = True
             oTable.Rows.Item(row).Range.Font.Size = font_sizze
             oTable.Cell(row, 1).Range.Text = "Rotation Inertia impeller"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Ja, inertia (radial line)"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
+            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Jp, inertia (center line)"
             oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
-            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
-            row += 1
-            oTable.Cell(row, 1).Range.Text = "Ja, inertia (radial line)"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
