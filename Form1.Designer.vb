@@ -185,8 +185,6 @@ Partial Class Form1
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
@@ -367,7 +365,6 @@ Partial Class Form1
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
-        Me.GroupBox17.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2104,7 +2101,6 @@ Partial Class Form1
         Me.GroupBox9.Controls.Add(Me.Button8)
         Me.GroupBox9.Controls.Add(Me.Button7)
         Me.GroupBox9.Controls.Add(Me.GroupBox18)
-        Me.GroupBox9.Controls.Add(Me.GroupBox17)
         Me.GroupBox9.Controls.Add(Me.TextBox9)
         Me.GroupBox9.Controls.Add(Me.Label15)
         Me.GroupBox9.Controls.Add(Me.TextBox8)
@@ -2120,27 +2116,27 @@ Partial Class Form1
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(329, 41)
+        Me.Button8.Location = New System.Drawing.Point(196, 126)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(74, 21)
+        Me.Button8.Size = New System.Drawing.Size(127, 21)
         Me.Button8.TabIndex = 83
-        Me.Button8.Text = "Button8"
+        Me.Button8.Text = "Retrieve Project"
         Me.Button8.UseVisualStyleBackColor = True
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(329, 14)
+        Me.Button7.Location = New System.Drawing.Point(196, 99)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(74, 21)
+        Me.Button7.Size = New System.Drawing.Size(127, 21)
         Me.Button7.TabIndex = 82
-        Me.Button7.Text = "Button7"
+        Me.Button7.Text = "Save Project"
         Me.Button7.UseVisualStyleBackColor = True
         '
         'GroupBox18
         '
         Me.GroupBox18.Controls.Add(Me.RadioButton2)
         Me.GroupBox18.Controls.Add(Me.RadioButton1)
-        Me.GroupBox18.Location = New System.Drawing.Point(263, 89)
+        Me.GroupBox18.Location = New System.Drawing.Point(12, 89)
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(128, 61)
         Me.GroupBox18.TabIndex = 81
@@ -2169,25 +2165,6 @@ Partial Class Form1
         Me.RadioButton1.Text = "Overhung"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
-        'GroupBox17
-        '
-        Me.GroupBox17.Controls.Add(Me.ComboBox1)
-        Me.GroupBox17.Location = New System.Drawing.Point(12, 89)
-        Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.Size = New System.Drawing.Size(229, 55)
-        Me.GroupBox17.TabIndex = 80
-        Me.GroupBox17.TabStop = False
-        Me.GroupBox17.Text = "Selectie"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.BackColor = System.Drawing.Color.Yellow
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(11, 17)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(212, 21)
-        Me.ComboBox1.TabIndex = 75
-        '
         'TextBox9
         '
         Me.TextBox9.Location = New System.Drawing.Point(151, 64)
@@ -2195,7 +2172,6 @@ Partial Class Form1
         Me.TextBox9.Size = New System.Drawing.Size(172, 20)
         Me.TextBox9.TabIndex = 74
         Me.TextBox9.Text = "-"
-        Me.TextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label15
         '
@@ -2203,18 +2179,17 @@ Partial Class Form1
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(10, 16)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(96, 18)
+        Me.Label15.Size = New System.Drawing.Size(112, 18)
         Me.Label15.TabIndex = 69
-        Me.Label15.Text = "Project name"
+        Me.Label15.Text = "Project Number"
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(153, 39)
+        Me.TextBox8.Location = New System.Drawing.Point(151, 38)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(170, 20)
+        Me.TextBox8.Size = New System.Drawing.Size(172, 20)
         Me.TextBox8.TabIndex = 73
         Me.TextBox8.Text = "-"
-        Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label16
         '
@@ -2222,9 +2197,9 @@ Partial Class Form1
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(10, 39)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(141, 18)
+        Me.Label16.Size = New System.Drawing.Size(77, 18)
         Me.Label16.TabIndex = 70
-        Me.Label16.Text = "VTK Project number"
+        Me.Label16.Text = "Item name"
         '
         'TextBox7
         '
@@ -2232,8 +2207,7 @@ Partial Class Form1
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(171, 20)
         Me.TextBox7.TabIndex = 72
-        Me.TextBox7.Text = "-"
-        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TextBox7.Text = "P17.0"
         '
         'Label17
         '
@@ -3733,7 +3707,6 @@ Partial Class Form1
         Me.GroupBox9.PerformLayout()
         Me.GroupBox18.ResumeLayout(False)
         Me.GroupBox18.PerformLayout()
-        Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3954,8 +3927,6 @@ Partial Class Form1
     Friend WithEvents GroupBox18 As GroupBox
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents GroupBox17 As GroupBox
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents TextBox8 As TextBox

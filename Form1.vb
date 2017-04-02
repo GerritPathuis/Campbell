@@ -41,21 +41,21 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim words() As String
+        'Dim words() As String
 
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")      'Decimal separator "."
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")    'Decimal separator "."
-        ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
+        ' ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
 
-        '-------Fill combobox1, Fan type selection------------------
-        For hh = 0 To (fan.Length - 1)            'Fill combobox3 with steel data
-            words = fan(hh).Split(CType(";", Char()))
-            ComboBox1.Items.Add(words(0))
-        Next hh
+        ''-------Fill combobox1, Fan type selection------------------
+        'For hh = 0 To (fan.Length - 1)            'Fill combobox3 with steel data
+        '    words = fan(hh).Split(CType(";", Char()))
+        '    ComboBox1.Items.Add(words(0))
+        'Next hh
 
-        If ComboBox1.Items.Count > 0 Then
-            ComboBox1.SelectedIndex = 2                 'Select Fan data
-        End If
+        'If ComboBox1.Items.Count > 0 Then
+        '    ComboBox1.SelectedIndex = 2                 'Select Fan data
+        'End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
@@ -443,51 +443,6 @@ Public Class Form1
     Private Function Rad_to_hz(rads As Double) As Double
         Return (rads / (2 * PI))
     End Function
-    'Reading data into the comboxes
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-        Dim words() As String
-
-        If (ComboBox1.SelectedIndex > 0) Then      'Prevent exceptions
-            words = fan(ComboBox1.SelectedIndex).Split(CType(";", Char()))
-            TextBox7.Text = words(0)                            'Naam
-            TextBox8.Text = words(1)                            'Model
-            TextBox9.Text = words(2)                            'Tekst
-            NumericUpDown1.Value = CDec(Convert.ToDouble(words(3)))   'L1-Tussen de lagers
-            NumericUpDown2.Value = CDec(Convert.ToDouble(words(4)))   'L2-overhung
-            NumericUpDown3.Value = CDec(Convert.ToDouble(words(5)))   'L3-Star deel in de waaier
-            NumericUpDown8.Value = CDec(Convert.ToDouble(words(6)))   'As dikte tussen de lagers
-            NumericUpDown9.Value = CDec(Convert.ToDouble(words(7)))   'As dikte
-            NumericUpDown4.Value = CDec(Convert.ToDouble(words(8)))   'Weight
-            NumericUpDown10.Value = CDec(Convert.ToDouble(words(9)))  'Jp
-            NumericUpDown11.Value = CDec(Convert.ToDouble(words(10))) 'Ja
-            NumericUpDown6.Value = CDec(Convert.ToDouble(words(11)))  'Stiffness bearing/support buiten
-            NumericUpDown7.Value = CDec(Convert.ToDouble(words(12)))  'Stiffness bearing/support binnen
-            If CBool(String.Compare(words(13), "N")) Then
-                RadioButton1.Checked = True
-                RadioButton2.Checked = False
-            Else
-                RadioButton1.Checked = False
-                RadioButton2.Checked = True
-            End If
-        End If
-
-
-        '-------- decimal places for presenting data ---------------------
-        If (ComboBox1.SelectedIndex = 1) Or (ComboBox1.SelectedIndex = 2) Then  'Test
-            NumericUpDown4.DecimalPlaces = 1        'Massa 
-            NumericUpDown6.DecimalPlaces = 1        'Stiffness bearing/support buiten
-            NumericUpDown7.DecimalPlaces = 1        'Stiffness bearing/support buiten
-            NumericUpDown10.DecimalPlaces = 3       'JP
-            NumericUpDown11.DecimalPlaces = 3       'JA
-        Else
-            NumericUpDown6.DecimalPlaces = 0
-            NumericUpDown4.DecimalPlaces = 0
-            NumericUpDown7.DecimalPlaces = 0
-            NumericUpDown10.DecimalPlaces = 0
-            NumericUpDown11.DecimalPlaces = 0
-        End If
-
-    End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim oWord As Word.Application ' = Nothing
@@ -959,28 +914,8 @@ Public Class Form1
             TextBox8.Text = "-"
         End If
 
-        temp_string = TextBox7.Text & ";" & TextBox8.Text & ";"
-
-        'For j = 0 To case_x_conditions.GetLength(0) - 2             '42 elements
-        '    For k = 0 To case_x_conditions.GetLength(1) - 1         '22 elements
-        '        '---- check for isnull--------------
-        '        If String.IsNullOrEmpty(case_x_conditions(j, k)) Then
-        '            case_x_conditions(j, k) = ""
-        '        End If
-        '        temp_string &= case_x_conditions(j, k).ToString & ";"   'Write all variables
-        '    Next
-        'Next
-        'temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
-
-        ''----- save case chart information-----
-        'For hh = 0 To case_x_flow.GetLength(0) - 1         '50 elements
-        '    For i = 0 To case_x_flow.GetLength(1) - 1      '18 elements
-        '        temp_string &= Math.Round(case_x_flow(hh, i), 4).ToString & ";"
-        '        temp_string &= Math.Round(case_x_Pstat(hh, i), 4).ToString & ";"
-        '        temp_string &= Math.Round(case_x_Power(hh, i), 4).ToString & ";"
-        '    Next i
-        'Next hh
-        'temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        temp_string = TextBox7.Text & ";" & TextBox8.Text & ";" & TextBox9.Text & ";"
+        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
         '-------- find all numeric, combobox, checkbox and radiobutton controls -----------------
         FindControlRecursive(all_num, Me, GetType(NumericUpDown))   'Find the control
@@ -1045,7 +980,7 @@ Public Class Form1
     'Then split up the secton string into part to read into the parameters
     Private Sub Read_file()
         Dim control_words(), words() As String
-        Dim i, count As Integer
+        Dim i As Integer
         Dim ttt As Double
         Dim k As Integer = 0
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
@@ -1060,62 +995,41 @@ Public Class Form1
 
         OpenFileDialog1.Title = "Open a Text File"
         OpenFileDialog1.Filter = "VTK Files|*.vtk"
+
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim readText As String = File.ReadAllText(OpenFileDialog1.FileName, Encoding.ASCII)
             control_words = readText.Split(separators1, StringSplitOptions.None) 'Split the read file content
 
             '----- retrieve case condition-----
-            words = control_words(0).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(0).Split(separators, StringSplitOptions.None) 'Split first line the read file content
             TextBox7.Text = words(0)                  'Project number
-            TextBox8.Text = words(1)                  'Item no
-            count = 2
-
-
-            'For j = 0 To case_x_conditions.GetLength(0) - 2             '42 elements
-            '    For k = 0 To case_x_conditions.GetLength(1) - 1         '23 elements
-            '        case_x_conditions(j, k) = words(count).ToString
-            '        count += 1
-            '    Next
-            'Next
-
-            ''----- retrieve case chart information-----
-            'words = control_words(1).Split(separators, StringSplitOptions.None) 'Split the read file content
-            'count = 1
-            'For hh = 0 To case_x_flow.GetLength(0) - 1        '50 elements
-            '    For i = 0 To case_x_flow.GetLength(1) - 1     '18 elements
-            '        case_x_flow(hh, i) = CDbl(words(count))
-            '        count += 1
-            '        case_x_Pstat(hh, i) = CDbl(words(count))
-            '        count += 1
-            '        case_x_Power(hh, i) = CDbl(words(count))
-            '        count += 1
-            '    Next i
-            'Next hh
+            TextBox8.Text = words(1)                  'Item name
+            TextBox9.Text = words(2)                  'Fan yupe
 
             '---------- terugzetten numeric controls -----------------
             FindControlRecursive(all_num, Me, GetType(NumericUpDown))
             all_num = all_num.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(2).Split(separators, StringSplitOptions.None)     'Split the read file content
+            words = control_words(1).Split(separators, StringSplitOptions.None)     'Split the read file content
             For i = 0 To all_num.Count - 1
                 Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
-                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
+                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal numeric controls--
                 If (i < words.Length - 1) Then
-                    If Not (Double.TryParse(words(i + 1), ttt)) Then MessageBox.Show("Combobox conversion problem occured")
+                    If Not (Double.TryParse(words(i + 1), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
                     If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
                         grbx.Value = CDec(ttt)          'OK
                     Else
                         grbx.Value = grbx.Minimum       'NOK
-                        MessageBox.Show("Combobox value out of ousode min-max range, Minimum value is used")
+                        MessageBox.Show("Numeric controls value out of ousode min-max range, Minimum value is used")
                     End If
                 Else
-                    MessageBox.Show("Warning last combobox not found in file")  'NOK
+                    MessageBox.Show("Warning last Numeric controls not found in file")  'NOK
                 End If
             Next
 
             '---------- terugzetten combobox controls -----------------
             FindControlRecursive(all_combo, Me, GetType(ComboBox))
             all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(3).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(2).Split(separators, StringSplitOptions.None) 'Split the read file content
             For i = 0 To all_combo.Count - 1
                 Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
                 '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
@@ -1129,7 +1043,7 @@ Public Class Form1
             '---------- terugzetten checkbox controls -----------------
             FindControlRecursive(all_check, Me, GetType(CheckBox))
             all_check = all_check.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(4).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(3).Split(separators, StringSplitOptions.None) 'Split the read file content
             For i = 0 To all_check.Count - 1
                 Dim grbx As CheckBox = CType(all_check(i), CheckBox)
                 '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
@@ -1143,7 +1057,7 @@ Public Class Form1
             '---------- terugzetten radiobuttons controls -----------------
             FindControlRecursive(all_radio, Me, GetType(RadioButton))
             all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(5).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(4).Split(separators, StringSplitOptions.None) 'Split the read file content
             For i = 0 To all_radio.Count - 1
                 Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
                 '--- dit deel voorkomt problemen bij het uitbreiden van het aantal radiobuttons--
