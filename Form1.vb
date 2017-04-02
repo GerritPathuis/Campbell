@@ -49,7 +49,7 @@ Public Class Form1
 
         '-------Fill combobox1, Fan type selection------------------
         For hh = 0 To (fan.Length - 1)            'Fill combobox3 with steel data
-            words = fan(hh).Split(";")
+            words = fan(hh).Split(CType(";", Char()))
             ComboBox1.Items.Add(words(0))
         Next hh
 
@@ -207,13 +207,13 @@ Public Class Form1
 
             TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
             TextBox15.Text = Math.Round(rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
-            TextBox39.Text = Math.Round(rad_to_hz(omega_asym) * 60, 0).ToString     'Omega asymptote
+            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString     'Omega asymptote
 
             TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
             TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
 
-            TextBox1.Text = Math.Round(rad_to_hz(om_krit1) * 60, 0).ToString   'om_krit1 [rmp]
-            TextBox13.Text = Math.Round(rad_to_hz(om_krit2) * 60, 0).ToString  'om_krit2 [rmp]
+            TextBox1.Text = Math.Round((Rad_to_hz(om_krit1) * 60), 0).ToString   'om_krit1 [rmp]
+            TextBox13.Text = Math.Round((Rad_to_hz(om_krit2) * 60), 0).ToString  'om_krit2 [rmp]
 
             TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
             TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
@@ -233,7 +233,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub draw_chart1()
+    Private Sub Draw_chart1()
         Dim hh, limit As Integer
         Dim om10, om20, krit1 As Double
 
@@ -300,7 +300,7 @@ Public Class Form1
             End If
 
             Chart1.Series(1).BorderWidth = 1        'Formule 5.33
-            limit = NumericUpDown22.Value                       'Limit in [rad/s]
+            limit = CInt(NumericUpDown22.Value)                       'Limit in [rad/s]
             For hh = 1 To 2000                                  'Array size
                 If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
                     If CheckBox1.Checked Then
@@ -440,7 +440,7 @@ Public Class Form1
         TextBox43.Text = Round(eigenfreq2, 0).ToString       '
     End Sub
     'Converts Radial per second to Hz
-    Private Function rad_to_hz(rads As Double)
+    Private Function Rad_to_hz(rads As Double) As Double
         Return (rads / (2 * PI))
     End Function
     'Reading data into the comboxes
@@ -448,21 +448,21 @@ Public Class Form1
         Dim words() As String
 
         If (ComboBox1.SelectedIndex > 0) Then      'Prevent exceptions
-            words = fan(ComboBox1.SelectedIndex).Split(";")
+            words = fan(ComboBox1.SelectedIndex).Split(CType(";", Char()))
             TextBox7.Text = words(0)                            'Naam
             TextBox8.Text = words(1)                            'Model
             TextBox9.Text = words(2)                            'Tekst
-            NumericUpDown1.Value = Convert.ToDouble(words(3))   'L1-Tussen de lagers
-            NumericUpDown2.Value = Convert.ToDouble(words(4))   'L2-overhung
-            NumericUpDown3.Value = Convert.ToDouble(words(5))   'L3-Star deel in de waaier
-            NumericUpDown8.Value = Convert.ToDouble(words(6))   'As dikte tussen de lagers
-            NumericUpDown9.Value = Convert.ToDouble(words(7))   'As dikte
-            NumericUpDown4.Value = Convert.ToDouble(words(8))   'Weight
-            NumericUpDown10.Value = Convert.ToDouble(words(9))  'Jp
-            NumericUpDown11.Value = Convert.ToDouble(words(10)) 'Ja
-            NumericUpDown6.Value = Convert.ToDouble(words(11))  'Stiffness bearing/support buiten
-            NumericUpDown7.Value = Convert.ToDouble(words(12))  'Stiffness bearing/support binnen
-            If String.Compare(words(13), "N") Then
+            NumericUpDown1.Value = CDec(Convert.ToDouble(words(3)))   'L1-Tussen de lagers
+            NumericUpDown2.Value = CDec(Convert.ToDouble(words(4)))   'L2-overhung
+            NumericUpDown3.Value = CDec(Convert.ToDouble(words(5)))   'L3-Star deel in de waaier
+            NumericUpDown8.Value = CDec(Convert.ToDouble(words(6)))   'As dikte tussen de lagers
+            NumericUpDown9.Value = CDec(Convert.ToDouble(words(7)))   'As dikte
+            NumericUpDown4.Value = CDec(Convert.ToDouble(words(8)))   'Weight
+            NumericUpDown10.Value = CDec(Convert.ToDouble(words(9)))  'Jp
+            NumericUpDown11.Value = CDec(Convert.ToDouble(words(10))) 'Ja
+            NumericUpDown6.Value = CDec(Convert.ToDouble(words(11)))  'Stiffness bearing/support buiten
+            NumericUpDown7.Value = CDec(Convert.ToDouble(words(12)))  'Stiffness bearing/support binnen
+            If CBool(String.Compare(words(13), "N")) Then
                 RadioButton1.Checked = True
                 RadioButton2.Checked = False
             Else
@@ -503,7 +503,7 @@ Public Class Form1
 
             'Start Word and open the document template. 
             font_sizze = 9
-            oWord = CreateObject("Word.Application")
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
             oWord.Visible = True
             oDoc = oWord.Documents.Add
 
@@ -512,14 +512,14 @@ Public Class Form1
             oPara1.Range.Text = "VTK Engineering"
             oPara1.Range.Font.Name = "Arial"
             oPara1.Range.Font.Size = font_sizze + 3
-            oPara1.Range.Font.Bold = True
+            oPara1.Range.Font.Bold = CInt(True)
             oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
             oPara1.Range.InsertParagraphAfter()
 
             oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
-            oPara2.Range.Font.Bold = False
+            oPara2.Range.Font.Bold = CInt(False)
             oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage)" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
@@ -528,8 +528,8 @@ Public Class Form1
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
-            oTable.Range.Font.Bold = False
-            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
 
             row = 1
             oTable.Cell(row, 1).Range.Text = "Project Name"
@@ -550,7 +550,7 @@ Public Class Form1
             oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(2)
 
-            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             '----------------------------------------------
@@ -558,8 +558,8 @@ Public Class Form1
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
-            oTable.Range.Font.Bold = False
-            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Input Data"
@@ -573,71 +573,71 @@ Public Class Form1
             End If
 
             row += 2
-            oTable.Rows.Item(4).Range.Font.Bold = True
+            oTable.Rows.Item(4).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(4).Range.Font.Size = font_sizze
             oTable.Cell(row, 1).Range.Text = "Fan Housing"
 
             If RadioButton1.Checked Then    'Overhung "
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "L1, Bearing distance"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown1.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
 
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "L2, Overhung length incl. L3"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown2.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "L3, Rigid length in imppeller"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown3.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown3.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #1 -- impeller"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown1.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown1.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #2 -- impeller"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown2.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown2.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Weight impeller"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown4.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown4.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "C1 Stiffness outside bearing"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown6.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown6.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "C2 Stiffness inside bearing"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown7.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown7.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Shaft dia. at impeller"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown8.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown8.Value, String)
             oTable.Cell(row, 3).Range.Text = "[mm]"
 
             If RadioButton1.Checked Then    'Overhung "
                 row += 1
                 oTable.Cell(row, 1).Range.Text = "Shaft dia. overhung"
-                oTable.Cell(row, 2).Range.Text = NumericUpDown9.Value
+                oTable.Cell(row, 2).Range.Text = CType(NumericUpDown9.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
 
             row += 2
-            oTable.Rows.Item(row).Range.Font.Bold = True
+            oTable.Rows.Item(row).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(row).Range.Font.Size = font_sizze
             oTable.Cell(row, 1).Range.Text = "Rotation Inertia impeller"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Ja, inertia (radial line)"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown11.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown11.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Jp, inertia (center line)"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown10.Value
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown10.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
@@ -649,8 +649,8 @@ Public Class Form1
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
-            oTable.Range.Font.Bold = False
-            oTable.Rows.Item(1).Range.Font.Bold = True
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Results"
@@ -695,7 +695,7 @@ Public Class Form1
             oPara4 = oDoc.Content.Paragraphs.Add
             oPara4.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
             oPara4.Range.InlineShapes.AddPicture("c:\Temp\MainChart.gif")
-            oPara4.Range.InlineShapes.Item(1).LockAspectRatio = True
+            oPara4.Range.InlineShapes.Item(1).LockAspectRatio = CType(True, Microsoft.Office.Core.MsoTriState)
             oPara4.Range.InlineShapes.Item(1).Width = 310
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
@@ -720,7 +720,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub calc_rolling_element_bearings()
+    Private Sub Calc_rolling_element_bearings()
         Dim dia_ball, length_roller, alfa, no_balls, no_rollers As Double
         Dim K_ball, K_roller As Double
         Dim Kvv_ball, Kvv_roller As Double
@@ -730,8 +730,8 @@ Public Class Form1
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
         alfa = Math.PI * 0 / 180      'Pressure angle [radials]
 
-        NumericUpDown43.Value = NumericUpDown35.Value * 0.8 'Ball diameter is 80% van de lager breedte
-        NumericUpDown32.Value = NumericUpDown36.Value * 0.8 'Total rollers length is 80% van de lager breedte
+        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.8) 'Ball diameter is 80% van de lager breedte
+        NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.8) 'Total rollers length is 80% van de lager breedte
         dia_ball = NumericUpDown43.Value / 1000         '[m]
         length_roller = NumericUpDown32.Value / 1000    '[m]
         force_ball = NumericUpDown40.Value * 1000       '[N]
@@ -747,7 +747,7 @@ Public Class Form1
         TextBox46.Text = Math.Round(Kvv_ball, 0).ToString
         TextBox47.Text = Math.Round(Kvv_roller, 0).ToString
     End Sub
-    Private Sub calc_dydrodynamic_bearing()
+    Private Sub Calc_dydrodynamic_bearing()
         Dim dia, omega, visco, length, f_load, clearance As Double
         Dim Sommerfeld As Double
 
@@ -773,7 +773,7 @@ Public Class Form1
             MessageBox.Show("Line 753 " & ex.Message)  ' Show the exception's message.
         End Try
     End Sub
-    Private Sub itterate(sommerf As Double)
+    Private Sub Itterate(sommerf As Double)
         Dim Ecc1, Ecc2, Ecc3, Exc_fin2 As Double
         Dim Dev1, Dev2, Dev3 As Double
         Dim H_nul, Kvv, Kuu, force, clearance As Double
@@ -788,9 +788,9 @@ Public Class Form1
         Ecc2 = 1.0      'Start upper limit of eccentricity [-]
         Ecc3 = 0.5      'In the middle of eccentricity [-]
 
-        Dev1 = calc_epsilon(sommerf, Ecc1)
-        Dev2 = calc_epsilon(sommerf, Ecc2)
-        Dev3 = calc_epsilon(sommerf, Ecc3)
+        Dev1 = CDbl(Calc_epsilon(sommerf, Ecc1))
+        Dev2 = CDbl(Calc_epsilon(sommerf, Ecc2))
+        Dev3 = CDbl(Calc_epsilon(sommerf, Ecc3))
 
         '-------------Iteratie 30x halveren moet voldoende zijn ---------------
         '---------- Exc= excentricity, looking for Deviation is zero ---------
@@ -802,9 +802,9 @@ Public Class Form1
                 Ecc1 = Ecc3
             End If
             Ecc3 = (Ecc1 + Ecc2) / 2
-            Dev1 = calc_epsilon(sommerf, Ecc1)
-            Dev2 = calc_epsilon(sommerf, Ecc2)
-            Dev3 = calc_epsilon(sommerf, Ecc3)
+            Dev1 = CDbl(Calc_epsilon(sommerf, Ecc1))
+            Dev2 = CDbl(Calc_epsilon(sommerf, Ecc2))
+            Dev3 = CDbl(Calc_epsilon(sommerf, Ecc3))
         Next jjr
         TextBox49.Text = Round(Ecc3, 2).ToString
 
@@ -855,7 +855,7 @@ Public Class Form1
         draw_Chart2(sommerf)
     End Sub
 
-    Private Function calc_epsilon(sommerf As Double, eps As Double)
+    Private Function Calc_epsilon(sommerf As Double, eps As Double) As Double
         Dim deviation, som2 As Double
 
         som2 = sommerf ^ 2
@@ -867,7 +867,7 @@ Public Class Form1
         Return (deviation)
     End Function
 
-    Private Sub draw_Chart2(sommerf As Double)
+    Private Sub Draw_Chart2(sommerf As Double)
         Dim x, y As Double
         Try
             'Clear all series And chart areas so we can re-add them
@@ -890,7 +890,7 @@ Public Class Form1
             Chart2.ChartAreas("ChartArea0").AxisX.Title = "Eccentricity [-]"
 
             For x = 0 To 1.01 Step 0.01
-                y = calc_epsilon(sommerf, x)
+                y = CDbl(Calc_epsilon(sommerf, x))
                 Chart2.Series(0).Points.AddXY(x, y)
             Next x
 
@@ -926,7 +926,7 @@ Public Class Form1
         If no_pockets < 1 Then no_pockets = 2
         L_pocket = omtrek * 0.5 / no_pockets            '[m] pocket length
 
-        NumericUpDown37.Value = L_pocket * 1000         '[mm]
+        NumericUpDown37.Value = CDec(L_pocket * 1000)         '[mm]
 
         stiff_dimless = NumericUpDown39.Value           '[-] Stiffness dimensionless
         clear_procent = NumericUpDown54.Value           '[-] Stiffness dimensionless
@@ -940,7 +940,238 @@ Public Class Form1
         area_recess = no_pockets * b_pocket * L_pocket * 10 ^ 6     '[pockets [mm2]
 
         TextBox51.Text = Round(stiffness / 10 ^ 6, 0).ToString      '[kN/mm]
-        TextBox52.Text = h0_clearance * 1000.ToString               '[mm]
+        TextBox52.Text = CType((h0_clearance * 1000).ToString, String)               '[mm]
         TextBox53.Text = Round(area_recess, 0).ToString                       '[mm2]
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Save_tofile()
+    End Sub
+
+    'Save control settings and case_x_conditions to file
+    Private Sub Save_tofile()
+        Dim temp_string As String
+        Dim filename As String = "Campbell_select_" & TextBox7.Text & "_" & TextBox8.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk"
+        Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
+        Dim i As Integer
+
+        If String.IsNullOrEmpty(TextBox8.Text) Then
+            TextBox8.Text = "-"
+        End If
+
+        temp_string = TextBox7.Text & ";" & TextBox8.Text & ";"
+
+        'For j = 0 To case_x_conditions.GetLength(0) - 2             '42 elements
+        '    For k = 0 To case_x_conditions.GetLength(1) - 1         '22 elements
+        '        '---- check for isnull--------------
+        '        If String.IsNullOrEmpty(case_x_conditions(j, k)) Then
+        '            case_x_conditions(j, k) = ""
+        '        End If
+        '        temp_string &= case_x_conditions(j, k).ToString & ";"   'Write all variables
+        '    Next
+        'Next
+        'temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        ''----- save case chart information-----
+        'For hh = 0 To case_x_flow.GetLength(0) - 1         '50 elements
+        '    For i = 0 To case_x_flow.GetLength(1) - 1      '18 elements
+        '        temp_string &= Math.Round(case_x_flow(hh, i), 4).ToString & ";"
+        '        temp_string &= Math.Round(case_x_Pstat(hh, i), 4).ToString & ";"
+        '        temp_string &= Math.Round(case_x_Power(hh, i), 4).ToString & ";"
+        '    Next i
+        'Next hh
+        'temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        '-------- find all numeric, combobox, checkbox and radiobutton controls -----------------
+        FindControlRecursive(all_num, Me, GetType(NumericUpDown))   'Find the control
+        all_num = all_num.OrderBy(Function(x) x.Name).ToList()      'Alphabetical order
+        For i = 0 To all_num.Count - 1
+            Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
+            temp_string &= grbx.Value.ToString & ";"
+        Next
+        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        '-------- find all combobox controls and save
+        FindControlRecursive(all_combo, Me, GetType(ComboBox))      'Find the control
+        all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()   'Alphabetical order
+        For i = 0 To all_combo.Count - 1
+            Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
+            temp_string &= grbx.SelectedItem.ToString & ";"
+        Next
+        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        '-------- find all checkbox controls and save
+        FindControlRecursive(all_check, Me, GetType(CheckBox))      'Find the control
+        all_check = all_check.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
+        For i = 0 To all_check.Count - 1
+            Dim grbx As CheckBox = CType(all_check(i), CheckBox)
+            temp_string &= grbx.Checked.ToString & ";"
+        Next
+        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        '-------- find all radio controls and save
+        FindControlRecursive(all_radio, Me, GetType(RadioButton))   'Find the control
+        all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
+        For i = 0 To all_radio.Count - 1
+            Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
+            temp_string &= grbx.Checked.ToString & ";"
+        Next
+
+        '---- if path not exist then create one----------
+        Try
+            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+            If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
+            If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
+        Catch ex As Exception
+        End Try
+
+        Try
+            If CInt(temp_string.Length.ToString) > 100 Then      'String may be empty
+                If Directory.Exists(dirpath_Eng) Then
+                    File.WriteAllText(dirpath_Eng & filename, temp_string, Encoding.ASCII)      'used at VTK
+                Else
+                    File.WriteAllText(dirpath_Home & filename, temp_string, Encoding.ASCII)     'used at home
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Line 5062, " & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
+
+
+    'Retrieve control settings and case_x_conditions from file
+    'Split the file string into 5 separate strings
+    'Each string represents a control type (combobox, checkbox,..)
+    'Then split up the secton string into part to read into the parameters
+    Private Sub Read_file()
+        Dim control_words(), words() As String
+        Dim i, count As Integer
+        Dim ttt As Double
+        Dim k As Integer = 0
+        Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
+        Dim separators() As String = {";"}
+        Dim separators1() As String = {"BREAK"}
+
+        If Directory.Exists(dirpath_Eng) Then
+            OpenFileDialog1.InitialDirectory = dirpath_Eng  'used at VTK
+        Else
+            OpenFileDialog1.InitialDirectory = dirpath_Home  'used at home
+        End If
+
+        OpenFileDialog1.Title = "Open a Text File"
+        OpenFileDialog1.Filter = "VTK Files|*.vtk"
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            Dim readText As String = File.ReadAllText(OpenFileDialog1.FileName, Encoding.ASCII)
+            control_words = readText.Split(separators1, StringSplitOptions.None) 'Split the read file content
+
+            '----- retrieve case condition-----
+            words = control_words(0).Split(separators, StringSplitOptions.None) 'Split the read file content
+            TextBox7.Text = words(0)                  'Project number
+            TextBox8.Text = words(1)                  'Item no
+            count = 2
+
+
+            'For j = 0 To case_x_conditions.GetLength(0) - 2             '42 elements
+            '    For k = 0 To case_x_conditions.GetLength(1) - 1         '23 elements
+            '        case_x_conditions(j, k) = words(count).ToString
+            '        count += 1
+            '    Next
+            'Next
+
+            ''----- retrieve case chart information-----
+            'words = control_words(1).Split(separators, StringSplitOptions.None) 'Split the read file content
+            'count = 1
+            'For hh = 0 To case_x_flow.GetLength(0) - 1        '50 elements
+            '    For i = 0 To case_x_flow.GetLength(1) - 1     '18 elements
+            '        case_x_flow(hh, i) = CDbl(words(count))
+            '        count += 1
+            '        case_x_Pstat(hh, i) = CDbl(words(count))
+            '        count += 1
+            '        case_x_Power(hh, i) = CDbl(words(count))
+            '        count += 1
+            '    Next i
+            'Next hh
+
+            '---------- terugzetten numeric controls -----------------
+            FindControlRecursive(all_num, Me, GetType(NumericUpDown))
+            all_num = all_num.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
+            words = control_words(2).Split(separators, StringSplitOptions.None)     'Split the read file content
+            For i = 0 To all_num.Count - 1
+                Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
+                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
+                If (i < words.Length - 1) Then
+                    If Not (Double.TryParse(words(i + 1), ttt)) Then MessageBox.Show("Combobox conversion problem occured")
+                    If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
+                        grbx.Value = CDec(ttt)          'OK
+                    Else
+                        grbx.Value = grbx.Minimum       'NOK
+                        MessageBox.Show("Combobox value out of ousode min-max range, Minimum value is used")
+                    End If
+                Else
+                    MessageBox.Show("Warning last combobox not found in file")  'NOK
+                End If
+            Next
+
+            '---------- terugzetten combobox controls -----------------
+            FindControlRecursive(all_combo, Me, GetType(ComboBox))
+            all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
+            words = control_words(3).Split(separators, StringSplitOptions.None) 'Split the read file content
+            For i = 0 To all_combo.Count - 1
+                Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
+                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
+                If (i < words.Length - 1) Then
+                    grbx.SelectedItem = words(i + 1)
+                Else
+                    MessageBox.Show("Warning last combobox not found in file")
+                End If
+            Next
+
+            '---------- terugzetten checkbox controls -----------------
+            FindControlRecursive(all_check, Me, GetType(CheckBox))
+            all_check = all_check.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
+            words = control_words(4).Split(separators, StringSplitOptions.None) 'Split the read file content
+            For i = 0 To all_check.Count - 1
+                Dim grbx As CheckBox = CType(all_check(i), CheckBox)
+                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
+                If (i < words.Length - 1) Then
+                    Boolean.TryParse(words(i + 1), grbx.Checked)
+                Else
+                    MessageBox.Show("Warning last checkbox not found in file")
+                End If
+            Next
+
+            '---------- terugzetten radiobuttons controls -----------------
+            FindControlRecursive(all_radio, Me, GetType(RadioButton))
+            all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
+            words = control_words(5).Split(separators, StringSplitOptions.None) 'Split the read file content
+            For i = 0 To all_radio.Count - 1
+                Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
+                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal radiobuttons--
+                If (i < words.Length - 1) Then
+                    Boolean.TryParse(words(i + 1), grbx.Checked)
+                Else
+                    MessageBox.Show("Warning last radiobutton not found in file")
+                End If
+            Next
+
+        End If
+    End Sub
+
+    '----------- Find all controls on form1------
+    'Nota Bene, sequence of found control may be differen, List sort is required
+    Public Shared Function FindControlRecursive(ByVal list As List(Of Control), ByVal parent As Control, ByVal ctrlType As System.Type) As List(Of Control)
+        If parent Is Nothing Then Return list
+
+        If parent.GetType Is ctrlType Then
+            list.Add(parent)
+        End If
+        For Each child As Control In parent.Controls
+            FindControlRecursive(list, child, ctrlType)
+        Next
+        Return list
+    End Function
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Read_file()
     End Sub
 End Class
