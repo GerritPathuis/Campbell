@@ -453,6 +453,8 @@ Public Class Form1
         Dim row, font_sizze As Integer
         Dim ufilename As String
 
+        ufilename = "Campbell_report_" & TextBox7.Text & TextBox8.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+
         Try
             oWord = New Word.Application()
 
@@ -493,17 +495,20 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Project number "
             oTable.Cell(row, 2).Range.Text = TextBox8.Text
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Fan type "
+            oTable.Cell(row, 1).Range.Text = "Fan type"
             oTable.Cell(row, 2).Range.Text = TextBox9.Text
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Author "
+            oTable.Cell(row, 1).Range.Text = "Author"
             oTable.Cell(row, 2).Range.Text = Environment.UserName
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Date "
+            oTable.Cell(row, 1).Range.Text = "Date"
             oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
-            oTable.Columns(2).Width = oWord.InchesToPoints(2)
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
 
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -657,7 +662,6 @@ Public Class Form1
 
             '--------------Save file word file------------------
             'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
-            ufilename = dirpath_Rap & "Campbell_report_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
             If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
             If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
@@ -670,7 +674,7 @@ Public Class Form1
             End If
 
         Catch ex As Exception
-            MessageBox.Show("Error 713" & ex.Message)  ' Show the exception's message.
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
         End Try
 
     End Sub
