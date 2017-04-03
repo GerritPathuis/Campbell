@@ -112,6 +112,7 @@ Public Class Form1
                 Label11.Visible = True
                 NumericUpDown9.Visible = True
                 TextBox31.Visible = True
+                Label114.Visible = True
                 '--------------- d11= Alfa --------------------------------
                 d11 = L2 ^ 2 / (C1 * L1 ^ 2)
                 d11 += (L1 + L2) ^ 2 / (C2 * L1 ^ 2)
@@ -139,6 +140,7 @@ Public Class Form1
                 Label11.Visible = False
                 NumericUpDown9.Visible = False
                 TextBox31.Visible = False
+                Label114.Visible = False
 
                 '--------------- d11= Alfa --------------------------------
                 d11 = L2 ^ 2 / (C1 * (L1 + L2) ^ 2)
@@ -218,8 +220,8 @@ Public Class Form1
             TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
             TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
 
-            TextBox30.Text = I1_shaft.ToString((("0.00 E0")))                   'Buigtraagheidsmoment [m^4]
-            TextBox31.Text = I2_overhung.ToString((("0.00 E0")))                'Buigtraagheidsmoment [m^4]
+            TextBox30.Text = I1_shaft.ToString((("0.00 E0")))      'Buigtraagheidsmoment as  [m^4]
+            TextBox31.Text = I2_overhung.ToString((("0.00 E0")))   'Buigtraagheidsmoment overhung as [m^4]
 
             ' ------- Check sanity -------
             If L3 > L2 Then
@@ -606,7 +608,7 @@ Public Class Form1
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             'Insert a 4 x 7 table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 7)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
@@ -618,8 +620,12 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Shaft area moment of inertia"
             oTable.Cell(row, 2).Range.Text = TextBox30.Text
             oTable.Cell(row, 3).Range.Text = "[mm^4]"
-            If RadioButton1.Checked Then
-                oTable.Cell(row, 4).Range.Text = TextBox31.Text
+
+            If RadioButton1.Checked Then    'Overhung
+                row += 1
+                oTable.Cell(row, 1).Range.Text = "Overhung shaft m.o.i."
+                oTable.Cell(row, 2).Range.Text = TextBox31.Text
+                oTable.Cell(row, 3).Range.Text = "[mm^4]"
             End If
 
             row += 1
@@ -641,10 +647,10 @@ Public Class Form1
             oTable.Cell(row, 7).Range.Text = "[rpm]"
 
             row += 1
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.0)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(1.8)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(0.9)
-            oTable.Columns(3).Width = oWord.InchesToPoints(0.6)    '"[rad/s]"
-            oTable.Columns(4).Width = oWord.InchesToPoints(0.4)
+            oTable.Columns(3).Width = oWord.InchesToPoints(0.7)    '"[rad/s]"
+            oTable.Columns(4).Width = oWord.InchesToPoints(0.7)
             oTable.Columns(5).Width = oWord.InchesToPoints(0.4)    '"[Hz]"
             oTable.Columns(6).Width = oWord.InchesToPoints(0.5)
             oTable.Columns.Item(7).Width = oWord.InchesToPoints(0.45)   '"[rpm]"
