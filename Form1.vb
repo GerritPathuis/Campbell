@@ -39,23 +39,11 @@ Public Class Form1
      "Tecnimont;P16.0078;HD2 407/1230/T16B;                 850;850;000;190;0;      346;64;32;428;428;N"
      }
 
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim words() As String
 
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")      'Decimal separator "."
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")    'Decimal separator "."
-        ' ComboBox1.Items.Clear()                    'Note Combobox1 contains"startup" to prevent exceptions
-
-        ''-------Fill combobox1, Fan type selection------------------
-        'For hh = 0 To (fan.Length - 1)            'Fill combobox3 with steel data
-        '    words = fan(hh).Split(CType(";", Char()))
-        '    ComboBox1.Items.Add(words(0))
-        'Next hh
-
-        'If ComboBox1.Items.Count > 0 Then
-        '    ComboBox1.SelectedIndex = 2                 'Select Fan data
-        'End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
