@@ -63,6 +63,9 @@ Public Class Form1
         Dim om10, om20, term1, term2 As Double
         Dim om_krit1, om_krit2, omega_asym As Double
 
+        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 2))
+        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 2))
+
         Try
             E_steel = 210.0 * 10 ^ 3                        'Young N/mm^2
 

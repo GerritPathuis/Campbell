@@ -2279,7 +2279,7 @@ Partial Class Form1
         Me.NumericUpDown11.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown11.Cursor = System.Windows.Forms.Cursors.Default
         Me.NumericUpDown11.DecimalPlaces = 5
-        Me.NumericUpDown11.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown11.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.NumericUpDown11.Location = New System.Drawing.Point(329, 41)
         Me.NumericUpDown11.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.NumericUpDown11.Name = "NumericUpDown11"
@@ -2302,7 +2302,7 @@ Partial Class Form1
         '
         Me.NumericUpDown10.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown10.DecimalPlaces = 3
-        Me.NumericUpDown10.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown10.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.NumericUpDown10.Location = New System.Drawing.Point(329, 16)
         Me.NumericUpDown10.Maximum = New Decimal(New Integer() {6000, 0, 0, 0})
         Me.NumericUpDown10.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
