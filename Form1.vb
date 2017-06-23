@@ -568,7 +568,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown7.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Shaft dia. at impeller"
+            oTable.Cell(row, 1).Range.Text = "Shaft dia. between bearings"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown8.Value, String)
             oTable.Cell(row, 3).Range.Text = "[mm]"
 
