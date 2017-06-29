@@ -1,13 +1,11 @@
 ﻿Imports System.Text
 Imports System.IO
-Imports System.Configuration
 Imports System.Math
-Imports System.Collections.Generic
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Globalization
 Imports System.Threading
+Imports System.Management
 Imports Word = Microsoft.Office.Interop.Word
-
 
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
@@ -40,10 +38,47 @@ Public Class Form1
      }
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim words() As String
+        Dim Pro_user, HD_number As String
+        Dim user_list As New List(Of String)
+        Dim hard_disk_list As New List(Of String)
+        Dim pass_name As Boolean = False
+        Dim pass_disc As Boolean = False
 
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")      'Decimal separator "."
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")    'Decimal separator "."
+
+        '------ allowed users with hard disc id's -----
+        user_list.Add("GP")
+        hard_disk_list.Add("3879121263")        'Privee PC, graslaan25
+
+        user_list.Add("GerritP")
+        hard_disk_list.Add("2012062914345300")  'VTK PC, GP
+
+        user_list.Add("GerritP")
+        hard_disk_list.Add("14290CEE95FC")       'VTK laptop, GP
+
+        user_list.Add("KarelB")
+        hard_disk_list.Add("165214800214")    'VTK PC, Karel Bakker
+
+        Pro_user = Environment.UserName     'User name on the screen
+        HD_number = HardDisc_Id()           'Harddisk identification
+        Me.Text &= "  (" & Pro_user & ")"
+
+        'Check user name and disc_id
+        For i = 0 To user_list.Count - 1
+            If StrComp(LCase(Pro_user), LCase(user_list.Item(i))) = 0 Then pass_name = True
+            If CBool(HD_number = Trim(hard_disk_list(i))) Then pass_disc = True
+        Next
+
+        If pass_name = False Or pass_disc = False Then
+            MessageBox.Show("VTK fan selection program" & vbCrLf & "Access denied, contact GPa" & vbCrLf)
+            MessageBox.Show("User_name= " & Pro_user & ", Pass name= " & pass_name.ToString)
+            MessageBox.Show("HD_id= *" & HD_number & "*" & ", Pass disc= " & pass_disc.ToString)
+            Environment.Exit(0)
+        End If
+
+
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
@@ -51,7 +86,7 @@ Public Class Form1
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
         Calc_nr()
-        draw_chart1()
+        Draw_chart1()
     End Sub
     Private Sub Calc_nr()
         Dim i As Integer
@@ -192,14 +227,14 @@ Public Class Form1
             TextBox3.Text = d12.ToString((("0.00 E0")))                     'gamma en delta
             TextBox4.Text = d22.ToString((("0.00 E0")))                     'beta
 
-            TextBox5.Text = Math.Round(rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
-            TextBox6.Text = Math.Round(rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
+            TextBox5.Text = Math.Round(Rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
+            TextBox6.Text = Math.Round(Rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
 
-            TextBox11.Text = Math.Round(rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
-            TextBox12.Text = Math.Round(rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
+            TextBox11.Text = Math.Round(Rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
+            TextBox12.Text = Math.Round(Rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
 
             TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
-            TextBox15.Text = Math.Round(rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
+            TextBox15.Text = Math.Round(Rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
             TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString     'Omega asymptote
 
             TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
@@ -722,7 +757,7 @@ Public Class Form1
             Sommerfeld = dia * omega * visco * length ^ 3 / (8 * f_load * clearance ^ 2)
 
             If Not Double.IsNaN(Sommerfeld) Then
-                itterate(Sommerfeld)
+                Itterate(Sommerfeld)
                 TextBox50.Text = Math.Round(Sommerfeld, 5).ToString
             End If
         Catch ex As Exception
@@ -808,7 +843,7 @@ Public Class Form1
         TextBox44.Text = Round(Cvv, 1).ToString     'Vertical damping [kNs/m]
         TextBox45.Text = Round(Cuu, 1).ToString     'Horizontal damping [kNs/m]
 
-        draw_Chart2(sommerf)
+        Draw_Chart2(sommerf)
     End Sub
 
     Private Function Calc_epsilon(sommerf As Double, eps As Double) As Double
@@ -859,8 +894,8 @@ Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged
         'Dynamics of Rotating Machines , page 178 
 
-        calc_rolling_element_bearings()
-        calc_dydrodynamic_bearing()
+        Calc_rolling_element_bearings()
+        Calc_dydrodynamic_bearing()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, TabPage6.Enter, NumericUpDown50.ValueChanged, NumericUpDown39.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged
@@ -1089,4 +1124,27 @@ Public Class Form1
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Read_file()
     End Sub
+
+    Public Function HardDisc_Id() As String
+        'Add system.management as reference !!
+        Dim tmpStr2 As String = ""
+        Dim myScop As New ManagementScope("\\" & Environment.MachineName & "\root\cimv2")
+        Dim oQuer As New SelectQuery("SELECT * FROM WIN32_DiskDrive")
+
+        Dim oResult As New ManagementObjectSearcher(myScop, oQuer)
+        Dim oIte As ManagementObject
+        Dim oPropert As PropertyData
+        For Each oIte In oResult.Get()
+            For Each oPropert In oIte.Properties
+                If Not oPropert.Value Is Nothing AndAlso oPropert.Name = "SerialNumber" Then
+                    tmpStr2 = oPropert.Value.ToString
+                    Exit For
+                End If
+            Next
+            Exit For
+        Next
+        Return (Trim(tmpStr2))         'Harddisk identification
+    End Function
+
+
 End Class
