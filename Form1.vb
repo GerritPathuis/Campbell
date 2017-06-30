@@ -49,7 +49,7 @@ Public Class Form1
 
         '------ allowed users with hard disc id's -----
         user_list.Add("GP")
-        hard_disk_list.Add("3879121263")        'Privee PC, graslaan25
+        hard_disk_list.Add("058F63626371") 'Privee PC, graslaan25
 
         user_list.Add("GerritP")
         hard_disk_list.Add("2012062914345300")  'VTK PC, GP
@@ -76,9 +76,6 @@ Public Class Form1
             MessageBox.Show("HD_id= *" & HD_number & "*" & ", Pass disc= " & pass_disc.ToString)
             Environment.Exit(0)
         End If
-
-
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
@@ -98,11 +95,11 @@ Public Class Form1
         Dim om10, om20, term1, term2 As Double
         Dim om_krit1, om_krit2, omega_asym As Double
 
-        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 2))
-        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 2))
+        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 3))
+        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 3))
 
         Try
-            E_steel = 210.0 * 10 ^ 3                        'Young N/mm^2
+            E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
 
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
@@ -116,7 +113,7 @@ Public Class Form1
             JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
             JA_imp = NumericUpDown11.Value                      '[kg.m2] Massa Traagheid haaks op hartlijn (JA= 1/16.m.D^2(1+4/3(h/D)^2))
 
-            'I circel is PI/4 * r^4
+            'I circlw = PI/4 * r^4
             I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
             I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
@@ -152,7 +149,8 @@ Public Class Form1
                 d12 += (L2 ^ 2 - L3 ^ 2) / (2 * E_steel * I2_overhung)  '[1/N]
 
                 '--------------- d22= Beta ----------------
-                d22 = (1 / C1 + 1 / C2) / L1 ^ 2
+                d22 = 1 / C1 + 1 / C2
+                d22 /= L1 ^ 2
                 d22 += L1 / (3 * E_steel * I1_shaft)
                 d22 += (L2 - L3) / (E_steel * I2_overhung)
                 d22 *= 1000                                             '[1/(meter.N)]
@@ -223,9 +221,9 @@ Public Class Form1
             omega_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
             omega_asym = Sqrt(omega_asym)
 
-            TextBox2.Text = d11.ToString((("0.00 E0")))                     'alfa
-            TextBox3.Text = d12.ToString((("0.00 E0")))                     'gamma en delta
-            TextBox4.Text = d22.ToString((("0.00 E0")))                     'beta
+            TextBox2.Text = d11.ToString((("0.000 E0")))                     'alfa
+            TextBox3.Text = d12.ToString((("0.000 E0")))                     'gamma en delta
+            TextBox4.Text = d22.ToString((("0.000 E0")))                     'beta
 
             TextBox5.Text = Math.Round(Rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
             TextBox6.Text = Math.Round(Rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
@@ -368,7 +366,7 @@ Public Class Form1
         length_A = NumericUpDown13.Value / 1000
         length_B = length_L - length_A
         mmassa = NumericUpDown15.Value                                  '[kg]
-        diam_tussen = NumericUpDown16.Value / 1000                      '[mm]
+        diam_tussen = NumericUpDown16.Value / 1000                      '[m]
 
         young = NumericUpDown17.Value * 10 ^ 9                          '[N/m2]
 
@@ -381,7 +379,7 @@ Public Class Form1
 
         TextBox17.Text = Round(length_B * 1000, 0).ToString
         TextBox18.Text = I_as_tussen.ToString((("0.00 E0")))
-        TextBox19.Text = C_tussen.ToString((("0.00 E0")))                   'Buigstijfheid
+        TextBox19.Text = Round(C_tussen / 1000).ToString                'Buigstijfheid [kN/m]
         TextBox20.Text = Round(fr_krit, 0).ToString                     '[Hz]
         TextBox27.Text = Round(fr_krit * 60, 0).ToString                '[rpm]
 
@@ -401,7 +399,7 @@ Public Class Form1
         fr_krit_overhung /= (2 * PI)                                    '[Hz]
 
         TextBox26.Text = I_as_overhung.ToString((("0.00 E0")))
-        TextBox21.Text = C_Overhung.ToString((("0.00 E0")))                 'Buigstijfheid
+        TextBox21.Text = Round(C_Overhung / 1000, 0).ToString           'Buigstijfheid [kN/m]
         TextBox22.Text = Round(fr_krit_overhung, 0).ToString            '[Hz]   
         TextBox28.Text = Round(fr_krit_overhung * 60, 0).ToString       '[rpm]
 
@@ -424,9 +422,10 @@ Public Class Form1
         Iz = 0.5 * massa * (Dia / 2) ^ 2
         Ix = massa / 12 * (3 * (Dia / 2) ^ 2 + hoog ^ 2)
 
-        TextBox23.Text = Round(Iz, 1).ToString
-        TextBox24.Text = Round(Ix, 1).ToString
-        TextBox25.Text = Round(massa, 0).ToString
+        TextBox23.Text = IIf(Iz < 50, Round(Iz, 3), Round(Iz, 1)).ToString
+        TextBox24.Text = IIf(Ix < 50, Round(Ix, 3), Round(Ix, 1)).ToString
+
+        TextBox25.Text = IIf(massa < 10, Round(massa, 1), Round(massa, 0)).ToString
 
         sp1 = NumericUpDown24.Value
         sp2 = NumericUpDown25.Value
@@ -505,7 +504,7 @@ Public Class Form1
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage)" & vbCrLf
+            oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage, ISBN 978-3-642-29570-6)" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
@@ -576,7 +575,7 @@ Public Class Form1
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown2.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "L3, Rigid length in imppeller"
+                oTable.Cell(row, 1).Range.Text = "L3, Rigid length in impeller"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown3.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
@@ -721,7 +720,7 @@ Public Class Form1
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
         alfa = Math.PI * 0 / 180      'Pressure angle [radials]
 
-        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.8) 'Ball diameter is 80% van de lager breedte
+        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.6) 'Ball diameter is 80% van de lager breedte
         NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.8) 'Total rollers length is 80% van de lager breedte
         dia_ball = NumericUpDown43.Value / 1000         '[m]
         length_roller = NumericUpDown32.Value / 1000    '[m]
@@ -1146,6 +1145,4 @@ Public Class Form1
         Next
         Return (Trim(tmpStr2))         'Harddisk identification
     End Function
-
-
 End Class
