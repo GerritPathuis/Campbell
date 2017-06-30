@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -440,7 +440,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1245, 756)
+        Me.TabPage5.Size = New System.Drawing.Size(1245, 749)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Massa traagheid + springs"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1041,7 +1041,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(1245, 756)
+        Me.TabPage4.Size = New System.Drawing.Size(1245, 749)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Simple approach"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -1310,9 +1310,9 @@ Partial Class Form1
         Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label35.Location = New System.Drawing.Point(11, 22)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(213, 18)
+        Me.Label35.Size = New System.Drawing.Size(218, 18)
         Me.Label35.TabIndex = 8
-        Me.Label35.Text = "l= lengte tussen de lagers [mm]"
+        Me.Label35.Text = "L= lengte tussen de lagers [mm]"
         '
         'GroupBox4
         '
@@ -1376,6 +1376,7 @@ Partial Class Form1
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'PictureBox1
         '
@@ -1544,9 +1545,9 @@ Partial Class Form1
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.Location = New System.Drawing.Point(16, 22)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(213, 18)
+        Me.Label24.Size = New System.Drawing.Size(218, 18)
         Me.Label24.TabIndex = 8
-        Me.Label24.Text = "l= lengte tussen de lagers [mm]"
+        Me.Label24.Text = "L= lengte tussen de lagers [mm]"
         '
         'Label25
         '
@@ -1910,9 +1911,9 @@ Partial Class Form1
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(13, 112)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(214, 16)
+        Me.Label4.Size = New System.Drawing.Size(293, 16)
         Me.Label4.TabIndex = 5
-        Me.Label4.Text = "C1 outer bearing stiffness [kN/mm] "
+        Me.Label4.Text = "C1 outer (@ coupling) bearing stiffness [kN/mm] "
         '
         'Label2
         '
@@ -1961,21 +1962,21 @@ Partial Class Form1
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(13, 136)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(213, 16)
+        Me.Label5.Size = New System.Drawing.Size(289, 16)
         Me.Label5.TabIndex = 6
-        Me.Label5.Text = "C2 inner bearing stiffness [kN/mm] "
+        Me.Label5.Text = "C2 inner (@ impeller) bearing stiffness [kN/mm] "
         '
         'NumericUpDown7
         '
         Me.NumericUpDown7.BackColor = System.Drawing.Color.LawnGreen
         Me.NumericUpDown7.Location = New System.Drawing.Point(324, 136)
-        Me.NumericUpDown7.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
-        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.NumericUpDown7.Maximum = New Decimal(New Integer() {2000, 0, 0, 0})
+        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown7.Name = "NumericUpDown7"
         Me.NumericUpDown7.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown7.TabIndex = 31
         Me.NumericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown7.Value = New Decimal(New Integer() {400, 0, 0, 0})
+        Me.NumericUpDown7.Value = New Decimal(New Integer() {2000, 0, 0, 0})
         '
         'NumericUpDown9
         '
@@ -1992,13 +1993,13 @@ Partial Class Form1
         '
         Me.NumericUpDown6.BackColor = System.Drawing.Color.LawnGreen
         Me.NumericUpDown6.Location = New System.Drawing.Point(324, 112)
-        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
-        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {2000, 0, 0, 0})
+        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown6.Name = "NumericUpDown6"
         Me.NumericUpDown6.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown6.TabIndex = 30
         Me.NumericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown6.Value = New Decimal(New Integer() {400, 0, 0, 0})
+        Me.NumericUpDown6.Value = New Decimal(New Integer() {260, 0, 0, 0})
         '
         'Label6
         '
@@ -2341,23 +2342,23 @@ Partial Class Form1
         Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox12)
         Me.SplitContainer2.Panel2.Controls.Add(Me.Button1)
         Me.SplitContainer2.Size = New System.Drawing.Size(820, 743)
-        Me.SplitContainer2.SplitterDistance = 654
+        Me.SplitContainer2.SplitterDistance = 653
         Me.SplitContainer2.TabIndex = 40
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea3)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend3.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend3)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(820, 654)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.Chart1.Series.Add(Series3)
+        Me.Chart1.Size = New System.Drawing.Size(820, 653)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
         '
@@ -2474,7 +2475,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1245, 756)
+        Me.TabPage2.Size = New System.Drawing.Size(1245, 749)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -2518,7 +2519,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1245, 756)
+        Me.TabPage3.Size = New System.Drawing.Size(1245, 749)
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -2534,16 +2535,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend4)
         Me.Chart2.Location = New System.Drawing.Point(388, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.Chart2.Series.Add(Series4)
         Me.Chart2.Size = New System.Drawing.Size(499, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -2563,10 +2564,10 @@ Partial Class Form1
         Me.GroupBox21.Controls.Add(Me.NumericUpDown45)
         Me.GroupBox21.Location = New System.Drawing.Point(914, 296)
         Me.GroupBox21.Name = "GroupBox21"
-        Me.GroupBox21.Size = New System.Drawing.Size(303, 200)
+        Me.GroupBox21.Size = New System.Drawing.Size(303, 192)
         Me.GroupBox21.TabIndex = 83
         Me.GroupBox21.TabStop = False
-        Me.GroupBox21.Text = "Rolling element bearing"
+        Me.GroupBox21.Text = "Rolling element bearing (floating @ impeller)"
         '
         'Label101
         '
@@ -2588,7 +2589,7 @@ Partial Class Form1
         Me.NumericUpDown36.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown36.TabIndex = 75
         Me.NumericUpDown36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown36.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        Me.NumericUpDown36.Value = New Decimal(New Integer() {40, 0, 0, 0})
         '
         'NumericUpDown41
         '
@@ -2678,6 +2679,8 @@ Partial Class Form1
         'NumericUpDown45
         '
         Me.NumericUpDown45.BackColor = System.Drawing.Color.Yellow
+        Me.NumericUpDown45.DecimalPlaces = 1
+        Me.NumericUpDown45.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.NumericUpDown45.Location = New System.Drawing.Point(224, 101)
         Me.NumericUpDown45.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
         Me.NumericUpDown45.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -2685,7 +2688,7 @@ Partial Class Form1
         Me.NumericUpDown45.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown45.TabIndex = 28
         Me.NumericUpDown45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown45.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.NumericUpDown45.Value = New Decimal(New Integer() {4, 0, 0, 0})
         '
         'GroupBox20
         '
@@ -2705,7 +2708,7 @@ Partial Class Form1
         Me.GroupBox20.Size = New System.Drawing.Size(303, 198)
         Me.GroupBox20.TabIndex = 82
         Me.GroupBox20.TabStop = False
-        Me.GroupBox20.Text = "Ball bearing"
+        Me.GroupBox20.Text = "Ball bearing (fixed @ coupling)"
         '
         'Label100
         '
@@ -2727,7 +2730,7 @@ Partial Class Form1
         Me.NumericUpDown35.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown35.TabIndex = 75
         Me.NumericUpDown35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown35.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        Me.NumericUpDown35.Value = New Decimal(New Integer() {40, 0, 0, 0})
         '
         'NumericUpDown34
         '
@@ -2804,6 +2807,8 @@ Partial Class Form1
         'NumericUpDown40
         '
         Me.NumericUpDown40.BackColor = System.Drawing.Color.Yellow
+        Me.NumericUpDown40.DecimalPlaces = 1
+        Me.NumericUpDown40.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.NumericUpDown40.Location = New System.Drawing.Point(224, 107)
         Me.NumericUpDown40.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
         Me.NumericUpDown40.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -2811,7 +2816,7 @@ Partial Class Form1
         Me.NumericUpDown40.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown40.TabIndex = 28
         Me.NumericUpDown40.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown40.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.NumericUpDown40.Value = New Decimal(New Integer() {4, 0, 0, 0})
         '
         'NumericUpDown43
         '
@@ -3223,7 +3228,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(1245, 756)
+        Me.TabPage6.Size = New System.Drawing.Size(1245, 749)
         Me.TabPage6.TabIndex = 7
         Me.TabPage6.Text = "Hydrostatic bearing with external punp"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -3650,7 +3655,7 @@ Partial Class Form1
         '
         'OpenFileDialog1
         '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog1.FileName = "Campbell*"
         '
         'Form1
         '

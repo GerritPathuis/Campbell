@@ -1023,6 +1023,7 @@ Public Class Form1
         Dim separators() As String = {";"}
         Dim separators1() As String = {"BREAK"}
 
+        OpenFileDialog1.FileName = "Campbell*"
         If Directory.Exists(dirpath_Eng) Then
             OpenFileDialog1.InitialDirectory = dirpath_Eng  'used at VTK
         Else
