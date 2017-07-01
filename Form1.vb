@@ -81,7 +81,17 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, RadioButton4.CheckedChanged
+        Calc_rolling_element_bearings()
+        Calc_dydrodynamic_bearing()
+        If RadioButton4.Checked Then    'Rigid support
+            NumericUpDown6.Value = 2000
+            NumericUpDown7.Value = 2000
+        Else        'Flex support
+            Decimal.TryParse(TextBox56.Text, NumericUpDown6.Value)  '@ coupling
+            Decimal.TryParse(TextBox57.Text, NumericUpDown7.Value)  '@ impeller
+        End If
+
         GroupBox12.Text = "Chart settings"
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
@@ -98,8 +108,9 @@ Public Class Form1
         Dim om10, om20, term1, term2 As Double
         Dim om_krit1, om_krit2, omega_asym As Double
 
-        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 3))
-        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 3))
+        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 4))
+        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 4))
+        NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
             E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
@@ -188,9 +199,9 @@ Public Class Form1
             End If
 
             '----------------------- formel 5.33 ------------------------
-            speed_rad = -NumericUpDown22.Value
+            speed_rad = -NumericUpDown22.Value                      'Chart range
             For i = 1 To 2000                                       'Array size
-                speed_rad += NumericUpDown22.Value * 2 / 2000       'increment step [rad/s]
+                speed_rad += Abs(NumericUpDown22.Value * 2 / 2000)  'increment step [rad/s]
                 form533(i, 0) = speed_rad                           'Waaier hoeksnelheid [rad/s]
 
                 form533(i, 1) = -1 + (speed_rad ^ 2 * d11 * massa)
@@ -228,24 +239,31 @@ Public Class Form1
             TextBox3.Text = d12.ToString((("0.000 E0")))                    'gamma en delta
             TextBox4.Text = d22.ToString((("0.000 E0")))                    'beta
 
+            '--------- krit1 and krit 2----------
             TextBox5.Text = Math.Round(Rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
             TextBox6.Text = Math.Round(Rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
-
-            TextBox11.Text = Math.Round(Rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
-            TextBox12.Text = Math.Round(Rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
-
-            TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
-            TextBox15.Text = Math.Round(Rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
-            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString    'Omega asymptote
-
-            TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
-            TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
 
             TextBox1.Text = Math.Round((Rad_to_hz(om_krit1) * 60), 0).ToString   'om_krit1 [rmp]
             TextBox13.Text = Math.Round((Rad_to_hz(om_krit2) * 60), 0).ToString  'om_krit2 [rmp]
 
             TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
             TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
+
+            '--------- om10  and om20 -----------
+            TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
+            TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
+
+            TextBox11.Text = Math.Round(Rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
+            TextBox12.Text = Math.Round(Rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
+
+            TextBox59.Text = Math.Round(Rad_to_hz(om10) * 60, 0).ToString   'Omega 10 bij stilstand
+            TextBox58.Text = Math.Round(Rad_to_hz(om20) * 60, 0).ToString   'Omega 20 bij stilstand
+
+            '---------- asymtote--------------
+            TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
+            TextBox15.Text = Math.Round(Rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
+            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString    'Omega asymptote
+
 
             TextBox30.Text = I1_shaft.ToString((("0.00 E0")))      'Buigtraagheidsmoment as  [m^4]
             TextBox31.Text = I2_overhung.ToString((("0.00 E0")))   'Buigtraagheidsmoment overhung as [m^4]
