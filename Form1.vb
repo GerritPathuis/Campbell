@@ -64,6 +64,9 @@ Public Class Form1
         HD_number = HardDisc_Id()           'Harddisk identification
         Me.Text &= "  (" & Pro_user & ")"
 
+        ComboBox1.SelectedIndex = 0     '8 balls
+        ComboBox2.SelectedIndex = 0     '8 rollers
+
         'Check user name and disc_id
         For i = 0 To user_list.Count - 1
             If StrComp(LCase(Pro_user), LCase(user_list.Item(i))) = 0 Then pass_name = True
@@ -197,13 +200,13 @@ Public Class Form1
                 ' TextBox16.Text += form533(i, 0).ToString & ",  " & form533(i, 1).ToString & vbCrLf
             Next
 
-            '----------- Omega kritisch #1 ------------------
+            '----------- Omega kritisch #1 (eq. 5.35)------------------
             om_krit1 = (d11 * massa + d22 * (JA_imp - JP_imp))
             om_krit1 += Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
             om_krit1 *= 0.5
             om_krit1 = Sqrt(1 / om_krit1)
 
-            '----------- Omega kritisch #2 ------------------
+            '----------- Omega kritisch #2 (eq. 5.35)------------------
             om_krit2 = (d11 * massa + d22 * (JA_imp - JP_imp))
             om_krit2 -= Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
             om_krit2 *= 0.5
@@ -221,9 +224,9 @@ Public Class Form1
             omega_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
             omega_asym = Sqrt(omega_asym)
 
-            TextBox2.Text = d11.ToString((("0.000 E0")))                     'alfa
-            TextBox3.Text = d12.ToString((("0.000 E0")))                     'gamma en delta
-            TextBox4.Text = d22.ToString((("0.000 E0")))                     'beta
+            TextBox2.Text = d11.ToString((("0.000 E0")))                    'alfa
+            TextBox3.Text = d12.ToString((("0.000 E0")))                    'gamma en delta
+            TextBox4.Text = d22.ToString((("0.000 E0")))                    'beta
 
             TextBox5.Text = Math.Round(Rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
             TextBox6.Text = Math.Round(Rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
@@ -233,7 +236,7 @@ Public Class Form1
 
             TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
             TextBox15.Text = Math.Round(Rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
-            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString     'Omega asymptote
+            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString    'Omega asymptote
 
             TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
             TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
@@ -711,31 +714,57 @@ Public Class Form1
     End Sub
 
     Private Sub Calc_rolling_element_bearings()
+        'Based on Dynamics of Rotary Machines page 183, ISBN 978-0-521-85016-2
+
         Dim dia_ball, length_roller, alfa, no_balls, no_rollers As Double
         Dim K_ball, K_roller As Double
-        Dim Kvv_ball, Kvv_roller As Double
+        Dim Kvv_ball, Kvv_roller As Double 'vertical stiffness
+        Dim Kuu_ball, Kuu_roller As Double 'horizontal stiffness
         Dim force_ball, force_roller As Double
 
         K_ball = 13 * 10 ^ 6        '[N^2/3.m^-4/3]
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
-        alfa = Math.PI * 0 / 180      'Pressure angle [radials]
+        alfa = Math.PI * 0 / 180     'Pressure angle [radials]
 
         NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.6) 'Ball diameter is 80% van de lager breedte
         NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.8) 'Total rollers length is 80% van de lager breedte
-        dia_ball = NumericUpDown43.Value / 1000         '[m]
-        length_roller = NumericUpDown32.Value / 1000    '[m]
-        force_ball = NumericUpDown40.Value * 1000       '[N]
-        force_roller = NumericUpDown45.Value * 1000     '[N]
-        no_balls = NumericUpDown34.Value                '[-]
-        no_rollers = NumericUpDown41.Value              '[-]
+        dia_ball = NumericUpDown43.Value / 1000             '[m]
+        length_roller = NumericUpDown32.Value / 1000        '[m]
+        force_ball = NumericUpDown40.Value * 1000           '[N]
+        force_roller = NumericUpDown45.Value * 1000         '[N]
+        Double.TryParse(CType(ComboBox1.SelectedItem, String), no_balls)
+        Double.TryParse(CType(ComboBox2.SelectedItem, String), no_rollers)
 
-        Kvv_ball = K_ball * no_balls ^ (2 / 3) * dia_ball ^ (1 / 3) * force_ball ^ (1 / 3) * Math.Cos(alfa) ^ (5 / 3)   '[N/m]
-        Kvv_ball /= 10 ^ 6              '[kN/mm]   
-        Kvv_roller = K_roller * no_rollers ^ 0.9 * length_roller ^ 0.8 * force_roller ^ 0.1 * Math.Cos(alfa) ^ 1.9 '[N/m]
+        'Page 183, Equation 5.89, vertical stiffness, in SI units
+        Kvv_ball = K_ball * no_balls ^ (2 / 3) * dia_ball ^ (1 / 3) * force_ball ^ (1 / 3) * Cos(alfa) ^ (5 / 3)   '[N/m]
+        Kvv_ball /= 10 ^ 6              '[kN/mm]
+        Select Case no_balls
+            Case 8
+                Kuu_ball = Kvv_ball * 0.46
+            Case 12
+                Kuu_ball = Kvv_ball * 0.64
+            Case 16
+                Kuu_ball = Kvv_ball * 0.73
+        End Select
+
+        'Page 183, Equation 5.90, vertical stiffness, in SI units
+        Kvv_roller = K_roller * no_rollers ^ 0.9 * length_roller ^ 0.8 * force_roller ^ 0.1 * Cos(alfa) ^ 1.9 '[N/m]
         Kvv_roller /= 10 ^ 6            '[kN/mm]   
 
-        TextBox46.Text = Math.Round(Kvv_ball, 0).ToString
-        TextBox47.Text = Math.Round(Kvv_roller, 0).ToString
+        Select Case no_rollers
+            Case 8
+                Kuu_roller = Kvv_roller * 0.49
+            Case 12
+                Kuu_roller = Kvv_roller * 0.66
+            Case 16
+                Kuu_roller = Kvv_roller * 0.74
+        End Select
+
+        TextBox46.Text = Math.Round(Kvv_ball, 0).ToString   'Vertical stiffness
+        TextBox56.Text = Math.Round(Kuu_ball, 0).ToString   'horizontal stiffness
+
+        TextBox47.Text = Math.Round(Kvv_roller, 0).ToString 'Vertical stiffness
+        TextBox57.Text = Math.Round(Kuu_roller, 0).ToString 'horizontal stiffness
     End Sub
     Private Sub Calc_dydrodynamic_bearing()
         Dim dia, omega, visco, length, f_load, clearance As Double
@@ -850,8 +879,8 @@ Public Class Form1
 
         som2 = sommerf ^ 2
 
-        'Dynamics of Rotating Machines ISBN 9780511780509, Formula (5.83) page 178
-
+        'Dynamics of Rotating Machines ISBN 9780511780509, equation (5.83) page 178
+        'Hydrodunamic journal bearings, bearing eccentric
         deviation = eps ^ 8 - 4 * eps ^ 6 + (6 - som2 * (16 - PI ^ 2)) * eps ^ 4 - (4 + PI ^ 2 * som2) * eps ^ 2 + 1
 
         Return (deviation)
@@ -890,7 +919,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, ComboBox1.SelectedIndexChanged
         'Dynamics of Rotating Machines , page 178 
 
         Calc_rolling_element_bearings()
@@ -1145,4 +1174,6 @@ Public Class Form1
         Next
         Return (Trim(tmpStr2))         'Harddisk identification
     End Function
+
+
 End Class
