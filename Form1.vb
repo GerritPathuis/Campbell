@@ -10,6 +10,24 @@ Imports Word = Microsoft.Office.Interop.Word
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
+    Public Shared based_on() As String = {
+    "Based on",
+    "Maschinendynamik, 11 Auflage, ISBN 978-3-642-29570-6",
+    "Dynamics of Rotary Machines, ISBN 978-0-521-85016-2",
+    " ",
+    "Example #1, Maschinendynamik page,Aufgabe A5.5, page 357",
+    "Overhung, disk weight 3.7 kg, shaft diameter 15mm,",
+    "Length between bearing 470mm, overhung 66 mm",
+    "Disc diameter 200mm, 15mm wide, rigid bearings",
+    "Critical Natural frequency 6127 rpm",
+    " ",
+    "Example #2, Dynamics Rotating Machines; Example 3.5.1, page 85",
+    "Between bearings, disk weight 122.7 kg, shaft diameter 200mm,",
+    "Length between bearings 500mm",
+    "Disc diameter 200mm, 500mm wide",
+    "Bearing stiffness horz. and vert. 1MN/m (1 kN/mm)",
+    "Critical Natural frequencies 1219 and 1996 rpm"}
+
     '----------- directory's-----------
     Dim dirpath_Eng As String = "N:\Engineering\VBasic\Fan_sizing_input\"
     Dim dirpath_Rap As String = "N:\Engineering\VBasic\Fan_rapport_copy\"
@@ -79,19 +97,13 @@ Public Class Form1
             MessageBox.Show("HD_id= *" & HD_number & "*" & ", Pass disc= " & pass_disc.ToString)
             Environment.Exit(0)
         End If
+
+        For hh = 0 To (based_on.Length - 1)
+            TextBox60.Text &= based_on(hh) & vbCrLf
+        Next hh
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, RadioButton4.CheckedChanged
-        Calc_rolling_element_bearings()
-        Calc_dydrodynamic_bearing()
-        If RadioButton4.Checked Then    'Rigid support
-            NumericUpDown6.Value = 2000
-            NumericUpDown7.Value = 2000
-        Else        'Flex support
-            Decimal.TryParse(TextBox56.Text, NumericUpDown6.Value)  '@ coupling
-            Decimal.TryParse(TextBox57.Text, NumericUpDown7.Value)  '@ impeller
-        End If
-
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
         GroupBox12.Text = "Chart settings"
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
@@ -104,12 +116,13 @@ Public Class Form1
         Dim C1, C2 As Double
         Dim d11, d12, d22 As Double
         Dim E_steel, shaft_radius, shaft_overhang_radius, I1_shaft, I2_overhung As Double
-        Dim JP_imp, JA_imp As Double
-        Dim om10, om20, term1, term2 As Double
-        Dim om_krit1, om_krit2, omega_asym As Double
+        Dim JP_imp, JA_imp, Jr As Double
+        Dim discrim As Double
+        Dim ω10, ω20, term1, term2 As Double
+        Dim ω_krit1, ω_krit2, ω_asym As Double
 
-        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value > 1, 1, 4))
-        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value > 1, 1, 4))
+        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value < 3, 3, 1))
+        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 3, 3, 1))
         NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
@@ -211,58 +224,60 @@ Public Class Form1
                 ' TextBox16.Text += form533(i, 0).ToString & ",  " & form533(i, 1).ToString & vbCrLf
             Next
 
+            '----------- Omega kritisch(eq. 5.35)------------------
+            Jr = JA_imp - JP_imp
+            discrim = Sqrt((d11 * massa + d22 * Jr) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * Jr) 'discriminant
+
             '----------- Omega kritisch #1 (eq. 5.35)------------------
-            om_krit1 = (d11 * massa + d22 * (JA_imp - JP_imp))
-            om_krit1 += Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
-            om_krit1 *= 0.5
-            om_krit1 = Sqrt(1 / om_krit1)
+            ω_krit1 = 0.5 * (d11 * massa + d22 * Jr + discrim)
+            ω_krit1 = Sqrt(1 / ω_krit1)
 
             '----------- Omega kritisch #2 (eq. 5.35)------------------
-            om_krit2 = (d11 * massa + d22 * (JA_imp - JP_imp))
-            om_krit2 -= Sqrt((d11 * massa + d22 * (JA_imp - JP_imp)) ^ 2 - 4 * (d11 * d22 - d12 ^ 2) * massa * (JA_imp - JP_imp))
-            om_krit2 *= 0.5
-            om_krit2 = Sqrt(1 / om_krit2)
+            ω_krit2 = 0.5 * (d11 * massa + d22 * Jr - discrim)
+            ω_krit2 = Sqrt(1 / ω_krit2)
 
-            '------------ om10 en om20 (bij stilstand)---formule 5.32--------
+            '------------ ω10 en ω20 (bij stilstand)---(eq. 5.32)--------
             term1 = (d11 * massa + d22 * JA_imp) / (2 * massa * JA_imp * (d11 * d22 - d12 ^ 2))
             term2 = 4 * massa * JA_imp * (d11 * d22 - d12 ^ 2) / (d11 * massa + d22 * JA_imp) ^ 2
             term2 = 1 - term2
 
-            om10 = Sqrt(term1 * (1 + Sqrt(term2)))
-            om20 = Sqrt(term1 * (1 - Sqrt(term2)))
+            ω10 = Sqrt(term1 * (1 + Sqrt(term2)))
+            ω20 = Sqrt(term1 * (1 - Sqrt(term2)))
 
-            '---------- omega _asymptote----------------
-            omega_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
-            omega_asym = Sqrt(omega_asym)
+            '---------- omega _asymptote (eq. 5.34)----------------
+            ω_asym = d22 / (massa * (d11 * d22 - d12 ^ 2))
+            ω_asym = Sqrt(ω_asym)
 
+
+            '-------- present results-------------
             TextBox2.Text = d11.ToString((("0.000 E0")))                    'alfa
             TextBox3.Text = d12.ToString((("0.000 E0")))                    'gamma en delta
             TextBox4.Text = d22.ToString((("0.000 E0")))                    'beta
 
             '--------- krit1 and krit 2----------
-            TextBox5.Text = Math.Round(Rad_to_hz(om_krit1), 1).ToString     'om_krit1 [Hz]
-            TextBox6.Text = Math.Round(Rad_to_hz(om_krit2), 1).ToString     'om_krit2 [Hz]
+            TextBox5.Text = Math.Round(Rad_to_hz(ω_krit1), 1).ToString     'ω_krit1 [Hz]
+            TextBox6.Text = Math.Round(Rad_to_hz(ω_krit2), 1).ToString     'ω_krit2 [Hz]
 
-            TextBox1.Text = Math.Round((Rad_to_hz(om_krit1) * 60), 0).ToString   'om_krit1 [rmp]
-            TextBox13.Text = Math.Round((Rad_to_hz(om_krit2) * 60), 0).ToString  'om_krit2 [rmp]
+            TextBox1.Text = Math.Round((Rad_to_hz(ω_krit1) * 60), 0).ToString   'ω_krit1 [rmp]
+            TextBox13.Text = Math.Round((Rad_to_hz(ω_krit2) * 60), 0).ToString  'ω_krit2 [rmp]
 
-            TextBox32.Text = Math.Round(om_krit1, 0).ToString               'om_krit1 [Rad/s]
-            TextBox33.Text = Math.Round(om_krit2, 0).ToString               'om_krit2 [Rad/s]
+            TextBox32.Text = Math.Round(ω_krit1, 0).ToString               'ω_krit1 [Rad/s]
+            TextBox33.Text = Math.Round(ω_krit2, 0).ToString               'ω_krit2 [Rad/s]
 
-            '--------- om10  and om20 -----------
-            TextBox34.Text = Math.Round(om10, 0).ToString                   'Omega 10 bij stilstand
-            TextBox35.Text = Math.Round(om20, 0).ToString                   'Omega 20 bij stilstand
+            '--------- ω10  and ω20 -----------
+            TextBox34.Text = Math.Round(ω10, 0).ToString                   'Omega 10 bij stilstand
+            TextBox35.Text = Math.Round(ω20, 0).ToString                   'Omega 20 bij stilstand
 
-            TextBox11.Text = Math.Round(Rad_to_hz(om10), 0).ToString        'Omega 10 bij stilstand
-            TextBox12.Text = Math.Round(Rad_to_hz(om20), 0).ToString        'Omega 20 bij stilstand
+            TextBox11.Text = Math.Round(Rad_to_hz(ω10), 0).ToString        'Omega 10 bij stilstand
+            TextBox12.Text = Math.Round(Rad_to_hz(ω20), 0).ToString        'Omega 20 bij stilstand
 
-            TextBox59.Text = Math.Round(Rad_to_hz(om10) * 60, 0).ToString   'Omega 10 bij stilstand
-            TextBox58.Text = Math.Round(Rad_to_hz(om20) * 60, 0).ToString   'Omega 20 bij stilstand
+            TextBox59.Text = Math.Round(Rad_to_hz(ω10) * 60, 0).ToString   'Omega 10 bij stilstand
+            TextBox58.Text = Math.Round(Rad_to_hz(ω20) * 60, 0).ToString   'Omega 20 bij stilstand
 
             '---------- asymtote--------------
-            TextBox14.Text = Math.Round(omega_asym, 0).ToString                     'Omega asymptote
-            TextBox15.Text = Math.Round(Rad_to_hz(omega_asym), 0).ToString          'Omega asymptote
-            TextBox39.Text = Math.Round((Rad_to_hz(omega_asym) * 60), 0).ToString    'Omega asymptote
+            TextBox14.Text = Math.Round(ω_asym, 0).ToString                     'Omega asymptote
+            TextBox15.Text = Math.Round(Rad_to_hz(ω_asym), 0).ToString          'Omega asymptote
+            TextBox39.Text = Math.Round((Rad_to_hz(ω_asym) * 60), 0).ToString    'Omega asymptote
 
 
             TextBox30.Text = I1_shaft.ToString((("0.00 E0")))      'Buigtraagheidsmoment as  [m^4]
@@ -282,7 +297,7 @@ Public Class Form1
 
     Private Sub Draw_chart1()
         Dim hh, limit As Integer
-        Dim om10, om20, krit1 As Double
+        Dim ω10, ω20, krit1 As Double
 
         Try
             Chart1.Series.Clear()
@@ -326,11 +341,11 @@ Public Class Form1
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
 
             '-------- snijpunten -----------
-            Double.TryParse(TextBox34.Text, om10)
-            Double.TryParse(TextBox35.Text, om20)
+            Double.TryParse(TextBox34.Text, ω10)
+            Double.TryParse(TextBox35.Text, ω20)
             Double.TryParse(TextBox32.Text, krit1)
-            Chart1.Series(2).Points.AddXY(0, om10)            'Omega 10 [Rad/sec]
-            Chart1.Series(3).Points.AddXY(0, om20)            'Omega 20 [Rad/sec]
+            Chart1.Series(2).Points.AddXY(0, ω10)            'Omega 10 [Rad/sec]
+            Chart1.Series(3).Points.AddXY(0, ω20)            'Omega 20 [Rad/sec]
             Chart1.Series(4).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
             Chart1.Series(2).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(2).Points(0).MarkerSize = 10
@@ -1193,5 +1208,7 @@ Public Class Form1
         Return (Trim(tmpStr2))         'Harddisk identification
     End Function
 
-
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Form2.Show()
+    End Sub
 End Class
