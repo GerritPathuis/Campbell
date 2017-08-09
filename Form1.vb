@@ -184,8 +184,8 @@ Public Class Form1
             Else
                 '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
                 '--------------- d11= Alfa ----------------------------------------
-                Label1.Text = "L1, aslengte lager#1-waaier [mm]"
-                Label2.Text = "L2, aslengte waaier-lager#2 [mm]"
+                Label1.Text = "L1, aslengte fixed lager-waaier [mm] (drive side)"
+                Label2.Text = "L2, aslengte waaier-float lager [mm]"
                 Label3.Visible = False
                 NumericUpDown3.Visible = False
                 Label11.Visible = False
@@ -616,11 +616,11 @@ Public Class Form1
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #1 -- impeller"
+                oTable.Cell(row, 1).Range.Text = "Shaft length fixed Bearing -- impeller (drive side)"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown1.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "Shaft length Bearing #2 -- impeller"
+                oTable.Cell(row, 1).Range.Text = "Shaft length float Bearing -- impeller"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown2.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
@@ -630,11 +630,11 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown4.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C1 Stiffness outside bearing"
+            oTable.Cell(row, 1).Range.Text = "C1 Stiffness fixed bearing"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown6.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C2 Stiffness inside bearing"
+            oTable.Cell(row, 1).Range.Text = "C2 Stiffness float bearing"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown7.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
@@ -663,7 +663,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown10.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg.m2]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.4)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
