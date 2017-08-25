@@ -70,7 +70,7 @@ Public Class Form1
         hard_disk_list.Add("058F63626371") 'Privee PC, graslaan25
 
         user_list.Add("GerritP")
-        hard_disk_list.Add("2012062914345300")  'VTK PC, GP
+        hard_disk_list.Add("S2R6NX0H740154H")  'VTK PC, GP
 
         user_list.Add("GerritP")
         hard_disk_list.Add("14290CEE95FC")       'VTK laptop, GP
