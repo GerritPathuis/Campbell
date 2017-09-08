@@ -1216,4 +1216,11 @@ Public Class Form1
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         Form2.Show()
     End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, NumericUpDown56.ValueChanged
+        Dim temp, young As Double
+        temp = NumericUpDown56.Value
+        young = 0.00000032 * temp ^ 3 + 0.00004995 * temp ^ 2 - 0.04930174 * temp + 203.386
+        TextBox62.Text = young.ToString("00.0")
+    End Sub
 End Class
