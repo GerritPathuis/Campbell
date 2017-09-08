@@ -103,7 +103,7 @@ Public Class Form1
         Next hh
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged
         GroupBox12.Text = "Chart settings"
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
@@ -126,7 +126,7 @@ Public Class Form1
         NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
-            E_steel = 210.0 * 10 ^ 3                            'Young N/mm^2
+            E_steel = NumericUpDown55.Value * 1000              'Shaft Young mod. N/mm^2 
 
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
@@ -648,6 +648,11 @@ Public Class Form1
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown9.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Shaft young modulus"
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown55.Value, String)
+            oTable.Cell(row, 3).Range.Text = "[kN/mm]"
 
             row += 2
             oTable.Rows.Item(row).Range.Font.Bold = CInt(True)
