@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -209,6 +209,7 @@ Partial Class Form1
         Me.NumericUpDown10 = New System.Windows.Forms.NumericUpDown()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Label128 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
@@ -334,7 +335,8 @@ Partial Class Form1
         Me.TextBox60 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label128 = New System.Windows.Forms.Label()
+        Me.Label129 = New System.Windows.Forms.Label()
+        Me.Label130 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1228,6 +1230,7 @@ Partial Class Form1
         '
         'TextBox28
         '
+        Me.TextBox28.BackColor = System.Drawing.SystemColors.MenuBar
         Me.TextBox28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox28.Location = New System.Drawing.Point(361, 155)
         Me.TextBox28.Name = "TextBox28"
@@ -1371,6 +1374,7 @@ Partial Class Form1
         '
         'NumericUpDown15
         '
+        Me.NumericUpDown15.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown15.Location = New System.Drawing.Point(341, 21)
         Me.NumericUpDown15.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
         Me.NumericUpDown15.Name = "NumericUpDown15"
@@ -1455,6 +1459,7 @@ Partial Class Form1
         '
         'TextBox27
         '
+        Me.TextBox27.BackColor = System.Drawing.SystemColors.MenuBar
         Me.TextBox27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox27.Location = New System.Drawing.Point(358, 184)
         Me.TextBox27.Name = "TextBox27"
@@ -1495,6 +1500,7 @@ Partial Class Form1
         '
         'NumericUpDown16
         '
+        Me.NumericUpDown16.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown16.Location = New System.Drawing.Point(340, 104)
         Me.NumericUpDown16.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
         Me.NumericUpDown16.Name = "NumericUpDown16"
@@ -1542,6 +1548,7 @@ Partial Class Form1
         '
         'NumericUpDown12
         '
+        Me.NumericUpDown12.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown12.Location = New System.Drawing.Point(340, 23)
         Me.NumericUpDown12.Maximum = New Decimal(New Integer() {8000, 0, 0, 0})
         Me.NumericUpDown12.Name = "NumericUpDown12"
@@ -1552,6 +1559,7 @@ Partial Class Form1
         '
         'NumericUpDown13
         '
+        Me.NumericUpDown13.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown13.Location = New System.Drawing.Point(340, 50)
         Me.NumericUpDown13.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
         Me.NumericUpDown13.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -2438,35 +2446,47 @@ Partial Class Form1
         '
         'SplitContainer2.Panel2
         '
+        Me.SplitContainer2.Panel2.Controls.Add(Me.Label130)
+        Me.SplitContainer2.Panel2.Controls.Add(Me.Label129)
         Me.SplitContainer2.Panel2.Controls.Add(Me.Label128)
         Me.SplitContainer2.Panel2.Controls.Add(Me.Button4)
         Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox12)
         Me.SplitContainer2.Size = New System.Drawing.Size(764, 769)
-        Me.SplitContainer2.SplitterDistance = 656
+        Me.SplitContainer2.SplitterDistance = 639
         Me.SplitContainer2.TabIndex = 40
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea7.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea7)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend7.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend7)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(764, 656)
+        Series7.ChartArea = "ChartArea1"
+        Series7.Legend = "Legend1"
+        Series7.Name = "Series1"
+        Me.Chart1.Series.Add(Series7)
+        Me.Chart1.Size = New System.Drawing.Size(764, 639)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
         '
+        'Label128
+        '
+        Me.Label128.AutoSize = True
+        Me.Label128.Location = New System.Drawing.Point(11, 68)
+        Me.Label128.Name = "Label128"
+        Me.Label128.Size = New System.Drawing.Size(411, 13)
+        Me.Label128.TabIndex = 41
+        Me.Label128.Text = "API 673, 3rd edition, section 6.7.2.1 first critical bending speed 20% above max " &
+    "speed"
+        '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(616, 26)
+        Me.Button4.Location = New System.Drawing.Point(616, 9)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(118, 36)
+        Me.Button4.Size = New System.Drawing.Size(118, 53)
         Me.Button4.TabIndex = 40
         Me.Button4.Text = "Print to word"
         Me.Button4.UseVisualStyleBackColor = True
@@ -2479,7 +2499,7 @@ Partial Class Form1
         Me.GroupBox12.Controls.Add(Me.CheckBox1)
         Me.GroupBox12.Controls.Add(Me.Label50)
         Me.GroupBox12.Controls.Add(Me.NumericUpDown22)
-        Me.GroupBox12.Location = New System.Drawing.Point(14, 12)
+        Me.GroupBox12.Location = New System.Drawing.Point(13, 9)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(596, 53)
         Me.GroupBox12.TabIndex = 39
@@ -2637,16 +2657,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea8.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea8)
+        Legend8.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend8)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series8.ChartArea = "ChartArea1"
+        Series8.Legend = "Legend1"
+        Series8.Name = "Series1"
+        Me.Chart2.Series.Add(Series8)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -3883,15 +3903,24 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'Label128
+        'Label129
         '
-        Me.Label128.AutoSize = True
-        Me.Label128.Location = New System.Drawing.Point(11, 82)
-        Me.Label128.Name = "Label128"
-        Me.Label128.Size = New System.Drawing.Size(411, 13)
-        Me.Label128.TabIndex = 41
-        Me.Label128.Text = "API 673, 3rd edition, section 6.7.2.1 first critical bending speed 20% above max " &
-    "speed"
+        Me.Label129.AutoSize = True
+        Me.Label129.Location = New System.Drawing.Point(11, 86)
+        Me.Label129.Name = "Label129"
+        Me.Label129.Size = New System.Drawing.Size(506, 13)
+        Me.Label129.TabIndex = 42
+        Me.Label129.Text = "Roller bearing estimate C=100-120, Ball bearing C= 320-480 [kN/mm], see the beari" &
+    "ng stiffness calculation"
+        '
+        'Label130
+        '
+        Me.Label130.AutoSize = True
+        Me.Label130.Location = New System.Drawing.Point(11, 102)
+        Me.Label130.Name = "Label130"
+        Me.Label130.Size = New System.Drawing.Size(270, 13)
+        Me.Label130.TabIndex = 43
+        Me.Label130.Text = "Jp and Ja very small then results like ""Simple approach"""
         '
         'Form1
         '
@@ -4344,4 +4373,6 @@ Partial Class Form1
     Friend WithEvents TextBox60 As TextBox
     Friend WithEvents Button9 As Button
     Friend WithEvents Label128 As Label
+    Friend WithEvents Label129 As Label
+    Friend WithEvents Label130 As Label
 End Class
