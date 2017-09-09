@@ -16,15 +16,15 @@ Public Class Form1
     "Dynamics of Rotary Machines, ISBN 978-0-521-85016-2",
     " ",
     "Example #1, Maschinendynamik page,Aufgabe A5.5, page 357",
-    "Overhung, disk weight 3.7 kg, shaft diameter 15mm,",
-    "Length between bearing 470mm, overhung 66 mm",
-    "Disc diameter 200mm, 15mm wide, rigid bearings",
-    "Critical Natural frequency 6127 rpm",
+    "Overhung, disk weight 3.7 kg, shaft diameter 15 mm,",
+    "Length between bearing 470 mm, overhung 66 mm",
+    "Disc diameter 200mm, 15mm wide, rigid bearings (1000 kN/mm)",
+    "E= 210 kN/mm2, Critical Natural frequency 6127 rpm",
     " ",
     "Example #2, Dynamics Rotating Machines; Example 3.5.1, page 85",
-    "Between bearings, disk weight 122.7 kg, shaft diameter 200mm,",
-    "Length between bearings 500mm",
-    "Disc diameter 200mm, 500mm wide",
+    "Between bearings, disk weight 122.7 kg, shaft diameter 200 mm,",
+    "Length between bearings 500 mm",
+    "Disc diameter 200 mm, 500 mm wide (Jp=0.613,=Ja=2.859 kg.m2)",
     "Bearing stiffness horz. and vert. 1MN/m (1 kN/mm)",
     "Critical Natural frequencies 1219 and 1996 rpm"}
 
@@ -73,7 +73,7 @@ Public Class Form1
         hard_disk_list.Add("S2R6NX0H740154H")  'VTK PC, GP
 
         user_list.Add("GerritP")
-        hard_disk_list.Add("14290CEE95FC")       'VTK laptop, GP
+        hard_disk_list.Add("14290CEE95FC")     'VTK laptop, GP
 
         user_list.Add("KarelB")
         hard_disk_list.Add("165214800214")    'VTK PC, Karel Bakker
@@ -126,8 +126,8 @@ Public Class Form1
         NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
-            E_steel = NumericUpDown55.Value * 1000              'Shaft Young mod. N/mm^2 
-
+            E_steel = Calc_young(NumericUpDown55.Value)         'Shaft Young mod. [N/mm^2] 
+            TextBox61.Text = (E_steel / 1000).ToString("000")   'Young's modulud [kN/mm^2]
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
             L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
@@ -277,7 +277,7 @@ Public Class Form1
             '---------- asymtote--------------
             TextBox14.Text = Math.Round(ω_asym, 0).ToString                     'Omega asymptote
             TextBox15.Text = Math.Round(Rad_to_hz(ω_asym), 0).ToString          'Omega asymptote
-            TextBox39.Text = Math.Round((Rad_to_hz(ω_asym) * 60), 0).ToString    'Omega asymptote
+            TextBox39.Text = Math.Round((Rad_to_hz(ω_asym) * 60), 0).ToString   'Omega asymptote
 
 
             TextBox30.Text = I1_shaft.ToString((("0.00 E0")))      'Buigtraagheidsmoment as  [m^4]
@@ -1217,10 +1217,9 @@ Public Class Form1
         Form2.Show()
     End Sub
 
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, NumericUpDown56.ValueChanged
-        Dim temp, young As Double
-        temp = NumericUpDown56.Value
-        young = 0.00000032 * temp ^ 3 + 0.00004995 * temp ^ 2 - 0.04930174 * temp + 203.386
-        TextBox62.Text = young.ToString("00.0")
-    End Sub
+    Public Function Calc_young(t As Double) As Double
+        Dim young As Double
+        young = -0.000000324 * t ^ 3 + 0.000049951 * t ^ 2 - 0.04930174 * t + 203.386
+        Return (young * 1000)
+    End Function
 End Class
