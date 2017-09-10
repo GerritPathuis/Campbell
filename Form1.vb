@@ -24,7 +24,7 @@ Public Class Form1
     "Example #2, Dynamics Rotating Machines; Example 3.5.1, page 85",
     "Between bearings, disk weight 122.7 kg, shaft diameter 200 mm,",
     "Length between bearings 500 mm",
-    "Disc diameter 200 mm, 500 mm wide (Jp=0.613,=Ja=2.859 kg.m2)",
+    "Disc/roll diameter 200 mm, 500 mm wide (Jp=0.613,=Ja=2.859 kg.m2)",
     "Bearing stiffness horz. and vert. 1MN/m (1 kN/mm)",
     "Critical Natural frequencies 1219 and 1996 rpm"}
 
@@ -515,7 +515,6 @@ Public Class Form1
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
-
         ufilename = "Campbell_report_" & TextBox7.Text & TextBox8.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
@@ -527,8 +526,12 @@ Public Class Form1
             oWord.Visible = True
             oDoc = oWord.Documents.Add
 
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
             'Insert a paragraph at the beginning of the document. 
             oPara1 = oDoc.Content.Paragraphs.Add
+
             oPara1.Range.Text = "VTK Engineering"
             oPara1.Range.Font.Name = "Arial"
             oPara1.Range.Font.Size = font_sizze + 3
@@ -577,8 +580,8 @@ Public Class Form1
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             '----------------------------------------------
-            'Insert a 16 x 3 table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 16, 3)
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 18, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
@@ -629,6 +632,7 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Weight impeller"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown4.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg]"
+
             row += 1
             oTable.Cell(row, 1).Range.Text = "C1 Stiffness fixed bearing"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown6.Value, String)
@@ -650,9 +654,14 @@ Public Class Form1
             End If
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Shaft young modulus"
-            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown55.Value, String)
+            oTable.Cell(row, 1).Range.Text = "Shaft young's modulus"
+            oTable.Cell(row, 2).Range.Text = TextBox61.Text
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Shaft max. operating temp."
+            oTable.Cell(row, 2).Range.Text = CType(NumericUpDown55.Value, String)
+            oTable.Cell(row, 3).Range.Text = "[c]"
 
             row += 2
             oTable.Rows.Item(row).Range.Font.Bold = CInt(True)
@@ -673,7 +682,8 @@ Public Class Form1
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
-            'Insert a 4 x 7 table, fill it with data and change the column widths.
+            '----------------------------------------------------------------------
+            'Insert a 5 (row) x 7 (column) table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
