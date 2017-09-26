@@ -103,7 +103,7 @@ Public Class Form1
         Next hh
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, RadioButton1.CheckedChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton1.CheckedChanged
         GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
         GroupBox5.Visible = CBool(IIf(RadioButton2.Checked, False, True)) 'Overhung
         GroupBox12.Text = "Chart settings"
@@ -122,6 +122,7 @@ Public Class Form1
         Dim discrim As Double
         Dim ω10, ω20, term1, term2 As Double
         Dim ω_krit1, ω_krit2, ω_asym As Double
+        Dim max_api_673 As Double
 
         NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value < 3, 3, 1))
         NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 3, 3, 1))
@@ -281,6 +282,9 @@ Public Class Form1
             TextBox15.Text = Math.Round(Rad_to_hz(ω_asym), 0).ToString          'Omega asymptote
             TextBox39.Text = Math.Round((Rad_to_hz(ω_asym) * 60), 0).ToString   'Omega asymptote
 
+            max_api_673 = Rad_to_hz(ω_krit1) * 60 / 1.2
+
+            TextBox62.Text = Math.Round(max_api_673, 0).ToString   'Max speed API 673 [rpm]
 
             TextBox30.Text = I1_shaft.ToString((("0.00 E0")))      'Buigtraagheidsmoment as  [m^4]
             TextBox31.Text = I2_overhung.ToString((("0.00 E0")))   'Buigtraagheidsmoment overhung as [m^4]
@@ -686,7 +690,7 @@ Public Class Form1
 
             '----------------------------------------------------------------------
             'Insert a 5 (row) x 7 (column) table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 7)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
@@ -725,6 +729,11 @@ Public Class Form1
             oTable.Cell(row, 7).Range.Text = "[rpm]"
 
             row += 1
+            oTable.Cell(row, 1).Range.Text = "Maximum speed acc API 673"
+            oTable.Cell(row, 2).Range.Text = TextBox62.Text
+            oTable.Cell(row, 3).Range.Text = "[rpm]"
+
+
             oTable.Columns(1).Width = oWord.InchesToPoints(1.8)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(0.9)
             oTable.Columns(3).Width = oWord.InchesToPoints(0.7)    '"[rad/s]"
@@ -1086,7 +1095,6 @@ Public Class Form1
             MessageBox.Show("Line 5062, " & ex.Message)  ' Show the exception's message.
         End Try
     End Sub
-
 
     'Retrieve control settings and case_x_conditions from file
     'Split the file string into 5 separate strings
