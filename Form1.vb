@@ -776,8 +776,8 @@ Public Class Form1
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
         alfa = Math.PI * 0 / 180     'Pressure angle [radials]
 
-        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.6) 'Ball diameter is 80% van de lager breedte
-        NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.8) 'Total rollers length is 80% van de lager breedte
+        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.9) 'Ball diameter is 90% van de lager breedte
+        NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.9) 'Total rollers length is 90% van de lager breedte
         dia_ball = NumericUpDown43.Value / 1000             '[m]
         length_roller = NumericUpDown32.Value / 1000        '[m]
         force_ball = NumericUpDown40.Value * 1000           '[N]
