@@ -1074,6 +1074,10 @@ Public Class Form1
             Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
             temp_string &= grbx.Checked.ToString & ";"
         Next
+        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+
+        '--------- add notes -----
+        temp_string &= TextBox63.Text & ";"
 
         '---- if path not exist then create one----------
         Try
@@ -1190,7 +1194,14 @@ Public Class Form1
                     MessageBox.Show("Warning last radiobutton not found in file")
                 End If
             Next
-
+            '---------- terugzetten Notes -- ---------------
+            If control_words.Count > 5 Then
+                words = control_words(5).Split(separators, StringSplitOptions.None) 'Split the read file content
+                TextBox63.Clear()
+                TextBox63.AppendText(words(1))
+            Else
+                MessageBox.Show("Warning Notes not found in file")
+            End If
         End If
     End Sub
 
@@ -1232,11 +1243,7 @@ Public Class Form1
         Next
         Return (Trim(tmpStr2))         'Harddisk identification
     End Function
-
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Form2.Show()
-    End Sub
-
+    'Young for steel S355 temperature dependent
     Public Function Calc_young(t As Double) As Double
         Dim young As Double
         young = -0.000000324 * t ^ 3 + 0.000049951 * t ^ 2 - 0.04930174 * t + 203.386

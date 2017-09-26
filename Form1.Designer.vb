@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -137,6 +137,8 @@ Partial Class Form1
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.TextBox62 = New System.Windows.Forms.TextBox()
+        Me.Label132 = New System.Windows.Forms.Label()
         Me.TextBox59 = New System.Windows.Forms.TextBox()
         Me.TextBox58 = New System.Windows.Forms.TextBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
@@ -190,6 +192,11 @@ Partial Class Form1
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox31 = New System.Windows.Forms.TextBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
@@ -333,16 +340,11 @@ Partial Class Form1
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.TextBox60 = New System.Windows.Forms.TextBox()
+        Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Label132 = New System.Windows.Forms.Label()
-        Me.TextBox62 = New System.Windows.Forms.TextBox()
+        Me.Label133 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -395,6 +397,7 @@ Partial Class Form1
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox9.SuspendLayout()
+        Me.GroupBox18.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -450,7 +453,7 @@ Partial Class Form1
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage7.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox18.SuspendLayout()
+        Me.TabPage8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage5
@@ -469,7 +472,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage5.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Massa traagheid + springs"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1094,7 +1097,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage4.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Simple approach"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -1687,6 +1690,28 @@ Partial Class Form1
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "Tabelle 5.1 Maschinendynamik pagina 328 (ISBN 978-3-642-29570-6)"
         '
+        'TextBox62
+        '
+        Me.TextBox62.BackColor = System.Drawing.Color.Chartreuse
+        Me.TextBox62.Enabled = False
+        Me.TextBox62.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox62.Location = New System.Drawing.Point(272, 231)
+        Me.TextBox62.Name = "TextBox62"
+        Me.TextBox62.Size = New System.Drawing.Size(71, 22)
+        Me.TextBox62.TabIndex = 76
+        Me.TextBox62.Text = "-"
+        Me.TextBox62.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label132
+        '
+        Me.Label132.AutoSize = True
+        Me.Label132.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label132.Location = New System.Drawing.Point(10, 231)
+        Me.Label132.Name = "Label132"
+        Me.Label132.Size = New System.Drawing.Size(217, 16)
+        Me.Label132.TabIndex = 75
+        Me.Label132.Text = "Maximum speed acc. API 673 [rpm]"
+        '
         'TextBox59
         '
         Me.TextBox59.Enabled = False
@@ -2254,7 +2279,6 @@ Partial Class Form1
         '
         'GroupBox9
         '
-        Me.GroupBox9.Controls.Add(Me.Button9)
         Me.GroupBox9.Controls.Add(Me.Button8)
         Me.GroupBox9.Controls.Add(Me.Button7)
         Me.GroupBox9.Controls.Add(Me.GroupBox18)
@@ -2270,6 +2294,59 @@ Partial Class Form1
         Me.GroupBox9.TabIndex = 75
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "VTK"
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button8.Location = New System.Drawing.Point(165, 89)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(267, 21)
+        Me.Button8.TabIndex = 83
+        Me.Button8.Text = "Retrieve Project"
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'Button7
+        '
+        Me.Button7.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button7.Location = New System.Drawing.Point(165, 115)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(267, 41)
+        Me.Button7.TabIndex = 82
+        Me.Button7.Text = "Save Project"
+        Me.Button7.UseVisualStyleBackColor = False
+        '
+        'GroupBox18
+        '
+        Me.GroupBox18.Controls.Add(Me.RadioButton2)
+        Me.GroupBox18.Controls.Add(Me.RadioButton1)
+        Me.GroupBox18.Location = New System.Drawing.Point(12, 89)
+        Me.GroupBox18.Name = "GroupBox18"
+        Me.GroupBox18.Size = New System.Drawing.Size(146, 67)
+        Me.GroupBox18.TabIndex = 81
+        Me.GroupBox18.TabStop = False
+        Me.GroupBox18.Text = "Fan type"
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(6, 37)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(110, 17)
+        Me.RadioButton2.TabIndex = 78
+        Me.RadioButton2.Text = "Between bearings"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Checked = True
+        Me.RadioButton1.Location = New System.Drawing.Point(6, 14)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(72, 17)
+        Me.RadioButton1.TabIndex = 77
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Overhung"
+        Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'TextBox9
         '
@@ -2443,17 +2520,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea3)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend3.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend3)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart1.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(764, 679)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -2587,6 +2664,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
+        Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -2602,7 +2680,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage2.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -2646,7 +2724,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage3.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -2662,16 +2740,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart2.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart2.Series.Add(Series2)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -3459,7 +3537,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage6.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage6.TabIndex = 7
         Me.TabPage6.Text = "Hydrostatic bearing with external punp"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -3891,7 +3969,7 @@ Partial Class Form1
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(1245, 802)
+        Me.TabPage7.Size = New System.Drawing.Size(1245, 824)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "Background"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -3915,93 +3993,40 @@ Partial Class Form1
         Me.TextBox60.Size = New System.Drawing.Size(456, 442)
         Me.TextBox60.TabIndex = 0
         '
+        'TabPage8
+        '
+        Me.TabPage8.Controls.Add(Me.Label133)
+        Me.TabPage8.Controls.Add(Me.TextBox63)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage8.Name = "TabPage8"
+        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage8.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage8.TabIndex = 9
+        Me.TabPage8.Text = "Add Notes"
+        Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'TextBox63
+        '
+        Me.TextBox63.Location = New System.Drawing.Point(8, 36)
+        Me.TextBox63.Multiline = True
+        Me.TextBox63.Name = "TextBox63"
+        Me.TextBox63.Size = New System.Drawing.Size(437, 230)
+        Me.TextBox63.TabIndex = 0
+        Me.TextBox63.Text = "Notes"
+        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'RadioButton1
+        'Label133
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(6, 14)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(72, 17)
-        Me.RadioButton1.TabIndex = 77
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Overhung"
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(6, 37)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(110, 17)
-        Me.RadioButton2.TabIndex = 78
-        Me.RadioButton2.Text = "Between bearings"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'GroupBox18
-        '
-        Me.GroupBox18.Controls.Add(Me.RadioButton2)
-        Me.GroupBox18.Controls.Add(Me.RadioButton1)
-        Me.GroupBox18.Location = New System.Drawing.Point(12, 89)
-        Me.GroupBox18.Name = "GroupBox18"
-        Me.GroupBox18.Size = New System.Drawing.Size(146, 67)
-        Me.GroupBox18.TabIndex = 81
-        Me.GroupBox18.TabStop = False
-        Me.GroupBox18.Text = "Fan type"
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.Button7.Location = New System.Drawing.Point(165, 115)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(194, 41)
-        Me.Button7.TabIndex = 82
-        Me.Button7.Text = "Save Project"
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(370, 116)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(62, 40)
-        Me.Button9.TabIndex = 84
-        Me.Button9.Text = "Notes"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.Button8.Location = New System.Drawing.Point(165, 89)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(267, 21)
-        Me.Button8.TabIndex = 83
-        Me.Button8.Text = "Retrieve Project"
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'Label132
-        '
-        Me.Label132.AutoSize = True
-        Me.Label132.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label132.Location = New System.Drawing.Point(10, 231)
-        Me.Label132.Name = "Label132"
-        Me.Label132.Size = New System.Drawing.Size(217, 16)
-        Me.Label132.TabIndex = 75
-        Me.Label132.Text = "Maximum speed acc. API 673 [rpm]"
-        '
-        'TextBox62
-        '
-        Me.TextBox62.BackColor = System.Drawing.Color.Chartreuse
-        Me.TextBox62.Enabled = False
-        Me.TextBox62.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox62.Location = New System.Drawing.Point(272, 231)
-        Me.TextBox62.Name = "TextBox62"
-        Me.TextBox62.Size = New System.Drawing.Size(71, 22)
-        Me.TextBox62.TabIndex = 76
-        Me.TextBox62.Text = "-"
-        Me.TextBox62.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Label133.AutoSize = True
+        Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label133.Location = New System.Drawing.Point(10, 11)
+        Me.Label133.Name = "Label133"
+        Me.Label133.Size = New System.Drawing.Size(196, 18)
+        Me.Label133.TabIndex = 1
+        Me.Label133.Text = "Add project related notes"
         '
         'Form1
         '
@@ -4079,6 +4104,8 @@ Partial Class Form1
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
+        Me.GroupBox18.ResumeLayout(False)
+        Me.GroupBox18.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4144,8 +4171,8 @@ Partial Class Form1
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox18.ResumeLayout(False)
-        Me.GroupBox18.PerformLayout()
+        Me.TabPage8.ResumeLayout(False)
+        Me.TabPage8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4456,7 +4483,6 @@ Partial Class Form1
     Friend WithEvents NumericUpDown55 As NumericUpDown
     Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents TextBox61 As TextBox
-    Friend WithEvents Button9 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents GroupBox18 As GroupBox
@@ -4464,4 +4490,7 @@ Partial Class Form1
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents TextBox62 As TextBox
     Friend WithEvents Label132 As Label
+    Friend WithEvents TabPage8 As TabPage
+    Friend WithEvents TextBox63 As TextBox
+    Friend WithEvents Label133 As Label
 End Class
