@@ -226,10 +226,12 @@ Partial Class Form1
         Me.NumericUpDown22 = New System.Windows.Forms.NumericUpDown()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TextBox64 = New System.Windows.Forms.TextBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label70 = New System.Windows.Forms.Label()
-        Me.Label69 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.PictureBox12 = New System.Windows.Forms.PictureBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.GroupBox21 = New System.Windows.Forms.GroupBox()
@@ -341,10 +343,10 @@ Partial Class Form1
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.TextBox60 = New System.Windows.Forms.TextBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Label133 = New System.Windows.Forms.Label()
         Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label133 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -412,6 +414,7 @@ Partial Class Form1
         Me.TabPage2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
+        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox21.SuspendLayout()
         CType(Me.NumericUpDown36, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -945,7 +948,7 @@ Partial Class Form1
         Me.GroupBox6.Size = New System.Drawing.Size(392, 179)
         Me.GroupBox6.TabIndex = 3
         Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Massa traagheid Impeller (Moment of Inertia)"
+        Me.GroupBox6.Text = "Massa traagheid Impeller (Moment of Inertia, Principal moments)"
         '
         'Label117
         '
@@ -993,9 +996,9 @@ Partial Class Form1
         Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label41.Location = New System.Drawing.Point(15, 146)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(208, 18)
+        Me.Label41.Size = New System.Drawing.Size(240, 18)
         Me.Label41.TabIndex = 59
-        Me.Label41.Text = "Ix (Roteren om X of Y) [kg.m2]"
+        Me.Label41.Text = "Ixx, Iyy (Roteren om X of Y) [kg.m2]"
         '
         'TextBox23
         '
@@ -1013,9 +1016,9 @@ Partial Class Form1
         Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label40.Location = New System.Drawing.Point(15, 118)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(233, 18)
+        Me.Label40.Size = New System.Drawing.Size(241, 18)
         Me.Label40.TabIndex = 57
-        Me.Label40.Text = "Iz (Roteren om Z=hartlijn)  [kg.m2]"
+        Me.Label40.Text = "Izz (Roteren om Z=hartlijn)  [kg.m2]"
         '
         'Label37
         '
@@ -2012,6 +2015,7 @@ Partial Class Form1
         '
         'TextBox61
         '
+        Me.TextBox61.Enabled = False
         Me.TextBox61.Location = New System.Drawing.Point(340, 112)
         Me.TextBox61.Name = "TextBox61"
         Me.TextBox61.Size = New System.Drawing.Size(62, 20)
@@ -2329,7 +2333,7 @@ Partial Class Form1
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(6, 37)
+        Me.RadioButton2.Location = New System.Drawing.Point(6, 39)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(110, 17)
         Me.RadioButton2.TabIndex = 78
@@ -2340,7 +2344,7 @@ Partial Class Form1
         '
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(6, 14)
+        Me.RadioButton1.Location = New System.Drawing.Point(6, 18)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(72, 17)
         Me.RadioButton1.TabIndex = 77
@@ -2674,9 +2678,9 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.TextBox64)
         Me.TabPage2.Controls.Add(Me.PictureBox4)
         Me.TabPage2.Controls.Add(Me.Label70)
-        Me.TabPage2.Controls.Add(Me.Label69)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -2684,6 +2688,15 @@ Partial Class Form1
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TextBox64
+        '
+        Me.TextBox64.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox64.Location = New System.Drawing.Point(36, 78)
+        Me.TextBox64.Name = "TextBox64"
+        Me.TextBox64.Size = New System.Drawing.Size(317, 22)
+        Me.TextBox64.TabIndex = 3
+        Me.TextBox64.Text = "https://www.youtube.com/watch?v=-8sMdTEQgIE"
         '
         'PictureBox4
         '
@@ -2704,18 +2717,10 @@ Partial Class Form1
         Me.Label70.TabIndex = 1
         Me.Label70.Text = "Google; backward whirl"
         '
-        'Label69
-        '
-        Me.Label69.AutoSize = True
-        Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label69.Location = New System.Drawing.Point(32, 78)
-        Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(357, 20)
-        Me.Label69.TabIndex = 0
-        Me.Label69.Text = "https://www.youtube.com/watch?v=-8sMdTEQgIE"
-        '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.Label69)
+        Me.TabPage3.Controls.Add(Me.PictureBox12)
         Me.TabPage3.Controls.Add(Me.Button6)
         Me.TabPage3.Controls.Add(Me.Chart2)
         Me.TabPage3.Controls.Add(Me.GroupBox21)
@@ -2728,6 +2733,26 @@ Partial Class Form1
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label69.Location = New System.Drawing.Point(371, 401)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(160, 16)
+        Me.Label69.TabIndex = 87
+        Me.Label69.Text = "Ball bearing SKF 6205"
+        '
+        'PictureBox12
+        '
+        Me.PictureBox12.Image = CType(resources.GetObject("PictureBox12.Image"), System.Drawing.Image)
+        Me.PictureBox12.Location = New System.Drawing.Point(372, 419)
+        Me.PictureBox12.Name = "PictureBox12"
+        Me.PictureBox12.Size = New System.Drawing.Size(479, 328)
+        Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox12.TabIndex = 86
+        Me.PictureBox12.TabStop = False
         '
         'Button6
         '
@@ -4005,6 +4030,16 @@ Partial Class Form1
         Me.TabPage8.Text = "Add Notes"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'Label133
+        '
+        Me.Label133.AutoSize = True
+        Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label133.Location = New System.Drawing.Point(10, 11)
+        Me.Label133.Name = "Label133"
+        Me.Label133.Size = New System.Drawing.Size(196, 18)
+        Me.Label133.TabIndex = 1
+        Me.Label133.Text = "Add project related notes"
+        '
         'TextBox63
         '
         Me.TextBox63.Location = New System.Drawing.Point(8, 36)
@@ -4017,16 +4052,6 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
-        '
-        'Label133
-        '
-        Me.Label133.AutoSize = True
-        Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label133.Location = New System.Drawing.Point(10, 11)
-        Me.Label133.Name = "Label133"
-        Me.Label133.Size = New System.Drawing.Size(196, 18)
-        Me.Label133.TabIndex = 1
-        Me.Label133.Text = "Add project related notes"
         '
         'Form1
         '
@@ -4124,6 +4149,8 @@ Partial Class Form1
         Me.TabPage2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox21.ResumeLayout(False)
         Me.GroupBox21.PerformLayout()
@@ -4352,7 +4379,6 @@ Partial Class Form1
     Friend WithEvents Label68 As Label
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents Label70 As Label
-    Friend WithEvents Label69 As Label
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Chart2 As DataVisualization.Charting.Chart
@@ -4493,4 +4519,7 @@ Partial Class Form1
     Friend WithEvents TabPage8 As TabPage
     Friend WithEvents TextBox63 As TextBox
     Friend WithEvents Label133 As Label
+    Friend WithEvents TextBox64 As TextBox
+    Friend WithEvents PictureBox12 As PictureBox
+    Friend WithEvents Label69 As Label
 End Class
