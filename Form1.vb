@@ -992,7 +992,7 @@ Public Class Form1
         Dim L_rim As Double                           'length next to the pocket
         Dim omtrek As Double                            'journal omtrek
 
-        'Hydrostatic brearing orifice type
+        'Hydrostatic bearing orifice type
 
 
         '---------- pocket sizing------------ 
@@ -1004,7 +1004,7 @@ Public Class Form1
         If no_pockets < 1 Then no_pockets = 2
         L_pocket = omtrek * 0.5 / no_pockets            '[m] pocket length
 
-        NumericUpDown37.Value = CDec(L_pocket * 1000)         '[mm]
+        NumericUpDown37.Value = CDec(L_pocket * 1000)   '[mm]
 
         stiff_dimless = NumericUpDown39.Value           '[-] Stiffness dimensionless
         clear_procent = NumericUpDown54.Value           '[-] Stiffness dimensionless
@@ -1017,9 +1017,9 @@ Public Class Form1
         stiffness = no_pockets * 3 * L_pocket * (L_rim + b_pocket) * p_pump * stiff_dimless / h0_clearance
         area_recess = no_pockets * b_pocket * L_pocket * 10 ^ 6     '[pockets [mm2]
 
-        TextBox51.Text = Round(stiffness / 10 ^ 6, 0).ToString      '[kN/mm]
-        TextBox52.Text = CType((h0_clearance * 1000).ToString, String)               '[mm]
-        TextBox53.Text = Round(area_recess, 0).ToString                       '[mm2]
+        TextBox51.Text = Round(stiffness / 10 ^ 6, 0).ToString          '[kN/mm]
+        TextBox52.Text = CType((h0_clearance * 1000).ToString, String)  '[mm]
+        TextBox53.Text = Round(area_recess, 0).ToString                 '[mm2]
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
