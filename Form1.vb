@@ -521,7 +521,7 @@ Public Class Form1
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
-        ufilename = "Campbell_report_" & TextBox7.Text & TextBox8.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+        ufilename = "Campbell_report_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
             oWord = New Word.Application()
