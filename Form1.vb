@@ -29,8 +29,8 @@ Public Class Form1
     "Critical Natural frequencies 1219 and 1996 rpm"}
 
     '----------- directory's-----------
-    Dim dirpath_Eng As String = "N:\Engineering\VBasic\Fan_sizing_input\"
-    Dim dirpath_Rap As String = "N:\Engineering\VBasic\Fan_rapport_copy\"
+    Dim dirpath_Eng As String = "N:\Engineering\VBasic\Campbell_input\"
+    Dim dirpath_Rap As String = "N:\Engineering\VBasic\Campbell_rapport_copy\"
     Dim dirpath_Home As String = "C:\Temp\"
     'Naam
     'Model
