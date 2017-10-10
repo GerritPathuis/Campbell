@@ -2395,7 +2395,7 @@ Partial Class Form1
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(267, 20)
         Me.TextBox7.TabIndex = 72
-        Me.TextBox7.Text = "P17.0"
+        Me.TextBox7.Text = "P17.10"
         '
         'Label17
         '
@@ -3072,7 +3072,7 @@ Partial Class Form1
         '
         Me.NumericUpDown35.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown35.Location = New System.Drawing.Point(253, 30)
-        Me.NumericUpDown35.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.NumericUpDown35.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.NumericUpDown35.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
         Me.NumericUpDown35.Name = "NumericUpDown35"
         Me.NumericUpDown35.Size = New System.Drawing.Size(62, 20)
