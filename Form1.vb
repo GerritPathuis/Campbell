@@ -779,7 +779,7 @@ Public Class Form1
         Dim K_ball, K_roller As Double
         Dim Kvv_ball, Kvv_roller As Double 'vertical stiffness
         Dim Kuu_ball, Kuu_roller As Double 'horizontal stiffness
-        Dim force_ball, force_roller As Double
+        Dim force_ball, force_roller, row_ball, row_roller As Double
 
         K_ball = 13 * 10 ^ 6        '[N^2/3.m^-4/3]
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
@@ -819,11 +819,13 @@ Public Class Form1
                 Kuu_roller = Kvv_roller * 0.74
         End Select
 
-        TextBox46.Text = Math.Round(Kvv_ball, 0).ToString   'Vertical stiffness
-        TextBox56.Text = Math.Round(Kuu_ball, 0).ToString   'horizontal stiffness
+        row_ball = NumericUpDown34.Value                        'Single of double row bearing
+        row_roller = NumericUpDown41.Value                      'Single of double row bearing
+        TextBox46.Text = (Kvv_ball * row_ball).ToString("0")    'Vertical stiffness x row
+        TextBox56.Text = (Kuu_ball * row_ball).ToString("0")    'horizontal stiffness x row
 
-        TextBox47.Text = Math.Round(Kvv_roller, 0).ToString 'Vertical stiffness
-        TextBox57.Text = Math.Round(Kuu_roller, 0).ToString 'horizontal stiffness
+        TextBox47.Text = (Kvv_roller * row_roller).ToString("0") 'Vertical stiffness
+        TextBox57.Text = (Kuu_roller * row_roller).ToString("0") 'horizontal stiffness
     End Sub
     Private Sub Calc_dydrodynamic_bearing()
         Dim dia, omega, visco, length, f_load, clearance As Double
@@ -978,7 +980,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, ComboBox1.SelectedIndexChanged
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, TabPage3.Enter, NumericUpDown49.ValueChanged, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged, NumericUpDown42.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown32.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, ComboBox1.SelectedIndexChanged, NumericUpDown41.ValueChanged, NumericUpDown34.ValueChanged
         'Dynamics of Rotating Machines , page 178 
 
         Calc_rolling_element_bearings()
