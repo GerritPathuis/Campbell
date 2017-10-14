@@ -236,6 +236,7 @@ Partial Class Form1
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.GroupBox21 = New System.Windows.Forms.GroupBox()
+        Me.Label138 = New System.Windows.Forms.Label()
         Me.Label136 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.NumericUpDown41 = New System.Windows.Forms.NumericUpDown()
@@ -255,6 +256,7 @@ Partial Class Form1
         Me.Label95 = New System.Windows.Forms.Label()
         Me.NumericUpDown45 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox20 = New System.Windows.Forms.GroupBox()
+        Me.Label137 = New System.Windows.Forms.Label()
         Me.Label135 = New System.Windows.Forms.Label()
         Me.NumericUpDown34 = New System.Windows.Forms.NumericUpDown()
         Me.Label124 = New System.Windows.Forms.Label()
@@ -353,8 +355,6 @@ Partial Class Form1
         Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label137 = New System.Windows.Forms.Label()
-        Me.Label138 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2831,6 +2831,15 @@ Partial Class Form1
         Me.GroupBox21.TabStop = False
         Me.GroupBox21.Text = "Rolling element bearing (floating @ impeller)"
         '
+        'Label138
+        '
+        Me.Label138.AutoSize = True
+        Me.Label138.Location = New System.Drawing.Point(13, 272)
+        Me.Label138.Name = "Label138"
+        Me.Label138.Size = New System.Drawing.Size(302, 13)
+        Me.Label138.TabIndex = 90
+        Me.Label138.Text = "Roller bearings preferred for stiffness and high static load ability"
+        '
         'Label136
         '
         Me.Label136.AutoSize = True
@@ -2877,7 +2886,7 @@ Partial Class Form1
         'Label123
         '
         Me.Label123.AutoSize = True
-        Me.Label123.Location = New System.Drawing.Point(11, 253)
+        Me.Label123.Location = New System.Drawing.Point(13, 254)
         Me.Label123.Name = "Label123"
         Me.Label123.Size = New System.Drawing.Size(185, 13)
         Me.Label123.TabIndex = 80
@@ -2907,7 +2916,7 @@ Partial Class Form1
         'Label119
         '
         Me.Label119.AutoSize = True
-        Me.Label119.Location = New System.Drawing.Point(11, 234)
+        Me.Label119.Location = New System.Drawing.Point(13, 236)
         Me.Label119.Name = "Label119"
         Me.Label119.Size = New System.Drawing.Size(125, 13)
         Me.Label119.TabIndex = 77
@@ -2948,7 +2957,7 @@ Partial Class Form1
         'Label89
         '
         Me.Label89.AutoSize = True
-        Me.Label89.Location = New System.Drawing.Point(11, 218)
+        Me.Label89.Location = New System.Drawing.Point(13, 218)
         Me.Label89.Name = "Label89"
         Me.Label89.Size = New System.Drawing.Size(244, 13)
         Me.Label89.TabIndex = 71
@@ -3045,10 +3054,19 @@ Partial Class Form1
         Me.GroupBox20.Controls.Add(Me.NumericUpDown43)
         Me.GroupBox20.Location = New System.Drawing.Point(870, 32)
         Me.GroupBox20.Name = "GroupBox20"
-        Me.GroupBox20.Size = New System.Drawing.Size(355, 326)
+        Me.GroupBox20.Size = New System.Drawing.Size(355, 310)
         Me.GroupBox20.TabIndex = 82
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Ball bearing (fixed @ coupling)"
+        '
+        'Label137
+        '
+        Me.Label137.AutoSize = True
+        Me.Label137.Location = New System.Drawing.Point(14, 287)
+        Me.Label137.Name = "Label137"
+        Me.Label137.Size = New System.Drawing.Size(233, 13)
+        Me.Label137.TabIndex = 89
+        Me.Label137.Text = "Ball bearings preferred for long lubrication period"
         '
         'Label135
         '
@@ -3096,7 +3114,7 @@ Partial Class Form1
         'Label122
         '
         Me.Label122.AutoSize = True
-        Me.Label122.Location = New System.Drawing.Point(11, 273)
+        Me.Label122.Location = New System.Drawing.Point(14, 268)
         Me.Label122.Name = "Label122"
         Me.Label122.Size = New System.Drawing.Size(185, 13)
         Me.Label122.TabIndex = 79
@@ -3126,7 +3144,7 @@ Partial Class Form1
         'Label118
         '
         Me.Label118.AutoSize = True
-        Me.Label118.Location = New System.Drawing.Point(11, 252)
+        Me.Label118.Location = New System.Drawing.Point(14, 249)
         Me.Label118.Name = "Label118"
         Me.Label118.Size = New System.Drawing.Size(125, 13)
         Me.Label118.TabIndex = 76
@@ -3167,7 +3185,7 @@ Partial Class Form1
         'Label84
         '
         Me.Label84.AutoSize = True
-        Me.Label84.Location = New System.Drawing.Point(11, 235)
+        Me.Label84.Location = New System.Drawing.Point(14, 230)
         Me.Label84.Name = "Label84"
         Me.Label84.Size = New System.Drawing.Size(244, 13)
         Me.Label84.TabIndex = 71
@@ -4138,24 +4156,6 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
-        '
-        'Label137
-        '
-        Me.Label137.AutoSize = True
-        Me.Label137.Location = New System.Drawing.Point(14, 293)
-        Me.Label137.Name = "Label137"
-        Me.Label137.Size = New System.Drawing.Size(233, 13)
-        Me.Label137.TabIndex = 89
-        Me.Label137.Text = "Ball bearings preferred for long lubrication period"
-        '
-        'Label138
-        '
-        Me.Label138.AutoSize = True
-        Me.Label138.Location = New System.Drawing.Point(11, 272)
-        Me.Label138.Name = "Label138"
-        Me.Label138.Size = New System.Drawing.Size(302, 13)
-        Me.Label138.TabIndex = 90
-        Me.Label138.Text = "Roller bearings preferred for stiffness and high static load ability"
         '
         'Form1
         '
