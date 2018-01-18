@@ -108,6 +108,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton1.CheckedChanged
+        Calc_sequence()
+    End Sub
+    Private Sub Calc_sequence()
         GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
         GroupBox5.Visible = CBool(IIf(RadioButton2.Checked, False, True)) 'Overhung
         GroupBox12.Text = "Chart settings"
@@ -115,7 +118,9 @@ Public Class Form1
         TextBox55.Text = TextBox24.Text
         Calc_nr()
         Draw_chart1()
+        Calc_simple()
     End Sub
+
     Private Sub Calc_nr()
         Dim i As Integer
         Dim L1, L2, L3, massa, speed_rad As Double
@@ -405,6 +410,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, TabPage4.Enter, NumericUpDown17.ValueChanged, NumericUpDown16.ValueChanged, NumericUpDown15.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown12.ValueChanged, NumericUpDown18.ValueChanged, NumericUpDown14.ValueChanged, NumericUpDown19.ValueChanged
+        Calc_sequence()
+    End Sub
+    Private Sub Calc_simple()
         Dim length_L, length_A, length_B, mmassa, diam_tussen, diam_overhung, young As Double
         Dim C_tussen, I_as_tussen, I_as_overhung, fr_krit As Double
 
@@ -424,7 +432,8 @@ Public Class Form1
         fr_krit /= (2 * PI)                                             '[Hz]
 
         TextBox17.Text = Round(length_B * 1000, 0).ToString
-        TextBox18.Text = I_as_tussen.ToString((("0.00 E0")))
+        'TextBox18.Text = I_as_tussen.ToString("0.00 E0")
+        TextBox18.Text = (I_as_tussen * 1000 ^ 4).ToString("0")
         TextBox19.Text = Round(C_tussen / 1000).ToString                'Buigstijfheid [kN/m]
         TextBox20.Text = Round(fr_krit, 0).ToString                     '[Hz]
         TextBox27.Text = Round(fr_krit * 60, 0).ToString                '[rpm]
@@ -444,7 +453,8 @@ Public Class Form1
         fr_krit_overhung = Sqrt(C_Overhung / mmassa)                    '[Rad/sec]
         fr_krit_overhung /= (2 * PI)                                    '[Hz]
 
-        TextBox26.Text = I_as_overhung.ToString((("0.00 E0")))
+        'TextBox26.Text = I_as_overhung.ToString("0.00 E0")
+        TextBox26.Text = (I_as_overhung * 1000 ^ 4).ToString("0")       '[mm4]
         TextBox21.Text = Round(C_Overhung / 1000, 0).ToString           'Buigstijfheid [kN/m]
         TextBox22.Text = Round(fr_krit_overhung, 0).ToString            '[Hz]   
         TextBox28.Text = Round(fr_krit_overhung * 60, 0).ToString       '[rpm]
@@ -456,6 +466,7 @@ Public Class Form1
             NumericUpDown13.BackColor = SystemColors.Window
         End If
     End Sub
+
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged
         Dim Dia, hoog, massa, Iz, Ix As Double
@@ -1227,6 +1238,7 @@ Public Class Form1
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Read_file()
+
     End Sub
 
     Public Function HardDisc_Id() As String
