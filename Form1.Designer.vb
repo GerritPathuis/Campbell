@@ -355,6 +355,7 @@ Partial Class Form1
         Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Label139 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3036,6 +3037,7 @@ Partial Class Form1
         '
         'GroupBox20
         '
+        Me.GroupBox20.Controls.Add(Me.Label139)
         Me.GroupBox20.Controls.Add(Me.Label137)
         Me.GroupBox20.Controls.Add(Me.Label135)
         Me.GroupBox20.Controls.Add(Me.NumericUpDown34)
@@ -3057,7 +3059,7 @@ Partial Class Form1
         Me.GroupBox20.Controls.Add(Me.NumericUpDown43)
         Me.GroupBox20.Location = New System.Drawing.Point(870, 32)
         Me.GroupBox20.Name = "GroupBox20"
-        Me.GroupBox20.Size = New System.Drawing.Size(355, 310)
+        Me.GroupBox20.Size = New System.Drawing.Size(355, 326)
         Me.GroupBox20.TabIndex = 82
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Ball bearing (fixed @ coupling)"
@@ -3065,7 +3067,7 @@ Partial Class Form1
         'Label137
         '
         Me.Label137.AutoSize = True
-        Me.Label137.Location = New System.Drawing.Point(14, 287)
+        Me.Label137.Location = New System.Drawing.Point(15, 299)
         Me.Label137.Name = "Label137"
         Me.Label137.Size = New System.Drawing.Size(233, 13)
         Me.Label137.TabIndex = 89
@@ -3100,9 +3102,9 @@ Partial Class Form1
         Me.Label124.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label124.Location = New System.Drawing.Point(321, 183)
         Me.Label124.Name = "Label124"
-        Me.Label124.Size = New System.Drawing.Size(23, 16)
+        Me.Label124.Size = New System.Drawing.Size(28, 16)
         Me.Label124.TabIndex = 85
-        Me.Label124.Text = "<--"
+        Me.Label124.Text = "<--*"
         '
         'ComboBox1
         '
@@ -3117,7 +3119,7 @@ Partial Class Form1
         'Label122
         '
         Me.Label122.AutoSize = True
-        Me.Label122.Location = New System.Drawing.Point(14, 268)
+        Me.Label122.Location = New System.Drawing.Point(15, 281)
         Me.Label122.Name = "Label122"
         Me.Label122.Size = New System.Drawing.Size(185, 13)
         Me.Label122.TabIndex = 79
@@ -3147,7 +3149,7 @@ Partial Class Form1
         'Label118
         '
         Me.Label118.AutoSize = True
-        Me.Label118.Location = New System.Drawing.Point(14, 249)
+        Me.Label118.Location = New System.Drawing.Point(15, 245)
         Me.Label118.Name = "Label118"
         Me.Label118.Size = New System.Drawing.Size(125, 13)
         Me.Label118.TabIndex = 76
@@ -3188,7 +3190,7 @@ Partial Class Form1
         'Label84
         '
         Me.Label84.AutoSize = True
-        Me.Label84.Location = New System.Drawing.Point(14, 230)
+        Me.Label84.Location = New System.Drawing.Point(15, 227)
         Me.Label84.Name = "Label84"
         Me.Label84.Size = New System.Drawing.Size(244, 13)
         Me.Label84.TabIndex = 71
@@ -3254,7 +3256,7 @@ Partial Class Form1
         Me.NumericUpDown43.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown43.Enabled = False
         Me.NumericUpDown43.Location = New System.Drawing.Point(253, 55)
-        Me.NumericUpDown43.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.NumericUpDown43.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.NumericUpDown43.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown43.Name = "NumericUpDown43"
         Me.NumericUpDown43.Size = New System.Drawing.Size(62, 20)
@@ -4160,6 +4162,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
+        'Label139
+        '
+        Me.Label139.AutoSize = True
+        Me.Label139.Location = New System.Drawing.Point(15, 263)
+        Me.Label139.Name = "Label139"
+        Me.Label139.Size = New System.Drawing.Size(87, 13)
+        Me.Label139.TabIndex = 90
+        Me.Label139.Text = "* Single row balls"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4639,4 +4650,5 @@ Partial Class Form1
     Friend WithEvents NumericUpDown41 As NumericUpDown
     Friend WithEvents Label138 As Label
     Friend WithEvents Label137 As Label
+    Friend WithEvents Label139 As Label
 End Class

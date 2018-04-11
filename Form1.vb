@@ -105,6 +105,9 @@ Public Class Form1
         For hh = 0 To (based_on.Length - 1)
             TextBox60.Text &= based_on(hh) & vbCrLf
         Next hh
+
+        TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton1.CheckedChanged
@@ -800,8 +803,8 @@ Public Class Form1
         K_roller = 1.0 * 10 ^ 9     '[N^0,9.m^-1.8]
         alfa = Math.PI * 0 / 180     'Pressure angle [radials]
 
-        NumericUpDown43.Value = CDec(NumericUpDown35.Value * 0.9) 'Ball diameter is 90% van de lager breedte
-        NumericUpDown32.Value = CDec(NumericUpDown36.Value * 0.9) 'Total rollers length is 90% van de lager breedte
+        NumericUpDown43.Value = CDec(Round(NumericUpDown35.Value * 0.9, 0)) 'Ball diameter is 90% van de lager breedte
+        NumericUpDown32.Value = CDec(Round(NumericUpDown36.Value * 0.9, 0)) 'Total rollers length is 90% van de lager breedte
         dia_ball = NumericUpDown43.Value / 1000             '[m]
         length_roller = NumericUpDown32.Value / 1000        '[m]
         force_ball = NumericUpDown40.Value * 1000           '[N]
