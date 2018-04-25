@@ -28,6 +28,26 @@ Public Class Form1
     "Bearing stiffness horz. and vert. 1MN/m (1 kN/mm)",
     "Critical Natural frequencies 1219 and 1996 rpm"}
 
+    Public Shared bearing_support() As String = {
+    "VTK bearing support structures",
+    "",
+    "BETWEEN THE BEARINGS, BOLTED TO THE FLOOR",
+    "The bearing support near the motor > 1000 kN/mm",
+    "Motor side calculate with the bearing stiffness 100-300 kN/mm",
+    "The opposite support side is 140 kN/mm",
+    "",
+    " ",
+    "BETWEEN THE BEARINGS, ON VIBRATION ISOLATORS",
+    "The bearing support near the motor > 100 kN/mm",
+    "Motor calculate with 100 kN/mm",
+    "The opposite support side 2 kN/mm !!",
+    " ",
+    " ",
+    "OVERHUNG BEARING SUPPORT",
+    "The bearing support near the motor is stiff > 1000 kN/mm",
+    "Calculate with the bearing stiffness 100-300 kN/mm",
+     ""}
+
     '----------- directory's-----------
     Dim dirpath_Eng As String = "N:\Engineering\VBasic\Campbell_input\"
     Dim dirpath_Rap As String = "N:\Engineering\VBasic\Campbell_rapport_copy\"
@@ -104,6 +124,10 @@ Public Class Form1
 
         For hh = 0 To (based_on.Length - 1)
             TextBox60.Text &= based_on(hh) & vbCrLf
+        Next hh
+
+        For hh = 0 To (bearing_support.Length - 1)
+            TextBox66.Text &= bearing_support(hh) & vbCrLf
         Next hh
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
@@ -658,11 +682,11 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[kg]"
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C1 Stiffness fixed bearing"
+            oTable.Cell(row, 1).Range.Text = "C1 Stiffness bearing Drive End"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown6.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "C2 Stiffness float bearing"
+            oTable.Cell(row, 1).Range.Text = "C2 Stiffness bearing NDE side"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown7.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
