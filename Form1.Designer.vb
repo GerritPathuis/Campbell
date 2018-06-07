@@ -2264,7 +2264,7 @@ Partial Class Form1
         '
         Me.NumericUpDown2.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown2.Location = New System.Drawing.Point(340, 40)
-        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
+        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
         Me.NumericUpDown2.Minimum = New Decimal(New Integer() {66, 0, 0, 0})
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(62, 20)
