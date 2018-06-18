@@ -116,7 +116,7 @@ Public Class Form1
         Next
 
         If pass_name = False Or pass_disc = False Then
-            MessageBox.Show("VTK fan selection program" & vbCrLf & "Access denied, contact GPa" & vbCrLf)
+            MessageBox.Show("VTK Campbell diagram program" & vbCrLf & "Access denied, contact GPa" & vbCrLf)
             MessageBox.Show("User_name= " & Pro_user & ", Pass name= " & pass_name.ToString)
             MessageBox.Show("HD_id= *" & HD_number & "*" & ", Pass disc= " & pass_disc.ToString)
             Environment.Exit(0)
