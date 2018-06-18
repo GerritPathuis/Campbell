@@ -93,14 +93,14 @@ Public Class Form1
         hard_disk_list.Add("S2R6NX0H740154H")  'VTK PC, GP
 
         user_list.Add("GerritP")
-        hard_disk_list.Add("14290CEE95FC")     'VTK laptop, GP
+        hard_disk_list.Add("14290CEE95FC")   'VTK laptop, GP
 
         user_list.Add("KarelB")
-        hard_disk_list.Add("165214800214")    'VTK PC, Karel Bakker
+        hard_disk_list.Add("165214800214")   'VTK PC, Karel Bakker
 
         user_list.Add("JeroenA")
-        'hard_disk_list.Add("165162800823")       'VTK laptop, Jeroen
-        hard_disk_list.Add("171095402070")       'VTK desktop, Jeroen
+        hard_disk_list.Add("170228801578")   'VTK laptop, Jeroen
+        hard_disk_list.Add("171095402070")   'VTK desktop, Jeroen
 
         Pro_user = Environment.UserName     'User name on the screen
         HD_number = HardDisc_Id()           'Harddisk identification
