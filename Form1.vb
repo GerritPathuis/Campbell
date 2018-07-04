@@ -109,9 +109,13 @@ Public Class Form1
         ComboBox1.SelectedIndex = 0     '8 balls
         ComboBox2.SelectedIndex = 0     '8 rollers
 
-        'Check user name and disc_id
+        'Check user name 
         For i = 0 To user_list.Count - 1
             If StrComp(LCase(Pro_user), LCase(user_list.Item(i))) = 0 Then pass_name = True
+        Next
+
+        'Check disc_id
+        For i = 0 To hard_disk_list.Count - 1
             If CBool(HD_number = Trim(hard_disk_list(i))) Then pass_disc = True
         Next
 
