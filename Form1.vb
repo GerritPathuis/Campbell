@@ -135,10 +135,24 @@ Public Class Form1
         Next hh
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
-
+        Fan_bearing_position()
+        Calc_sequence()
+    End Sub
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+        Fan_bearing_position()
+        Calc_sequence()
+    End Sub
+    Private Sub Fan_bearing_position()
+        If RadioButton1.Checked Then    '(Overhung)
+            NumericUpDown6.Value = 250  '[kN/mm] Stiffness C1 @ drive
+            NumericUpDown7.Value = 300  '[kN/mm] Stiffness C2 @ impeller
+        Else                            '(Between Bearings with heavy support)
+            NumericUpDown6.Value = 100  '[kN/mm] Stiffness frame C1 @ drive bearing
+            NumericUpDown7.Value = 10   '[kN/mm] Stiffness frame C2 @ Not drive bearing
+        End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton1.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
@@ -199,7 +213,7 @@ Public Class Form1
             If RadioButton1.Checked Then
                 '---------------- Tabelle 5.1 Nr 4 (Overhung) -------------
                 Label1.Text = "L1, aslengte tussen de lagers [mm]"
-                Label2.Text = "L2, Overhang [mm]"
+                Label2.Text = "L2, Overhang waaier, incl L3 [mm]"
                 Label3.Visible = True
                 NumericUpDown3.Visible = True
                 Label11.Visible = True
@@ -439,10 +453,29 @@ Public Class Form1
             'MessageBox.Show("nnnnnn")
         End Try
     End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, TabPage4.Enter, NumericUpDown17.ValueChanged, NumericUpDown16.ValueChanged, NumericUpDown15.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown12.ValueChanged, NumericUpDown18.ValueChanged, NumericUpDown14.ValueChanged, NumericUpDown19.ValueChanged
+    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
+        Sync_data()
         Calc_sequence()
     End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, TabPage4.Enter, NumericUpDown17.ValueChanged, NumericUpDown16.ValueChanged, NumericUpDown15.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown12.ValueChanged, NumericUpDown18.ValueChanged, NumericUpDown14.ValueChanged, NumericUpDown19.ValueChanged
+        Sync_data()
+        Calc_sequence()
+    End Sub
+    Private Sub Sync_data()
+        If CheckBox4.Checked Then
+            NumericUpDown15.Value = NumericUpDown4.Value    'Weight
+            NumericUpDown17.Value = CDec(Convert.ToDouble(TextBox61.Text)) 'Young
+
+            NumericUpDown12.Value = NumericUpDown1.Value
+            NumericUpDown13.Value = NumericUpDown2.Value
+            NumericUpDown16.Value = NumericUpDown8.Value
+
+            NumericUpDown14.Value = NumericUpDown1.Value
+            NumericUpDown18.Value = NumericUpDown2.Value
+            NumericUpDown19.Value = NumericUpDown8.Value
+        End If
+    End Sub
+
     Private Sub Calc_simple()
         Dim length_L, length_A, length_B, mmassa, diam_tussen, diam_overhung, young As Double
         Dim C_tussen, I_as_tussen, I_as_overhung, fr_krit As Double
@@ -1298,4 +1331,5 @@ Public Class Form1
         young = -0.000000324 * t ^ 3 + 0.000049951 * t ^ 2 - 0.04930174 * t + 203.386
         Return (young * 1000)
     End Function
+
 End Class
