@@ -46,6 +46,7 @@ Public Class Form1
     "OVERHUNG BEARING SUPPORT",
     "The bearing support near the motor is stiff > 1000 kN/mm",
     "Calculate with the bearing stiffness 100-300 kN/mm",
+    "Use 150 kN/mm (happy medium)as starting value",
      ""}
 
     '----------- directory's-----------
@@ -144,8 +145,8 @@ Public Class Form1
     End Sub
     Private Sub Fan_bearing_position()
         If RadioButton1.Checked Then    '(Overhung)
-            NumericUpDown6.Value = 250  '[kN/mm] Stiffness C1 @ drive
-            NumericUpDown7.Value = 300  '[kN/mm] Stiffness C2 @ impeller
+            NumericUpDown6.Value = 150  '[kN/mm] Stiffness C1 @ drive
+            NumericUpDown7.Value = 150  '[kN/mm] Stiffness C2 @ impeller
         Else                            '(Between Bearings with heavy support)
             NumericUpDown6.Value = 100  '[kN/mm] Stiffness frame C1 @ drive bearing
             NumericUpDown7.Value = 10   '[kN/mm] Stiffness frame C2 @ Not drive bearing
@@ -462,9 +463,11 @@ Public Class Form1
         Calc_sequence()
     End Sub
     Private Sub Sync_data()
+        Dim yng As Integer
         If CheckBox4.Checked Then
             NumericUpDown15.Value = NumericUpDown4.Value    'Weight
-            NumericUpDown17.Value = CDec(Convert.ToDouble(TextBox61.Text)) 'Young
+            Int32.TryParse(TextBox61.Text, yng)
+            NumericUpDown17.Value = yng                     'Young
 
             NumericUpDown12.Value = NumericUpDown1.Value
             NumericUpDown13.Value = NumericUpDown2.Value
