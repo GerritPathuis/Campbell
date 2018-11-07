@@ -468,15 +468,33 @@ Public Class Form1
         If CheckBox4.Checked Then
             NumericUpDown15.Value = NumericUpDown4.Value    'Weight
             Int32.TryParse(TextBox61.Text, yng)
-            NumericUpDown17.Value = yng                     'Young
 
             NumericUpDown12.Value = NumericUpDown1.Value + NumericUpDown2.Value
             NumericUpDown13.Value = NumericUpDown2.Value
             NumericUpDown16.Value = NumericUpDown8.Value
+            NumericUpDown17.Value = yng                     'Young
 
             NumericUpDown14.Value = NumericUpDown1.Value
             NumericUpDown18.Value = NumericUpDown2.Value
             NumericUpDown19.Value = NumericUpDown8.Value
+
+            NumericUpDown12.Enabled = False
+            NumericUpDown13.Enabled = False
+            NumericUpDown14.Enabled = False
+            NumericUpDown15.Enabled = False
+            NumericUpDown16.Enabled = False
+            NumericUpDown17.Enabled = False
+            NumericUpDown18.Enabled = False
+            NumericUpDown19.Enabled = False
+        Else
+            NumericUpDown12.Enabled = True
+            NumericUpDown13.Enabled = True
+            NumericUpDown14.Enabled = True
+            NumericUpDown15.Enabled = True
+            NumericUpDown16.Enabled = True
+            NumericUpDown17.Enabled = True
+            NumericUpDown18.Enabled = True
+            NumericUpDown19.Enabled = True
         End If
     End Sub
 
