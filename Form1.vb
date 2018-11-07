@@ -470,7 +470,7 @@ Public Class Form1
             Int32.TryParse(TextBox61.Text, yng)
             NumericUpDown17.Value = yng                     'Young
 
-            NumericUpDown12.Value = NumericUpDown1.Value
+            NumericUpDown12.Value = NumericUpDown1.Value + NumericUpDown2.Value
             NumericUpDown13.Value = NumericUpDown2.Value
             NumericUpDown16.Value = NumericUpDown8.Value
 
