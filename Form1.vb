@@ -32,9 +32,9 @@ Public Class Form1
     "VTK bearing support structures",
     "",
     "BETWEEN THE BEARINGS, BOLTED TO THE FLOOR",
-    "The bearing support near the motor > 1000 kN/mm",
-    "Motor side calculate with the bearing stiffness 100-300 kN/mm",
-    "The opposite support side is 140 kN/mm",
+    "The bearing support near the motor > 100 kN/mm",
+    "Motor side calculate with the bearing stiffness 100 kN/mm",
+    "The opposite support side is 15 kN/mm",
     "",
     " ",
     "BETWEEN THE BEARINGS, ON VIBRATION ISOLATORS",
@@ -43,11 +43,11 @@ Public Class Form1
     "The opposite support side 2 kN/mm !!",
     "With HEB300 + 15mm welded side plates 9 kN/mm ",
     "With IPE400 + 20mm welded side plates 10 kN/mm ",
+    "Supezet between bearings stiffnes 12 kN/mm ",
     " ",
     "OVERHUNG BEARING SUPPORT",
-    "The bearing support near the motor is stiff > 1000 kN/mm",
-    "Calculate with the bearing stiffness 100-300 kN/mm",
-    "Use 150 kN/mm (happy medium)as starting value",
+    "The bearing support near the motor is stiff > 100 kN/mm",
+    "Calculate with the bearing stiffness 100 kN/mm",
      ""}
 
     '----------- directory's-----------
@@ -137,20 +137,20 @@ Public Class Form1
         Next hh
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
-        Fan_bearing_position()
+        Bearing_support_stiffnes()
         Calc_sequence()
     End Sub
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
-        Fan_bearing_position()
+        Bearing_support_stiffnes()
         Calc_sequence()
     End Sub
-    Private Sub Fan_bearing_position()
+    Private Sub Bearing_support_stiffnes()
         If RadioButton1.Checked Then    '(Overhung)
-            NumericUpDown6.Value = 150  '[kN/mm] Stiffness C1 @ drive
-            NumericUpDown7.Value = 150  '[kN/mm] Stiffness C2 @ impeller
-        Else                            '(Between Bearings with heavy support)
-            NumericUpDown6.Value = 100  '[kN/mm] Stiffness frame C1 @ drive bearing
-            NumericUpDown7.Value = 10   '[kN/mm] Stiffness frame C2 @ Not drive bearing
+            If NumericUpDown6.Value > 100 Then NumericUpDown6.Value = 100 '[kN/mm] Stiffness C1 @ drive
+            If NumericUpDown7.Value > 100 Then NumericUpDown7.Value = 100 '[kN/mm] Stiffness C2 @ impeller
+        Else '(Between Bearings with heavy support)
+            If NumericUpDown6.Value > 100 Then NumericUpDown6.Value = 100  '[kN/mm] Stiffness frame C1 @ drive bearing
+            If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 10   '[kN/mm] Stiffness frame C2 @ Not drive bearing
         End If
     End Sub
 
@@ -158,6 +158,7 @@ Public Class Form1
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
+        Bearing_support_stiffnes()  'Check bearing stiffness
         GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
         GroupBox5.Visible = CBool(IIf(RadioButton2.Checked, False, True)) 'Overhung
         GroupBox12.Text = "Chart settings"
