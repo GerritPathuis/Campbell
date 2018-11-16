@@ -150,7 +150,7 @@ Public Class Form1
             If NumericUpDown7.Value > 100 Then NumericUpDown7.Value = 100 '[kN/mm] Stiffness C2 @ impeller
         Else '(Between Bearings with heavy support)
             If NumericUpDown6.Value > 100 Then NumericUpDown6.Value = 100  '[kN/mm] Stiffness frame C1 @ drive bearing
-            If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 10   '[kN/mm] Stiffness frame C2 @ Not drive bearing
+            If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 13   '[kN/mm] Stiffness frame C2 @ Not drive bearing
         End If
     End Sub
 

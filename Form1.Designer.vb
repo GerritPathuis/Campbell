@@ -2185,7 +2185,6 @@ Partial Class Form1
         'NumericUpDown7
         '
         Me.NumericUpDown7.BackColor = System.Drawing.Color.LawnGreen
-        Me.NumericUpDown7.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDown7.Location = New System.Drawing.Point(340, 160)
         Me.NumericUpDown7.Maximum = New Decimal(New Integer() {2000, 0, 0, 0})
         Me.NumericUpDown7.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
