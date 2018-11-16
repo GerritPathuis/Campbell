@@ -1354,5 +1354,23 @@ Public Class Form1
         young = -0.000000324 * t ^ 3 + 0.000049951 * t ^ 2 - 0.04930174 * t + 203.386
         Return (young * 1000)
     End Function
+    'Çalculate natural frequency bearing support
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged
+        Dim fan_weight As Double
+        Dim stiff As Double
+        Dim period, freq, speed As Double
 
+        fan_weight = NumericUpDown56.Value      '[kg]
+        stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
+
+        period = 2 * PI * Sqrt(fan_weight / stiff)
+        freq = 1 / period
+        speed = freq * 60
+
+        TextBox67.Text = period.ToString("0.000")
+        TextBox68.Text = freq.ToString("0.0")
+        TextBox69.Text = speed.ToString("0")
+        TextBox70.Text = (speed * 2).ToString("0")
+        TextBox71.Text = (speed * 3).ToString("0")
+    End Sub
 End Class
