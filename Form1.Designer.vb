@@ -1289,10 +1289,10 @@ Partial Class Form1
         Me.GroupBox5.Controls.Add(Me.Label35)
         Me.GroupBox5.Location = New System.Drawing.Point(23, 384)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(426, 186)
+        Me.GroupBox5.Size = New System.Drawing.Size(426, 211)
         Me.GroupBox5.TabIndex = 61
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Overhung Impeller"
+        Me.GroupBox5.Text = "Overhung Impeller (stiffness approx 75 [kN/mm])"
         '
         'TextBox28
         '
