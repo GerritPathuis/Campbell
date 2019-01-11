@@ -100,6 +100,9 @@ Public Class Form1
         user_list.Add("KarelB")
         hard_disk_list.Add("165214800214")   'VTK PC, Karel Bakker
 
+        user_list.Add("GP")
+        hard_disk_list.Add("S28ZNXAG521979")
+
         user_list.Add("JeroenA")
         hard_disk_list.Add("170228801578")   'VTK laptop, Jeroen
         hard_disk_list.Add("171095402070")   'VTK desktop, Jeroen
@@ -168,6 +171,26 @@ Public Class Form1
         Draw_chart1()
         Calc_simple()
     End Sub
+    Private Sub Set_num_digits(num As NumericUpDown)
+        Dim tmp As Double
+        tmp = num.Value
+        num.DecimalPlaces = 1
+        Select Case True
+            Case tmp < 0.1
+                num.DecimalPlaces = 3
+                num.Increment = CDec(0.001)
+            Case tmp >= 0.1 And tmp < 1
+                num.DecimalPlaces = 2
+                num.Increment = CDec(0.01)
+            Case tmp >= 1 And tmp < 10
+                num.DecimalPlaces = 1
+                num.Increment = CDec(0.1)
+            Case Else
+                num.DecimalPlaces = 0
+                num.Increment = CDec(1)
+        End Select
+
+    End Sub
 
     Private Sub Calc_nr()
         Dim i As Integer
@@ -180,27 +203,9 @@ Public Class Form1
         Dim ω10, ω20, term1, term2 As Double
         Dim ω_krit1, ω_krit2, ω_asym As Double
         Dim max_api_673 As Double
-        Dim tmp As Double
 
-        'NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value < 3, 3, 1))
-        'NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 3, 3, 1))
-        tmp = NumericUpDown10.Value
-        Select Case True
-            Case tmp < 1
-                NumericUpDown10.DecimalPlaces = 3
-                NumericUpDown11.DecimalPlaces = 3
-            Case tmp >= 1 And tmp < 10
-                NumericUpDown10.DecimalPlaces = 2
-                NumericUpDown11.DecimalPlaces = 2
-            Case tmp >= 10 And tmp < 100
-                NumericUpDown10.DecimalPlaces = 1
-                NumericUpDown11.DecimalPlaces = 1
-            Case Else
-                NumericUpDown10.DecimalPlaces = 0
-                NumericUpDown11.DecimalPlaces = 0
-        End Select
-
-
+        Set_num_digits(NumericUpDown10)
+        Set_num_digits(NumericUpDown11)
         NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
