@@ -180,9 +180,27 @@ Public Class Form1
         Dim ω10, ω20, term1, term2 As Double
         Dim ω_krit1, ω_krit2, ω_asym As Double
         Dim max_api_673 As Double
+        Dim tmp As Double
 
-        NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value < 3, 3, 1))
-        NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 3, 3, 1))
+        'NumericUpDown10.DecimalPlaces = CInt(IIf(NumericUpDown10.Value < 3, 3, 1))
+        'NumericUpDown11.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 3, 3, 1))
+        tmp = NumericUpDown10.Value
+        Select Case True
+            Case tmp < 1
+                NumericUpDown10.DecimalPlaces = 3
+                NumericUpDown11.DecimalPlaces = 3
+            Case tmp >= 1 And tmp < 10
+                NumericUpDown10.DecimalPlaces = 2
+                NumericUpDown11.DecimalPlaces = 2
+            Case tmp >= 10 And tmp < 100
+                NumericUpDown10.DecimalPlaces = 1
+                NumericUpDown11.DecimalPlaces = 1
+            Case Else
+                NumericUpDown10.DecimalPlaces = 0
+                NumericUpDown11.DecimalPlaces = 0
+        End Select
+
+
         NumericUpDown15.DecimalPlaces = CInt(IIf(NumericUpDown11.Value < 10, 1, 0))
 
         Try
