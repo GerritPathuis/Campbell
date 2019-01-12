@@ -100,8 +100,11 @@ Public Class Form1
         user_list.Add("KarelB")
         hard_disk_list.Add("165214800214")   'VTK PC, Karel Bakker
 
-        user_list.Add("GP")
+        user_list.Add("GP")                  'Privee laptop GP
         hard_disk_list.Add("S28ZNXAG521979")
+
+        user_list.Add("User")                'Privee PC GP
+        hard_disk_list.Add("058F63646471")
 
         user_list.Add("JeroenA")
         hard_disk_list.Add("170228801578")   'VTK laptop, Jeroen
@@ -125,9 +128,12 @@ Public Class Form1
         Next
 
         If pass_name = False Or pass_disc = False Then
-            MessageBox.Show("VTK Campbell diagram program" & vbCrLf & "Access denied, contact GPa" & vbCrLf)
-            MessageBox.Show("User_name= " & Pro_user & ", Pass name= " & pass_name.ToString)
-            MessageBox.Show("HD_id= *" & HD_number & "*" & ", Pass disc= " & pass_disc.ToString)
+            Form2.Show()
+            Form2.Text = "VTK Campbell diagram program"
+            Form2.Label2.Text = "User_name= " & Pro_user & ", Pass name= " & pass_name.ToString
+            Form2.Label3.Text = "HD_id= "
+            Form2.TextBox1.Text = "*" & HD_number & "*"
+            Form2.Label4.Text = "Pass disc= " & pass_disc.ToString
             Environment.Exit(0)
         End If
 
@@ -185,9 +191,12 @@ Public Class Form1
             Case tmp >= 1 And tmp < 10
                 num.DecimalPlaces = 1
                 num.Increment = CDec(0.1)
+            Case tmp >= 10 And tmp < 100
+                num.DecimalPlaces = 0
+                num.Increment = 1
             Case Else
                 num.DecimalPlaces = 0
-                num.Increment = CDec(1)
+                num.Increment = 10
         End Select
 
     End Sub
@@ -402,9 +411,9 @@ Public Class Form1
             Chart1.ChartAreas.Add("ChartArea0")
             Chart1.Series(0).ChartArea = "ChartArea0"
             If RadioButton1.Checked Then
-                Chart1.Titles.Add("Campbell diagram, overhung, isotropic short bearings, flex shaft, no damping")
+                Chart1.Titles.Add("Campbell diagram, overhung, isotropic Short bearings, flex shaft, no damping")
             Else
-                Chart1.Titles.Add("Campbell diagram, between bearing, isotropic short bearings, flex shaft, no damping")
+                Chart1.Titles.Add("Campbell diagram, between bearing, isotropic Short bearings, flex shaft, no damping")
             End If
             Chart1.Titles(0).Font = New Font("Arial", 12, System.Drawing.FontStyle.Bold)
 
@@ -674,7 +683,7 @@ Public Class Form1
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Campbell diagram (based on Maschinendynamik, 11 Auflage, ISBN 978-3-642-29570-6)" & vbCrLf
+            oPara2.Range.Text = "Campbell diagram (based On Maschinendynamik, 11 Auflage, ISBN 978-3-642-29570-6)" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
