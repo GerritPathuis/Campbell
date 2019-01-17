@@ -95,7 +95,7 @@ Public Class Form1
         hard_disk_list.Add("S2R6NX0H740154H")  'VTK PC, GP
 
         user_list.Add("GerritP")
-        hard_disk_list.Add("14290CEE95FC")   'VTK laptop, GP
+        hard_disk_list.Add("0008_0D02_003E_0FBB.")   'VTK laptop, GP
 
         user_list.Add("KarelB")
         hard_disk_list.Add("165214800214")   'VTK PC, Karel Bakker
@@ -128,13 +128,14 @@ Public Class Form1
         Next
 
         If pass_name = False Or pass_disc = False Then
-            Form2.Show()
             Form2.Text = "VTK Campbell diagram program"
             Form2.Label2.Text = "User_name= " & Pro_user & ", Pass name= " & pass_name.ToString
             Form2.Label3.Text = "HD_id= "
             Form2.TextBox1.Text = "*" & HD_number & "*"
             Form2.Label4.Text = "Pass disc= " & pass_disc.ToString
-            Environment.Exit(0)
+            Me.Hide()
+            Me.Opacity = 0
+            Form2.Show()
         End If
 
         For hh = 0 To (based_on.Length - 1)
