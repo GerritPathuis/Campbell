@@ -375,6 +375,7 @@ Partial Class Form1
         Me.PictureBox13 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.TextBox72 = New System.Windows.Forms.TextBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -511,7 +512,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage5.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Inertia + springs"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1137,7 +1138,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage4.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Simple approach"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -2733,7 +2734,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage2.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -2778,7 +2779,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage3.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -3691,7 +3692,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage6.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage6.TabIndex = 7
         Me.TabPage6.Text = "Hydrostatic bearing with external punp"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -4128,12 +4129,13 @@ Partial Class Form1
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.TextBox72)
         Me.TabPage7.Controls.Add(Me.PictureBox11)
         Me.TabPage7.Controls.Add(Me.TextBox60)
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage7.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "Background"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -4154,7 +4156,7 @@ Partial Class Form1
         Me.TextBox60.Location = New System.Drawing.Point(8, 6)
         Me.TextBox60.Multiline = True
         Me.TextBox60.Name = "TextBox60"
-        Me.TextBox60.Size = New System.Drawing.Size(456, 442)
+        Me.TextBox60.Size = New System.Drawing.Size(456, 351)
         Me.TextBox60.TabIndex = 0
         '
         'TabPage8
@@ -4164,7 +4166,7 @@ Partial Class Form1
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage8.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage8.TabIndex = 9
         Me.TabPage8.Text = "Add Notes"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -4198,7 +4200,7 @@ Partial Class Form1
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage9.Size = New System.Drawing.Size(1245, 824)
+        Me.TabPage9.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage9.TabIndex = 10
         Me.TabPage9.Text = "Bearing support stiffness"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -4403,6 +4405,15 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
+        '
+        'TextBox72
+        '
+        Me.TextBox72.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox72.Location = New System.Drawing.Point(8, 363)
+        Me.TextBox72.Multiline = True
+        Me.TextBox72.Name = "TextBox72"
+        Me.TextBox72.Size = New System.Drawing.Size(456, 299)
+        Me.TextBox72.TabIndex = 5
         '
         'Form1
         '
@@ -4911,4 +4922,5 @@ Partial Class Form1
     Friend WithEvents Label144 As Label
     Friend WithEvents TextBox70 As TextBox
     Friend WithEvents Label143 As Label
+    Friend WithEvents TextBox72 As TextBox
 End Class

@@ -28,13 +28,35 @@ Public Class Form1
     "Bearing stiffness horz. and vert. 1MN/m (1 kN/mm)",
     "Critical Natural frequencies 1219 and 1996 rpm"}
 
+    Public Shared fundation() As String = {
+    "ACI 351.3R-04",
+    "A long-established rule-of-thumb for machinery on blocktype",
+    "foundations Is to make the weight of the foundation",
+    "block at least three times the weight Of a rotating machine",
+    "And at least five times the weight of a reciprocating machine.",
+    "For pile - supported foundations, these ratios are sometimes",
+    "reduced so that the foundation block weight, including pile ",
+    "cap, Is at least 2-1/2 times the weight of a rotating machine",
+    "And at least four times the weight of a reciprocating machine.",
+    "These ratios are machine weights inclusive Of moving and",
+    "stationary parts as compared With the weight Of the concrete",
+    "foundation block",
+    "Additionally, many designers require the",
+    "foundation to be of such weight that the resultant of lateral",
+    "And vertical loads falls within the middle third of the foundation",
+    "base. That Is, the net effect of lateral And vertical loads Or the",
+    "eccentricity of the vertical load should Not cause uplift.",
+    " ",
+    "Supply rotor weight itself is 400 kg",
+    "Machine+platform weight shall be > 8x400= 3200 kg"}
+
     Public Shared bearing_support() As String = {
     "VTK bearing support structures",
     "",
     "BETWEEN THE BEARINGS, BOLTED TO THE FLOOR",
     "The bearing support near the motor > 100 kN/mm",
     "Motor side calculate with the bearing stiffness 100 kN/mm",
-    "The opposite support side is 15 kN/mm",
+    "The opposite support side Is 15 kN/mm",
     "",
     " ",
     "BETWEEN THE BEARINGS, ON VIBRATION ISOLATORS",
@@ -46,7 +68,7 @@ Public Class Form1
     "Supezet between bearings stiffnes 12 kN/mm ",
     " ",
     "OVERHUNG BEARING SUPPORT",
-    "The bearing support near the motor is stiff > 100 kN/mm",
+    "The bearing support near the motor Is stiff > 100 kN/mm",
     "Calculate with the bearing stiffness 100 kN/mm",
      ""}
 
@@ -144,6 +166,10 @@ Public Class Form1
 
         For hh = 0 To (bearing_support.Length - 1)
             TextBox66.Text &= bearing_support(hh) & vbCrLf
+        Next hh
+
+        For hh = 0 To (fundation.Length - 1)
+            TextBox72.Text &= fundation(hh) & vbCrLf
         Next hh
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
