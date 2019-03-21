@@ -172,12 +172,28 @@ Public Class Form1
             TextBox72.Text &= fundation(hh) & vbCrLf
         Next hh
 
+        TextBox73.Text =
+        "DIN 1940" & vbCrLf &
+        "G2.5 (2.5 mm/s)" & vbCrLf &
+        "   -Gas turbines" & vbCrLf &
+        "G6.3 (6.3 mm/s)" & vbCrLf &
+        "   -Fans " & vbCrLf &
+        "   -Machinery general" & vbCrLf &
+        "   -Electric motors <950 rpm" & vbCrLf &
+        "G16 (16 mm/s) " & vbCrLf &
+        "   -Agricultutal machinery" & vbCrLf &
+        "G40 (40 mm/s)" & vbCrLf &
+        "   -Car wheels" & vbCrLf &
+        "G100 (100 mm/s) " & vbCrLf &
+        "   -Reciprocating Car engines" & vbCrLf &
+        ""
+
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
         "Concrete slab adjacent shall be spaced by a minimum of 15 mm" & vbCrLf &
         "Rigid block foundation slab for machinery thickness shall be no less then" & vbCrLf &
         "0.6 + L/30 Where L [m] is the greater of the length or breadth " & vbCrLf &
-        "Minimum Concrete reinforcement for slabs shall be 30 kg/m3 " & vbCrLf & vbCrLf &
+        "Minimum Concrete steel reinforcement for slabs shall be 30 kg/m3 " & vbCrLf & vbCrLf &
         "Static design" & vbCrLf &
         "Vertical impact 50% of machine dead weight" & vbCrLf &
         "Lateral force 25% dead weight applied between bearings" & vbCrLf &
