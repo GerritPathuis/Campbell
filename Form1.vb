@@ -35,8 +35,8 @@ Public Class Form1
     "block at least three times the weight Of a rotating machine",
     "And at least five times the weight of a reciprocating machine.",
     "For pile - supported foundations, these ratios are sometimes",
-    "reduced so that the foundation block weight, including pile ",
-    "cap, Is at least 2-1/2 times the weight of a rotating machine",
+    "reduced so that the foundation block weight, including pile cap,",
+    "Is at least 2-1/2 times the weight of a rotating machine",
     "And at least four times the weight of a reciprocating machine.",
     "These ratios are machine weights inclusive Of moving and",
     "stationary parts as compared With the weight Of the concrete",
@@ -44,11 +44,11 @@ Public Class Form1
     "Additionally, many designers require the",
     "foundation to be of such weight that the resultant of lateral",
     "And vertical loads falls within the middle third of the foundation",
-    "base. That Is, the net effect of lateral And vertical loads Or the",
-    "eccentricity of the vertical load should Not cause uplift.",
+    "base. That Is, the net effect of lateral and vertical loads Or the",
+    "eccentricity of the vertical load should not cause uplift.",
     " ",
-    "Supply rotor weight itself is 400 kg",
-    "Machine+platform weight shall be > 8x400= 3200 kg"}
+    "Supply rotor machine weight is 2500 kg",
+    "Inertia block weight shall be > 2.5 x 2500= 6250 kg"}
 
     Public Shared bearing_support() As String = {
     "VTK bearing support structures",
@@ -171,6 +171,20 @@ Public Class Form1
         For hh = 0 To (fundation.Length - 1)
             TextBox72.Text &= fundation(hh) & vbCrLf
         Next hh
+
+        TextBox106.Text =
+        "Concrete slab foundation" & vbCrLf &
+        "Concrete slab adjacent shall be spaced by a minimum of 15 mm" & vbCrLf &
+        "Rigid block foundation slab for machinery thickness shall be no less then" & vbCrLf &
+        "0.6 + L/30 Where L [m] is the greater of the length or breadth " & vbCrLf &
+        "Minimum Concrete reinforcement for slabs shall be 30 kg/m3 " & vbCrLf & vbCrLf &
+        "Static design" & vbCrLf &
+        "Vertical impact 50% of machine dead weight" & vbCrLf &
+        "Lateral force 25% dead weight applied between bearings" & vbCrLf &
+        "Longitudinal force 25% dead weight applied along axis" & vbCrLf &
+        "Lateral and Longitudinal force do not work concurrently" & vbCrLf &
+        ""
+
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
         Bearing_support_stiffnes()
@@ -1431,5 +1445,22 @@ Public Class Form1
         TextBox69.Text = speed.ToString("0")
         TextBox70.Text = (speed * 2).ToString("0")
         TextBox71.Text = (speed * 3).ToString("0")
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged
+        Dim weight_r As Double
+        Dim un_bal_speed, ang_speed As Double
+        Dim un_bal_force As Double
+        Dim rpm As Double
+
+        rpm = NumericUpDown60.Value                 '[rpm]
+        weight_r = NumericUpDown59.Value            '[kg]
+        un_bal_speed = NumericUpDown58.Value / 1000 '[mm/s]-->[m/s]
+
+        ang_speed = rpm * 2 * PI / 60               '[rad/s]
+        un_bal_force = weight_r * ang_speed * un_bal_speed  '[N]
+
+        TextBox96.Text = ang_speed.ToString("0.0")      '[rad/s]
+        TextBox95.Text = un_bal_force.ToString("0")     '[N]
     End Sub
 End Class
