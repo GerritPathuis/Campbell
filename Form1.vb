@@ -174,17 +174,17 @@ Public Class Form1
 
         TextBox73.Text =
         "DIN 1940" & vbCrLf &
-        "G2.5 (2.5 mm/s)" & vbCrLf &
+        "G2.5 (2.5 mm/s [p-p])" & vbCrLf &
         "   -Gas turbines" & vbCrLf &
-        "G6.3 (6.3 mm/s)" & vbCrLf &
+        "G6.3 (6.3 mm/s [p-p])" & vbCrLf &
         "   -Fans " & vbCrLf &
         "   -Machinery general" & vbCrLf &
         "   -Electric motors <950 rpm" & vbCrLf &
-        "G16 (16 mm/s) " & vbCrLf &
+        "G16 (16 mm/s [p-p]) " & vbCrLf &
         "   -Agricultutal machinery" & vbCrLf &
-        "G40 (40 mm/s)" & vbCrLf &
+        "G40 (40 mm/s [p-p])" & vbCrLf &
         "   -Car wheels" & vbCrLf &
-        "G100 (100 mm/s) " & vbCrLf &
+        "G100 (100 mm/s [p-p]) " & vbCrLf &
         "   -Reciprocating Car engines" & vbCrLf &
         ""
 
@@ -1465,18 +1465,31 @@ Public Class Form1
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged
         Dim weight_r As Double
-        Dim un_bal_speed, ang_speed As Double
+        Dim un_bal_speed_rms As Double  'rms valuemeasured in the field
+        Dim un_bal_speed_pp As Double   'peak-peak value
+        Dim ang_speed As Double
         Dim un_bal_force As Double
         Dim rpm As Double
+        Dim F_dyn_found As Double
 
-        rpm = NumericUpDown60.Value                 '[rpm]
-        weight_r = NumericUpDown59.Value            '[kg]
-        un_bal_speed = NumericUpDown58.Value / 1000 '[mm/s]-->[m/s]
+        un_bal_speed_rms = NumericUpDown58.Value / 1000             '[mm/s]-->[m/s]
+        un_bal_speed_pp = un_bal_speed_rms * 2 * Sqrt(2)
+        rpm = NumericUpDown60.Value                                 '[rpm]
+        weight_r = NumericUpDown59.Value                            '[kg]
+        ang_speed = rpm * 2 * PI / 60                               '[rad/s]
 
-        ang_speed = rpm * 2 * PI / 60               '[rad/s]
-        un_bal_force = weight_r * ang_speed * un_bal_speed  '[N]
+        '------------- Calc centrifugal force --------
+        un_bal_force = weight_r * ang_speed * un_bal_speed_pp       '[N]
 
-        TextBox96.Text = ang_speed.ToString("0.0")      '[rad/s]
-        TextBox95.Text = un_bal_force.ToString("0")     '[N]
+        '------------- Dynamic foundation force ------
+        '@ 20 mm/s, rms
+        F_dyn_found = 20 * 2 * Sqrt(2) * 10 ^ -3 * weight_r * ang_speed
+
+        Label159.Visible = CBool(IIf(F_dyn_found / 10 < weight_r, vbFalse, vbTrue))
+        Label160.Visible = CBool(IIf(un_bal_force / 10 < weight_r, vbFalse, vbTrue))
+        TextBox74.Text = (un_bal_speed_pp * 1000).ToString("0.0")   '[mm/s, p-p]
+        TextBox75.Text = F_dyn_found.ToString("0")                  '[N]
+        TextBox96.Text = ang_speed.ToString("0.0")                  '[rad/s]
+        TextBox95.Text = un_bal_force.ToString("0")                 '[N]
     End Sub
 End Class
