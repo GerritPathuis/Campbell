@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea10 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend10 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -405,6 +405,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -529,6 +530,7 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabPage5
@@ -2365,6 +2367,7 @@ Partial Class Form1
         '
         'GroupBox9
         '
+        Me.GroupBox9.Controls.Add(Me.PictureBox15)
         Me.GroupBox9.Controls.Add(Me.Button8)
         Me.GroupBox9.Controls.Add(Me.Button7)
         Me.GroupBox9.Controls.Add(Me.GroupBox18)
@@ -2385,9 +2388,9 @@ Partial Class Form1
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.Color.SpringGreen
-        Me.Button8.Location = New System.Drawing.Point(165, 89)
+        Me.Button8.Location = New System.Drawing.Point(135, 89)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(267, 21)
+        Me.Button8.Size = New System.Drawing.Size(130, 21)
         Me.Button8.TabIndex = 83
         Me.Button8.Text = "Retrieve Project"
         Me.Button8.UseVisualStyleBackColor = False
@@ -2395,9 +2398,9 @@ Partial Class Form1
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.Button7.Location = New System.Drawing.Point(165, 115)
+        Me.Button7.Location = New System.Drawing.Point(135, 115)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(267, 41)
+        Me.Button7.Size = New System.Drawing.Size(130, 41)
         Me.Button7.TabIndex = 82
         Me.Button7.Text = "Save Project"
         Me.Button7.UseVisualStyleBackColor = False
@@ -2408,7 +2411,7 @@ Partial Class Form1
         Me.GroupBox18.Controls.Add(Me.RadioButton1)
         Me.GroupBox18.Location = New System.Drawing.Point(12, 89)
         Me.GroupBox18.Name = "GroupBox18"
-        Me.GroupBox18.Size = New System.Drawing.Size(146, 67)
+        Me.GroupBox18.Size = New System.Drawing.Size(118, 67)
         Me.GroupBox18.TabIndex = 81
         Me.GroupBox18.TabStop = False
         Me.GroupBox18.Text = "Fan type"
@@ -2437,9 +2440,9 @@ Partial Class Form1
         '
         'TextBox9
         '
-        Me.TextBox9.Location = New System.Drawing.Point(164, 63)
+        Me.TextBox9.Location = New System.Drawing.Point(135, 64)
         Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(268, 20)
+        Me.TextBox9.Size = New System.Drawing.Size(130, 20)
         Me.TextBox9.TabIndex = 74
         Me.TextBox9.Text = "-"
         '
@@ -2455,9 +2458,9 @@ Partial Class Form1
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(164, 38)
+        Me.TextBox8.Location = New System.Drawing.Point(135, 39)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(268, 20)
+        Me.TextBox8.Size = New System.Drawing.Size(130, 20)
         Me.TextBox8.TabIndex = 73
         Me.TextBox8.Text = "-"
         '
@@ -2473,9 +2476,9 @@ Partial Class Form1
         '
         'TextBox7
         '
-        Me.TextBox7.Location = New System.Drawing.Point(165, 14)
+        Me.TextBox7.Location = New System.Drawing.Point(135, 14)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(267, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(130, 20)
         Me.TextBox7.TabIndex = 72
         Me.TextBox7.Text = "P17.10"
         '
@@ -2608,17 +2611,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea9.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea9)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend9.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend9)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        Series9.ChartArea = "ChartArea1"
+        Series9.Legend = "Legend1"
+        Series9.Name = "Series1"
+        Me.Chart1.Series.Add(Series9)
         Me.Chart1.Size = New System.Drawing.Size(777, 674)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -2851,16 +2854,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea10.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea10)
+        Legend10.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend10)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series10.ChartArea = "ChartArea1"
+        Series10.Legend = "Legend1"
+        Series10.Name = "Series1"
+        Me.Chart2.Series.Add(Series10)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -4767,6 +4770,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
+        'PictureBox15
+        '
+        Me.PictureBox15.Location = New System.Drawing.Point(277, 16)
+        Me.PictureBox15.Name = "PictureBox15"
+        Me.PictureBox15.Size = New System.Drawing.Size(175, 141)
+        Me.PictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox15.TabIndex = 39
+        Me.PictureBox15.TabStop = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4933,6 +4945,7 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -5313,4 +5326,5 @@ Partial Class Form1
     Friend WithEvents Label157 As Label
     Friend WithEvents Label159 As Label
     Friend WithEvents Label160 As Label
+    Friend WithEvents PictureBox15 As PictureBox
 End Class

@@ -225,8 +225,14 @@ Public Class Form1
     End Sub
     Private Sub Calc_sequence()
         Bearing_support_stiffnes()  'Check bearing stiffness
-        GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
-        GroupBox5.Visible = CBool(IIf(RadioButton2.Checked, False, True)) 'Overhung
+        If RadioButton1.Checked Then
+            PictureBox15.Image = Campbell_diagram.My.Resources.Resources.Overhung1
+            GroupBox5.Visible = CBool(IIf(RadioButton2.Checked, False, True)) 'Overhung
+        Else
+            PictureBox15.Image = Campbell_diagram.My.Resources.Resources.Between_bearings2
+            GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
+        End If
+
         GroupBox12.Text = "Chart settings"
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
