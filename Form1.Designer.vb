@@ -412,6 +412,8 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Label162 = New System.Windows.Forms.Label()
+        Me.TextBox76 = New System.Windows.Forms.TextBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2634,6 +2636,7 @@ Partial Class Form1
         '
         'SplitContainer3.Panel1
         '
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label162)
         Me.SplitContainer3.Panel1.Controls.Add(Me.Label161)
         Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox31)
         Me.SplitContainer3.Panel1.Controls.Add(Me.Label130)
@@ -2650,7 +2653,7 @@ Partial Class Form1
         'Label161
         '
         Me.Label161.AutoSize = True
-        Me.Label161.Location = New System.Drawing.Point(188, 69)
+        Me.Label161.Location = New System.Drawing.Point(188, 66)
         Me.Label161.Name = "Label161"
         Me.Label161.Size = New System.Drawing.Size(397, 13)
         Me.Label161.TabIndex = 44
@@ -2692,7 +2695,7 @@ Partial Class Form1
         'Label130
         '
         Me.Label130.AutoSize = True
-        Me.Label130.Location = New System.Drawing.Point(188, 51)
+        Me.Label130.Location = New System.Drawing.Point(188, 48)
         Me.Label130.Name = "Label130"
         Me.Label130.Size = New System.Drawing.Size(270, 13)
         Me.Label130.TabIndex = 43
@@ -2701,7 +2704,7 @@ Partial Class Form1
         'Label128
         '
         Me.Label128.AutoSize = True
-        Me.Label128.Location = New System.Drawing.Point(188, 17)
+        Me.Label128.Location = New System.Drawing.Point(188, 14)
         Me.Label128.Name = "Label128"
         Me.Label128.Size = New System.Drawing.Size(411, 13)
         Me.Label128.TabIndex = 41
@@ -2711,7 +2714,7 @@ Partial Class Form1
         'Label129
         '
         Me.Label129.AutoSize = True
-        Me.Label129.Location = New System.Drawing.Point(188, 35)
+        Me.Label129.Location = New System.Drawing.Point(188, 32)
         Me.Label129.Name = "Label129"
         Me.Label129.Size = New System.Drawing.Size(547, 13)
         Me.Label129.TabIndex = 42
@@ -4532,6 +4535,7 @@ Partial Class Form1
         '
         'TabPage10
         '
+        Me.TabPage10.Controls.Add(Me.TextBox76)
         Me.TabPage10.Controls.Add(Me.PictureBox16)
         Me.TabPage10.Controls.Add(Me.GroupBox30)
         Me.TabPage10.Controls.Add(Me.TextBox73)
@@ -4616,7 +4620,7 @@ Partial Class Form1
         'TextBox106
         '
         Me.TextBox106.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox106.Location = New System.Drawing.Point(461, 520)
+        Me.TextBox106.Location = New System.Drawing.Point(461, 572)
         Me.TextBox106.Multiline = True
         Me.TextBox106.Name = "TextBox106"
         Me.TextBox106.Size = New System.Drawing.Size(547, 195)
@@ -4860,6 +4864,27 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
+        '
+        'Label162
+        '
+        Me.Label162.AutoSize = True
+        Me.Label162.Location = New System.Drawing.Point(189, 84)
+        Me.Label162.Name = "Label162"
+        Me.Label162.Size = New System.Drawing.Size(235, 13)
+        Me.Label162.TabIndex = 85
+        Me.Label162.Text = "Avoid rubber or steel springs under the fan frame"
+        '
+        'TextBox76
+        '
+        Me.TextBox76.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox76.Location = New System.Drawing.Point(461, 482)
+        Me.TextBox76.Multiline = True
+        Me.TextBox76.Name = "TextBox76"
+        Me.TextBox76.Size = New System.Drawing.Size(547, 84)
+        Me.TextBox76.TabIndex = 29
+        Me.TextBox76.Text = "Avoid rubber ot steel spring." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The stiffness and weight of the floor is not used " &
+    "!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use long  J or L anchor bolts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Design of the concrete support is up to the c" &
+    "ustomer."
         '
         'Form1
         '
@@ -5422,4 +5447,6 @@ Partial Class Form1
     Friend WithEvents SplitContainer3 As SplitContainer
     Friend WithEvents GroupBox31 As GroupBox
     Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents Label162 As Label
+    Friend WithEvents TextBox76 As TextBox
 End Class
