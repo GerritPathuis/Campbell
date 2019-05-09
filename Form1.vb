@@ -211,16 +211,21 @@ Public Class Form1
         Calc_sequence()
     End Sub
     Private Sub Bearing_support_stiffnes()
-        If RadioButton1.Checked Then    '(Overhung)
-            If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75 '[kN/mm] Stiffness C1 @ drive
-            If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 75 '[kN/mm] Stiffness C2 @ impeller
-        Else '(Between Bearings with heavy support)
-            If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75  '[kN/mm] Stiffness frame C1 @ drive bearing
-            If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 13   '[kN/mm] Stiffness frame C2 @ Not drive bearing
+        If RadioButton3.Checked Then    'Steel supports
+            If RadioButton1.Checked Then    '(Overhung)
+                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75 '[kN/mm] Stiffness C1 @ drive
+                If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 75 '[kN/mm] Stiffness C2 @ impeller
+            Else '(Between Bearings with heavy support)
+                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75  '[kN/mm] Stiffness frame C1 @ drive bearing
+                If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 10  '[kN/mm] Stiffness frame C2 @ Not drive bearing
+            End If
+        Else 'Concrete supports
+            NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
+            NumericUpDown7.Value = 90   '[kN/mm] Stiffness C2 @ impeller
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
