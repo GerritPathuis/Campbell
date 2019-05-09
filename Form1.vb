@@ -199,8 +199,10 @@ Public Class Form1
         "Lateral force 25% dead weight applied between bearings" & vbCrLf &
         "Longitudinal force 25% dead weight applied along axis" & vbCrLf &
         "Lateral and Longitudinal force do not work concurrently" & vbCrLf &
-        ""
-
+        "Anchor stress not exceed 120 N/mm2" & vbCrLf &
+        "Anchor coorosion allowence 3 mm" & vbCrLf &
+        "Concrete bearing stress not exceed 5 N/mm2" & vbCrLf &
+        "" & vbCrLf
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
         Bearing_support_stiffnes()
