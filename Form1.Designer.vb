@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -214,14 +214,14 @@ Partial Class Form1
         Me.NumericUpDown10 = New System.Windows.Forms.NumericUpDown()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+        Me.Label161 = New System.Windows.Forms.Label()
         Me.GroupBox31 = New System.Windows.Forms.GroupBox()
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.Label161 = New System.Windows.Forms.Label()
         Me.Label130 = New System.Windows.Forms.Label()
-        Me.Label129 = New System.Windows.Forms.Label()
         Me.Label128 = New System.Windows.Forms.Label()
+        Me.Label129 = New System.Windows.Forms.Label()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
@@ -2647,6 +2647,15 @@ Partial Class Form1
         Me.SplitContainer3.SplitterDistance = 105
         Me.SplitContainer3.TabIndex = 39
         '
+        'Label161
+        '
+        Me.Label161.AutoSize = True
+        Me.Label161.Location = New System.Drawing.Point(188, 69)
+        Me.Label161.Name = "Label161"
+        Me.Label161.Size = New System.Drawing.Size(397, 13)
+        Me.Label161.TabIndex = 44
+        Me.Label161.Text = "Between bearings and powerful motors must have a concrete support ~ 90 kN/mm"
+        '
         'GroupBox31
         '
         Me.GroupBox31.Controls.Add(Me.RadioButton4)
@@ -2680,32 +2689,6 @@ Partial Class Form1
         Me.RadioButton3.Text = "Steel"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
-        'Chart1
-        '
-        ChartArea7.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea7)
-        Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend7.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend7)
-        Me.Chart1.Location = New System.Drawing.Point(0, 0)
-        Me.Chart1.Name = "Chart1"
-        Series7.ChartArea = "ChartArea1"
-        Series7.Legend = "Legend1"
-        Series7.Name = "Series1"
-        Me.Chart1.Series.Add(Series7)
-        Me.Chart1.Size = New System.Drawing.Size(795, 620)
-        Me.Chart1.TabIndex = 38
-        Me.Chart1.Text = "Chart1"
-        '
-        'Label161
-        '
-        Me.Label161.AutoSize = True
-        Me.Label161.Location = New System.Drawing.Point(188, 69)
-        Me.Label161.Name = "Label161"
-        Me.Label161.Size = New System.Drawing.Size(396, 13)
-        Me.Label161.TabIndex = 44
-        Me.Label161.Text = "Between bearings and powerful motors must have a concrete support < 60 kN/mm"
-        '
         'Label130
         '
         Me.Label130.AutoSize = True
@@ -2714,6 +2697,16 @@ Partial Class Form1
         Me.Label130.Size = New System.Drawing.Size(270, 13)
         Me.Label130.TabIndex = 43
         Me.Label130.Text = "Jp and Ja very small then results like ""Simple approach"""
+        '
+        'Label128
+        '
+        Me.Label128.AutoSize = True
+        Me.Label128.Location = New System.Drawing.Point(188, 17)
+        Me.Label128.Name = "Label128"
+        Me.Label128.Size = New System.Drawing.Size(411, 13)
+        Me.Label128.TabIndex = 41
+        Me.Label128.Text = "API 673, 3rd edition, section 6.7.2.1 first critical bending speed 20% above max " &
+    "speed"
         '
         'Label129
         '
@@ -2725,15 +2718,22 @@ Partial Class Form1
         Me.Label129.Text = "Ball bearing estimate C=110-130, Roller + CARB bearing C= 320-480 [kN/mm], see th" &
     "e bearing stiffness calculation"
         '
-        'Label128
+        'Chart1
         '
-        Me.Label128.AutoSize = True
-        Me.Label128.Location = New System.Drawing.Point(188, 17)
-        Me.Label128.Name = "Label128"
-        Me.Label128.Size = New System.Drawing.Size(411, 13)
-        Me.Label128.TabIndex = 41
-        Me.Label128.Text = "API 673, 3rd edition, section 6.7.2.1 first critical bending speed 20% above max " &
-    "speed"
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(0, 0)
+        Me.Chart1.Name = "Chart1"
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Size = New System.Drawing.Size(795, 620)
+        Me.Chart1.TabIndex = 38
+        Me.Chart1.Text = "Chart1"
         '
         'Button4
         '
@@ -2934,16 +2934,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea8.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea8)
-        Legend8.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend8)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series8.ChartArea = "ChartArea1"
-        Series8.Legend = "Legend1"
-        Series8.Name = "Series1"
-        Me.Chart2.Series.Add(Series8)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart2.Series.Add(Series2)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
