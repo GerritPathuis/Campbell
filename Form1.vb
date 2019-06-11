@@ -1476,7 +1476,7 @@ Public Class Form1
         TextBox71.Text = (speed * 3).ToString("0")
     End Sub
 
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged
         Dim weight_r As Double
         Dim un_bal_speed_rms As Double  'rms valuemeasured in the field
         Dim un_bal_speed_pp As Double   'peak-peak value
@@ -1484,6 +1484,8 @@ Public Class Form1
         Dim un_bal_force As Double
         Dim rpm As Double
         Dim F_dyn_found As Double
+
+        Calc_Rotary_feeder()
 
         un_bal_speed_rms = NumericUpDown58.Value / 1000             '[mm/s]-->[m/s]
         un_bal_speed_pp = un_bal_speed_rms * 2 * Sqrt(2)
@@ -1504,5 +1506,32 @@ Public Class Form1
         TextBox75.Text = F_dyn_found.ToString("0")                  '[N]
         TextBox96.Text = ang_speed.ToString("0.0")                  '[rad/s]
         TextBox95.Text = un_bal_force.ToString("0")                 '[N]
+    End Sub
+    Private Sub Calc_Rotary_feeder()
+        Dim rps, dia As Double      'Rotary feeder
+        Dim lump, a_time As Double  'Lump data
+        Dim acc As Double
+        Dim tip_speed As Double
+        Dim Force As Double
+
+        '---- get data -------------
+        lump = NumericUpDown61.Value        '[kg]
+        rps = NumericUpDown62.Value / 60    '[rot_per_sec]
+        dia = NumericUpDown63.Value / 1000  '[m]
+
+        '---- calc -----------------
+        tip_speed = PI * dia * rps          '[m/s]
+
+        '---- The lump acceleration takes place in 1/4 rotor turn ---
+        a_time = 1 / (4 * rps)              'Accelation time [s]
+
+        acc = tip_speed / a_time            'Accelation [m/s]
+
+        Force = lump * acc                  'Accelation force [N]
+
+        TextBox77.Text = tip_speed.ToString("0.0")
+        TextBox78.Text = acc.ToString("0")
+        TextBox79.Text = Force.ToString("0")
+        TextBox80.Text = a_time.ToString("0.00")
     End Sub
 End Class
