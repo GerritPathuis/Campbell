@@ -1457,7 +1457,7 @@ Public Class Form1
         Return (young * 1000)
     End Function
     'Çalculate natural frequency bearing support
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown65.ValueChanged
         Dim fan_weight As Double
         Dim stiff As Double
         Dim period, freq, speed As Double
@@ -1469,11 +1469,52 @@ Public Class Form1
         freq = 1 / period
         speed = freq * 60
 
-        TextBox67.Text = period.ToString("0.000")
-        TextBox68.Text = freq.ToString("0.0")
+        TextBox67.Text = period.ToString("F4")
+        TextBox68.Text = freq.ToString("F1")
         TextBox69.Text = speed.ToString("0")
         TextBox70.Text = (speed * 2).ToString("0")
         TextBox71.Text = (speed * 3).ToString("0")
+
+
+        '============= torsional stiffness =======
+        'https://en.wikipedia.org/wiki/Stiffness
+        Dim height As Double = NumericUpDown66.Value      '[m]
+        Dim T_stiff As Double                   '[N/m]
+        Dim omtrek As Double
+        Dim hoek_radiaal As Double
+        Dim inertia As Double
+        Dim T_period, T_freq As Double
+
+
+        '----- berekende lineaire stijfheid is
+        stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
+        height = NumericUpDown66.Value          '[m] Centerline height
+
+        '----- omtrek van de verplaatsings cirkel is in [mm]
+        omtrek = PI * 2 * height * 1000         '[mm]
+        TextBox88.Text &= "omtrek= " & omtrek.ToString & vbCrLf
+        '----- de werkelijke verplaatsing is 1 mm
+        ' de hoek in radialen is dan
+        hoek_radiaal = 1 / omtrek * 2 * PI      '[rad]
+
+        TextBox88.Text &= "hoek_rad" & hoek_radiaal.ToString & vbCrLf
+        TextBox88.Text &= "stiff" & stiff.ToString & vbCrLf
+
+        'Torsie stijfheid moment= kracht*arm/hoek
+        T_stiff = (stiff * height) / hoek_radiaal       '[Nm/rad]
+
+        TextBox86.Text = stiff.ToString("F0")
+        TextBox87.Text = (T_stiff / 1000).ToString("F0")    '[kN/rad]
+
+        'Natural torsional frequency
+
+        inertia = NumericUpDown65.Value                 '[kg.m2] 
+
+        T_period = 2 * PI * Sqrt(inertia / T_stiff)
+        T_freq = 1 / T_period
+        TextBox85.Text = T_period.ToString
+        TextBox84.Text = T_freq.ToString
+
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged
