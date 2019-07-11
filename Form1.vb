@@ -65,7 +65,7 @@ Public Class Form1
     "The opposite support side 2 kN/mm !!",
     "With HEB300 + 15mm welded side plates 9 kN/mm ",
     "With IPE400 + 20mm welded side plates 10 kN/mm ",
-    "Supezet between bearings stiffnes 12 kN/mm ",
+    "Supezet between bearings stiffness 12 kN/mm ",
     " ",
     "OVERHUNG BEARING SUPPORT",
     "The bearing support near the motor Is stiff > 100 kN/mm",
@@ -203,6 +203,15 @@ Public Class Form1
         "Anchor coorosion allowence 3 mm" & vbCrLf &
         "Concrete bearing stress not exceed 5 N/mm2" & vbCrLf &
         "" & vbCrLf
+
+        TextBox71.Text =
+        "Possible NDE bearing support vibration problem solutions" & vbCrLf & vbCrLf &
+        "Use the stiffness of the foundation or floor" & vbCrLf &
+        "Increase the stiffness of the NDE bearing support" & vbCrLf &
+        "Increase the weight/inertia of NDE bearing support" & vbCrLf &
+        "Fill up with approx 750 kg concrete (2500 [kg/m3])" & vbCrLf &
+        " "
+
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
         Bearing_support_stiffnes()
@@ -1457,7 +1466,7 @@ Public Class Form1
         Return (young * 1000)
     End Function
     'Çalculate natural frequency bearing support
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown65.ValueChanged
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown68.ValueChanged
         Dim fan_weight As Double
         Dim stiff As Double
         Dim period, freq, speed As Double
@@ -1473,48 +1482,45 @@ Public Class Form1
         TextBox68.Text = freq.ToString("F1")
         TextBox69.Text = speed.ToString("0")
         TextBox70.Text = (speed * 2).ToString("0")
-        TextBox71.Text = (speed * 3).ToString("0")
 
 
         '============= torsional stiffness =======
         'https://en.wikipedia.org/wiki/Stiffness
-        Dim height As Double = NumericUpDown66.Value      '[m]
-        Dim T_stiff As Double                   '[N/m]
-        Dim omtrek As Double
-        Dim hoek_radiaal As Double
-        Dim inertia As Double
-        Dim T_period, T_freq As Double
+        'https://en.wikipedia.org/wiki/List_of_moments_of_inertia
+        Dim radius As Double = NumericUpDown66.Value    '[m]
+        Dim T_stiff As Double                           '[N/m]
+        Dim displac As Double                           '[m]
+        Dim inertia As Double                           '[kg.m2]
+        Dim force As Double                             '[N]
+        Dim T_period, T_freq, T_speed As Double
+        Dim w1, w2, wt As Double
+        '----- get data from screen -----------
+        force = NumericUpDown64.Value * 10 ^ 3      '[N] horizontal force on bearing
+        displac = NumericUpDown67.Value * 10 ^ -3   '[m] verplaatsing
+        radius = NumericUpDown66.Value              '[m] Centerline height
 
-
-        '----- berekende lineaire stijfheid is
-        stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
-        height = NumericUpDown66.Value          '[m] Centerline height
-
-        '----- omtrek van de verplaatsings cirkel is in [mm]
-        omtrek = PI * 2 * height * 1000         '[mm]
-        TextBox88.Text &= "omtrek= " & omtrek.ToString & vbCrLf
-        '----- de werkelijke verplaatsing is 1 mm
-        ' de hoek in radialen is dan
-        hoek_radiaal = 1 / omtrek * 2 * PI      '[rad]
-
-        TextBox88.Text &= "hoek_rad" & hoek_radiaal.ToString & vbCrLf
-        TextBox88.Text &= "stiff" & stiff.ToString & vbCrLf
-
-        'Torsie stijfheid moment= kracht*arm/hoek
-        T_stiff = (stiff * height) / hoek_radiaal       '[Nm/rad]
-
-        TextBox86.Text = stiff.ToString("F0")
+        '----- Torsional stiffness -----
+        T_stiff = force * radius ^ 2 / displac
         TextBox87.Text = (T_stiff / 1000).ToString("F0")    '[kN/rad]
 
+
+        'Estimate inertia
+        w1 = NumericUpDown68.Value                  '[kg] 
+        w2 = NumericUpDown69.Value * 0.5            '[kg] 
+        wt = w1 + w2                                '[kg] 
+        inertia = wt * radius ^ 2                   '[kg.m2] 
+
         'Natural torsional frequency
-
-        inertia = NumericUpDown65.Value                 '[kg.m2] 
-
         T_period = 2 * PI * Sqrt(inertia / T_stiff)
-        T_freq = 1 / T_period
-        TextBox85.Text = T_period.ToString
-        TextBox84.Text = T_freq.ToString
+        T_freq = 1 / T_period                           '[Hz]
+        T_speed = T_freq * 60                           '[Rpm]
 
+        TextBox81.Text = wt.ToString("F0")              '[kg]
+        TextBox86.Text = inertia.ToString("F1")         '[kg.m2] inertia
+        TextBox85.Text = T_period.ToString("F2")        '[s] Period 
+        TextBox84.Text = T_freq.ToString("F1")          '[Hz] frequency
+        TextBox83.Text = T_speed.ToString("F0")         '[rpm] speed
+        TextBox82.Text = (T_speed * 2).ToString("F0")   '[rpm] speed first harmonic
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged
