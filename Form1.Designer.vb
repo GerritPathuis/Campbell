@@ -362,19 +362,27 @@ Partial Class Form1
         Me.Label133 = New System.Windows.Forms.Label()
         Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.TextBox71 = New System.Windows.Forms.TextBox()
         Me.GroupBox34 = New System.Windows.Forms.GroupBox()
-        Me.TextBox87 = New System.Windows.Forms.TextBox()
-        Me.Label180 = New System.Windows.Forms.Label()
-        Me.NumericUpDown66 = New System.Windows.Forms.NumericUpDown()
-        Me.Label181 = New System.Windows.Forms.Label()
-        Me.Label182 = New System.Windows.Forms.Label()
+        Me.TextBox86 = New System.Windows.Forms.TextBox()
+        Me.Label179 = New System.Windows.Forms.Label()
+        Me.NumericUpDown69 = New System.Windows.Forms.NumericUpDown()
+        Me.NumericUpDown67 = New System.Windows.Forms.NumericUpDown()
         Me.TextBox82 = New System.Windows.Forms.TextBox()
+        Me.NumericUpDown64 = New System.Windows.Forms.NumericUpDown()
         Me.Label174 = New System.Windows.Forms.Label()
+        Me.Label184 = New System.Windows.Forms.Label()
         Me.TextBox83 = New System.Windows.Forms.TextBox()
+        Me.TextBox87 = New System.Windows.Forms.TextBox()
         Me.Label175 = New System.Windows.Forms.Label()
+        Me.Label180 = New System.Windows.Forms.Label()
         Me.Label176 = New System.Windows.Forms.Label()
+        Me.NumericUpDown66 = New System.Windows.Forms.NumericUpDown()
         Me.TextBox84 = New System.Windows.Forms.TextBox()
+        Me.Label181 = New System.Windows.Forms.Label()
         Me.Label177 = New System.Windows.Forms.Label()
+        Me.Label182 = New System.Windows.Forms.Label()
         Me.TextBox85 = New System.Windows.Forms.TextBox()
         Me.Label178 = New System.Windows.Forms.Label()
         Me.Button9 = New System.Windows.Forms.Button()
@@ -446,17 +454,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.NumericUpDown64 = New System.Windows.Forms.NumericUpDown()
-        Me.Label184 = New System.Windows.Forms.Label()
-        Me.NumericUpDown67 = New System.Windows.Forms.NumericUpDown()
-        Me.Label173 = New System.Windows.Forms.Label()
-        Me.NumericUpDown68 = New System.Windows.Forms.NumericUpDown()
-        Me.Label179 = New System.Windows.Forms.Label()
-        Me.NumericUpDown69 = New System.Windows.Forms.NumericUpDown()
-        Me.TextBox81 = New System.Windows.Forms.TextBox()
-        Me.Label187 = New System.Windows.Forms.Label()
-        Me.TextBox86 = New System.Windows.Forms.TextBox()
-        Me.TextBox71 = New System.Windows.Forms.TextBox()
+        Me.TextBox88 = New System.Windows.Forms.TextBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -577,6 +575,9 @@ Partial Class Form1
         Me.TabPage8.SuspendLayout()
         Me.TabPage9.SuspendLayout()
         Me.GroupBox34.SuspendLayout()
+        CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown67, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown64, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown66, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox17.SuspendLayout()
         CType(Me.NumericUpDown57, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -594,10 +595,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown64, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown67, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown68, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabPage5
@@ -4385,6 +4382,8 @@ Partial Class Form1
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.TextBox88)
+        Me.TabPage9.Controls.Add(Me.Button11)
         Me.TabPage9.Controls.Add(Me.TextBox71)
         Me.TabPage9.Controls.Add(Me.GroupBox34)
         Me.TabPage9.Controls.Add(Me.Button9)
@@ -4397,18 +4396,33 @@ Partial Class Form1
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage9.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage9.TabIndex = 10
-        Me.TabPage9.Text = "Metal support stiffness"
+        Me.TabPage9.Text = "NDE bearing support stiffness"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(461, 639)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(95, 23)
+        Me.Button11.TabIndex = 31
+        Me.Button11.Text = "Print"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'TextBox71
+        '
+        Me.TextBox71.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox71.Location = New System.Drawing.Point(704, 407)
+        Me.TextBox71.Multiline = True
+        Me.TextBox71.Name = "TextBox71"
+        Me.TextBox71.Size = New System.Drawing.Size(534, 129)
+        Me.TextBox71.TabIndex = 22
+        Me.TextBox71.Text = "Possible solutions"
         '
         'GroupBox34
         '
         Me.GroupBox34.Controls.Add(Me.TextBox86)
-        Me.GroupBox34.Controls.Add(Me.TextBox81)
-        Me.GroupBox34.Controls.Add(Me.Label187)
         Me.GroupBox34.Controls.Add(Me.Label179)
         Me.GroupBox34.Controls.Add(Me.NumericUpDown69)
-        Me.GroupBox34.Controls.Add(Me.Label173)
-        Me.GroupBox34.Controls.Add(Me.NumericUpDown68)
         Me.GroupBox34.Controls.Add(Me.NumericUpDown67)
         Me.GroupBox34.Controls.Add(Me.TextBox82)
         Me.GroupBox34.Controls.Add(Me.NumericUpDown64)
@@ -4433,6 +4447,102 @@ Partial Class Form1
         Me.GroupBox34.TabStop = False
         Me.GroupBox34.Text = "Torsion natural frequency bearing support"
         '
+        'TextBox86
+        '
+        Me.TextBox86.Location = New System.Drawing.Point(228, 229)
+        Me.TextBox86.Name = "TextBox86"
+        Me.TextBox86.Size = New System.Drawing.Size(68, 20)
+        Me.TextBox86.TabIndex = 35
+        Me.TextBox86.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label179
+        '
+        Me.Label179.AutoSize = True
+        Me.Label179.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label179.Location = New System.Drawing.Point(18, 147)
+        Me.Label179.Name = "Label179"
+        Me.Label179.Size = New System.Drawing.Size(200, 18)
+        Me.Label179.TabIndex = 27
+        Me.Label179.Text = "Weight NDE bearing support "
+        '
+        'NumericUpDown69
+        '
+        Me.NumericUpDown69.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.NumericUpDown69.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown69.Location = New System.Drawing.Point(227, 147)
+        Me.NumericUpDown69.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown69.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown69.Name = "NumericUpDown69"
+        Me.NumericUpDown69.Size = New System.Drawing.Size(68, 20)
+        Me.NumericUpDown69.TabIndex = 28
+        Me.NumericUpDown69.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NumericUpDown69.Value = New Decimal(New Integer() {400, 0, 0, 0})
+        '
+        'NumericUpDown67
+        '
+        Me.NumericUpDown67.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.NumericUpDown67.DecimalPlaces = 2
+        Me.NumericUpDown67.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.NumericUpDown67.Location = New System.Drawing.Point(227, 71)
+        Me.NumericUpDown67.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown67.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.NumericUpDown67.Name = "NumericUpDown67"
+        Me.NumericUpDown67.Size = New System.Drawing.Size(68, 20)
+        Me.NumericUpDown67.TabIndex = 24
+        Me.NumericUpDown67.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NumericUpDown67.Value = New Decimal(New Integer() {10, 0, 0, 65536})
+        '
+        'TextBox82
+        '
+        Me.TextBox82.Location = New System.Drawing.Point(227, 335)
+        Me.TextBox82.Name = "TextBox82"
+        Me.TextBox82.Size = New System.Drawing.Size(68, 20)
+        Me.TextBox82.TabIndex = 16
+        Me.TextBox82.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'NumericUpDown64
+        '
+        Me.NumericUpDown64.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.NumericUpDown64.DecimalPlaces = 1
+        Me.NumericUpDown64.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.NumericUpDown64.Location = New System.Drawing.Point(227, 45)
+        Me.NumericUpDown64.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+        Me.NumericUpDown64.Minimum = New Decimal(New Integer() {4, 0, 0, 65536})
+        Me.NumericUpDown64.Name = "NumericUpDown64"
+        Me.NumericUpDown64.Size = New System.Drawing.Size(68, 20)
+        Me.NumericUpDown64.TabIndex = 23
+        Me.NumericUpDown64.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NumericUpDown64.Value = New Decimal(New Integer() {12, 0, 0, 0})
+        '
+        'Label174
+        '
+        Me.Label174.AutoSize = True
+        Me.Label174.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label174.Location = New System.Drawing.Point(18, 333)
+        Me.Label174.Name = "Label174"
+        Me.Label174.Size = New System.Drawing.Size(135, 18)
+        Me.Label174.TabIndex = 15
+        Me.Label174.Text = "1st Harmonic [rpm]"
+        '
+        'Label184
+        '
+        Me.Label184.AutoSize = True
+        Me.Label184.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label184.Location = New System.Drawing.Point(18, 45)
+        Me.Label184.Name = "Label184"
+        Me.Label184.Size = New System.Drawing.Size(150, 18)
+        Me.Label184.TabIndex = 22
+        Me.Label184.Text = "Horizontal Force [kN]"
+        '
+        'TextBox83
+        '
+        Me.TextBox83.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox83.Location = New System.Drawing.Point(227, 307)
+        Me.TextBox83.Name = "TextBox83"
+        Me.TextBox83.Size = New System.Drawing.Size(68, 22)
+        Me.TextBox83.TabIndex = 14
+        Me.TextBox83.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'TextBox87
         '
         Me.TextBox87.Location = New System.Drawing.Point(227, 97)
@@ -4440,6 +4550,16 @@ Partial Class Form1
         Me.TextBox87.Size = New System.Drawing.Size(68, 20)
         Me.TextBox87.TabIndex = 21
         Me.TextBox87.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label175
+        '
+        Me.Label175.AutoSize = True
+        Me.Label175.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label175.Location = New System.Drawing.Point(18, 307)
+        Me.Label175.Name = "Label175"
+        Me.Label175.Size = New System.Drawing.Size(137, 18)
+        Me.Label175.TabIndex = 13
+        Me.Label175.Text = "Natural speed [rpm]"
         '
         'Label180
         '
@@ -4450,6 +4570,16 @@ Partial Class Form1
         Me.Label180.Size = New System.Drawing.Size(200, 18)
         Me.Label180.TabIndex = 18
         Me.Label180.Text = "Torsional Stiffness [kNm/rad]"
+        '
+        'Label176
+        '
+        Me.Label176.AutoSize = True
+        Me.Label176.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label176.Location = New System.Drawing.Point(18, 255)
+        Me.Label176.Name = "Label176"
+        Me.Label176.Size = New System.Drawing.Size(87, 18)
+        Me.Label176.TabIndex = 12
+        Me.Label176.Text = "Period [sec]"
         '
         'NumericUpDown66
         '
@@ -4465,6 +4595,14 @@ Partial Class Form1
         Me.NumericUpDown66.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.NumericUpDown66.Value = New Decimal(New Integer() {13, 0, 0, 65536})
         '
+        'TextBox84
+        '
+        Me.TextBox84.Location = New System.Drawing.Point(227, 281)
+        Me.TextBox84.Name = "TextBox84"
+        Me.TextBox84.Size = New System.Drawing.Size(68, 20)
+        Me.TextBox84.TabIndex = 11
+        Me.TextBox84.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Label181
         '
         Me.Label181.AutoSize = True
@@ -4474,6 +4612,16 @@ Partial Class Form1
         Me.Label181.Size = New System.Drawing.Size(164, 18)
         Me.Label181.TabIndex = 13
         Me.Label181.Text = "Flex displacement [mm]"
+        '
+        'Label177
+        '
+        Me.Label177.AutoSize = True
+        Me.Label177.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label177.Location = New System.Drawing.Point(18, 281)
+        Me.Label177.Name = "Label177"
+        Me.Label177.Size = New System.Drawing.Size(156, 18)
+        Me.Label177.TabIndex = 10
+        Me.Label177.Text = "Natural Frequency [hz]"
         '
         'Label182
         '
@@ -4485,74 +4633,9 @@ Partial Class Form1
         Me.Label182.TabIndex = 14
         Me.Label182.Text = "Floor-CL bearing [m]"
         '
-        'TextBox82
-        '
-        Me.TextBox82.Location = New System.Drawing.Point(227, 351)
-        Me.TextBox82.Name = "TextBox82"
-        Me.TextBox82.Size = New System.Drawing.Size(68, 20)
-        Me.TextBox82.TabIndex = 16
-        Me.TextBox82.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label174
-        '
-        Me.Label174.AutoSize = True
-        Me.Label174.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label174.Location = New System.Drawing.Point(18, 349)
-        Me.Label174.Name = "Label174"
-        Me.Label174.Size = New System.Drawing.Size(135, 18)
-        Me.Label174.TabIndex = 15
-        Me.Label174.Text = "1st Harmonic [rpm]"
-        '
-        'TextBox83
-        '
-        Me.TextBox83.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox83.Location = New System.Drawing.Point(227, 323)
-        Me.TextBox83.Name = "TextBox83"
-        Me.TextBox83.Size = New System.Drawing.Size(68, 22)
-        Me.TextBox83.TabIndex = 14
-        Me.TextBox83.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label175
-        '
-        Me.Label175.AutoSize = True
-        Me.Label175.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label175.Location = New System.Drawing.Point(18, 323)
-        Me.Label175.Name = "Label175"
-        Me.Label175.Size = New System.Drawing.Size(137, 18)
-        Me.Label175.TabIndex = 13
-        Me.Label175.Text = "Natural speed [rpm]"
-        '
-        'Label176
-        '
-        Me.Label176.AutoSize = True
-        Me.Label176.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label176.Location = New System.Drawing.Point(18, 271)
-        Me.Label176.Name = "Label176"
-        Me.Label176.Size = New System.Drawing.Size(87, 18)
-        Me.Label176.TabIndex = 12
-        Me.Label176.Text = "Period [sec]"
-        '
-        'TextBox84
-        '
-        Me.TextBox84.Location = New System.Drawing.Point(227, 297)
-        Me.TextBox84.Name = "TextBox84"
-        Me.TextBox84.Size = New System.Drawing.Size(68, 20)
-        Me.TextBox84.TabIndex = 11
-        Me.TextBox84.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label177
-        '
-        Me.Label177.AutoSize = True
-        Me.Label177.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label177.Location = New System.Drawing.Point(18, 297)
-        Me.Label177.Name = "Label177"
-        Me.Label177.Size = New System.Drawing.Size(156, 18)
-        Me.Label177.TabIndex = 10
-        Me.Label177.Text = "Natural Frequency [hz]"
-        '
         'TextBox85
         '
-        Me.TextBox85.Location = New System.Drawing.Point(227, 271)
+        Me.TextBox85.Location = New System.Drawing.Point(227, 255)
         Me.TextBox85.Name = "TextBox85"
         Me.TextBox85.Size = New System.Drawing.Size(68, 20)
         Me.TextBox85.TabIndex = 9
@@ -4562,7 +4645,7 @@ Partial Class Form1
         '
         Me.Label178.AutoSize = True
         Me.Label178.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label178.Location = New System.Drawing.Point(18, 245)
+        Me.Label178.Location = New System.Drawing.Point(18, 229)
         Me.Label178.Name = "Label178"
         Me.Label178.Size = New System.Drawing.Size(176, 18)
         Me.Label178.TabIndex = 5
@@ -4570,12 +4653,13 @@ Partial Class Form1
         '
         'Button9
         '
-        Me.Button9.Location = New System.Drawing.Point(815, 758)
+        Me.Button9.Location = New System.Drawing.Point(610, 788)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(75, 23)
         Me.Button9.TabIndex = 8
         Me.Button9.Text = "Button9"
         Me.Button9.UseVisualStyleBackColor = True
+        Me.Button9.Visible = False
         '
         'GroupBox17
         '
@@ -5033,7 +5117,7 @@ Partial Class Form1
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(538, 520)
+        Me.Button10.Location = New System.Drawing.Point(527, 487)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 23)
         Me.Button10.TabIndex = 25
@@ -5289,125 +5373,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'NumericUpDown64
+        'TextBox88
         '
-        Me.NumericUpDown64.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.NumericUpDown64.DecimalPlaces = 2
-        Me.NumericUpDown64.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.NumericUpDown64.Location = New System.Drawing.Point(227, 45)
-        Me.NumericUpDown64.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
-        Me.NumericUpDown64.Minimum = New Decimal(New Integer() {4, 0, 0, 65536})
-        Me.NumericUpDown64.Name = "NumericUpDown64"
-        Me.NumericUpDown64.Size = New System.Drawing.Size(68, 20)
-        Me.NumericUpDown64.TabIndex = 23
-        Me.NumericUpDown64.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown64.Value = New Decimal(New Integer() {10, 0, 0, 0})
-        '
-        'Label184
-        '
-        Me.Label184.AutoSize = True
-        Me.Label184.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label184.Location = New System.Drawing.Point(18, 45)
-        Me.Label184.Name = "Label184"
-        Me.Label184.Size = New System.Drawing.Size(150, 18)
-        Me.Label184.TabIndex = 22
-        Me.Label184.Text = "Horizontal Force [kN]"
-        '
-        'NumericUpDown67
-        '
-        Me.NumericUpDown67.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.NumericUpDown67.DecimalPlaces = 2
-        Me.NumericUpDown67.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.NumericUpDown67.Location = New System.Drawing.Point(227, 71)
-        Me.NumericUpDown67.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown67.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.NumericUpDown67.Name = "NumericUpDown67"
-        Me.NumericUpDown67.Size = New System.Drawing.Size(68, 20)
-        Me.NumericUpDown67.TabIndex = 24
-        Me.NumericUpDown67.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown67.Value = New Decimal(New Integer() {5, 0, 0, 65536})
-        '
-        'Label173
-        '
-        Me.Label173.AutoSize = True
-        Me.Label173.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label173.Location = New System.Drawing.Point(18, 139)
-        Me.Label173.Name = "Label173"
-        Me.Label173.Size = New System.Drawing.Size(206, 18)
-        Me.Label173.TabIndex = 25
-        Me.Label173.Text = "Weight bearing house (100 %)"
-        '
-        'NumericUpDown68
-        '
-        Me.NumericUpDown68.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.NumericUpDown68.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown68.Location = New System.Drawing.Point(227, 139)
-        Me.NumericUpDown68.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NumericUpDown68.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown68.Name = "NumericUpDown68"
-        Me.NumericUpDown68.Size = New System.Drawing.Size(68, 20)
-        Me.NumericUpDown68.TabIndex = 26
-        Me.NumericUpDown68.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown68.Value = New Decimal(New Integer() {100, 0, 0, 0})
-        '
-        'Label179
-        '
-        Me.Label179.AutoSize = True
-        Me.Label179.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label179.Location = New System.Drawing.Point(18, 165)
-        Me.Label179.Name = "Label179"
-        Me.Label179.Size = New System.Drawing.Size(203, 18)
-        Me.Label179.TabIndex = 27
-        Me.Label179.Text = "Weight bearing support (30%)"
-        '
-        'NumericUpDown69
-        '
-        Me.NumericUpDown69.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.NumericUpDown69.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown69.Location = New System.Drawing.Point(227, 165)
-        Me.NumericUpDown69.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NumericUpDown69.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown69.Name = "NumericUpDown69"
-        Me.NumericUpDown69.Size = New System.Drawing.Size(68, 20)
-        Me.NumericUpDown69.TabIndex = 28
-        Me.NumericUpDown69.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown69.Value = New Decimal(New Integer() {100, 0, 0, 0})
-        '
-        'TextBox81
-        '
-        Me.TextBox81.Location = New System.Drawing.Point(227, 191)
-        Me.TextBox81.Name = "TextBox81"
-        Me.TextBox81.Size = New System.Drawing.Size(68, 20)
-        Me.TextBox81.TabIndex = 34
-        Me.TextBox81.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label187
-        '
-        Me.Label187.AutoSize = True
-        Me.Label187.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label187.Location = New System.Drawing.Point(18, 190)
-        Me.Label187.Name = "Label187"
-        Me.Label187.Size = New System.Drawing.Size(87, 18)
-        Me.Label187.TabIndex = 33
-        Me.Label187.Text = "Total weight"
-        '
-        'TextBox86
-        '
-        Me.TextBox86.Location = New System.Drawing.Point(227, 245)
-        Me.TextBox86.Name = "TextBox86"
-        Me.TextBox86.Size = New System.Drawing.Size(68, 20)
-        Me.TextBox86.TabIndex = 35
-        Me.TextBox86.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox71
-        '
-        Me.TextBox71.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox71.Location = New System.Drawing.Point(704, 407)
-        Me.TextBox71.Multiline = True
-        Me.TextBox71.Name = "TextBox71"
-        Me.TextBox71.Size = New System.Drawing.Size(534, 202)
-        Me.TextBox71.TabIndex = 22
-        Me.TextBox71.Text = "Possible solutions"
+        Me.TextBox88.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox88.Location = New System.Drawing.Point(705, 544)
+        Me.TextBox88.Multiline = True
+        Me.TextBox88.Name = "TextBox88"
+        Me.TextBox88.Size = New System.Drawing.Size(534, 234)
+        Me.TextBox88.TabIndex = 32
+        Me.TextBox88.Text = "Calculation method"
         '
         'Form1
         '
@@ -5569,6 +5543,9 @@ Partial Class Form1
         Me.TabPage9.PerformLayout()
         Me.GroupBox34.ResumeLayout(False)
         Me.GroupBox34.PerformLayout()
+        CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown67, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown64, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown66, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox17.PerformLayout()
@@ -5591,10 +5568,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown64, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown67, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown68, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -6019,12 +5992,10 @@ Partial Class Form1
     Friend WithEvents NumericUpDown67 As NumericUpDown
     Friend WithEvents NumericUpDown64 As NumericUpDown
     Friend WithEvents Label184 As Label
-    Friend WithEvents TextBox81 As TextBox
-    Friend WithEvents Label187 As Label
     Friend WithEvents Label179 As Label
     Friend WithEvents NumericUpDown69 As NumericUpDown
-    Friend WithEvents Label173 As Label
-    Friend WithEvents NumericUpDown68 As NumericUpDown
     Friend WithEvents TextBox86 As TextBox
     Friend WithEvents TextBox71 As TextBox
+    Friend WithEvents Button11 As Button
+    Friend WithEvents TextBox88 As TextBox
 End Class

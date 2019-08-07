@@ -70,7 +70,7 @@ Public Class Form1
     "OVERHUNG BEARING SUPPORT",
     "The bearing support near the motor Is stiff > 100 kN/mm",
     "Calculate with the bearing stiffness 100 kN/mm",
-     ""}
+    ""}
 
     '----------- directory's-----------
     Dim dirpath_Eng As String = "N:\Engineering\VBasic\Campbell_input\"
@@ -212,6 +212,22 @@ Public Class Form1
         "Fill up with approx 750 kg concrete (2500 [kg/m3])" & vbCrLf &
         " "
 
+        'see http://hyperphysics.phy-astr.gsu.edu/hbase/mi2.html
+        TextBox88.Text =
+        "Lineair Calculation basis" & vbCrLf &
+        "L_Stifness = Force / displacement [kN/mm]" & vbCrLf &
+        "L_period = 2 * PI * Sqrt(fan_weight / L_stiffness) [s]" & vbCrLf &
+        "L_Freq = 1 / period [hz]" & vbCrLf & vbCrLf &
+        "Torsional calculation basis" & vbCrLf &
+        "T_Stifness = Torque / displacement [kNm/rad]" & vbCrLf &
+        "T_moment of inertia = (Point mass, radius=R) M*R^2 [kg/m2]" & vbCrLf &
+        "T_Moment of inertia = (solid ring, radius=R) 1/2*M*L^2 [kg/m2]" & vbCrLf &
+        "T_Moment of inertia = (rod trough end, length=L) 1/3*M*L^2 [kg/m2]" & vbCrLf &
+        "T_period = 2 * PI * Sqrt(T_inertia / T_stiffness) [s]" & vbCrLf &
+        "T_freq = 1 / T_period [hz]" & vbCrLf &
+        "Note: Lineair calc is the preferred option due difficulty of determining the " & vbCrLf &
+        "      Moment of Inertia of the NDE bearing support"
+
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
         Bearing_support_stiffnes()
@@ -298,7 +314,7 @@ Public Class Form1
 
         Try
             E_steel = Calc_young(NumericUpDown55.Value)         'Shaft Young mod. [N/mm^2] 
-            TextBox61.Text = (E_steel / 1000).ToString("000")   'Young's modulud [kN/mm^2]
+            TextBox61.Text = (E_steel / 1000).ToString("F0")   'Young's modulud [kN/mm^2]
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
             L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
@@ -631,7 +647,7 @@ Public Class Form1
 
         TextBox17.Text = Round(length_B * 1000, 0).ToString
         'TextBox18.Text = I_as_tussen.ToString("0.00 E0")
-        TextBox18.Text = (I_as_tussen * 1000 ^ 4).ToString("0")
+        TextBox18.Text = (I_as_tussen * 1000 ^ 4).ToString("F0")
         TextBox19.Text = Round(C_tussen / 1000).ToString                'Buigstijfheid [kN/m]
         TextBox20.Text = Round(fr_krit, 0).ToString                     '[Hz]
         TextBox27.Text = Round(fr_krit * 60, 0).ToString                '[rpm]
@@ -640,9 +656,9 @@ Public Class Form1
         '-------------- Overhung -----------------
         Dim Overhung_L, Overhung_A, C_Overhung, fr_krit_overhung As Double
 
-        diam_overhung = NumericUpDown19.Value / 1000                     '[m]
+        diam_overhung = NumericUpDown19.Value / 1000                    '[m]
         Overhung_L = NumericUpDown14.Value / 1000
-        Overhung_A = NumericUpDown18.Value / 1000                        'Overhung
+        Overhung_A = NumericUpDown18.Value / 1000                       'Overhung
 
         I_as_overhung = PI / 4 * (diam_overhung / 2) ^ 4                '[m4]
         C_Overhung = 3 * young * I_as_overhung
@@ -652,10 +668,10 @@ Public Class Form1
         fr_krit_overhung /= (2 * PI)                                    '[Hz]
 
         'TextBox26.Text = I_as_overhung.ToString("0.00 E0")
-        TextBox26.Text = (I_as_overhung * 1000 ^ 4).ToString("0")       '[mm4]
-        TextBox21.Text = Round(C_Overhung / 1000, 0).ToString           'Buigstijfheid [kN/m]
-        TextBox22.Text = Round(fr_krit_overhung, 0).ToString            '[Hz]   
-        TextBox28.Text = Round(fr_krit_overhung * 60, 0).ToString       '[rpm]
+        TextBox26.Text = (I_as_overhung * 1000 ^ 4).ToString("F0")      '[mm4]
+        TextBox21.Text = (C_Overhung / 1000).ToString("F2")             'Buigstijfheid [kN/m]
+        TextBox22.Text = (fr_krit_overhung).ToString("F0")              '[Hz]   
+        TextBox28.Text = (fr_krit_overhung * 60).ToString("F0")         '[rpm]
 
         '---------------- Check lengtes --------------------
         If length_A > length_L * 0.95 Then   'Residual torque too big,  problem in choosen bouderies
@@ -1034,11 +1050,11 @@ Public Class Form1
 
         row_ball = NumericUpDown34.Value                        'Single of double row bearing
         row_roller = NumericUpDown41.Value                      'Single of double row bearing
-        TextBox46.Text = (Kvv_ball * row_ball).ToString("0")    'Vertical stiffness x row
-        TextBox56.Text = (Kuu_ball * row_ball).ToString("0")    'horizontal stiffness x row
+        TextBox46.Text = (Kvv_ball * row_ball).ToString("F0")    'Vertical stiffness x row
+        TextBox56.Text = (Kuu_ball * row_ball).ToString("F0")    'horizontal stiffness x row
 
-        TextBox47.Text = (Kvv_roller * row_roller).ToString("0") 'Vertical stiffness
-        TextBox57.Text = (Kuu_roller * row_roller).ToString("0") 'horizontal stiffness
+        TextBox47.Text = (Kvv_roller * row_roller).ToString("F0") 'Vertical stiffness
+        TextBox57.Text = (Kuu_roller * row_roller).ToString("F0") 'horizontal stiffness
     End Sub
     Private Sub Calc_dydrodynamic_bearing()
         Dim dia, omega, visco, length, f_load, clearance As Double
@@ -1466,7 +1482,7 @@ Public Class Form1
         Return (young * 1000)
     End Function
     'Çalculate natural frequency bearing support
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown68.ValueChanged
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged
         Dim fan_weight As Double
         Dim stiff As Double
         Dim period, freq, speed As Double
@@ -1480,43 +1496,43 @@ Public Class Form1
 
         TextBox67.Text = period.ToString("F4")
         TextBox68.Text = freq.ToString("F1")
-        TextBox69.Text = speed.ToString("0")
-        TextBox70.Text = (speed * 2).ToString("0")
-
+        TextBox69.Text = speed.ToString("F0")
+        TextBox70.Text = (speed * 2).ToString("F0")
 
         '============= torsional stiffness =======
         'https://en.wikipedia.org/wiki/Stiffness
         'https://en.wikipedia.org/wiki/List_of_moments_of_inertia
         Dim radius As Double = NumericUpDown66.Value    '[m]
         Dim T_stiff As Double                           '[N/m]
-        Dim displac As Double                           '[m]
+        Dim L_displac As Double                         '[rad] lineair displacement
+        Dim R_displac As Double                         '[rad] radial displacement
         Dim inertia As Double                           '[kg.m2]
         Dim force As Double                             '[N]
         Dim T_period, T_freq, T_speed As Double
-        Dim w1, w2, wt As Double
+        Dim wt As Double
+
         '----- get data from screen -----------
         force = NumericUpDown64.Value * 10 ^ 3      '[N] horizontal force on bearing
-        displac = NumericUpDown67.Value * 10 ^ -3   '[m] verplaatsing
+        L_displac = NumericUpDown67.Value * 10 ^ -3   '[m] verplaatsing
         radius = NumericUpDown66.Value              '[m] Centerline height
 
+        '----- Radial dispacement ---------
+        R_displac = L_displac / (PI * 2 * radius) * 2 * PI
+
         '----- Torsional stiffness -----
-        T_stiff = force * radius ^ 2 / displac
+        T_stiff = force / R_displac
         TextBox87.Text = (T_stiff / 1000).ToString("F0")    '[kN/rad]
 
-
-        'Estimate inertia
-        w1 = NumericUpDown68.Value                  '[kg] 
-        w2 = NumericUpDown69.Value * 0.5            '[kg] 
-        wt = w1 + w2                                '[kg] 
-        inertia = wt * radius ^ 2                   '[kg.m2] 
+        'Estimate moment of inertia
+        wt = NumericUpDown69.Value                      '[kg] complete NDE bearing support
+        inertia = 1 / 3 * wt * radius ^ 2               '[kg.m2] 
 
         'Natural torsional frequency
         T_period = 2 * PI * Sqrt(inertia / T_stiff)
         T_freq = 1 / T_period                           '[Hz]
         T_speed = T_freq * 60                           '[Rpm]
 
-        TextBox81.Text = wt.ToString("F0")              '[kg]
-        TextBox86.Text = inertia.ToString("F1")         '[kg.m2] inertia
+        TextBox86.Text = inertia.ToString("F1")         '[kg.m2] Moment inertia
         TextBox85.Text = T_period.ToString("F2")        '[s] Period 
         TextBox84.Text = T_freq.ToString("F1")          '[Hz] frequency
         TextBox83.Text = T_speed.ToString("F0")         '[rpm] speed
@@ -1549,10 +1565,10 @@ Public Class Form1
 
         Label159.Visible = CBool(IIf(F_dyn_found / 10 < weight_r, vbFalse, vbTrue))
         Label160.Visible = CBool(IIf(un_bal_force / 10 < weight_r, vbFalse, vbTrue))
-        TextBox74.Text = (un_bal_speed_pp * 1000).ToString("0.0")   '[mm/s, p-p]
-        TextBox75.Text = F_dyn_found.ToString("0")                  '[N]
-        TextBox96.Text = ang_speed.ToString("0.0")                  '[rad/s]
-        TextBox95.Text = un_bal_force.ToString("0")                 '[N]
+        TextBox74.Text = (un_bal_speed_pp * 1000).ToString("F2")  '[mm/s, p-p]
+        TextBox75.Text = F_dyn_found.ToString("F0")               '[N]
+        TextBox96.Text = ang_speed.ToString("F1")                 '[rad/s]
+        TextBox95.Text = un_bal_force.ToString("F0")              '[N]
     End Sub
     Private Sub Calc_Rotary_feeder()
         Dim rps, dia As Double      'Rotary feeder
@@ -1576,9 +1592,201 @@ Public Class Form1
 
         Force = lump * acc                  'Accelation force [N]
 
-        TextBox77.Text = tip_speed.ToString("0.0")
-        TextBox78.Text = acc.ToString("0")
-        TextBox79.Text = Force.ToString("0")
-        TextBox80.Text = a_time.ToString("0.00")
+        TextBox77.Text = tip_speed.ToString("F1")
+        TextBox78.Text = acc.ToString("F0")
+        TextBox79.Text = Force.ToString("F0")
+        TextBox80.Text = a_time.ToString("F2")
+    End Sub
+
+    Private Sub Print_torsion()
+        Dim oWord As Word.Application ' = Nothing
+
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Dim ufilename As String
+        ufilename = "Frame_Vibration_report_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 9
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 65
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Horizontal Vibration Analyses of the NDE bearing support of a 'between bearings' fan" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox7.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number"
+            oTable.Cell(row, 2).Range.Text = TextBox8.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Fan type"
+            oTable.Cell(row, 2).Range.Text = TextBox9.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a 8 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+
+            oTable.Cell(row, 1).Range.Text = "Lineair Natural frequency support"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Weight bearing support"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown56.Value.ToString("F0")
+            oTable.Cell(row, 3).Range.Text = "[kg]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Lineair stiffness"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown57.Value.ToString("F1")
+            oTable.Cell(row, 3).Range.Text = "[KN/mm]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Natural frequency"
+            oTable.Cell(row, 2).Range.Text = TextBox68.Text
+            oTable.Cell(row, 3).Range.Text = "[Hz]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Natural speed"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            oTable.Cell(row, 3).Range.Text = "[rpm]"
+            row += 1
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------------------------------
+            'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+
+            oTable.Cell(row, 1).Range.Text = "Torsion natural frequency"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Floor to bearing height"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
+            oTable.Cell(row, 3).Range.Text = "[m]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Horizontal force"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown64.Value.ToString("F1")
+            oTable.Cell(row, 3).Range.Text = "[kN]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Flex displacement"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown67.Value.ToString("F2")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Torsion stiffness"
+            oTable.Cell(row, 2).Range.Text = TextBox87.Text
+            oTable.Cell(row, 3).Range.Text = "[kNm/rad]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Weight NDE support"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown69.Value.ToString("F0")
+            oTable.Cell(row, 3).Range.Text = "[kg]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Moment of inertia"
+            oTable.Cell(row, 2).Range.Text = TextBox86.Text
+            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Natural frequency"
+            oTable.Cell(row, 2).Range.Text = TextBox84.Text
+            oTable.Cell(row, 3).Range.Text = "[Hz]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Natural speed"
+            oTable.Cell(row, 2).Range.Text = TextBox83.Text
+            oTable.Cell(row, 3).Range.Text = "[rpm]"
+            row += 1
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------------Save file word file------------------
+            'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
+
+            If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
+            If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
+            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+
+            If Directory.Exists(dirpath_Rap) Then
+                oWord.ActiveDocument.SaveAs(dirpath_Rap & ufilename)
+            Else
+                oWord.ActiveDocument.SaveAs(dirpath_Home & ufilename)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
+
+    Private Sub Button11_Click_1(sender As Object, e As EventArgs) Handles Button11.Click
+        Print_torsion()
     End Sub
 End Class
