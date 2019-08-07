@@ -225,9 +225,13 @@ Public Class Form1
         "T_Moment of inertia = (rod trough end, length=L) 1/3*M*L^2 [kg/m2]" & vbCrLf &
         "T_period = 2 * PI * Sqrt(T_inertia / T_stiffness) [s]" & vbCrLf &
         "T_freq = 1 / T_period [hz]" & vbCrLf &
-        "Note: Lineair calc is the preferred option due difficulty of determining the " & vbCrLf &
-        "      Moment of Inertia of the NDE bearing support"
+        "Note: Lineair calc is the preferred option due difficulty of determining the " &
+        "Moment of Inertia of the NDE bearing support"
 
+        TextBox81.Text =
+        "Note, only a part of the weight is taken into account " &
+        "depending on the COG position of the support because" & vbCrLf &
+        "near the bearing the movement is more intens than at the foot of the support. "
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
         Bearing_support_stiffnes()
@@ -1482,15 +1486,26 @@ Public Class Form1
         Return (young * 1000)
     End Function
     'Çalculate natural frequency bearing support
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, RadioButton6.CheckedChanged, RadioButton5.CheckedChanged
         Dim fan_weight As Double
         Dim stiff As Double
         Dim period, freq, speed As Double
+        Dim shape_factor As Double
 
         fan_weight = NumericUpDown56.Value      '[kg]
         stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
 
-        period = 2 * PI * Sqrt(fan_weight / stiff)
+        '== shape of the NDE bearing support===
+        'If support is triangle shaped 1/3 weight is taken into account
+        'If support is square shaped 1/2 weight is taken into account
+
+        If RadioButton5.Checked Then
+            shape_factor = 0.5      'Rectangle
+        Else
+            shape_factor = 0.333    'Triangle
+        End If
+
+        period = 2 * PI * Sqrt(fan_weight * shape_factor / stiff)
         freq = 1 / period
         speed = freq * 60
 
@@ -1503,40 +1518,40 @@ Public Class Form1
         'https://en.wikipedia.org/wiki/Stiffness
         'https://en.wikipedia.org/wiki/List_of_moments_of_inertia
         Dim radius As Double = NumericUpDown66.Value    '[m]
-        Dim T_stiff As Double                           '[N/m]
+        Dim R_stiff As Double                           '[N/m]
         Dim L_displac As Double                         '[rad] lineair displacement
         Dim R_displac As Double                         '[rad] radial displacement
-        Dim inertia As Double                           '[kg.m2]
-        Dim force As Double                             '[N]
-        Dim T_period, T_freq, T_speed As Double
+        Dim R_inertia As Double                         '[kg.m2]
+        Dim R_force As Double                           '[N]
+        Dim R_period, R_freq, R_speed As Double
         Dim wt As Double
 
         '----- get data from screen -----------
-        force = NumericUpDown64.Value * 10 ^ 3      '[N] horizontal force on bearing
-        L_displac = NumericUpDown67.Value * 10 ^ -3   '[m] verplaatsing
-        radius = NumericUpDown66.Value              '[m] Centerline height
+        R_force = NumericUpDown64.Value * 10 ^ 3        '[N] horizontal force on bearing
+        L_displac = NumericUpDown67.Value * 10 ^ -3     '[m] verplaatsing
+        radius = NumericUpDown66.Value                  '[m] Centerline height
 
         '----- Radial dispacement ---------
         R_displac = L_displac / (PI * 2 * radius) * 2 * PI
 
         '----- Torsional stiffness -----
-        T_stiff = force / R_displac
-        TextBox87.Text = (T_stiff / 1000).ToString("F0")    '[kN/rad]
+        R_stiff = R_force / R_displac
+        TextBox87.Text = (R_stiff / 1000).ToString("F0")    '[kN/rad]
 
         'Estimate moment of inertia
         wt = NumericUpDown69.Value                      '[kg] complete NDE bearing support
-        inertia = 1 / 3 * wt * radius ^ 2               '[kg.m2] 
+        R_inertia = 1 / 3 * wt * radius ^ 2             '[kg.m2] 
 
         'Natural torsional frequency
-        T_period = 2 * PI * Sqrt(inertia / T_stiff)
-        T_freq = 1 / T_period                           '[Hz]
-        T_speed = T_freq * 60                           '[Rpm]
+        R_period = 2 * PI * Sqrt(R_inertia / R_stiff)
+        R_freq = 1 / R_period                           '[Hz]
+        R_speed = R_freq * 60                           '[Rpm]
 
-        TextBox86.Text = inertia.ToString("F1")         '[kg.m2] Moment inertia
-        TextBox85.Text = T_period.ToString("F2")        '[s] Period 
-        TextBox84.Text = T_freq.ToString("F1")          '[Hz] frequency
-        TextBox83.Text = T_speed.ToString("F0")         '[rpm] speed
-        TextBox82.Text = (T_speed * 2).ToString("F0")   '[rpm] speed first harmonic
+        TextBox86.Text = R_inertia.ToString("F1")       '[kg.m2] Moment inertia
+        TextBox85.Text = R_period.ToString("F4")        '[s] Period torsional
+        TextBox84.Text = R_freq.ToString("F1")          '[Hz] frequency torsional
+        TextBox83.Text = R_speed.ToString("F0")         '[rpm] speed
+        TextBox82.Text = (R_speed * 2).ToString("F0")   '[rpm] speed first harmonic
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click, TabPage10.Enter, NumericUpDown60.ValueChanged, NumericUpDown59.ValueChanged, NumericUpDown58.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged
