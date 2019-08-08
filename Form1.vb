@@ -1618,9 +1618,10 @@ Public Class Form1
 
         Dim oDoc As Word.Document
         Dim oTable As Word.Table
-        Dim oPara1, oPara2 As Word.Paragraph
+        Dim oPara1, oPara2, oPara3 As Word.Paragraph
         Dim row, font_sizze As Integer
-        Dim ufilename As String
+        Dim chart_size As Integer = 55  '% of original picture size
+        Dim ufilename, filename As String
         ufilename = "Frame_Vibration_report_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
@@ -1734,7 +1735,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
 
-            oTable.Cell(row, 1).Range.Text = "Torsion natural frequency"
+            oTable.Cell(row, 1).Range.Text = "NDE bearing support natural frequency"
             row += 1
 
             oTable.Cell(row, 1).Range.Text = "Floor to bearing height"
@@ -1782,6 +1783,16 @@ Public Class Form1
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
 
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------- Insert picturebox14 -------
+            filename = dirpath_Rap & "Picturebox14.Jpeg"
+            PictureBox14.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg)
+            oPara3 = oDoc.Content.Paragraphs.Add
+            oPara3.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            oPara3.Range.InlineShapes.AddPicture(filename)
+            oPara3.Range.InlineShapes.Item(1).LockAspectRatio = CType(True, Microsoft.Office.Core.MsoTriState)
+            oPara3.Range.InlineShapes.Item(1).ScaleWidth = chart_size       'Size
+            oPara3.Range.InsertParagraphAfter()
 
             '--------------Save file word file------------------
             'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx

@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea19 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend19 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series19 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea20 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend20 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series20 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -362,6 +362,10 @@ Partial Class Form1
         Me.Label133 = New System.Windows.Forms.Label()
         Me.TextBox63 = New System.Windows.Forms.TextBox()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
+        Me.TextBox81 = New System.Windows.Forms.TextBox()
+        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.TextBox88 = New System.Windows.Forms.TextBox()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.TextBox71 = New System.Windows.Forms.TextBox()
@@ -455,10 +459,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
-        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
-        Me.TextBox81 = New System.Windows.Forms.TextBox()
+        Me.Label144 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -578,6 +579,7 @@ Partial Class Form1
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage8.SuspendLayout()
         Me.TabPage9.SuspendLayout()
+        Me.GroupBox33.SuspendLayout()
         Me.GroupBox34.SuspendLayout()
         CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown67, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -599,7 +601,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox33.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage5
@@ -2787,17 +2788,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea19.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea19)
+        ChartArea5.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea5)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend19.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend19)
+        Legend5.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend5)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series19.ChartArea = "ChartArea1"
-        Series19.Legend = "Legend1"
-        Series19.Name = "Series1"
-        Me.Chart1.Series.Add(Series19)
+        Series5.ChartArea = "ChartArea1"
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.Chart1.Series.Add(Series5)
         Me.Chart1.Size = New System.Drawing.Size(795, 620)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -3001,16 +3002,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea20.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea20)
-        Legend20.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend20)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend6)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series20.ChartArea = "ChartArea1"
-        Series20.Legend = "Legend1"
-        Series20.Name = "Series1"
-        Me.Chart2.Series.Add(Series20)
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.Chart2.Series.Add(Series6)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -4387,6 +4388,7 @@ Partial Class Form1
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.Label144)
         Me.TabPage9.Controls.Add(Me.GroupBox33)
         Me.TabPage9.Controls.Add(Me.TextBox88)
         Me.TabPage9.Controls.Add(Me.Button11)
@@ -4404,6 +4406,48 @@ Partial Class Form1
         Me.TabPage9.TabIndex = 10
         Me.TabPage9.Text = "NDE bearing support stiffness"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'GroupBox33
+        '
+        Me.GroupBox33.Controls.Add(Me.TextBox81)
+        Me.GroupBox33.Controls.Add(Me.RadioButton6)
+        Me.GroupBox33.Controls.Add(Me.RadioButton5)
+        Me.GroupBox33.Location = New System.Drawing.Point(410, 601)
+        Me.GroupBox33.Name = "GroupBox33"
+        Me.GroupBox33.Size = New System.Drawing.Size(288, 120)
+        Me.GroupBox33.TabIndex = 33
+        Me.GroupBox33.TabStop = False
+        Me.GroupBox33.Text = "NDE bearing support shape"
+        '
+        'TextBox81
+        '
+        Me.TextBox81.Location = New System.Drawing.Point(0, 47)
+        Me.TextBox81.Multiline = True
+        Me.TextBox81.Name = "TextBox81"
+        Me.TextBox81.Size = New System.Drawing.Size(287, 72)
+        Me.TextBox81.TabIndex = 19
+        '
+        'RadioButton6
+        '
+        Me.RadioButton6.AutoSize = True
+        Me.RadioButton6.Checked = True
+        Me.RadioButton6.Location = New System.Drawing.Point(142, 19)
+        Me.RadioButton6.Name = "RadioButton6"
+        Me.RadioButton6.Size = New System.Drawing.Size(89, 17)
+        Me.RadioButton6.TabIndex = 18
+        Me.RadioButton6.TabStop = True
+        Me.RadioButton6.Text = "Triangle (1/3)"
+        Me.RadioButton6.UseVisualStyleBackColor = True
+        '
+        'RadioButton5
+        '
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(11, 19)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(100, 17)
+        Me.RadioButton5.TabIndex = 17
+        Me.RadioButton5.Text = "Rectangle (1/2)"
+        Me.RadioButton5.UseVisualStyleBackColor = True
         '
         'TextBox88
         '
@@ -4430,7 +4474,7 @@ Partial Class Form1
         Me.TextBox71.Location = New System.Drawing.Point(704, 407)
         Me.TextBox71.Multiline = True
         Me.TextBox71.Name = "TextBox71"
-        Me.TextBox71.Size = New System.Drawing.Size(534, 120)
+        Me.TextBox71.Size = New System.Drawing.Size(533, 120)
         Me.TextBox71.TabIndex = 22
         Me.TextBox71.Text = "Possible solutions"
         '
@@ -4821,7 +4865,7 @@ Partial Class Form1
         'PictureBox14
         '
         Me.PictureBox14.Image = CType(resources.GetObject("PictureBox14.Image"), System.Drawing.Image)
-        Me.PictureBox14.Location = New System.Drawing.Point(8, 375)
+        Me.PictureBox14.Location = New System.Drawing.Point(3, 388)
         Me.PictureBox14.Name = "PictureBox14"
         Me.PictureBox14.Size = New System.Drawing.Size(396, 346)
         Me.PictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -5390,47 +5434,14 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'RadioButton5
+        'Label144
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(11, 19)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(100, 17)
-        Me.RadioButton5.TabIndex = 17
-        Me.RadioButton5.Text = "Rectangle (1/2)"
-        Me.RadioButton5.UseVisualStyleBackColor = True
-        '
-        'RadioButton6
-        '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Checked = True
-        Me.RadioButton6.Location = New System.Drawing.Point(142, 19)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(89, 17)
-        Me.RadioButton6.TabIndex = 18
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "Triangle (1/3)"
-        Me.RadioButton6.UseVisualStyleBackColor = True
-        '
-        'GroupBox33
-        '
-        Me.GroupBox33.Controls.Add(Me.TextBox81)
-        Me.GroupBox33.Controls.Add(Me.RadioButton6)
-        Me.GroupBox33.Controls.Add(Me.RadioButton5)
-        Me.GroupBox33.Location = New System.Drawing.Point(410, 601)
-        Me.GroupBox33.Name = "GroupBox33"
-        Me.GroupBox33.Size = New System.Drawing.Size(288, 120)
-        Me.GroupBox33.TabIndex = 33
-        Me.GroupBox33.TabStop = False
-        Me.GroupBox33.Text = "NDE bearing support shape"
-        '
-        'TextBox81
-        '
-        Me.TextBox81.Location = New System.Drawing.Point(0, 47)
-        Me.TextBox81.Multiline = True
-        Me.TextBox81.Name = "TextBox81"
-        Me.TextBox81.Size = New System.Drawing.Size(287, 72)
-        Me.TextBox81.TabIndex = 19
+        Me.Label144.AutoSize = True
+        Me.Label144.Location = New System.Drawing.Point(8, 744)
+        Me.Label144.Name = "Label144"
+        Me.Label144.Size = New System.Drawing.Size(273, 13)
+        Me.Label144.TabIndex = 34
+        Me.Label144.Text = "NDE BEARING SUPPORT, HORIZONTAL VIBRATION"
         '
         'Form1
         '
@@ -5590,6 +5601,8 @@ Partial Class Form1
         Me.TabPage8.PerformLayout()
         Me.TabPage9.ResumeLayout(False)
         Me.TabPage9.PerformLayout()
+        Me.GroupBox33.ResumeLayout(False)
+        Me.GroupBox33.PerformLayout()
         Me.GroupBox34.ResumeLayout(False)
         Me.GroupBox34.PerformLayout()
         CType(Me.NumericUpDown69, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5617,8 +5630,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox33.ResumeLayout(False)
-        Me.GroupBox33.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -6053,4 +6064,5 @@ Partial Class Form1
     Friend WithEvents RadioButton6 As RadioButton
     Friend WithEvents RadioButton5 As RadioButton
     Friend WithEvents TextBox81 As TextBox
+    Friend WithEvents Label144 As Label
 End Class
