@@ -58,14 +58,14 @@ Public Class Form1
     "Motor side calculate with the bearing stiffness 100 kN/mm",
     "The opposite support side Is 15 kN/mm",
     "",
-    " ",
     "BETWEEN THE BEARINGS, ON VIBRATION ISOLATORS",
     "The bearing support near the motor > 100 kN/mm",
     "Motor calculate with 100 kN/mm",
     "The opposite support side 2 kN/mm !!",
-    "With HEB300 + 15mm welded side plates 9 kN/mm ",
-    "With IPE400 + 20mm welded side plates 10 kN/mm ",
-    "Supezet between bearings stiffness 12 kN/mm ",
+    "With HEB300 + 15mm welded side plates 9 kN/mm @ NDE",
+    "With IPE400 + 20mm welded side plates 10 kN/mm @NDE",
+    "Supezet (P17.1053) between bearings stiffness 12 kN/mm @ NDE",
+    "Lummes (P18.1076) between bearings stiffness 20 kN/mm @ NDE",
     " ",
     "OVERHUNG BEARING SUPPORT",
     "The bearing support near the motor Is stiff > 100 kN/mm",
@@ -214,7 +214,7 @@ Public Class Form1
 
         'see http://hyperphysics.phy-astr.gsu.edu/hbase/mi2.html
         TextBox88.Text =
-        "Lineair Calculation basis" & vbCrLf &
+        "Linear Calculation basis" & vbCrLf &
         "L_Stifness = Force / displacement [kN/mm]" & vbCrLf &
         "L_period = 2 * PI * Sqrt(fan_weight / L_stiffness) [s]" & vbCrLf &
         "L_Freq = 1 / period [hz]" & vbCrLf & vbCrLf &
@@ -225,7 +225,7 @@ Public Class Form1
         "T_Moment of inertia = (rod trough end, length=L) 1/3*M*L^2 [kg/m2]" & vbCrLf &
         "T_period = 2 * PI * Sqrt(T_inertia / T_stiffness) [s]" & vbCrLf &
         "T_freq = 1 / T_period [hz]" & vbCrLf &
-        "Note: Lineair calc is the preferred option due difficulty of determining the " &
+        "Note: Linear calc is the preferred option due difficulty of determining the " &
         "Moment of Inertia of the NDE bearing support"
 
         TextBox81.Text =
@@ -1486,40 +1486,46 @@ Public Class Form1
         Return (young * 1000)
     End Function
     'Çalculate natural frequency bearing support
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, RadioButton6.CheckedChanged, RadioButton5.CheckedChanged
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown65.ValueChanged
         Dim fan_weight As Double
         Dim stiff As Double
         Dim period, freq, speed As Double
-        Dim shape_factor As Double
+        Dim COG_factor As Double
+        Dim Height_COG, Height_CL As Double
 
         fan_weight = NumericUpDown56.Value      '[kg]
         stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
 
         '== shape of the NDE bearing support===
-        'If support is triangle shaped 1/3 weight is taken into account
-        'If support is square shaped 1/2 weight is taken into account
+        '
+        Height_COG = NumericUpDown65.Value      'COG bearing support
+        Height_CL = NumericUpDown66.Value       'CL bearing
 
-        If RadioButton5.Checked Then
-            shape_factor = 0.5      'Rectangle
-        Else
-            shape_factor = 0.333    'Triangle
-        End If
+        COG_factor = Height_COG / Height_CL    'Ratio
 
-        period = 2 * PI * Sqrt(fan_weight * shape_factor / stiff)
+        period = 2 * PI * Sqrt(fan_weight * COG_factor / stiff)
         freq = 1 / period
         speed = freq * 60
 
         TextBox67.Text = period.ToString("F4")
         TextBox68.Text = freq.ToString("F1")
-        TextBox69.Text = speed.ToString("F0")
-        TextBox70.Text = (speed * 2).ToString("F0")
+        TextBox69.Text = speed.ToString("F0")           'Bending speed
+        TextBox70.Text = (speed / 1.2).ToString("F0")   'Save speed
+        TextBox90.Text = COG_factor.ToString("F2")    'ratio
+
+        '------ check ---
+        If COG_factor > 1.0 Then
+            TextBox90.BackColor = Color.Red
+        Else
+            TextBox90.BackColor = Color.LightGreen
+        End If
 
         '============= torsional stiffness =======
         'https://en.wikipedia.org/wiki/Stiffness
         'https://en.wikipedia.org/wiki/List_of_moments_of_inertia
         Dim radius As Double = NumericUpDown66.Value    '[m]
         Dim R_stiff As Double                           '[N/m]
-        Dim L_displac As Double                         '[rad] lineair displacement
+        Dim L_displac As Double                         '[rad] linear displacement
         Dim R_displac As Double                         '[rad] radial displacement
         Dim R_inertia As Double                         '[kg.m2]
         Dim R_force As Double                           '[N]
@@ -1662,10 +1668,10 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
 
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 1).Range.Text = "Project Number"
             oTable.Cell(row, 2).Range.Text = TextBox7.Text
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Project number"
+            oTable.Cell(row, 1).Range.Text = "Intem name"
             oTable.Cell(row, 2).Range.Text = TextBox8.Text
             row += 1
             oTable.Cell(row, 1).Range.Text = "Fan type"
@@ -1686,6 +1692,70 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
+
+            '----------------------General data-----------------------------------------
+
+            'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 1)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+
+            oTable.Cell(row, 1).Range.Text = "General info"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "The NDE Bearing support is sensative to horizontal vibration when the fan is not mounted on a conctrete support. "
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "The concrete support gives weight and stiffnes to the spring mass system thus reducing the vibrations."
+            row += 2
+            oTable.Cell(row, 1).Range.Text = "In the absence of a concrete support the forces need to be contained by the steel frame. "
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "The horizontal stiffness is FEA calculated by adding a horizontal force of 10 kN to the side "
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "of the NDE bearing house and then determining the horizontal deflection (C= Force/deflection [kN/mm])"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "The Center Of Gravity (COG of the NDE support) distance to the floor is also FEA calculated."
+            row += 1
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(6.5)   'Change width of columns 1 .
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '------------- NDE bearing support data --------------
+            'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+
+            oTable.Cell(row, 1).Range.Text = "NDE Bearing support data"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Support COF to floor height"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown65.Value.ToString("F2")
+            oTable.Cell(row, 3).Range.Text = "[m]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Bearing to floor height"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
+            oTable.Cell(row, 3).Range.Text = "[m]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Distance Ratio "
+            oTable.Cell(row, 2).Range.Text = TextBox90.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
             '----------------------------------------------
             'Insert a 8 (row) x 3 table (column), fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
@@ -1697,7 +1767,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
 
-            oTable.Cell(row, 1).Range.Text = "Lineair Natural frequency support"
+            oTable.Cell(row, 1).Range.Text = "Linear Natural frequency NDE bearing support"
             row += 1
 
             oTable.Cell(row, 1).Range.Text = "Weight bearing support"
@@ -1705,84 +1775,100 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Lineair stiffness"
+            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness"
             oTable.Cell(row, 2).Range.Text = NumericUpDown57.Value.ToString("F1")
-            oTable.Cell(row, 3).Range.Text = "[KN/mm]"
+            oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Natural frequency"
+            oTable.Cell(row, 1).Range.Text = "Natural vibration frequency"
             oTable.Cell(row, 2).Range.Text = TextBox68.Text
             oTable.Cell(row, 3).Range.Text = "[Hz]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Natural speed"
+            oTable.Cell(row, 1).Range.Text = "Natural vibration speed"
             oTable.Cell(row, 2).Range.Text = TextBox69.Text
             oTable.Cell(row, 3).Range.Text = "[rpm]"
             row += 1
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
-            oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
-            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
-            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
-
-            '----------------------------------------------------------------------
-            'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
-            oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
-            oTable.Range.Font.Bold = CInt(False)
-            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
-            row = 1
-
-            oTable.Cell(row, 1).Range.Text = "NDE bearing support natural frequency"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Floor to bearing height"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
-            oTable.Cell(row, 3).Range.Text = "[m]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Horizontal force"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown64.Value.ToString("F1")
-            oTable.Cell(row, 3).Range.Text = "[kN]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Flex displacement"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown67.Value.ToString("F2")
-            oTable.Cell(row, 3).Range.Text = "[mm]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Torsion stiffness"
-            oTable.Cell(row, 2).Range.Text = TextBox87.Text
-            oTable.Cell(row, 3).Range.Text = "[kNm/rad]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Weight NDE support"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown69.Value.ToString("F0")
-            oTable.Cell(row, 3).Range.Text = "[kg]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Moment of inertia"
-            oTable.Cell(row, 2).Range.Text = TextBox86.Text
-            oTable.Cell(row, 3).Range.Text = "[kg.m2]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Natural frequency"
-            oTable.Cell(row, 2).Range.Text = TextBox84.Text
-            oTable.Cell(row, 3).Range.Text = "[Hz]"
-            row += 1
-
-            oTable.Cell(row, 1).Range.Text = "Natural speed"
-            oTable.Cell(row, 2).Range.Text = TextBox83.Text
+            oTable.Cell(row, 1).Range.Text = "Maximum allowed speed"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
             oTable.Cell(row, 3).Range.Text = "[rpm]"
             row += 1
 
+            'oTable.Cell(row, 1).Range.Text = "Bearing support COF"
+            '    oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            '    oTable.Cell(row, 3).Range.Text = "[rpm]"
+            '    row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Maximum allowed speed"
+            '    oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            '    oTable.Cell(row, 3).Range.Text = "[rpm]"
+            '    row += 1
+
+
             oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
-
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            ''----------------------------------------------------------------------
+            ''Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
+            'oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
+            'oTable.Range.ParagraphFormat.SpaceAfter = 1
+            'oTable.Range.Font.Size = font_sizze
+            'oTable.Range.Font.Bold = CInt(False)
+            'oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            'oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            'row = 1
+
+            'oTable.Cell(row, 1).Range.Text = "NDE bearing support natural frequency"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Floor to bearing height"
+            'oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
+            'oTable.Cell(row, 3).Range.Text = "[m]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Horizontal force"
+            'oTable.Cell(row, 2).Range.Text = NumericUpDown64.Value.ToString("F1")
+            'oTable.Cell(row, 3).Range.Text = "[kN]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Flex displacement"
+            'oTable.Cell(row, 2).Range.Text = NumericUpDown67.Value.ToString("F2")
+            'oTable.Cell(row, 3).Range.Text = "[mm]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Torsion stiffness"
+            'oTable.Cell(row, 2).Range.Text = TextBox87.Text
+            'oTable.Cell(row, 3).Range.Text = "[kNm/rad]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Weight NDE support"
+            'oTable.Cell(row, 2).Range.Text = NumericUpDown69.Value.ToString("F0")
+            'oTable.Cell(row, 3).Range.Text = "[kg]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Moment of inertia"
+            'oTable.Cell(row, 2).Range.Text = TextBox86.Text
+            'oTable.Cell(row, 3).Range.Text = "[kg.m2]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Natural vibration frequency"
+            'oTable.Cell(row, 2).Range.Text = TextBox84.Text
+            'oTable.Cell(row, 3).Range.Text = "[Hz]"
+            'row += 1
+
+            'oTable.Cell(row, 1).Range.Text = "Natural speed"
+            'oTable.Cell(row, 2).Range.Text = TextBox83.Text
+            'oTable.Cell(row, 3).Range.Text = "[rpm]"
+            'row += 1
+
+            'oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
+            'oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
+            'oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+
+            'oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             '----------- Insert picturebox14 -------
             filename = dirpath_Rap & "Picturebox14.Jpeg"
