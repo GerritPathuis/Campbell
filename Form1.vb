@@ -1488,30 +1488,33 @@ Public Class Form1
     'Çalculate natural frequency bearing support
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click, NumericUpDown57.ValueChanged, NumericUpDown56.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown65.ValueChanged
         Dim fan_weight As Double
-        Dim stiff As Double
-        Dim period, freq, speed As Double
+        Dim stiff1 As Double
+        Dim stiff2 As Double
+        Dim freq, speed As Double
         Dim COG_factor As Double
         Dim Height_COG, Height_CL As Double
 
         fan_weight = NumericUpDown56.Value      '[kg]
-        stiff = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
+        stiff1 = NumericUpDown57.Value * 10 ^ 6  '[kN/mm]->[N/m]
 
-        '== shape of the NDE bearing support===
-        '
+        '== NOTE the Spring constant is determined at the bearing !!===
+        'at a lower position the spring is stiffer !
+
+        Height_CL = NumericUpDown66.Value       'CL bearing house
         Height_COG = NumericUpDown65.Value      'COG bearing support
-        Height_CL = NumericUpDown66.Value       'CL bearing
 
-        COG_factor = Height_COG / Height_CL    'Ratio
+        COG_factor = Height_COG / Height_CL     'Height Ratio
+        stiff2 = stiff1 / COG_factor            'Stiffness ar COG height
 
-        period = 2 * PI * Sqrt(fan_weight * COG_factor / stiff)
-        freq = 1 / period
-        speed = freq * 60
+        freq = Sqrt(stiff2 / fan_weight)        '[rad/s]
+        freq /= (2 * PI)                        '[Hz]
+        speed = freq * 60                       '[rpm]
 
-        TextBox67.Text = period.ToString("F4")
         TextBox68.Text = freq.ToString("F1")
-        TextBox69.Text = speed.ToString("F0")           'Bending speed
-        TextBox70.Text = (speed / 1.2).ToString("F0")   'Save speed
-        TextBox90.Text = COG_factor.ToString("F2")    'ratio
+        TextBox69.Text = speed.ToString("F0")               'Bending speed
+        TextBox70.Text = (speed / 1.2).ToString("F0")       'Save speed
+        TextBox90.Text = COG_factor.ToString("F2")          'ratio
+        TextBox67.Text = (stiff2 * 10 ^ -6).ToString("F1")  'ratio
 
         '------ check ---
         If COG_factor > 1.0 Then
