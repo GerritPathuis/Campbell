@@ -1778,8 +1778,13 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness"
+            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness @ bearing"
             oTable.Cell(row, 2).Range.Text = NumericUpDown57.Value.ToString("F1")
+            oTable.Cell(row, 3).Range.Text = "[kN/mm]"
+            row += 1
+
+            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness @ COG"
+            oTable.Cell(row, 2).Range.Text = TextBox67.Text
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
 
@@ -1797,16 +1802,6 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = TextBox70.Text
             oTable.Cell(row, 3).Range.Text = "[rpm]"
             row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Bearing support COF"
-            '    oTable.Cell(row, 2).Range.Text = TextBox70.Text
-            '    oTable.Cell(row, 3).Range.Text = "[rpm]"
-            '    row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Maximum allowed speed"
-            '    oTable.Cell(row, 2).Range.Text = TextBox70.Text
-            '    oTable.Cell(row, 3).Range.Text = "[rpm]"
-            '    row += 1
 
 
             oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
