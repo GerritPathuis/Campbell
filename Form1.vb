@@ -248,7 +248,7 @@ Public Class Form1
                 If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 100 '[kN/mm] Stiffness C2 @ impeller
             Else '(Between Bearings with heavy support)
                 If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75  '[kN/mm] Stiffness frame C1 @ drive bearing
-                If NumericUpDown7.Value > 10 Then NumericUpDown7.Value = 10  '[kN/mm] Stiffness frame C2 @ Not drive bearing
+                If NumericUpDown7.Value > 12 Then NumericUpDown7.Value = 12  '[kN/mm] Stiffness frame C2 @ Not drive bearing
             End If
         Else 'Concrete supports
             NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
@@ -754,7 +754,7 @@ Public Class Form1
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
-        ufilename = "Campbell_report_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+        ufilename = "Campbell_Calculation_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
             oWord = New Word.Application()
@@ -1514,7 +1514,7 @@ Public Class Form1
 
         TextBox68.Text = freq.ToString("F1")
         TextBox69.Text = speed.ToString("F0")               'Bending speed
-        TextBox70.Text = (speed / 1.2).ToString("F0")       'Save speed
+        TextBox70.Text = (speed / 1.2).ToString("F0")       'Save speed (20% clearance)
         TextBox90.Text = COG_factor.ToString("F2")          'ratio
         TextBox67.Text = (stiff2 * 10 ^ -6).ToString("F1")  'ratio
 
@@ -1633,7 +1633,7 @@ Public Class Form1
         Dim row, font_sizze As Integer
         Dim chart_size As Integer = 55  '% of original picture size
         Dim ufilename, filename As String
-        ufilename = "Frame_Vibration_report_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+        ufilename = "Frame_Vibration_Calculation_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
             oWord = New Word.Application()
@@ -1740,13 +1740,13 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "NDE Bearing support data"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "NDE support COG to floor height"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown65.Value.ToString("F2")
+            oTable.Cell(row, 1).Range.Text = "Bearing to floor height"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
             oTable.Cell(row, 3).Range.Text = "[m]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Bearing to floor height"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
+            oTable.Cell(row, 1).Range.Text = "NDE support COG to floor height"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown65.Value.ToString("F2")
             oTable.Cell(row, 3).Range.Text = "[m]"
             row += 1
 
