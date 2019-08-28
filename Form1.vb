@@ -1480,6 +1480,8 @@ Public Class Form1
         Return (Trim(tmpStr2))         'Harddisk identification
     End Function
     'Young for steel S355 temperature dependent
+    'https://www.engineeringtoolbox.com/young-modulus-d_773.html
+
     Public Function Calc_young(t As Double) As Double
         Dim young As Double
         young = -0.000000324 * t ^ 3 + 0.000049951 * t ^ 2 - 0.04930174 * t + 203.386
@@ -1738,7 +1740,7 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "NDE Bearing support data"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Support COF to floor height"
+            oTable.Cell(row, 1).Range.Text = "NDE support COG to floor height"
             oTable.Cell(row, 2).Range.Text = NumericUpDown65.Value.ToString("F2")
             oTable.Cell(row, 3).Range.Text = "[m]"
             row += 1
