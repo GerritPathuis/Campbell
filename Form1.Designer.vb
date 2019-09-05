@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -418,6 +418,8 @@ Partial Class Form1
         Me.TextBox66 = New System.Windows.Forms.TextBox()
         Me.PictureBox13 = New System.Windows.Forms.PictureBox()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.GroupBox35 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox17 = New System.Windows.Forms.PictureBox()
         Me.GroupBox32 = New System.Windows.Forms.GroupBox()
         Me.Label183 = New System.Windows.Forms.Label()
         Me.Label172 = New System.Windows.Forms.Label()
@@ -471,8 +473,6 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.PictureBox17 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox35 = New System.Windows.Forms.GroupBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -605,6 +605,8 @@ Partial Class Form1
         CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage10.SuspendLayout()
+        Me.GroupBox35.SuspendLayout()
+        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox32.SuspendLayout()
         CType(Me.NumericUpDown61, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown62, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -615,8 +617,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox35.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage5
@@ -2806,17 +2806,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea7.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea7)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend7.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend7)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series7.ChartArea = "ChartArea1"
-        Series7.Legend = "Legend1"
-        Series7.Name = "Series1"
-        Me.Chart1.Series.Add(Series7)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(795, 620)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -3020,16 +3020,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea8.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea8)
-        Legend8.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend8)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series8.ChartArea = "ChartArea1"
-        Series8.Legend = "Legend1"
-        Series8.Name = "Series1"
-        Me.Chart2.Series.Add(Series8)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart2.Series.Add(Series2)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -4481,9 +4481,9 @@ Partial Class Form1
         Me.Label186.AutoSize = True
         Me.Label186.Location = New System.Drawing.Point(261, 648)
         Me.Label186.Name = "Label186"
-        Me.Label186.Size = New System.Drawing.Size(116, 13)
+        Me.Label186.Size = New System.Drawing.Size(122, 13)
         Me.Label186.TabIndex = 35
-        Me.Label186.Text = "ω = SQRT(k/m) [rad/s]"
+        Me.Label186.Text = "ω = SQRT(k2/m) [rad/s]"
         '
         'Label144
         '
@@ -5035,6 +5035,27 @@ Partial Class Form1
         Me.TabPage10.Text = "Unbalance - Concrete support stiffness"
         Me.TabPage10.UseVisualStyleBackColor = True
         '
+        'GroupBox35
+        '
+        Me.GroupBox35.Controls.Add(Me.PictureBox17)
+        Me.GroupBox35.Location = New System.Drawing.Point(405, 483)
+        Me.GroupBox35.Name = "GroupBox35"
+        Me.GroupBox35.Size = New System.Drawing.Size(326, 315)
+        Me.GroupBox35.TabIndex = 31
+        Me.GroupBox35.TabStop = False
+        Me.GroupBox35.Text = "Waukesha, sqeeze film damper (hi speed application)"
+        '
+        'PictureBox17
+        '
+        Me.PictureBox17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox17.Image = CType(resources.GetObject("PictureBox17.Image"), System.Drawing.Image)
+        Me.PictureBox17.Location = New System.Drawing.Point(3, 16)
+        Me.PictureBox17.Name = "PictureBox17"
+        Me.PictureBox17.Size = New System.Drawing.Size(320, 296)
+        Me.PictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox17.TabIndex = 30
+        Me.PictureBox17.TabStop = False
+        '
         'GroupBox32
         '
         Me.GroupBox32.Controls.Add(Me.Label183)
@@ -5581,27 +5602,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'PictureBox17
-        '
-        Me.PictureBox17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox17.Image = CType(resources.GetObject("PictureBox17.Image"), System.Drawing.Image)
-        Me.PictureBox17.Location = New System.Drawing.Point(3, 16)
-        Me.PictureBox17.Name = "PictureBox17"
-        Me.PictureBox17.Size = New System.Drawing.Size(320, 296)
-        Me.PictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox17.TabIndex = 30
-        Me.PictureBox17.TabStop = False
-        '
-        'GroupBox35
-        '
-        Me.GroupBox35.Controls.Add(Me.PictureBox17)
-        Me.GroupBox35.Location = New System.Drawing.Point(405, 483)
-        Me.GroupBox35.Name = "GroupBox35"
-        Me.GroupBox35.Size = New System.Drawing.Size(326, 315)
-        Me.GroupBox35.TabIndex = 31
-        Me.GroupBox35.TabStop = False
-        Me.GroupBox35.Text = "Waukesha, sqeeze film damper (hi speed application)"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5777,6 +5777,8 @@ Partial Class Form1
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage10.ResumeLayout(False)
         Me.TabPage10.PerformLayout()
+        Me.GroupBox35.ResumeLayout(False)
+        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox32.ResumeLayout(False)
         Me.GroupBox32.PerformLayout()
         CType(Me.NumericUpDown61, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5790,8 +5792,6 @@ Partial Class Form1
         CType(Me.NumericUpDown60, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown59, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown58, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox35.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
