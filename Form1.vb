@@ -63,7 +63,7 @@ Public Class Form1
     "Motor calculate with 100 kN/mm",
     "The opposite support side 2 kN/mm !!",
     "With HEB300 + 15mm welded side plates 9 kN/mm @ NDE",
-    "With IPE400 + 20mm welded side plates 10 kN/mm @NDE",
+    "With IPE400 + 20mm welded side plates 10 kN/mm @ NDE",
     "Supezet (P17.1053) between bearings stiffness 12 kN/mm @ NDE",
     "Lummes (P18.1076) between bearings stiffness 20 kN/mm @ NDE",
     " ",
@@ -1569,6 +1569,8 @@ Public Class Form1
         Dim weight_r As Double
         Dim un_bal_speed_rms As Double  'rms valuemeasured in the field
         Dim un_bal_speed_pp As Double   'peak-peak value
+        Dim un_bal_travel_r As Double   'Unbalance travel radius
+        Dim un_bal_travel_pp As Double  'Unbalance travel peak-peak
         Dim ang_speed As Double
         Dim un_bal_force As Double
         Dim rpm As Double
@@ -1577,10 +1579,14 @@ Public Class Form1
         Calc_Rotary_feeder()
 
         un_bal_speed_rms = NumericUpDown58.Value / 1000             '[mm/s]-->[m/s]
-        un_bal_speed_pp = un_bal_speed_rms * 2 * Sqrt(2)
+        un_bal_speed_pp = un_bal_speed_rms * 2 * Sqrt(2)            '[m/s] peak-peak
         rpm = NumericUpDown60.Value                                 '[rpm]
         weight_r = NumericUpDown59.Value                            '[kg]
         ang_speed = rpm * 2 * PI / 60                               '[rad/s]
+
+        '------------- Unbalance travel --------------------
+        un_bal_travel_r = (un_bal_speed_pp * 0.5) / ang_speed       '[m] unbalance travel radius
+        un_bal_travel_pp = un_bal_travel_r * 2                      '[m] unbalance travel peak-peak
 
         '------------- Calc centrifugal force --------
         un_bal_force = weight_r * ang_speed * un_bal_speed_pp       '[N]
@@ -1592,6 +1598,7 @@ Public Class Form1
         Label159.Visible = CBool(IIf(F_dyn_found / 10 < weight_r, vbFalse, vbTrue))
         Label160.Visible = CBool(IIf(un_bal_force / 10 < weight_r, vbFalse, vbTrue))
         TextBox74.Text = (un_bal_speed_pp * 1000).ToString("F2")  '[mm/s, p-p]
+        TextBox91.Text = (un_bal_travel_pp * 1000).ToString("F2")  '[mm, p-p]
         TextBox75.Text = F_dyn_found.ToString("F0")               '[N]
         TextBox96.Text = ang_speed.ToString("F1")                 '[rad/s]
         TextBox95.Text = un_bal_force.ToString("F0")              '[N]
@@ -1901,4 +1908,6 @@ Public Class Form1
     Private Sub Button11_Click_1(sender As Object, e As EventArgs) Handles Button11.Click
         Print_torsion()
     End Sub
+
+
 End Class
