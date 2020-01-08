@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -473,6 +473,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -634,7 +635,7 @@ Partial Class Form1
         Me.TabPage5.Controls.Add(Me.PictureBox2)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage5.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Inertia + springs"
@@ -1260,7 +1261,7 @@ Partial Class Form1
         Me.TabPage4.Controls.Add(Me.GroupBox2)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage4.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Simple approach"
@@ -1810,7 +1811,7 @@ Partial Class Form1
         Me.TabPage1.Controls.Add(Me.SplitContainer1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Campbell calculation"
@@ -2583,9 +2584,9 @@ Partial Class Form1
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(10, 63)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(64, 18)
+        Me.Label17.Size = New System.Drawing.Size(106, 18)
         Me.Label17.TabIndex = 71
-        Me.Label17.Text = "Fan type"
+        Me.Label17.Text = "Fan-Dissy type"
         '
         'GroupBox1
         '
@@ -2806,17 +2807,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea3)
+        ChartArea7.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea7)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend3.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend3)
+        Legend7.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend7)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart1.Series.Add(Series3)
+        Series7.ChartArea = "ChartArea1"
+        Series7.Legend = "Legend1"
+        Series7.Name = "Series1"
+        Me.Chart1.Series.Add(Series7)
         Me.Chart1.Size = New System.Drawing.Size(796, 620)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -2832,6 +2833,7 @@ Partial Class Form1
         '
         'GroupBox12
         '
+        Me.GroupBox12.Controls.Add(Me.CheckBox5)
         Me.GroupBox12.Controls.Add(Me.CheckBox3)
         Me.GroupBox12.Controls.Add(Me.CheckBox2)
         Me.GroupBox12.Controls.Add(Me.Button1)
@@ -2850,7 +2852,7 @@ Partial Class Form1
         Me.CheckBox3.AutoSize = True
         Me.CheckBox3.Checked = True
         Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.Location = New System.Drawing.Point(348, 21)
+        Me.CheckBox3.Location = New System.Drawing.Point(346, 21)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(77, 17)
         Me.CheckBox3.TabIndex = 8
@@ -2906,7 +2908,7 @@ Partial Class Form1
         Me.NumericUpDown22.Increment = New Decimal(New Integer() {100, 0, 0, 0})
         Me.NumericUpDown22.Location = New System.Drawing.Point(82, 18)
         Me.NumericUpDown22.Maximum = New Decimal(New Integer() {15000, 0, 0, 0})
-        Me.NumericUpDown22.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NumericUpDown22.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDown22.Name = "NumericUpDown22"
         Me.NumericUpDown22.Size = New System.Drawing.Size(50, 20)
         Me.NumericUpDown22.TabIndex = 1
@@ -2938,7 +2940,7 @@ Partial Class Form1
         Me.TabPage2.Controls.Add(Me.Label70)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
@@ -2983,7 +2985,7 @@ Partial Class Form1
         Me.TabPage3.Controls.Add(Me.GroupBox22)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
@@ -3020,16 +3022,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend4)
+        ChartArea8.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea8)
+        Legend8.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend8)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart2.Series.Add(Series4)
+        Series8.ChartArea = "ChartArea1"
+        Series8.Legend = "Legend1"
+        Series8.Name = "Series1"
+        Me.Chart2.Series.Add(Series8)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -3896,7 +3898,7 @@ Partial Class Form1
         Me.TabPage6.Controls.Add(Me.GroupBox23)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage6.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage6.TabIndex = 7
         Me.TabPage6.Text = "Hydrostatic bearing with external punp"
@@ -4339,7 +4341,7 @@ Partial Class Form1
         Me.TabPage7.Controls.Add(Me.TextBox60)
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage7.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "Background"
@@ -4379,7 +4381,7 @@ Partial Class Form1
         Me.TabPage8.Controls.Add(Me.TextBox63)
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage8.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage8.TabIndex = 9
         Me.TabPage8.Text = "Add Notes"
@@ -4425,7 +4427,7 @@ Partial Class Form1
         Me.TabPage9.Controls.Add(Me.PictureBox13)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage9.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage9.TabIndex = 10
         Me.TabPage9.Text = "NDE bearing support stiffness"
@@ -5029,7 +5031,7 @@ Partial Class Form1
         Me.TabPage10.Controls.Add(Me.GroupBox29)
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage10.Size = New System.Drawing.Size(1245, 819)
         Me.TabPage10.TabIndex = 11
         Me.TabPage10.Text = "Unbalance - Concrete support stiffness"
@@ -5601,6 +5603,18 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
+        '
+        'CheckBox5
+        '
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Checked = True
+        Me.CheckBox5.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox5.Location = New System.Drawing.Point(429, 20)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(71, 17)
+        Me.CheckBox5.TabIndex = 9
+        Me.CheckBox5.Text = "rad/s-rpm"
+        Me.CheckBox5.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -6240,4 +6254,5 @@ Partial Class Form1
     Friend WithEvents Label192 As Label
     Friend WithEvents PictureBox17 As PictureBox
     Friend WithEvents GroupBox35 As GroupBox
+    Friend WithEvents CheckBox5 As CheckBox
 End Class

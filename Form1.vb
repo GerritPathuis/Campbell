@@ -132,6 +132,9 @@ Public Class Form1
         hard_disk_list.Add("170228801578")   'VTK laptop, Jeroen
         hard_disk_list.Add("171095402070")   'VTK desktop, Jeroen
 
+        user_list.Add("ABI")
+        hard_disk_list.Add("174741803447")         'VTK desktop, Ab van Iterson <a.van.Iterson@vtk.nl>
+
         Pro_user = Environment.UserName     'User name on the screen
         HD_number = HardDisc_Id()           'Harddisk identification
         Me.Text &= "  (" & Pro_user & ")"
@@ -256,7 +259,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
@@ -492,7 +495,8 @@ Public Class Form1
     Private Sub Draw_chart1()
         Dim hh, limit As Integer
         Dim ω10, ω20, krit1 As Double
-
+        Dim px, py As Double
+        Dim ulimit As Double
         Try
             Chart1.Series.Clear()
             Chart1.ChartAreas.Clear()
@@ -517,30 +521,52 @@ Public Class Form1
             Chart1.Titles(0).Font = New Font("Arial", 12, System.Drawing.FontStyle.Bold)
 
             '--------------- Legends and titles ---------------
-            Chart1.ChartAreas("ChartArea0").AxisX.Title = "Angular speed impeller [rad/s]"
-            Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequentie [rad/s]"
+            If CheckBox5.Checked Then
+                Chart1.ChartAreas("ChartArea0").AxisX.Title = "Speed impeller [rpm]"
+                Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequenty [rpm]"
+            Else
+                Chart1.ChartAreas("ChartArea0").AxisX.Title = "Angular speed impeller [rad/s]"
+                Chart1.ChartAreas("ChartArea0").AxisY.Title = "Eigenfrequenty [rad/s]"
+            End If
+
             Chart1.ChartAreas("ChartArea0").AxisY.RoundAxisValues()
             Chart1.ChartAreas("ChartArea0").AxisX.RoundAxisValues()
+
+            limit = CInt(NumericUpDown22.Value)     'Limit in [rad/s]
+            If CheckBox5.Checked Then
+                limit = CInt(Convert_to_rpm(limit)) 'Limit in [rpm]
+            End If
+
 
             '--------- Chart min size---------------
             If CheckBox1.Checked Then                           'Flip
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
             Else
-                Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -NumericUpDown22.Value
+                Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -limit
             End If
 
             '--------- Chart max size---------------
-            Chart1.ChartAreas("ChartArea0").AxisX.Maximum = NumericUpDown22.Value
-            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = NumericUpDown22.Value
+            Chart1.ChartAreas("ChartArea0").AxisX.Maximum = limit
+            Chart1.ChartAreas("ChartArea0").AxisY.Maximum = limit
             Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
 
             '-------- snijpunten -----------
-            Double.TryParse(TextBox34.Text, ω10)
-            Double.TryParse(TextBox35.Text, ω20)
-            Double.TryParse(TextBox32.Text, krit1)
-            Chart1.Series(2).Points.AddXY(0, ω10)            'Omega 10 [Rad/sec]
-            Chart1.Series(3).Points.AddXY(0, ω20)            'Omega 20 [Rad/sec]
-            Chart1.Series(4).Points.AddXY(krit1, krit1)       'Kritisch1 [Rad/sec]
+
+            Double.TryParse(TextBox34.Text, ω10)    '[Rad/sec] Omega 10 
+            Double.TryParse(TextBox35.Text, ω20)    '[Rad/sec] Omega 20 
+            Double.TryParse(TextBox32.Text, krit1)  '[Rad/sec] Kritisch1 
+
+            If CheckBox5.Checked Then
+                ω10 = Convert_to_rpm(ω10)           '[rpm] Omega 10 
+                ω20 = Convert_to_rpm(ω20)           '[rpm] Omega 20 
+                krit1 = Convert_to_rpm(krit1)       '[rpm] Kritisch1 
+            End If
+
+
+            Chart1.Series(2).Points.AddXY(0, ω10)
+            Chart1.Series(3).Points.AddXY(0, ω20)
+            Chart1.Series(4).Points.AddXY(krit1, krit1)
+
             Chart1.Series(2).Points(0).MarkerStyle = MarkerStyle.Circle
             Chart1.Series(2).Points(0).MarkerSize = 10
             Chart1.Series(3).Points(0).MarkerStyle = MarkerStyle.Circle
@@ -549,6 +575,8 @@ Public Class Form1
             Chart1.Series(4).Points(0).MarkerSize = 20
 
             '---------------- draw formule 5.33 -------------------------------
+
+
             If CheckBox3.Checked Then
                 Chart1.Series(1).ChartType = SeriesChartType.Point
             Else
@@ -556,13 +584,23 @@ Public Class Form1
             End If
 
             Chart1.Series(1).BorderWidth = 1        'Formule 5.33
-            limit = CInt(NumericUpDown22.Value)                       'Limit in [rad/s]
-            For hh = 1 To 2000                                  'Array size
-                If form533(hh, 1) < limit And form533(hh, 0) > 0 Then
+
+            '------- Chart
+
+            For hh = 1 To 2000                      'Array size
+                px = form533(hh, 1)                 '[rad/s] Plot x coordinate
+                py = form533(hh, 0)                 '[rad/s] Plot y coordinate
+
+                If CheckBox5.Checked Then
+                    px = Convert_to_rpm(px)
+                    py = Convert_to_rpm(py)
+                End If
+
+                If px < limit And py > 0 Then
                     If CheckBox1.Checked Then
-                        Chart1.Series(1).Points.AddXY(Abs(form533(hh, 1)), form533(hh, 0))
+                        Chart1.Series(1).Points.AddXY(Abs(px), py)
                     Else
-                        Chart1.Series(1).Points.AddXY(form533(hh, 1), form533(hh, 0))
+                        Chart1.Series(1).Points.AddXY(px, py)
                     End If
                 End If
             Next
@@ -587,6 +625,11 @@ Public Class Form1
             'MessageBox.Show("nnnnnn")
         End Try
     End Sub
+    Private Function Convert_to_rpm(rps As Double) As Double
+        'Convert [rad/s] to [rpm]
+        Return (rps * 60 / (2 * PI))
+    End Function
+
     Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
         Sync_data()
         Calc_sequence()
