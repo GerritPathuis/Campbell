@@ -272,6 +272,9 @@ Public Class Form1
             GroupBox2.Visible = CBool(IIf(RadioButton1.Checked, False, True)) 'Between bearings
         End If
 
+
+        NumericUpDown4.DecimalPlaces = CInt(IIf((NumericUpDown4.Value > 100), 0, 1))
+
         GroupBox12.Text = "Chart settings"
         TextBox54.Text = TextBox23.Text 'Inertia hart line
         TextBox55.Text = TextBox24.Text
@@ -730,15 +733,16 @@ Public Class Form1
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged
-        Dim Dia, hoog, massa, Iz, Ix As Double
+        Dim Dia, radius, hoog, massa, Iz, Ix As Double
         Dim sp1, sp2, spc As Double
 
         Dia = NumericUpDown20.Value / 1000          '[m]
         hoog = NumericUpDown21.Value / 1000         '[m]
+        radius = hoog / 2                           '[m]
 
         massa = PI / 4 * Dia ^ 2 * hoog * 7800      'Staal
-        Iz = 0.5 * massa * (Dia / 2) ^ 2
-        Ix = massa / 12 * (3 * (Dia / 2) ^ 2 + hoog ^ 2)
+        Iz = 0.5 * massa * (radius) ^ 2
+        Ix = massa / 12 * (3 * (radius) ^ 2 + hoog ^ 2)
 
         TextBox23.Text = IIf(Iz < 50, Round(Iz, 3), Round(Iz, 1)).ToString
         TextBox24.Text = IIf(Ix < 50, Round(Ix, 3), Round(Ix, 1)).ToString
