@@ -250,7 +250,7 @@ Public Class Form1
                 If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 100 '[kN/mm] Stiffness C1 @ drive
                 If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 100 '[kN/mm] Stiffness C2 @ impeller
             Else '(Between Bearings with heavy support)
-                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 75  '[kN/mm] Stiffness frame C1 @ drive bearing
+                If NumericUpDown6.Value > 80 Then NumericUpDown6.Value = 80  '[kN/mm] Stiffness frame C1 @ drive bearing
                 If NumericUpDown7.Value > 12 Then NumericUpDown7.Value = 12  '[kN/mm] Stiffness frame C2 @ Not drive bearing
             End If
         Else 'Concrete supports
@@ -499,7 +499,7 @@ Public Class Form1
         Dim hh, limit As Integer
         Dim ω10, ω20, krit1 As Double
         Dim px, py As Double
-        Dim ulimit As Double
+
         Try
             Chart1.Series.Clear()
             Chart1.ChartAreas.Clear()
@@ -733,12 +733,13 @@ Public Class Form1
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged
-        Dim Dia, radius, hoog, massa, Iz, Ix As Double
+        Dim Dia, radius, hoog, massa As Double
+        Dim Iz, Ix As Double
         Dim sp1, sp2, spc As Double
 
         Dia = NumericUpDown20.Value / 1000          '[m]
         hoog = NumericUpDown21.Value / 1000         '[m]
-        radius = hoog / 2                           '[m]
+        radius = Dia / 2                           '[m]
 
         massa = PI / 4 * Dia ^ 2 * hoog * 7800      'Staal
         Iz = 0.5 * massa * (radius) ^ 2
@@ -746,7 +747,6 @@ Public Class Form1
 
         TextBox23.Text = IIf(Iz < 50, Round(Iz, 3), Round(Iz, 1)).ToString
         TextBox24.Text = IIf(Ix < 50, Round(Ix, 3), Round(Ix, 1)).ToString
-
         TextBox25.Text = IIf(massa < 10, Round(massa, 1), Round(massa, 0)).ToString
 
         sp1 = NumericUpDown24.Value
