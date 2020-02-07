@@ -191,6 +191,13 @@ Public Class Form1
         "   -Reciprocating Car engines" & vbCrLf &
         ""
 
+        TextBox92.Text =
+        "Project 06.1050, Tata Big fan" & vbCrLf &
+        "Diameter 4130 mm, 750 rpm, impeller weight 7600 kg" & vbCrLf &
+        "Dia shaft 690 mm, Between bearing-bearing length 6400 mm" & vbCrLf &
+        "Bearings are sitting on concrete, Design temperature 300 c "
+
+
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
         "Concrete slab adjacent shall be spaced by a minimum of 15 mm" & vbCrLf &
@@ -1859,70 +1866,10 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[rpm]"
             row += 1
 
-
             oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
-
-            ''----------------------------------------------------------------------
-            ''Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
-            'oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
-            'oTable.Range.ParagraphFormat.SpaceAfter = 1
-            'oTable.Range.Font.Size = font_sizze
-            'oTable.Range.Font.Bold = CInt(False)
-            'oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            'oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
-            'row = 1
-
-            'oTable.Cell(row, 1).Range.Text = "NDE bearing support natural frequency"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Floor to bearing height"
-            'oTable.Cell(row, 2).Range.Text = NumericUpDown66.Value.ToString("F2")
-            'oTable.Cell(row, 3).Range.Text = "[m]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Horizontal force"
-            'oTable.Cell(row, 2).Range.Text = NumericUpDown64.Value.ToString("F1")
-            'oTable.Cell(row, 3).Range.Text = "[kN]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Flex displacement"
-            'oTable.Cell(row, 2).Range.Text = NumericUpDown67.Value.ToString("F2")
-            'oTable.Cell(row, 3).Range.Text = "[mm]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Torsion stiffness"
-            'oTable.Cell(row, 2).Range.Text = TextBox87.Text
-            'oTable.Cell(row, 3).Range.Text = "[kNm/rad]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Weight NDE support"
-            'oTable.Cell(row, 2).Range.Text = NumericUpDown69.Value.ToString("F0")
-            'oTable.Cell(row, 3).Range.Text = "[kg]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Moment of inertia"
-            'oTable.Cell(row, 2).Range.Text = TextBox86.Text
-            'oTable.Cell(row, 3).Range.Text = "[kg.m2]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Natural vibration frequency"
-            'oTable.Cell(row, 2).Range.Text = TextBox84.Text
-            'oTable.Cell(row, 3).Range.Text = "[Hz]"
-            'row += 1
-
-            'oTable.Cell(row, 1).Range.Text = "Natural speed"
-            'oTable.Cell(row, 2).Range.Text = TextBox83.Text
-            'oTable.Cell(row, 3).Range.Text = "[rpm]"
-            'row += 1
-
-            'oTable.Columns(1).Width = oWord.InchesToPoints(3.0)   'Change width of columns 1 & 2.
-            'oTable.Columns(2).Width = oWord.InchesToPoints(1.2)
-            'oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
-
-            'oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             '----------- Insert picturebox14 -------
             filename = dirpath_Rap & "Picturebox14.Jpeg"
@@ -1956,5 +1903,21 @@ Public Class Form1
         Print_torsion()
     End Sub
 
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        TextBox7.Text = "P06.1050"
+        TextBox7.Text = "Chorus"
+        RadioButton2.Checked = True         'Between bearing
+        RadioButton4.Checked = True         'Concrete
+        NumericUpDown1.Value = 3200         '[mm] bearing-impeller
+        NumericUpDown2.Value = 3200         '[mm] impeller-bearing
+        NumericUpDown4.Value = 7600         '[kg] impeller wight
+        NumericUpDown55.Value = 300         '[c] operating temp
+        NumericUpDown8.Value = 690          '[mm] shaft
 
+        NumericUpDown20.Value = 4130        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(72.8)  '[mm] impeller width
+
+        NumericUpDown10.Value = 16219       '[kg.m2] Jp
+        NumericUpDown11.Value = 8113        '[kg.m2] Ja
+    End Sub
 End Class
