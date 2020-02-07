@@ -194,8 +194,8 @@ Public Class Form1
         TextBox92.Text =
         "Project 06.1050, Tata Big fan" & vbCrLf &
         "Diameter 4130 mm, 750 rpm, impeller weight 7600 kg" & vbCrLf &
-        "Dia shaft 690 mm, Between bearing-bearing length 6400 mm" & vbCrLf &
-        "Bearings are sitting on concrete, Design temperature 300 c "
+        "Shaft 690x24 mm, Between bearing-bearing length 6400 mm" & vbCrLf &
+        "Bearings houses are sitting on concrete, Design temperature 300 c, Sleeve bearings d= 250 mm"
 
 
         TextBox106.Text =
