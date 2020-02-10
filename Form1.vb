@@ -192,10 +192,12 @@ Public Class Form1
         ""
 
         TextBox92.Text =
-        "Project 06.1050, Tata Big fan" & vbCrLf &
+        "Project P2006.1050, Tata Big fan" & vbCrLf &
         "Diameter 4130 mm, 750 rpm, impeller weight 7600 kg" & vbCrLf &
-        "Shaft 690x24 mm, Between bearing-bearing length 6400 mm" & vbCrLf &
-        "Bearings houses are sitting on concrete, Design temperature 300 c, Sleeve bearings d= 250 mm"
+        "Shaft 690x580 mm (wall 55 mm) " & vbCrLf &
+        "Between bearing-bearing length 6400 mm" & vbCrLf &
+        "Bearings houses are sitting on concrete" & vbCrLf &
+        "Design temperature 300 c, Sleeve bearings d= 250 mm"
 
 
         TextBox106.Text =
@@ -266,7 +268,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged, NumericUpDown68.ValueChanged
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
@@ -318,7 +320,10 @@ Public Class Form1
         Dim L1, L2, L3, massa, speed_rad As Double
         Dim C1, C2 As Double
         Dim d11, d12, d22 As Double
-        Dim E_steel, shaft_radius, shaft_overhang_radius, I1_shaft, I2_overhung As Double
+        Dim E_steel, shaft_overhang_radius As Double
+        Dim shaft_r_out, shaft_r_in As Double   '[mm]
+        Dim I1_shaft, I2_overhung As Double
+
         Dim JP_imp, JA_imp, Jr As Double
         Dim discrim As Double
         Dim ω10, ω20, term1, term2 As Double
@@ -339,13 +344,16 @@ Public Class Form1
 
             C1 = NumericUpDown6.Value * 1000                    '[N/mm]
             C2 = NumericUpDown7.Value * 1000                    '[N/mm]
-            shaft_radius = NumericUpDown8.Value / 2             '[mm] as tussen de lagers radius
+
+            shaft_r_out = NumericUpDown8.Value / 2         '[mm] as tussen de lagers radius
+            shaft_r_in = NumericUpDown68.Value / 2         '[mm] as tussen de lagers radius
+
             shaft_overhang_radius = NumericUpDown9.Value / 2    '[mm] as tussen de lagers radius
             JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
             JA_imp = NumericUpDown11.Value                      '[kg.m2] Massa Traagheid haaks op hartlijn (JA= 1/16.m.D^2(1+4/3(h/D)^2))
 
             'I circlw = PI/4 * r^4
-            I1_shaft = PI / 4 * shaft_radius ^ 4                 'Traagheidsmoment cirkel
+            I1_shaft = PI / 4 * (shaft_r_out ^ 4 - shaft_r_in ^ 4)          'Traagheidsmoment cirkel
             I2_overhung = PI / 4 * shaft_overhang_radius ^ 4     'Traagheidsmoment cirkel
 
             If JA_imp > JP_imp Then
@@ -1912,7 +1920,8 @@ Public Class Form1
         NumericUpDown2.Value = 3200         '[mm] impeller-bearing
         NumericUpDown4.Value = 7600         '[kg] impeller wight
         NumericUpDown55.Value = 300         '[c] operating temp
-        NumericUpDown8.Value = 690          '[mm] shaft
+        NumericUpDown8.Value = 690          '[mm] shaft OD (28" schedule 40)
+        NumericUpDown68.Value = 580         '[mm] shaft ID
 
         NumericUpDown20.Value = 4130        '[mm] impeller dia
         NumericUpDown21.Value = CDec(72.8)  '[mm] impeller width
