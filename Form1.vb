@@ -193,12 +193,13 @@ Public Class Form1
 
         TextBox92.Text =
         "Project P2006.1050, Tata Big fan" & vbCrLf &
-        "Diameter 4130 mm, 750 rpm, impeller weight 7600 kg" & vbCrLf &
-        "Shaft 690x580 mm (wall 55 mm) " & vbCrLf &
-        "Between bearing-bearing length 6400 mm" & vbCrLf &
+        "Diameter 4130 mm, 750 [rpm], impeller weight 7600 [kg]" & vbCrLf &
+        "Shaft 690x580 mm (wall 55 [mm]) " & vbCrLf &
+        "Between bearing-bearing length 6400 [mm]" & vbCrLf &
         "Bearings houses are sitting on concrete" & vbCrLf &
-        "Design temperature 300 c, Sleeve bearings d= 250 mm"
-
+        "Design temperature 300 [c], Sleeve bearings d= 250 mm" & vbCrLf &
+        "Result: Max speed is 875 [rpm] acc. API 673 [rpm]" & vbCrLf &
+        "Vibration measured is 1.4 [mm/s] " & vbCrLf
 
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
