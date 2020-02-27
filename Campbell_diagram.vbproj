@@ -25,7 +25,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\DCF1\data2%24\Engineering\VBasic\Campbell\</InstallUrl>
-    <ApplicationRevision>92</ApplicationRevision>
+    <ProductName>Campbell</ProductName>
+    <PublisherName>Pathuis Heavy Industries</PublisherName>
+    <ApplicationRevision>93</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
