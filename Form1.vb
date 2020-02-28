@@ -283,6 +283,11 @@ Public Class Form1
         End If
 
 
+        '------------- Check hollow shaft bore diameter ----
+        If NumericUpDown68.Value > NumericUpDown8.Value * 0.6 Then
+            NumericUpDown68.Value = CDec(NumericUpDown8.Value * 0.6)
+        End If
+
         NumericUpDown4.DecimalPlaces = CInt(IIf((NumericUpDown4.Value > 100), 0, 1))
 
         GroupBox12.Text = "Chart settings"
@@ -337,17 +342,17 @@ Public Class Form1
 
         Try
             E_steel = Calc_young(NumericUpDown55.Value)         'Shaft Young mod. [N/mm^2] 
-            TextBox61.Text = (E_steel / 1000).ToString("F0")   'Young's modulud [kN/mm^2]
+            TextBox61.Text = (E_steel / 1000).ToString("F0")    'Young's modulus [kN/mm^2]
             L1 = NumericUpDown1.Value                           'Length 1 [mm] tussen lagers
             L2 = NumericUpDown2.Value                           'Length 2 [mm] overhung
             L3 = NumericUpDown3.Value                           'Starre Length 3 [m]
             massa = NumericUpDown4.Value                        'Weight waaier [kg]
 
-            C1 = NumericUpDown6.Value * 1000                    '[N/mm]
-            C2 = NumericUpDown7.Value * 1000                    '[N/mm]
+            C1 = NumericUpDown6.Value * 1000                    '[N/mm] rigidness support
+            C2 = NumericUpDown7.Value * 1000                    '[N/mm] rigidness support
 
-            shaft_r_out = NumericUpDown8.Value / 2         '[mm] as tussen de lagers radius
-            shaft_r_in = NumericUpDown68.Value / 2         '[mm] as tussen de lagers radius
+            shaft_r_out = NumericUpDown8.Value / 2         '[mm] radius as tussen de lagers 
+            shaft_r_in = NumericUpDown68.Value / 2         '[mm] inside radius hollow shaft 
 
             shaft_overhang_radius = NumericUpDown9.Value / 2    '[mm] as tussen de lagers radius
             JP_imp = NumericUpDown10.Value                      '[kg.m2] Massa Traagheid hartlijn (JP=1/b.m.D^2)
