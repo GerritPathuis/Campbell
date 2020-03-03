@@ -2049,7 +2049,7 @@ Public Class Form1
         NumericUpDown1.Value = 750          '[mm] distance bearing-bearing
         NumericUpDown8.Value = 180          '[mm] shaft OD bearing-bearing 
 
-        NumericUpDown2.Value = 479          '[mm] overhung
+        NumericUpDown2.Value = 410          '[mm] overhung
         NumericUpDown3.Value = 0            '[mm] rigid length shaft
         NumericUpDown9.Value = 145          '[mm] overhung shaft OD 
         NumericUpDown68.Value = 0           '[mm] overhung shaft ID
@@ -2081,7 +2081,7 @@ Public Class Form1
         NumericUpDown1.Value = 900          '[mm] distance bearing-bearing
         NumericUpDown8.Value = 180          '[mm] shaft OD bearing-bearing 
 
-        NumericUpDown2.Value = 479          '[mm] overhung
+        NumericUpDown2.Value = 410          '[mm] overhung
         NumericUpDown3.Value = 0            '[mm] rigid length shaft
         NumericUpDown9.Value = 145          '[mm] overhung shaft OD 
         NumericUpDown68.Value = 0           '[mm] overhung shaft ID
