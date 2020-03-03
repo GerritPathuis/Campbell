@@ -198,8 +198,35 @@ Public Class Form1
         "Between bearing-bearing length 6400 [mm]" & vbCrLf &
         "Bearings houses are sitting on concrete" & vbCrLf &
         "Design temperature 300 [c], Sleeve bearings d= 250 mm" & vbCrLf &
-        "Result: Max speed is 875 [rpm] acc. API 673 [rpm]" & vbCrLf &
+        "Result: Max speed is 875 [rpm] acc. API 673" & vbCrLf &
         "Vibration measured is 1.4 [mm/s] " & vbCrLf
+
+        TextBox93.Text =
+        "Reducing impeller weight gives a higher critical speed." & vbCrLf &
+        "For overhung fans, bigger distance between bearing up to 1000 mm " & vbCrLf &
+        "results is a higher critical speed." & vbCrLf & vbCrLf &
+        "Single row ball bearing low C, Double row roller bearing high C " & vbCrLf &
+        " "
+
+        TextBox94.Text =
+        "Project P20001.1158, Standaard Fasel" & vbCrLf &
+        "FD Fan MD 1120/1900/T36" & vbCrLf &
+        "Rated 35c, ro= 1.12 kg/m3, 104000 kg/hr, dp= 121.76 mbar, 373 kW" & vbCrLf &
+        "Diameter 1900 mm, 1500 [rpm], impeller weight 580 [kg]" & vbCrLf &
+        "Between bearing-bearing length 1750x140 [mm]" & vbCrLf &
+        "Bearings houses are sitting on concrete (excellent)" & vbCrLf &
+        "Design temperature 35 [c], Oil bearings GOF 224BF and GOF220AL" & vbCrLf &
+        "Result: Max speed is 1962 [rpm] acc. API 673" & vbCrLf
+
+        TextBox97.Text =
+        "Project P16.0051, Biowanze" & vbCrLf &
+        "Fan HD 1980/2280/T31A" & vbCrLf &
+        "Rated 82c, ro= 0.854 kg/m3, 209000 kg/hr, dp= 107 mbar, 910 kW" & vbCrLf &
+        "Diameter 2280 mm, 1500 [rpm], impeller weight 863 [kg]" & vbCrLf &
+        "Overhung d=145, L=479 mm (CL bearing-COG) " & vbCrLf &
+        "Bearinghousing ZGLO140A d=180, CL-CL= 750 mm" & vbCrLf &
+        "LOW Steel Motor-bearing support" & vbCrLf &
+        "Result: Max speed is 1508 [rpm] acc. API 673" & vbCrLf
 
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
@@ -257,14 +284,14 @@ Public Class Form1
     Private Sub Bearing_support_stiffnes()
         If RadioButton3.Checked Then    'Steel supports
             If RadioButton1.Checked Then    '(Overhung)
-                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 100 '[kN/mm] Stiffness C1 @ drive
-                If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 100 '[kN/mm] Stiffness C2 @ impeller
+                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
+                If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 90 '[kN/mm] Stiffness C2 @ impeller
             Else '(Between Bearings with heavy support)
                 If NumericUpDown6.Value > 80 Then NumericUpDown6.Value = 80  '[kN/mm] Stiffness frame C1 @ drive bearing
                 If NumericUpDown7.Value > 12 Then NumericUpDown7.Value = 12  '[kN/mm] Stiffness frame C2 @ Not drive bearing
             End If
         Else 'Concrete supports
-            NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
+            NumericUpDown6.Value = 90   '[kN/mm] Stiffness C1 @ drive
             NumericUpDown7.Value = 90   '[kN/mm] Stiffness C2 @ impeller
         End If
     End Sub
@@ -1919,12 +1946,18 @@ Public Class Form1
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         TextBox7.Text = "P06.1050"
-        TextBox7.Text = "Chorus"
+        TextBox8.Text = "Chorus"
+        TextBox9.Text = "2250/4130/T36A"
+
+        RadioButton1.Checked = False        'Overhung
         RadioButton2.Checked = True         'Between bearing
+        RadioButton3.Checked = False        'Steel support
         RadioButton4.Checked = True         'Concrete
+
         NumericUpDown1.Value = 3200         '[mm] bearing-impeller
         NumericUpDown2.Value = 3200         '[mm] impeller-bearing
-        NumericUpDown4.Value = 7600         '[kg] impeller wight
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown4.Value = 7600         '[kg] impeller weight
         NumericUpDown55.Value = 300         '[c] operating temp
         NumericUpDown8.Value = 690          '[mm] shaft OD (28" schedule 40)
         NumericUpDown68.Value = 580         '[mm] shaft ID
@@ -1934,5 +1967,136 @@ Public Class Form1
 
         NumericUpDown10.Value = 16219       '[kg.m2] Jp
         NumericUpDown11.Value = 8113        '[kg.m2] Ja
+        Button12.BackColor = Color.SpringGreen
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        TextBox7.Text = "P01.1158"
+        TextBox8.Text = "Std Fasel"
+        TextBox9.Text = "1120/1900/T36"
+
+        RadioButton1.Checked = False        'Overhung
+        RadioButton2.Checked = True         'Between bearing
+        RadioButton3.Checked = False        'Steel support
+        RadioButton4.Checked = True         'Concrete
+
+        NumericUpDown1.Value = 600          '[mm] bearing-impeller
+        NumericUpDown2.Value = 1150         '[mm] impeller-bearing
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown4.Value = 580          '[kg] impeller weight
+        NumericUpDown55.Value = 35          '[c] operating temp
+        NumericUpDown8.Value = 140          '[mm] shaft OD 
+        NumericUpDown68.Value = 0           '[mm] shaft ID
+
+        NumericUpDown20.Value = 1900        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(26.3)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(262.5) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(131.3) '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.SpringGreen
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        TextBox7.Text = "P16.0051"
+        TextBox8.Text = "Biowanze SA"
+        TextBox9.Text = "1980/2280/T31A"
+
+        RadioButton1.Checked = True        'Overhung
+        RadioButton2.Checked = False        'Overhung
+        RadioButton3.Checked = True        'Steel support
+        RadioButton4.Checked = False        'Concrete support
+
+        NumericUpDown1.Value = 750          '[mm] distance bearing-bearing
+        NumericUpDown8.Value = 180          '[mm] shaft OD bearing-bearing 
+
+        NumericUpDown2.Value = 479          '[mm] overhung
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown9.Value = 145          '[mm] overhung shaft OD 
+        NumericUpDown68.Value = 0           '[mm] overhung shaft ID
+        NumericUpDown4.Value = 862          '[kg] impeller weight
+        NumericUpDown55.Value = 80          '[c] operating temp
+
+        NumericUpDown20.Value = 2280        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(27.1)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(508.5) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(280.4) '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.SpringGreen
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        TextBox7.Text = "P19.1065"
+        TextBox8.Text = "Krefeld"
+        TextBox9.Text = "1250/2155/T36"
+
+        RadioButton1.Checked = True         'Overhung
+        RadioButton2.Checked = False        'Overhung
+        RadioButton3.Checked = True         'Steel support
+        RadioButton4.Checked = False        'Concrete support
+
+        NumericUpDown1.Value = 750          '[mm] distance bearing-bearing
+        NumericUpDown8.Value = 180          '[mm] shaft OD bearing-bearing 
+
+        NumericUpDown2.Value = 479          '[mm] overhung
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown9.Value = 145          '[mm] overhung shaft OD 
+        NumericUpDown68.Value = 0           '[mm] overhung shaft ID
+        NumericUpDown4.Value = 638          '[kg] impeller + hub weight
+        NumericUpDown55.Value = 70          '[c] operating temp
+
+        NumericUpDown20.Value = 2155        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(23.4)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(386.5) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(193.3) '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.SpringGreen
+        Button16.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        TextBox7.Text = "P19.1065"
+        TextBox8.Text = "Krefeld"
+        TextBox9.Text = "1250/2155/T36"
+
+        RadioButton1.Checked = True         'Overhung
+        RadioButton2.Checked = False        'Overhung
+        RadioButton3.Checked = True         'Steel support
+        RadioButton4.Checked = False        'Concrete support
+
+        NumericUpDown1.Value = 900          '[mm] distance bearing-bearing
+        NumericUpDown8.Value = 180          '[mm] shaft OD bearing-bearing 
+
+        NumericUpDown2.Value = 479          '[mm] overhung
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown9.Value = 145          '[mm] overhung shaft OD 
+        NumericUpDown68.Value = 0           '[mm] overhung shaft ID
+        NumericUpDown4.Value = 638          '[kg] impeller + hub weight
+        NumericUpDown55.Value = 70          '[c] operating temp
+
+        NumericUpDown20.Value = 2155        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(23.4)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(386.5) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(193.3) '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.SpringGreen
     End Sub
 End Class
