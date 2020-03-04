@@ -228,6 +228,27 @@ Public Class Form1
         "LOW Steel Motor-bearing support" & vbCrLf &
         "Result: Max speed is 1508 [rpm] acc. API 673" & vbCrLf
 
+        TextBox98.Text =
+        "Project P19.1065, Cargill Krefeld" & vbCrLf &
+        "Fan HD 1250/2155/T31A" & vbCrLf &
+        "Rated 83c, ro= 0.9832 kg/m3, 128400 kg/hr, dp= 128 mbar, 580 kW" & vbCrLf &
+        "Diameter 2155 mm, 1490 [rpm], impeller weight 638 [kg]" & vbCrLf &
+        "Overhung d=145, L=410 mm (CL bearing-COG) " & vbCrLf &
+        "Bearinghousing ZGLO140A d=180, CL-CL= 750 mm" & vbCrLf &
+        "LOW Steel Motor-bearing support" & vbCrLf &
+        "Result: Max speed is 2036 [rpm] acc. API 673" & vbCrLf
+
+        TextBox99.Text =
+        "Project P17.1053, Supezet" & vbCrLf &
+        "Fan MD 1500/1535/T33" & vbCrLf &
+        "Rated .c, ro= . kg/m3, . kg/hr, dp= . mbar, .kW" & vbCrLf &
+        "Diameter 1490 mm, 1490 [rpm], impeller weight 450 [kg]" & vbCrLf &
+        "Between bearing-bearing length 2575x145 [mm]" & vbCrLf &
+        "Bearings houses are sitting on top of furnace" & vbCrLf &
+        "Design temperature 225 [c], 2x Oil bearings GOF 218BF" & vbCrLf &
+        "Result: Max speed is 1637 [rpm] acc. API 673" & vbCrLf
+
+
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
         "Concrete slab adjacent shall be spaced by a minimum of 15 mm" & vbCrLf &
@@ -429,8 +450,8 @@ Public Class Form1
             Else
                 '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
                 '--------------- d11= Alfa ----------------------------------------
-                Label1.Text = "L1, aslengte fixed lager-waaier [mm] (drive side)"
-                Label2.Text = "L2, aslengte waaier-float lager [mm]"
+                Label1.Text = "L1, aslengte fixed lager-waaier [mm] (drive end)"
+                Label2.Text = "L2, aslengte waaier-float lager [mm] (non drive end)"
                 Label3.Visible = False
                 NumericUpDown3.Visible = False
                 Label11.Visible = False
@@ -1972,6 +1993,7 @@ Public Class Form1
         Button14.BackColor = Color.Transparent
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
@@ -2002,6 +2024,7 @@ Public Class Form1
         Button14.BackColor = Color.Transparent
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
@@ -2009,9 +2032,9 @@ Public Class Form1
         TextBox8.Text = "Biowanze SA"
         TextBox9.Text = "1980/2280/T31A"
 
-        RadioButton1.Checked = True        'Overhung
+        RadioButton1.Checked = True         'Overhung
         RadioButton2.Checked = False        'Overhung
-        RadioButton3.Checked = True        'Steel support
+        RadioButton3.Checked = True         'Steel support
         RadioButton4.Checked = False        'Concrete support
 
         NumericUpDown1.Value = 750          '[mm] distance bearing-bearing
@@ -2034,6 +2057,7 @@ Public Class Form1
         Button14.BackColor = Color.SpringGreen
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
@@ -2066,6 +2090,7 @@ Public Class Form1
         Button14.BackColor = Color.Transparent
         Button15.BackColor = Color.SpringGreen
         Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
@@ -2098,5 +2123,37 @@ Public Class Form1
         Button14.BackColor = Color.Transparent
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.SpringGreen
+        Button17.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        TextBox7.Text = "P17.1053"
+        TextBox8.Text = "Supezet"
+        TextBox9.Text = "1500/1535/T36"
+
+        RadioButton1.Checked = False        'Overhung
+        RadioButton2.Checked = True         'Between bearing
+        RadioButton3.Checked = True        ' Steel support
+        RadioButton4.Checked = False        'Concrete
+
+        NumericUpDown1.Value = CDec(613.5)  '[mm] bearing-impeller
+        NumericUpDown2.Value = CDec(2026.5) '[mm] impeller-bearing 
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown4.Value = 455          '[kg] modified impeller weight
+        NumericUpDown55.Value = 225         '[c] operating temp
+        NumericUpDown8.Value = 145          '[mm] shaft OD 
+        NumericUpDown68.Value = 0           '[mm] shaft ID
+
+        NumericUpDown20.Value = 1535        '[mm] modified impeller dia
+        NumericUpDown21.Value = CDec(31.5)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(133.9) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(67.4)  '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.SpringGreen
     End Sub
 End Class
