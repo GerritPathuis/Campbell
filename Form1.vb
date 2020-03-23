@@ -248,6 +248,15 @@ Public Class Form1
         "Design temperature 225 [c], 2x Oil bearings GOF 218BF" & vbCrLf &
         "Result: Max speed is 1637 [rpm] acc. API 673" & vbCrLf
 
+        TextBox100.Text =
+        "Project P03.1033, Lummus-CNOOC China" & vbCrLf &
+        "Fan 2MD 2100/2370/T33" & vbCrLf &
+        "Rated 400c, ro= . kg/m3, . kg/hr, dp= . mbar, . kW" & vbCrLf &
+        "Diameter 2370 mm, 750 [rpm], impeller weight 1750 [kg], shaft 400 [mm]" & vbCrLf &
+        "Between bearings, bearing-imp-bearing 2998x2998 [mm]" & vbCrLf &
+        "Steel Bearings support are sitting on top of furnace" & vbCrLf &
+        "Design temperature 400 [c], 2x sleeve bearing" & vbCrLf &
+        "Result: Max speed is 901 [rpm] acc. API 673" & vbCrLf
 
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
@@ -1993,7 +2002,9 @@ Public Class Form1
         Button14.BackColor = Color.Transparent
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
         Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
@@ -2025,6 +2036,7 @@ Public Class Form1
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
         Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
@@ -2058,6 +2070,7 @@ Public Class Form1
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
         Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
@@ -2091,6 +2104,7 @@ Public Class Form1
         Button15.BackColor = Color.SpringGreen
         Button16.BackColor = Color.Transparent
         Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
@@ -2124,6 +2138,7 @@ Public Class Form1
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.SpringGreen
         Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.Transparent
     End Sub
 
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
@@ -2155,5 +2170,42 @@ Public Class Form1
         Button15.BackColor = Color.Transparent
         Button16.BackColor = Color.Transparent
         Button17.BackColor = Color.SpringGreen
+        Button18.BackColor = Color.Transparent
+    End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        TextBox7.Text = "P03.1033"
+        TextBox8.Text = "Lummus-China"
+        TextBox9.Text = "2MD 2100/2370/T33"
+
+        RadioButton1.Checked = False        'Overhung
+        RadioButton2.Checked = True         'Between bearing
+        RadioButton3.Checked = True         'Steel support
+        RadioButton4.Checked = False        'Concrete
+
+        NumericUpDown1.Value = CDec(2997)   '[mm] bearing-impeller
+        NumericUpDown2.Value = CDec(2997)   '[mm] impeller-bearing 
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown4.Value = 1750         '[kg] impeller weight
+
+        NumericUpDown6.Value = 80           '[kN/mm2] stiffness
+        NumericUpDown6.Value = 12           '[kN/mm2] stiffness
+
+        NumericUpDown55.Value = 400         '[c] design temp
+        NumericUpDown8.Value = 400          '[mm] shaft OD 
+        NumericUpDown68.Value = 0           '[mm] shaft ID
+
+        NumericUpDown20.Value = 2370        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(50.8)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(1227.3) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(614)  '[kg.m2] Ja
+        Button12.BackColor = Color.Transparent
+        Button13.BackColor = Color.Transparent
+        Button14.BackColor = Color.Transparent
+        Button15.BackColor = Color.Transparent
+        Button16.BackColor = Color.Transparent
+        Button17.BackColor = Color.Transparent
+        Button18.BackColor = Color.SpringGreen
     End Sub
 End Class
