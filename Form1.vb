@@ -198,7 +198,7 @@ Public Class Form1
         "Between bearing-bearing length 6400 [mm]" & vbCrLf &
         "Bearings houses are sitting on concrete" & vbCrLf &
         "Design temperature 300 [c], Sleeve bearings d= 250 mm" & vbCrLf &
-        "Result: Max speed is 875 [rpm] acc. API 673" & vbCrLf &
+        "Result: Max speed is 983 [rpm] acc. API 673" & vbCrLf &
         "Vibration measured is 1.4 [mm/s] " & vbCrLf
 
         TextBox93.Text =
@@ -257,6 +257,16 @@ Public Class Form1
         "Steel Bearings support are sitting on top of furnace" & vbCrLf &
         "Design temperature 400 [c], 2x sleeve bearing" & vbCrLf &
         "Result: Max speed is 901 [rpm] acc. API 673" & vbCrLf
+
+        TextBox101.Text =
+        "Project P04.1257, Technip Benelux" & vbCrLf &
+        "Fan 2LD 1600/1777/T33" & vbCrLf &
+        "Rated 186c, ro= 0.692. kg/m3, 187380 kg/hr, dp= 13.6 mbar, 130 kW" & vbCrLf &
+        "Diameter 1770 mm, 900 [rpm], impeller weight 875 [kg], shaft 300 [mm]" & vbCrLf &
+        "Between bearings, bearing-imp-bearing 2150x2150 [mm]" & vbCrLf &
+        "Steel Bearings support are sitting on top of furnace" & vbCrLf &
+        "Design temperature 350 [c], 2x sleeve bearing" & vbCrLf &
+        "Result: Max speed is 1244 [rpm] acc. API 673" & vbCrLf
 
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
@@ -326,7 +336,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged, NumericUpDown68.ValueChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged, NumericUpDown68.ValueChanged, RadioButton4.CheckedChanged, RadioButton2.CheckedChanged
         Calc_sequence()
     End Sub
     Private Sub Calc_sequence()
@@ -1997,14 +2007,8 @@ Public Class Form1
 
         NumericUpDown10.Value = 16219       '[kg.m2] Jp
         NumericUpDown11.Value = 8113        '[kg.m2] Ja
-        Button12.BackColor = Color.SpringGreen
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
@@ -2030,13 +2034,8 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(262.5) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(131.3) '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.SpringGreen
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
@@ -2064,13 +2063,8 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(508.5) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(280.4) '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.SpringGreen
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
@@ -2098,13 +2092,8 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(386.5) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(193.3) '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.SpringGreen
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
@@ -2132,13 +2121,8 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(386.5) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(193.3) '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.SpringGreen
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
@@ -2164,13 +2148,8 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(133.9) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(67.4)  '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.SpringGreen
-        Button18.BackColor = Color.Transparent
+
+        TabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
@@ -2189,7 +2168,7 @@ Public Class Form1
         NumericUpDown4.Value = 1750         '[kg] impeller weight
 
         NumericUpDown6.Value = 80           '[kN/mm2] stiffness
-        NumericUpDown6.Value = 12           '[kN/mm2] stiffness
+        NumericUpDown7.Value = 12           '[kN/mm2] stiffness
 
         NumericUpDown55.Value = 400         '[c] design temp
         NumericUpDown8.Value = 400          '[mm] shaft OD 
@@ -2200,12 +2179,38 @@ Public Class Form1
 
         NumericUpDown10.Value = CDec(1227.3) '[kg.m2] Jp
         NumericUpDown11.Value = CDec(614)  '[kg.m2] Ja
-        Button12.BackColor = Color.Transparent
-        Button13.BackColor = Color.Transparent
-        Button14.BackColor = Color.Transparent
-        Button15.BackColor = Color.Transparent
-        Button16.BackColor = Color.Transparent
-        Button17.BackColor = Color.Transparent
-        Button18.BackColor = Color.SpringGreen
+
+        TabControl1.SelectedIndex = 0
+    End Sub
+
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        TextBox7.Text = "P04.1257"
+        TextBox8.Text = "Technip"
+        TextBox9.Text = "2LD 1600/1770/T33"
+
+        RadioButton1.Checked = False        'Overhung
+        RadioButton2.Checked = True         'Between bearing
+        RadioButton3.Checked = True         'Steel support
+        RadioButton4.Checked = False        'Concrete
+
+        NumericUpDown1.Value = CDec(2150)   '[mm] bearing-impeller
+        NumericUpDown2.Value = CDec(2150)   '[mm] impeller-bearing 
+        NumericUpDown3.Value = 0            '[mm] rigid length shaft
+        NumericUpDown4.Value = 875         '[kg] impeller weight
+
+        NumericUpDown6.Value = 80           '[kN/mm2] stiffness
+        NumericUpDown7.Value = 12           '[kN/mm2] stiffness
+
+        NumericUpDown55.Value = 350         '[c] design temp
+        NumericUpDown8.Value = 300          '[mm] shaft OD 
+        NumericUpDown68.Value = 0           '[mm] shaft ID
+
+        NumericUpDown20.Value = 1770        '[mm] impeller dia
+        NumericUpDown21.Value = CDec(45.6)  '[mm] impeller width
+
+        NumericUpDown10.Value = CDec(342.7) '[kg.m2] Jp
+        NumericUpDown11.Value = CDec(171.5) '[kg.m2] Ja
+
+        TabControl1.SelectedIndex = 0
     End Sub
 End Class
