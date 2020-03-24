@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -361,6 +361,8 @@ Partial Class Form1
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.TextBox60 = New System.Windows.Forms.TextBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.TextBox101 = New System.Windows.Forms.TextBox()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.TextBox100 = New System.Windows.Forms.TextBox()
         Me.Button17 = New System.Windows.Forms.Button()
@@ -489,8 +491,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TextBox101 = New System.Windows.Forms.TextBox()
-        Me.Button19 = New System.Windows.Forms.Button()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2761,7 +2762,7 @@ Partial Class Form1
         'Label162
         '
         Me.Label162.AutoSize = True
-        Me.Label162.Location = New System.Drawing.Point(189, 84)
+        Me.Label162.Location = New System.Drawing.Point(236, 84)
         Me.Label162.Name = "Label162"
         Me.Label162.Size = New System.Drawing.Size(235, 13)
         Me.Label162.TabIndex = 85
@@ -2770,7 +2771,7 @@ Partial Class Form1
         'Label161
         '
         Me.Label161.AutoSize = True
-        Me.Label161.Location = New System.Drawing.Point(188, 66)
+        Me.Label161.Location = New System.Drawing.Point(235, 66)
         Me.Label161.Name = "Label161"
         Me.Label161.Size = New System.Drawing.Size(397, 13)
         Me.Label161.TabIndex = 44
@@ -2778,11 +2779,12 @@ Partial Class Form1
         '
         'GroupBox31
         '
+        Me.GroupBox31.Controls.Add(Me.RadioButton5)
         Me.GroupBox31.Controls.Add(Me.RadioButton4)
         Me.GroupBox31.Controls.Add(Me.RadioButton3)
         Me.GroupBox31.Location = New System.Drawing.Point(13, 11)
         Me.GroupBox31.Name = "GroupBox31"
-        Me.GroupBox31.Size = New System.Drawing.Size(146, 70)
+        Me.GroupBox31.Size = New System.Drawing.Size(217, 86)
         Me.GroupBox31.TabIndex = 84
         Me.GroupBox31.TabStop = False
         Me.GroupBox31.Text = "Bearing Support material"
@@ -2790,11 +2792,11 @@ Partial Class Form1
         'RadioButton4
         '
         Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(6, 44)
+        Me.RadioButton4.Location = New System.Drawing.Point(6, 63)
         Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(68, 17)
+        Me.RadioButton4.Size = New System.Drawing.Size(125, 17)
         Me.RadioButton4.TabIndex = 73
-        Me.RadioButton4.Text = "Concrete"
+        Me.RadioButton4.Text = "Full Concrete support"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'RadioButton3
@@ -2803,16 +2805,15 @@ Partial Class Form1
         Me.RadioButton3.Checked = True
         Me.RadioButton3.Location = New System.Drawing.Point(6, 19)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(49, 17)
+        Me.RadioButton3.Size = New System.Drawing.Size(205, 17)
         Me.RadioButton3.TabIndex = 72
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Steel"
+        Me.RadioButton3.Text = "Steel frame on rubber blocks (furnace)"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'Label130
         '
         Me.Label130.AutoSize = True
-        Me.Label130.Location = New System.Drawing.Point(188, 48)
+        Me.Label130.Location = New System.Drawing.Point(235, 48)
         Me.Label130.Name = "Label130"
         Me.Label130.Size = New System.Drawing.Size(270, 13)
         Me.Label130.TabIndex = 43
@@ -2821,7 +2822,7 @@ Partial Class Form1
         'Label128
         '
         Me.Label128.AutoSize = True
-        Me.Label128.Location = New System.Drawing.Point(188, 14)
+        Me.Label128.Location = New System.Drawing.Point(235, 14)
         Me.Label128.Name = "Label128"
         Me.Label128.Size = New System.Drawing.Size(411, 13)
         Me.Label128.TabIndex = 41
@@ -2831,7 +2832,7 @@ Partial Class Form1
         'Label129
         '
         Me.Label129.AutoSize = True
-        Me.Label129.Location = New System.Drawing.Point(188, 32)
+        Me.Label129.Location = New System.Drawing.Point(235, 32)
         Me.Label129.Name = "Label129"
         Me.Label129.Size = New System.Drawing.Size(547, 13)
         Me.Label129.TabIndex = 42
@@ -2840,17 +2841,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea5.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea5)
+        ChartArea7.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea7)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend5.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend5)
+        Legend7.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend7)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series5.ChartArea = "ChartArea1"
-        Series5.Legend = "Legend1"
-        Series5.Name = "Series1"
-        Me.Chart1.Series.Add(Series5)
+        Series7.ChartArea = "ChartArea1"
+        Series7.Legend = "Legend1"
+        Series7.Name = "Series1"
+        Me.Chart1.Series.Add(Series7)
         Me.Chart1.Size = New System.Drawing.Size(796, 620)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -3067,16 +3068,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea6.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea6)
-        Legend6.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend6)
+        ChartArea8.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea8)
+        Legend8.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend8)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series6.ChartArea = "ChartArea1"
-        Series6.Legend = "Legend1"
-        Series6.Name = "Series1"
-        Me.Chart2.Series.Add(Series6)
+        Series8.ChartArea = "ChartArea1"
+        Series8.Legend = "Legend1"
+        Series8.Name = "Series1"
+        Me.Chart2.Series.Add(Series8)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -4448,6 +4449,25 @@ Partial Class Form1
         Me.TabPage8.Text = "Examples"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(769, 773)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(129, 23)
+        Me.Button19.TabIndex = 86
+        Me.Button19.Text = "Enter data"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'TextBox101
+        '
+        Me.TextBox101.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox101.Location = New System.Drawing.Point(461, 630)
+        Me.TextBox101.Multiline = True
+        Me.TextBox101.Name = "TextBox101"
+        Me.TextBox101.Size = New System.Drawing.Size(437, 166)
+        Me.TextBox101.TabIndex = 85
+        Me.TextBox101.Text = "Project 04.1257"
+        '
         'Button18
         '
         Me.Button18.Location = New System.Drawing.Point(769, 601)
@@ -5799,24 +5819,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'TextBox101
+        'RadioButton5
         '
-        Me.TextBox101.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox101.Location = New System.Drawing.Point(461, 630)
-        Me.TextBox101.Multiline = True
-        Me.TextBox101.Name = "TextBox101"
-        Me.TextBox101.Size = New System.Drawing.Size(437, 166)
-        Me.TextBox101.TabIndex = 85
-        Me.TextBox101.Text = "Project 04.1257"
-        '
-        'Button19
-        '
-        Me.Button19.Location = New System.Drawing.Point(769, 773)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(129, 23)
-        Me.Button19.TabIndex = 86
-        Me.Button19.Text = "Enter data"
-        Me.Button19.UseVisualStyleBackColor = True
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(6, 42)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(167, 17)
+        Me.RadioButton5.TabIndex = 74
+        Me.RadioButton5.Text = "Steel frame on concrete block"
+        Me.RadioButton5.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -6475,4 +6486,5 @@ Partial Class Form1
     Friend WithEvents TextBox100 As TextBox
     Friend WithEvents Button19 As Button
     Friend WithEvents TextBox101 As TextBox
+    Friend WithEvents RadioButton5 As RadioButton
 End Class

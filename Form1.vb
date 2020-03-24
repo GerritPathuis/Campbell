@@ -322,18 +322,25 @@ Public Class Form1
         Calc_sequence()
     End Sub
     Private Sub Bearing_support_stiffnes()
-        If RadioButton3.Checked Then    'Steel supports
-            If RadioButton1.Checked Then    '(Overhung)
-                If NumericUpDown6.Value > 75 Then NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
-                If NumericUpDown7.Value > 75 Then NumericUpDown7.Value = 90 '[kN/mm] Stiffness C2 @ impeller
-            Else '(Between Bearings with heavy support)
-                If NumericUpDown6.Value > 80 Then NumericUpDown6.Value = 80  '[kN/mm] Stiffness frame C1 @ drive bearing
-                If NumericUpDown7.Value > 12 Then NumericUpDown7.Value = 12  '[kN/mm] Stiffness frame C2 @ Not drive bearing
-            End If
-        Else 'Concrete supports
-            NumericUpDown6.Value = 90   '[kN/mm] Stiffness C1 @ drive
-            NumericUpDown7.Value = 90   '[kN/mm] Stiffness C2 @ impeller
-        End If
+
+        Select Case True
+            Case RadioButton1.Checked And RadioButton3.Checked  'Overhung + Steel bearing supports 
+                NumericUpDown6.Value = 90 '[kN/mm] Stiffness C1 @ drive
+                NumericUpDown7.Value = 90 '[kN/mm] Stiffness C2 @ impeller
+
+            Case RadioButton2.Checked And RadioButton3.Checked 'Between bearings + Steel supports on RUBBER BLOCKS
+                NumericUpDown6.Value = 80  '[kN/mm] Stiffness frame C1 @ drive bearing
+                NumericUpDown7.Value = 12  '[kN/mm] Stiffness frame C2 @ Not drive bearing
+
+            Case RadioButton2.Checked And RadioButton4.Checked     'Between bearings + concrete supports
+                NumericUpDown6.Value = 90   '[kN/mm] Stiffness C1 @ drive
+                NumericUpDown7.Value = 90   '[kN/mm] Stiffness C2 @ impeller
+
+            Case RadioButton2.Checked And RadioButton5.Checked     'Between bearings + (steel/Concrete) supports
+                NumericUpDown6.Value = 90   '[kN/mm] Stiffness C1 @ drive
+                NumericUpDown7.Value = 30   '[kN/mm] Stiffness C2 @ impeller
+        End Select
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, TabPage1.Enter, NumericUpDown8.ValueChanged, NumericUpDown7.ValueChanged, NumericUpDown6.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown11.ValueChanged, NumericUpDown10.ValueChanged, NumericUpDown9.ValueChanged, NumericUpDown22.ValueChanged, CheckBox1.CheckedChanged, CheckBox2.CheckedChanged, CheckBox3.CheckedChanged, NumericUpDown55.ValueChanged, RadioButton3.CheckedChanged, CheckBox5.CheckedChanged, NumericUpDown68.ValueChanged, RadioButton4.CheckedChanged, RadioButton2.CheckedChanged
