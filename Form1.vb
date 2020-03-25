@@ -268,6 +268,14 @@ Public Class Form1
         "Design temperature 350 [c], 2x sleeve bearing" & vbCrLf &
         "Result: Max speed is 1244 [rpm] acc. API 673" & vbCrLf
 
+        TextBox102.Text =
+        "Concrete slab stiffness" & vbCrLf &
+        "See http://homepage.tudelft.nl/p3r3s/MSc_projects/reportBreeveld.pdf " & vbCrLf &
+        "page 53  concrete slab stiffness C2= 4.2 kN/mm " & vbCrLf &
+        " " & vbCrLf &
+        " " & vbCrLf &
+        " " & vbCrLf
+
         TextBox106.Text =
         "Concrete slab foundation" & vbCrLf &
         "Concrete slab adjacent shall be spaced by a minimum of 15 mm" & vbCrLf &
