@@ -1,11 +1,11 @@
 ﻿Imports System.Text
 Imports System.IO
 Imports System.Math
-Imports System.Windows.Forms.DataVisualization.Charting
-Imports System.Globalization
 Imports System.Threading
 Imports System.Management
 Imports Word = Microsoft.Office.Interop.Word
+Imports System.Globalization
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
     Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
@@ -190,6 +190,19 @@ Public Class Form1
         "G100 (100 mm/s [p-p]) " & vbCrLf &
         "   -Reciprocating Car engines" & vbCrLf &
         ""
+
+        TextBox29.Text =
+        "VTK motor support @ drive side 640 kN/mm" & vbCrLf &
+        "VTK motor support @ NON drive side 12 kN/mm" & vbCrLf &
+        "SKF rollager 110-150 kN/mm" & vbCrLf &
+        "API 684 Sleeve bearing 89 kN/mm" & vbCrLf &
+        "API 684 Tilting pad bearing 125 kN/mm" & vbCrLf &
+        "Maschinendynamik seite 34" & vbCrLf &
+        "8x Stahlfeder Machinefundamente  = 5-10 kN/mm" & vbCrLf &
+        "8x Industrie vibratie demper 3 kN/mm = 24 kN/mm" & vbCrLf &
+        "Walzlager(d50 mm) = 250 - 500 kN/mm" & vbCrLf &
+        "Walzlager(d100 mm) = 500 - 1000 kN/mm" & vbCrLf &
+        "FS Dynamics used probably 18 kN/mm on Bedum 3"
 
         TextBox92.Text =
         "Project P2006.1050, Tata Big fan" & vbCrLf &
@@ -484,7 +497,7 @@ Public Class Form1
             Else
                 '---------------- Tabelle 5.1 Nr 3 (Between bearings) -------------
                 '--------------- d11= Alfa ----------------------------------------
-                Label1.Text = "L1, aslengte fixed lager-waaier [mm] (drive end)"
+                Label1.Text = "L1, aslengte fI_diamed lager-waaier [mm] (drive end)"
                 Label2.Text = "L2, aslengte waaier-float lager [mm] (non drive end)"
                 Label3.Visible = False
                 NumericUpDown3.Visible = False
@@ -513,7 +526,7 @@ Public Class Form1
 
             '----------------------- formel 5.33 ------------------------
             speed_rad = -NumericUpDown22.Value                      'Chart range
-            For i = 1 To 2000                                       'Array size
+            For i = 1 To 2000                                       'Array sI_polare
                 speed_rad += Abs(NumericUpDown22.Value * 2 / 2000)  'increment step [rad/s]
                 form533(i, 0) = speed_rad                           'Waaier hoeksnelheid [rad/s]
 
@@ -644,17 +657,17 @@ Public Class Form1
             End If
 
 
-            '--------- Chart min size---------------
+            '--------- Chart min sI_polare---------------
             If CheckBox1.Checked Then                           'Flip
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = 0
             Else
                 Chart1.ChartAreas("ChartArea0").AxisX.Minimum = -limit
             End If
 
-            '--------- Chart max size---------------
+            '--------- Chart max sI_polare---------------
             Chart1.ChartAreas("ChartArea0").AxisX.Maximum = limit
             Chart1.ChartAreas("ChartArea0").AxisY.Maximum = limit
-            Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualization.Charting.AreaAlignmentOrientations.Vertical
+            ' Chart1.ChartAreas("ChartArea0").AlignmentOrientation = DataVisualI_polaration.Charting.AreaAlignmentOrientations.Vertical
 
             '-------- snijpunten -----------
 
@@ -693,7 +706,7 @@ Public Class Form1
 
             '------- Chart
 
-            For hh = 1 To 2000                      'Array size
+            For hh = 1 To 2000                      'Array sI_polare
                 px = form533(hh, 1)                 '[rad/s] Plot x coordinate
                 py = form533(hh, 0)                 '[rad/s] Plot y coordinate
 
@@ -835,9 +848,10 @@ Public Class Form1
     End Sub
 
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown71.ValueChanged, NumericUpDown70.ValueChanged
         Dim Dia, radius, hoog, massa As Double
-        Dim Iz, Ix As Double
+        Dim I_polar As Double   'Cylinder spin around the center line
+        Dim I_diam As Double    'Cylinder spin around the diameter
         Dim sp1, sp2, spc As Double
 
         Dia = NumericUpDown20.Value / 1000          '[m]
@@ -845,11 +859,14 @@ Public Class Form1
         radius = Dia / 2                           '[m]
 
         massa = PI / 4 * Dia ^ 2 * hoog * 7800      'Staal
-        Iz = 0.5 * massa * (radius) ^ 2
-        Ix = massa / 12 * (3 * (radius) ^ 2 + hoog ^ 2)
+        '---- cylinder Polar moment of inertia ------
 
-        TextBox23.Text = IIf(Iz < 50, Round(Iz, 3), Round(Iz, 1)).ToString
-        TextBox24.Text = IIf(Ix < 50, Round(Ix, 3), Round(Ix, 1)).ToString
+        I_polar = 0.5 * massa * (radius) ^ 2
+        '---- cylinder Diametral moment of inertia -----
+        I_diam = massa / 12 * (3 * (radius) ^ 2 + hoog ^ 2)
+
+        TextBox23.Text = IIf(I_polar < 50, Round(I_polar, 3), Round(I_polar, 1)).ToString
+        TextBox24.Text = IIf(I_diam < 50, Round(I_diam, 3), Round(I_diam, 1)).ToString
         TextBox25.Text = IIf(massa < 10, Round(massa, 1), Round(massa, 0)).ToString
 
         sp1 = NumericUpDown24.Value
@@ -889,7 +906,43 @@ Public Class Form1
         eigenfreq2 = Sqrt(C_Veer_support2 * 10 ^ 6 / gewicht2)  '[Rad/sec]
         eigenfreq2 /= 2 * PI                                    '[Hz]
 
-        TextBox43.Text = Round(eigenfreq2, 0).ToString       '
+
+        '--------- Gyroscopic couple -------
+        'Dynamics of rotating machines page 79
+        'ISBN 978-0-521-85016-2 Cambride University Press
+        Dim rpm As Double           '[rpm] speed
+        Dim ω As Double             '[rad/s] speed
+        Dim ang_moment As Double    '[kg.m2/s] Angular moment
+        Dim δψδt As Double          '[rad/s] Angle speed (δψ/δt) 
+        Dim δψ As Double            '[rad] tilt angle
+        Dim δt As Double            '[s] time one revolution
+        Dim couple As Double        '[Nm]
+        Dim runout As Double        '[mm] peak-peak impeller runout
+
+        rpm = NumericUpDown71.Value
+        ω = rpm * 2 * PI / 60       '[rad/s]
+
+        '----- Angular moment calculation ----
+        ang_moment = ω * I_polar            '[kg.m2/s] Angular moment
+
+        '----- Angle speed (δψ/δt) [rad/s] -----
+        δψ = (NumericUpDown70.Value / 360) * 2 * PI '[rad]
+        δt = 60 / rpm                       '[s] time one turn
+        δψδt = δψ / δt                      '[rad/s]
+
+        '----- Angular moment  ----
+        couple = ang_moment * δψδt          '[Nm]
+
+        '----- runout -----
+        runout = 2 * Asin(δψ) * (Dia * 0.5) '[m]
+
+        '----------- Present data ----------
+        TextBox43.Text = eigenfreq2.ToString("F0")
+        TextBox104.Text = ω.ToString("F0")
+        TextBox103.Text = ang_moment.ToString("F0")
+        TextBox105.Text = δψδt.ToString("F2")            '[rad/s]
+        TextBox107.Text = couple.ToString("F0")          '[Nm]
+        TextBox108.Text = (runout * 1000).ToString("F1") '[mm] 
     End Sub
     'Converts Radial per second to Hz
     Private Function Rad_to_hz(rads As Double) As Double
@@ -902,7 +955,7 @@ Public Class Form1
         Dim oDoc As Word.Document
         Dim oTable As Word.Table
         Dim oPara1, oPara2, oPara4 As Word.Paragraph
-        Dim row, font_sizze As Integer
+        Dim row, font_sI_polarze As Integer
         Dim ufilename As String
         ufilename = "Campbell_Calculation_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
@@ -910,7 +963,7 @@ Public Class Form1
             oWord = New Word.Application()
 
             'Start Word and open the document template. 
-            font_sizze = 9
+            font_sI_polarze = 9
             oWord = CType(CreateObject("Word.Application"), Word.Application)
             oWord.Visible = True
             oDoc = oWord.Documents.Add
@@ -923,13 +976,13 @@ Public Class Form1
 
             oPara1.Range.Text = "VTK Engineering"
             oPara1.Range.Font.Name = "Arial"
-            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Size = Font.Size + 3
             oPara1.Range.Font.Bold = CInt(True)
             oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
             oPara1.Range.InsertParagraphAfter()
 
             oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
-            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Range.Font.Size = font_sI_polarze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
             oPara2.Range.Text = "Campbell diagram (based On Maschinendynamik, 11 Auflage, ISBN 978-3-642-29570-6)" & vbCrLf
@@ -939,7 +992,7 @@ Public Class Form1
             'Insert a table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
 
@@ -972,10 +1025,10 @@ Public Class Form1
             'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 18, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            oTable.Rows.Item(1).Range.Font.Size = font_sI_polarze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Input Data"
             row += 1
@@ -989,7 +1042,7 @@ Public Class Form1
 
             row += 2
             oTable.Rows.Item(4).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(4).Range.Font.Size = font_sizze
+            oTable.Rows.Item(4).Range.Font.Size = font_sI_polarze
             oTable.Cell(row, 1).Range.Text = "Fan Housing"
 
             If RadioButton1.Checked Then    'Overhung "
@@ -1008,7 +1061,7 @@ Public Class Form1
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "Shaft length fixed Bearing -- impeller (drive side)"
+                oTable.Cell(row, 1).Range.Text = "Shaft length fI_diamed Bearing -- impeller (drive side)"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown1.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
@@ -1054,7 +1107,7 @@ Public Class Form1
 
             row += 2
             oTable.Rows.Item(row).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(row).Range.Font.Size = font_sizze
+            oTable.Rows.Item(row).Range.Font.Size = font_sI_polarze
             oTable.Cell(row, 1).Range.Text = "Rotation Inertia impeller"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Ja, inertia (radial line)"
@@ -1075,10 +1128,10 @@ Public Class Form1
             'Insert a 5 (row) x 7 (column) table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 7)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            oTable.Rows.Item(1).Range.Font.Size = font_sI_polarze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Results"
             row += 1
@@ -1161,7 +1214,7 @@ Public Class Form1
         Dim dia_ball, length_roller, alfa, no_balls, no_rollers As Double
         Dim K_ball, K_roller As Double
         Dim Kvv_ball, Kvv_roller As Double 'vertical stiffness
-        Dim Kuu_ball, Kuu_roller As Double 'horizontal stiffness
+        Dim Kuu_ball, Kuu_roller As Double 'horI_polarontal stiffness
         Dim force_ball, force_roller, row_ball, row_roller As Double
 
         K_ball = 13 * 10 ^ 6        '[N^2/3.m^-4/3]
@@ -1205,10 +1258,10 @@ Public Class Form1
         row_ball = NumericUpDown34.Value                        'Single of double row bearing
         row_roller = NumericUpDown41.Value                      'Single of double row bearing
         TextBox46.Text = (Kvv_ball * row_ball).ToString("F0")    'Vertical stiffness x row
-        TextBox56.Text = (Kuu_ball * row_ball).ToString("F0")    'horizontal stiffness x row
+        TextBox56.Text = (Kuu_ball * row_ball).ToString("F0")    'horI_polarontal stiffness x row
 
         TextBox47.Text = (Kvv_roller * row_roller).ToString("F0") 'Vertical stiffness
-        TextBox57.Text = (Kuu_roller * row_roller).ToString("F0") 'horizontal stiffness
+        TextBox57.Text = (Kuu_roller * row_roller).ToString("F0") 'horI_polarontal stiffness
     End Sub
     Private Sub Calc_dydrodynamic_bearing()
         Dim dia, omega, visco, length, f_load, clearance As Double
@@ -1294,7 +1347,7 @@ Public Class Form1
         Kvv = Kvv * force / clearance       '[N/m]
         Kvv /= 10 ^ 6                       '[kN/mm]
 
-        '-------------- Horizontal stiffness -------------------------
+        '-------------- HorI_polarontal stiffness -------------------------
         Kuu = H_nul * 4 * (PI ^ 2 * (2 - Exc_fin2) + 16 * Exc_fin2)
         Kuu = Kuu * force / clearance       '[N/m]
         Kuu /= 10 ^ 6                       '[kN/mm]
@@ -1310,10 +1363,10 @@ Public Class Form1
         Cuu /= 10 ^ 3                           '[kNs/m]
 
         TextBox48.Text = Round(Kvv, 1).ToString     'Vertical stiffness [kN/mm]
-        TextBox16.Text = Round(Kuu, 1).ToString     'Horizontal stiffness [kN/mm]
+        TextBox16.Text = Round(Kuu, 1).ToString     'HorI_polarontal stiffness [kN/mm]
 
         TextBox44.Text = Round(Cvv, 1).ToString     'Vertical damping [kNs/m]
-        TextBox45.Text = Round(Cuu, 1).ToString     'Horizontal damping [kNs/m]
+        TextBox45.Text = Round(Cuu, 1).ToString     'HorI_polarontal damping [kNs/m]
 
         Draw_Chart2(sommerf)
     End Sub
@@ -1380,7 +1433,7 @@ Public Class Form1
         'Hydrostatic bearing orifice type
 
 
-        '---------- pocket sizing------------ 
+        '---------- pocket sI_polaring------------ 
         no_pockets = NumericUpDown38.Value              '[-] No pockets
         b_pocket = NumericUpDown53.Value / 1000         '[m] Pocket width
         Journal_dia = NumericUpDown51.Value / 1000      '[m] Journal diameter
@@ -1688,7 +1741,7 @@ Public Class Form1
         Dim wt As Double
 
         '----- get data from screen -----------
-        R_force = NumericUpDown64.Value * 10 ^ 3        '[N] horizontal force on bearing
+        R_force = NumericUpDown64.Value * 10 ^ 3        '[N] horI_polarontal force on bearing
         L_displac = NumericUpDown67.Value * 10 ^ -3     '[m] verplaatsing
         radius = NumericUpDown66.Value                  '[m] Centerline height
 
@@ -1787,8 +1840,8 @@ Public Class Form1
         Dim oDoc As Word.Document
         Dim oTable As Word.Table
         Dim oPara1, oPara2, oPara3 As Word.Paragraph
-        Dim row, font_sizze As Integer
-        Dim chart_size As Integer = 55  '% of original picture size
+        Dim row, font_sI_polarze As Integer
+        Dim chart_sI_polare As Integer = 55  '% of original picture sI_polare
         Dim ufilename, filename As String
         ufilename = "Frame_Vibration_Calculation_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
@@ -1796,7 +1849,7 @@ Public Class Form1
             oWord = New Word.Application()
 
             'Start Word and open the document template. 
-            font_sizze = 9
+            'oWord.font.size = 9
             oWord = CType(CreateObject("Word.Application"), Word.Application)
             oWord.Visible = True
             oDoc = oWord.Documents.Add
@@ -1809,23 +1862,23 @@ Public Class Form1
 
             oPara1.Range.Text = "VTK Engineering"
             oPara1.Range.Font.Name = "Arial"
-            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Size = Font.Size + 3
             oPara1.Range.Font.Bold = CInt(True)
             oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
             oPara1.Range.InsertParagraphAfter()
 
             oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
-            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Range.Font.Size = font_sI_polarze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Horizontal Vibration Analyses of the NDE bearing support of a 'between bearings' fan" & vbCrLf
+            oPara2.Range.Text = "HorI_polarontal Vibration Analyses of the NDE bearing support of a 'between bearings' fan" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
             'Insert a table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 2)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
 
@@ -1860,23 +1913,23 @@ Public Class Form1
             'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 1)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            oTable.Rows.Item(1).Range.Font.Size = font_sI_polarze + 2
             row = 1
 
             oTable.Cell(row, 1).Range.Text = "General info"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "The NDE Bearing support is sensative to horizontal vibration when the fan is not mounted on a conctrete support. "
+            oTable.Cell(row, 1).Range.Text = "The NDE Bearing support is sensative to horI_polarontal vibration when the fan is not mounted on a conctrete support. "
             row += 1
             oTable.Cell(row, 1).Range.Text = "The concrete support gives weight and stiffnes to the spring mass system thus reducing the vibrations."
             row += 2
             oTable.Cell(row, 1).Range.Text = "In the absence of a concrete support the forces need to be contained by the steel frame. "
             row += 1
-            oTable.Cell(row, 1).Range.Text = "The horizontal stiffness is FEA calculated by adding a horizontal force of 10 kN to the side "
+            oTable.Cell(row, 1).Range.Text = "The horI_polarontal stiffness is FEA calculated by adding a horI_polarontal force of 10 kN to the side "
             row += 1
-            oTable.Cell(row, 1).Range.Text = "of the NDE bearing house and then determining the horizontal deflection (C= Force/deflection [kN/mm])"
+            oTable.Cell(row, 1).Range.Text = "of the NDE bearing house and then determining the horI_polarontal deflection (C= Force/deflection [kN/mm])"
             row += 1
             oTable.Cell(row, 1).Range.Text = "The Center Of Gravity (COG of the NDE support) distance to the floor is also FEA calculated."
             row += 1
@@ -1888,10 +1941,10 @@ Public Class Form1
             'Insert a 6 (row) x 3 (column) table, fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            oTable.Rows.Item(1).Range.Font.Size = font_sI_polarze + 2
             row = 1
 
             oTable.Cell(row, 1).Range.Text = "NDE Bearing support data"
@@ -1922,11 +1975,11 @@ Public Class Form1
             'Insert a 8 (row) x 3 table (column), fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
-            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
 
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
-            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            oTable.Rows.Item(1).Range.Font.Size = font_sI_polarze + 2
             row = 1
 
             oTable.Cell(row, 1).Range.Text = "Linear Natural frequency NDE bearing support"
@@ -1937,12 +1990,12 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[kg]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness @ bearing"
+            oTable.Cell(row, 1).Range.Text = "HorI_polarontal Linear stiffness @ bearing"
             oTable.Cell(row, 2).Range.Text = NumericUpDown57.Value.ToString("F1")
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
 
-            oTable.Cell(row, 1).Range.Text = "Horizontal Linear stiffness @ COG"
+            oTable.Cell(row, 1).Range.Text = "HorI_polarontal Linear stiffness @ COG"
             oTable.Cell(row, 2).Range.Text = TextBox67.Text
             oTable.Cell(row, 3).Range.Text = "[kN/mm]"
             row += 1
@@ -1974,7 +2027,7 @@ Public Class Form1
             oPara3.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             oPara3.Range.InlineShapes.AddPicture(filename)
             oPara3.Range.InlineShapes.Item(1).LockAspectRatio = CType(True, Microsoft.Office.Core.MsoTriState)
-            oPara3.Range.InlineShapes.Item(1).ScaleWidth = chart_size       'Size
+            oPara3.Range.InlineShapes.Item(1).ScaleWidth = chart_sI_polare       'SI_polare
             oPara3.Range.InsertParagraphAfter()
 
             '--------------Save file word file------------------
