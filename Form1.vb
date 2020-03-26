@@ -196,7 +196,7 @@ Public Class Form1
         "VTK motor support @ NON drive side 12 kN/mm" & vbCrLf &
         "SKF rollager 110-150 kN/mm" & vbCrLf &
         "API 684 Sleeve bearing 89 kN/mm" & vbCrLf &
-        "API 684 Tilting pad bearing 125 kN/mm" & vbCrLf &
+        "API 684 Tilting pad bearing 125 kN/mm" & vbCrLf & vbCrLf &
         "Maschinendynamik seite 34" & vbCrLf &
         "8x Stahlfeder Machinefundamente  = 5-10 kN/mm" & vbCrLf &
         "8x Industrie vibratie demper 3 kN/mm = 24 kN/mm" & vbCrLf &
@@ -335,6 +335,8 @@ Public Class Form1
         "near the bearing the movement is more intens than at the foot of the support. "
 
         TextBox7.Text = "P" & DateTime.Now.ToString("yy") & ".10"
+
+        Example_5()
         Bearing_support_stiffnes()
         Calc_sequence()
     End Sub
@@ -854,6 +856,7 @@ Public Class Form1
         Dim I_diam As Double    'Cylinder spin around the diameter
         Dim sp1, sp2, spc As Double
 
+
         Dia = NumericUpDown20.Value / 1000          '[m]
         hoog = NumericUpDown21.Value / 1000         '[m]
         radius = Dia / 2                           '[m]
@@ -955,7 +958,8 @@ Public Class Form1
         y = Mo * (6 * A * L - 3 * A ^ 2 - 2 * L ^ 2) ^ 1.5
         y /= 9 * (3 * Elas * ix * L) ^ 0.5
 
-        Debug.WriteLine("L= " & L.ToString)
+        Debug.WriteLine("elas= " & Elas.ToString)
+        Debug.WriteLine("Length= " & L.ToString)
         Debug.WriteLine("A= " & A.ToString)
         Debug.WriteLine("r_shaft= " & r_shaft.ToString)
         Debug.WriteLine("ix= " & ix.ToString)
@@ -2080,6 +2084,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Example_6()
+    End Sub
+
+    Private Sub Example_6()
         TextBox7.Text = "P06.1050"
         TextBox8.Text = "Chorus"
         TextBox9.Text = "2250/4130/T36A"
@@ -2107,6 +2115,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        Example_5()
+    End Sub
+
+    Private Sub Example_5()
         TextBox7.Text = "P01.1158"
         TextBox8.Text = "Std Fasel"
         TextBox9.Text = "1120/1900/T36"
@@ -2131,9 +2143,13 @@ Public Class Form1
         NumericUpDown11.Value = CDec(131.3) '[kg.m2] Ja
 
         TabControl1.SelectedIndex = 0
+
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        Example_4()
+    End Sub
+    Private Sub Example_4()
         TextBox7.Text = "P16.0051"
         TextBox8.Text = "Biowanze SA"
         TextBox9.Text = "1980/2280/T31A"
@@ -2163,6 +2179,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Example_3()
+    End Sub
+    Private Sub Example_3()
         TextBox7.Text = "P19.1065"
         TextBox8.Text = "Krefeld"
         TextBox9.Text = "1250/2155/T36"
@@ -2192,6 +2211,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        Example_2()
+    End Sub
+    Private Sub Example_2()
         TextBox7.Text = "P19.1065"
         TextBox8.Text = "Krefeld"
         TextBox9.Text = "1250/2155/T36"
@@ -2221,6 +2243,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        Example_1()
+    End Sub
+    Private Sub Example_1()
         TextBox7.Text = "P17.1053"
         TextBox8.Text = "Supezet"
         TextBox9.Text = "1500/1535/T36"
