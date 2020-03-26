@@ -936,6 +936,32 @@ Public Class Form1
         '----- runout -----
         runout = 2 * Asin(δψ) * (Dia * 0.5) '[m]
 
+        '---------- shaft deflection ------------
+        'Roark's Formulas, 8th edition page 216, reference 3e
+        Dim ix As Double            'Area moment of inertia
+        Dim r_shaft As Double       '[mm2]
+        Dim L, A As Double          '[mm]
+        Dim Mo As Double            '[N.mm]
+        Dim y As Double             '[mm] deflection
+        Dim Elas As Double
+
+        Double.TryParse(TextBox61.Text, Elas)
+        Elas *= 1000                            '[N/mm]
+        L = NumericUpDown1.Value + NumericUpDown2.Value '[mm]
+        A = NumericUpDown2.Value                '[mm]
+        r_shaft = NumericUpDown8.Value / 2      '[mm]
+        ix = PI / 4 * r_shaft ^ 4               '[mm4]
+        Mo = couple * 1000                      '[N.mm]
+        y = Mo * (6 * A * L - 3 * A ^ 2 - 2 * L ^ 2) ^ 1.5
+        y /= 9 * (3 * Elas * ix * L) ^ 0.5
+
+        Debug.WriteLine("L= " & L.ToString)
+        Debug.WriteLine("A= " & A.ToString)
+        Debug.WriteLine("r_shaft= " & r_shaft.ToString)
+        Debug.WriteLine("ix= " & ix.ToString)
+        Debug.WriteLine("Mo= " & Mo.ToString)
+        Debug.WriteLine("y= " & y.ToString)
+
         '----------- Present data ----------
         TextBox43.Text = eigenfreq2.ToString("F0")
         TextBox104.Text = ω.ToString("F0")
@@ -943,6 +969,7 @@ Public Class Form1
         TextBox105.Text = δψδt.ToString("F2")            '[rad/s]
         TextBox107.Text = couple.ToString("F0")          '[Nm]
         TextBox108.Text = (runout * 1000).ToString("F1") '[mm] 
+        TextBox111.Text = y.ToString("F3")               '[mm] 
     End Sub
     'Converts Radial per second to Hz
     Private Function Rad_to_hz(rads As Double) As Double
@@ -2281,4 +2308,6 @@ Public Class Form1
 
         TabControl1.SelectedIndex = 0
     End Sub
+
+    '
 End Class
