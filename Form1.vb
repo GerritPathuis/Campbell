@@ -193,7 +193,7 @@ Public Class Form1
 
         TextBox29.Text =
         "VTK motor support @ drive side 640 kN/mm" & vbCrLf &
-        "VTK motor support @ NON drive side 12 kN/mm" & vbCrLf &
+        "VTK motor support @ NON drive side 12 kN/mm" & vbCrLf & vbCrLf &
         "SKF rollager 110-150 kN/mm" & vbCrLf &
         "API 684 Sleeve bearing 89 kN/mm" & vbCrLf &
         "API 684 Tilting pad bearing 125 kN/mm" & vbCrLf & vbCrLf &
@@ -851,20 +851,20 @@ Public Class Form1
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, TabPage5.Enter, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown24.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown71.ValueChanged, NumericUpDown70.ValueChanged
-        Dim Dia, radius, hoog, massa As Double
+        Dim Dia_imp, radius, hoog, massa As Double
         Dim I_polar As Double   'Cylinder spin around the center line
         Dim I_diam As Double    'Cylinder spin around the diameter
         Dim sp1, sp2, spc As Double
 
 
-        Dia = NumericUpDown20.Value / 1000          '[m]
-        hoog = NumericUpDown21.Value / 1000         '[m]
-        radius = Dia / 2                           '[m]
+        Dia_imp = NumericUpDown20.Value / 1000          '[m]
+        hoog = NumericUpDown21.Value / 1000             '[m]
+        radius = Dia_imp / 2                            '[m]
 
-        massa = PI / 4 * Dia ^ 2 * hoog * 7800      'Staal
+        massa = PI / 4 * Dia_imp ^ 2 * hoog * 7800      'Staal
         '---- cylinder Polar moment of inertia ------
-
         I_polar = 0.5 * massa * (radius) ^ 2
+
         '---- cylinder Diametral moment of inertia -----
         I_diam = massa / 12 * (3 * (radius) ^ 2 + hoog ^ 2)
 
@@ -919,7 +919,7 @@ Public Class Form1
         Dim δψδt As Double          '[rad/s] Angle speed (δψ/δt) 
         Dim δψ As Double            '[rad] tilt angle
         Dim δt As Double            '[s] time one revolution
-        Dim couple As Double        '[Nm]
+        Dim tilt_couple As Double   '[Nm]
         Dim runout As Double        '[mm] peak-peak impeller runout
 
         rpm = NumericUpDown71.Value
@@ -934,47 +934,76 @@ Public Class Form1
         δψδt = δψ / δt                      '[rad/s]
 
         '----- Angular moment  ----
-        couple = ang_moment * δψδt          '[Nm]
+        tilt_couple = ang_moment * δψδt     '[Nm]
+
+        '----- bearing reaction forces -----
+        '----- only between bearing case----
+        Dim Ra, Rb As Double    '[N] bearing reaction force
+        Dim L, A As Double      '[m]
+
+        L = (NumericUpDown1.Value + NumericUpDown2.Value) / 1000    '[m]
+        A = NumericUpDown2.Value / 1000                             '[m]
+
+        If RadioButton2.Checked Then
+            Ra = (tilt_couple / L) * (L - A) / L
+            Rb = (tilt_couple / L) * A / L
+        Else
+            Ra = 0
+            Rb = 0
+        End If
 
         '----- runout -----
-        runout = 2 * Asin(δψ) * (Dia * 0.5) '[m]
+        runout = 2 * Asin(δψ) * (Dia_imp * 0.5)     '[m]
 
-        '---------- shaft deflection ------------
-        'Roark's Formulas, 8th edition page 216, reference 3e
-        Dim ix As Double            'Area moment of inertia
-        Dim r_shaft As Double       '[mm2]
-        Dim L, A As Double          '[mm]
-        Dim Mo As Double            '[N.mm]
-        Dim y As Double             '[mm] deflection
-        Dim Elas As Double
-
-        Double.TryParse(TextBox61.Text, Elas)
-        Elas *= 1000                            '[N/mm]
-        L = NumericUpDown1.Value + NumericUpDown2.Value '[mm]
-        A = NumericUpDown2.Value                '[mm]
-        r_shaft = NumericUpDown8.Value / 2      '[mm]
-        ix = PI / 4 * r_shaft ^ 4               '[mm4]
-        Mo = couple * 1000                      '[N.mm]
-        y = Mo * (6 * A * L - 3 * A ^ 2 - 2 * L ^ 2) ^ 1.5
-        y /= 9 * (3 * Elas * ix * L) ^ 0.5
-
-        Debug.WriteLine("elas= " & Elas.ToString)
-        Debug.WriteLine("Length= " & L.ToString)
-        Debug.WriteLine("A= " & A.ToString)
-        Debug.WriteLine("r_shaft= " & r_shaft.ToString)
-        Debug.WriteLine("ix= " & ix.ToString)
-        Debug.WriteLine("Mo= " & Mo.ToString)
-        Debug.WriteLine("y= " & y.ToString)
+        '===== this effect proved to be very small
+        Dim θs As Double            '[rad] angular deflection impeller due to tilt couple
+        θs = Calc_shaft_angular_displacement(tilt_couple)
 
         '----------- Present data ----------
         TextBox43.Text = eigenfreq2.ToString("F0")
         TextBox104.Text = ω.ToString("F0")
         TextBox103.Text = ang_moment.ToString("F0")
-        TextBox105.Text = δψδt.ToString("F2")            '[rad/s]
-        TextBox107.Text = couple.ToString("F0")          '[Nm]
-        TextBox108.Text = (runout * 1000).ToString("F1") '[mm] 
-        TextBox111.Text = y.ToString("F3")               '[mm] 
+        TextBox105.Text = δψδt.ToString("F2")               '[rad/s]
+        TextBox107.Text = tilt_couple.ToString("F0")        '[Nm]
+        TextBox108.Text = (runout * 1000).ToString("F1")    '[mm]
+        TextBox111.Text = θs.ToString("E1")                 '[rad] 
+
+        TextBox110.Text = Ra.ToString("F0")        '[N] Non Drive End
+        TextBox109.Text = Rb.ToString("F0")        '[N] Drive end
+
     End Sub
+    Private Function Calc_shaft_angular_displacement(tilt_couple As Double) As Double
+        '---------- Couple induced angular displacement ------------
+        '-- Impeller tilt gives couple, couple gives extra tilt 
+        'Roark's Formulas, 8th edition page 216, reference 3e
+        'Roark's Formulas, 8th edition page 974, 2nd moment of area
+        'Tilt couple in [N.m]
+        Dim ix As Double            'Area moment of inertia
+        Dim r_shaft As Double       '[mm2]
+        Dim L, A As Double          '[mm]
+        Dim Mo As Double            '[N.mm]
+        Dim θs As Double            '[rad] angular deflection
+        Dim Elas As Double
+        Dim y1 As Double
+
+        If TextBox61.Text.Length > 0 Then   'preventing problems as startup
+            Double.TryParse(TextBox61.Text, Elas)
+            Elas *= 1000                            '[N/mm]
+            L = NumericUpDown1.Value + NumericUpDown2.Value '[mm]
+            A = NumericUpDown2.Value                '[mm]
+            r_shaft = NumericUpDown8.Value / 2      '[mm]
+            ix = PI / 4 * r_shaft ^ 4               '[mm4]
+            Mo = tilt_couple * 10 ^ -3              '[N.mm]
+
+            y1 = (2 * L ^ 2 - 6 * A * L + 3 * A ^ 2)
+            θs = (Mo * y1) / (6 * Elas * ix * L)
+
+        End If
+
+        Return (θs)
+    End Function
+
+
     'Converts Radial per second to Hz
     Private Function Rad_to_hz(rads As Double) As Double
         Return (rads / (2 * PI))
