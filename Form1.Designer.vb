@@ -23,12 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea10 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend10 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -73,6 +73,8 @@ Partial Class Form1
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox36 = New System.Windows.Forms.GroupBox()
+        Me.TextBox109 = New System.Windows.Forms.TextBox()
+        Me.Label206 = New System.Windows.Forms.Label()
         Me.TextBox110 = New System.Windows.Forms.TextBox()
         Me.Label205 = New System.Windows.Forms.Label()
         Me.Label203 = New System.Windows.Forms.Label()
@@ -516,8 +518,6 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TextBox109 = New System.Windows.Forms.TextBox()
-        Me.Label206 = New System.Windows.Forms.Label()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -684,7 +684,7 @@ Partial Class Form1
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage5.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Inertia + springs"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1154,7 +1154,7 @@ Partial Class Form1
         Me.GroupBox6.Controls.Add(Me.Label39)
         Me.GroupBox6.Controls.Add(Me.NumericUpDown20)
         Me.GroupBox6.Controls.Add(Me.NumericUpDown21)
-        Me.GroupBox6.Location = New System.Drawing.Point(26, 248)
+        Me.GroupBox6.Location = New System.Drawing.Point(26, 201)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(392, 563)
         Me.GroupBox6.TabIndex = 3
@@ -1194,6 +1194,27 @@ Partial Class Form1
         Me.GroupBox36.TabIndex = 70
         Me.GroupBox36.TabStop = False
         Me.GroupBox36.Text = "Tilted impeller Precession"
+        '
+        'TextBox109
+        '
+        Me.TextBox109.Enabled = False
+        Me.TextBox109.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox109.Location = New System.Drawing.Point(281, 170)
+        Me.TextBox109.Name = "TextBox109"
+        Me.TextBox109.Size = New System.Drawing.Size(65, 21)
+        Me.TextBox109.TabIndex = 87
+        Me.TextBox109.Text = "-"
+        Me.TextBox109.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label206
+        '
+        Me.Label206.AutoSize = True
+        Me.Label206.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label206.Location = New System.Drawing.Point(13, 199)
+        Me.Label206.Name = "Label206"
+        Me.Label206.Size = New System.Drawing.Size(236, 18)
+        Me.Label206.TabIndex = 86
+        Me.Label206.Text = "Rotating forces at NDE bearing [N]"
         '
         'TextBox110
         '
@@ -1551,9 +1572,9 @@ Partial Class Form1
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(26, 27)
+        Me.PictureBox2.Location = New System.Drawing.Point(26, 13)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(392, 215)
+        Me.PictureBox2.Size = New System.Drawing.Size(392, 179)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
@@ -1575,7 +1596,7 @@ Partial Class Form1
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage4.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Simple approach"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -2125,7 +2146,7 @@ Partial Class Form1
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage1.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Campbell calculation"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -2141,13 +2162,12 @@ Partial Class Form1
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox11)
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox10)
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox9)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox1)
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1239, 813)
-        Me.SplitContainer1.SplitterDistance = 439
+        Me.SplitContainer1.Size = New System.Drawing.Size(1239, 770)
+        Me.SplitContainer1.SplitterDistance = 438
         Me.SplitContainer1.TabIndex = 59
         '
         'GroupBox11
@@ -2181,9 +2201,9 @@ Partial Class Form1
         Me.GroupBox11.Controls.Add(Me.TextBox1)
         Me.GroupBox11.Controls.Add(Me.Label9)
         Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBox11.Location = New System.Drawing.Point(0, 566)
+        Me.GroupBox11.Location = New System.Drawing.Point(0, 483)
         Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(439, 247)
+        Me.GroupBox11.Size = New System.Drawing.Size(438, 287)
         Me.GroupBox11.TabIndex = 77
         Me.GroupBox11.TabStop = False
         Me.GroupBox11.Text = "Tabelle 5.1 Maschinendynamik pagina 328 (ISBN 978-3-642-29570-6)"
@@ -2504,7 +2524,7 @@ Partial Class Form1
         Me.GroupBox10.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox10.Location = New System.Drawing.Point(0, 167)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(439, 310)
+        Me.GroupBox10.Size = New System.Drawing.Size(438, 310)
         Me.GroupBox10.TabIndex = 76
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Fan housing"
@@ -2795,7 +2815,7 @@ Partial Class Form1
         Me.GroupBox9.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox9.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(439, 167)
+        Me.GroupBox9.Size = New System.Drawing.Size(438, 167)
         Me.GroupBox9.TabIndex = 75
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "VTK"
@@ -2925,9 +2945,9 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.NumericUpDown11)
         Me.GroupBox1.Controls.Add(Me.Label13)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown10)
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 483)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 107)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(439, 79)
+        Me.GroupBox1.Size = New System.Drawing.Size(439, 76)
         Me.GroupBox1.TabIndex = 59
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Rotational inertia impeller"
@@ -3026,8 +3046,8 @@ Partial Class Form1
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.Button4)
         Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox12)
-        Me.SplitContainer2.Size = New System.Drawing.Size(796, 813)
-        Me.SplitContainer2.SplitterDistance = 728
+        Me.SplitContainer2.Size = New System.Drawing.Size(797, 770)
+        Me.SplitContainer2.SplitterDistance = 688
         Me.SplitContainer2.TabIndex = 40
         '
         'SplitContainer3
@@ -3040,6 +3060,7 @@ Partial Class Form1
         'SplitContainer3.Panel1
         '
         Me.SplitContainer3.Panel1.Controls.Add(Me.Label162)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox1)
         Me.SplitContainer3.Panel1.Controls.Add(Me.Label161)
         Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox31)
         Me.SplitContainer3.Panel1.Controls.Add(Me.Label130)
@@ -3049,8 +3070,8 @@ Partial Class Form1
         'SplitContainer3.Panel2
         '
         Me.SplitContainer3.Panel2.Controls.Add(Me.Chart1)
-        Me.SplitContainer3.Size = New System.Drawing.Size(796, 728)
-        Me.SplitContainer3.SplitterDistance = 104
+        Me.SplitContainer3.Size = New System.Drawing.Size(797, 688)
+        Me.SplitContainer3.SplitterDistance = 194
         Me.SplitContainer3.TabIndex = 39
         '
         'Label162
@@ -3098,9 +3119,9 @@ Partial Class Form1
         Me.RadioButton4.AutoSize = True
         Me.RadioButton4.Location = New System.Drawing.Point(6, 63)
         Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(125, 17)
+        Me.RadioButton4.Size = New System.Drawing.Size(127, 17)
         Me.RadioButton4.TabIndex = 73
-        Me.RadioButton4.Text = "Full Concrete support"
+        Me.RadioButton4.Text = "Bearings on Concrete"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'RadioButton3
@@ -3146,18 +3167,18 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea9.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea9)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend9.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend9)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series9.ChartArea = "ChartArea1"
-        Series9.Legend = "Legend1"
-        Series9.Name = "Series1"
-        Me.Chart1.Series.Add(Series9)
-        Me.Chart1.Size = New System.Drawing.Size(796, 620)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Size = New System.Drawing.Size(797, 490)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
         '
@@ -3281,7 +3302,7 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1253, 845)
+        Me.TabControl1.Size = New System.Drawing.Size(1253, 802)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage2
@@ -3292,7 +3313,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage2.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "Youtube"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -3337,7 +3358,7 @@ Partial Class Form1
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage3.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage3.TabIndex = 6
         Me.TabPage3.Text = "Bearing stiffness"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -3373,16 +3394,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea10.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea10)
-        Legend10.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend10)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series10.ChartArea = "ChartArea1"
-        Series10.Legend = "Legend1"
-        Series10.Name = "Series1"
-        Me.Chart2.Series.Add(Series10)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart2.Series.Add(Series2)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -4250,7 +4271,7 @@ Partial Class Form1
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage6.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage6.TabIndex = 7
         Me.TabPage6.Text = "Hydrostatic bearing with external punp"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -4693,7 +4714,7 @@ Partial Class Form1
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage7.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage7.TabIndex = 8
         Me.TabPage7.Text = "Background"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -4749,7 +4770,7 @@ Partial Class Form1
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage8.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage8.TabIndex = 9
         Me.TabPage8.Text = "Examples"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -4769,7 +4790,7 @@ Partial Class Form1
         Me.TextBox101.Location = New System.Drawing.Point(461, 630)
         Me.TextBox101.Multiline = True
         Me.TextBox101.Name = "TextBox101"
-        Me.TextBox101.Size = New System.Drawing.Size(437, 166)
+        Me.TextBox101.Size = New System.Drawing.Size(437, 119)
         Me.TextBox101.TabIndex = 85
         Me.TextBox101.Text = "Project 04.1257"
         '
@@ -4947,7 +4968,7 @@ Partial Class Form1
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage9.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage9.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage9.TabIndex = 10
         Me.TabPage9.Text = "NDE bearing support stiffness"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -5553,7 +5574,7 @@ Partial Class Form1
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(1245, 819)
+        Me.TabPage10.Size = New System.Drawing.Size(1245, 776)
         Me.TabPage10.TabIndex = 11
         Me.TabPage10.Text = "Unbalance - Concrete support stiffness"
         Me.TabPage10.UseVisualStyleBackColor = True
@@ -5573,7 +5594,7 @@ Partial Class Form1
         Me.GroupBox35.Controls.Add(Me.PictureBox17)
         Me.GroupBox35.Location = New System.Drawing.Point(405, 483)
         Me.GroupBox35.Name = "GroupBox35"
-        Me.GroupBox35.Size = New System.Drawing.Size(326, 315)
+        Me.GroupBox35.Size = New System.Drawing.Size(326, 257)
         Me.GroupBox35.TabIndex = 31
         Me.GroupBox35.TabStop = False
         Me.GroupBox35.Text = "Waukesha, sqeeze film damper (hi speed application)"
@@ -5584,7 +5605,7 @@ Partial Class Form1
         Me.PictureBox17.Image = CType(resources.GetObject("PictureBox17.Image"), System.Drawing.Image)
         Me.PictureBox17.Location = New System.Drawing.Point(3, 16)
         Me.PictureBox17.Name = "PictureBox17"
-        Me.PictureBox17.Size = New System.Drawing.Size(320, 296)
+        Me.PictureBox17.Size = New System.Drawing.Size(320, 238)
         Me.PictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox17.TabIndex = 30
         Me.PictureBox17.TabStop = False
@@ -5850,7 +5871,7 @@ Partial Class Form1
         Me.TextBox73.Multiline = True
         Me.TextBox73.Name = "TextBox73"
         Me.TextBox73.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox73.Size = New System.Drawing.Size(381, 227)
+        Me.TextBox73.Size = New System.Drawing.Size(381, 169)
         Me.TextBox73.TabIndex = 26
         Me.TextBox73.Text = "DIN 1940"
         '
@@ -6135,32 +6156,11 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
-        'TextBox109
-        '
-        Me.TextBox109.Enabled = False
-        Me.TextBox109.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox109.Location = New System.Drawing.Point(281, 170)
-        Me.TextBox109.Name = "TextBox109"
-        Me.TextBox109.Size = New System.Drawing.Size(65, 21)
-        Me.TextBox109.TabIndex = 87
-        Me.TextBox109.Text = "-"
-        Me.TextBox109.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label206
-        '
-        Me.Label206.AutoSize = True
-        Me.Label206.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label206.Location = New System.Drawing.Point(13, 199)
-        Me.Label206.Name = "Label206"
-        Me.Label206.Size = New System.Drawing.Size(236, 18)
-        Me.Label206.TabIndex = 86
-        Me.Label206.Text = "Rotating forces at NDE bearing [N]"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1253, 845)
+        Me.ClientSize = New System.Drawing.Size(1253, 802)
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"

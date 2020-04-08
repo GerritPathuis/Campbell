@@ -1083,7 +1083,7 @@ Public Class Form1
 
             '----------------------------------------------
             'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 18, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 19, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sI_polarze
             oTable.Range.Font.Bold = CInt(False)
@@ -1121,11 +1121,11 @@ Public Class Form1
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             Else                            'Between bearings
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "Shaft length fI_diamed Bearing -- impeller (drive side)"
+                oTable.Cell(row, 1).Range.Text = "Shaft length DE Bearing -- impeller (drive side)"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown1.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
                 row += 1
-                oTable.Cell(row, 1).Range.Text = "Shaft length float Bearing -- impeller"
+                oTable.Cell(row, 1).Range.Text = "Shaft length NDE Bearing -- impeller"
                 oTable.Cell(row, 2).Range.Text = CType(NumericUpDown2.Value, String)
                 oTable.Cell(row, 3).Range.Text = "[mm]"
             End If
@@ -1134,6 +1134,17 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Weight impeller"
             oTable.Cell(row, 2).Range.Text = CType(NumericUpDown4.Value, String)
             oTable.Cell(row, 3).Range.Text = "[kg]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Support"
+            Select Case True
+                Case RadioButton3.Checked
+                    oTable.Cell(row, 2).Range.Text = "Steel frame on rubber"
+                Case RadioButton4.Checked
+                    oTable.Cell(row, 2).Range.Text = "Bearings on concrete"
+                Case RadioButton5.Checked
+                    oTable.Cell(row, 2).Range.Text = "Steel frame on concrete"
+            End Select
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "C1 Stiffness bearing Drive End"
@@ -2363,5 +2374,7 @@ Public Class Form1
         TabControl1.SelectedIndex = 0
     End Sub
 
-    '
+    Private Sub GroupBox11_Enter(sender As Object, e As EventArgs) Handles GroupBox11.Enter
+
+    End Sub
 End Class
