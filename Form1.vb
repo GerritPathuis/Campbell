@@ -1625,7 +1625,7 @@ Public Class Form1
         Dim separators() As String = {";"}
         Dim separators1() As String = {"BREAK"}
 
-        OpenFileDialog1.FileName = "Campbell*"
+        OpenFileDialog1.FileName = "Campbell*.vtk5"
         If Directory.Exists(dirpath_Eng) Then
             OpenFileDialog1.InitialDirectory = dirpath_Eng  'used at VTK
         Else
@@ -1633,7 +1633,7 @@ Public Class Form1
         End If
 
         OpenFileDialog1.Title = "Open a Text File"
-        OpenFileDialog1.Filter = "VTK Files|*.vtk5"
+        OpenFileDialog1.Filter = "VTK5 Files|*.vtk5"
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim readText As String = File.ReadAllText(OpenFileDialog1.FileName, Encoding.ASCII)
