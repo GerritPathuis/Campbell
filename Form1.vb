@@ -1619,9 +1619,11 @@ Public Class Form1
     Private Sub Read_file()
         Dim control_words(), words() As String
         Dim i As Integer
-        Dim ttt As Double
         Dim k As Integer = 0
-        Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
+        Dim all_num As New List(Of Control)
+        Dim all_combo As New List(Of Control)
+        Dim all_check As New List(Of Control)
+        Dim all_radio As New List(Of Control)
         Dim separators() As String = {";"}
         Dim separators1() As String = {"BREAK"}
 
@@ -1645,110 +1647,25 @@ Public Class Form1
             TextBox8.Text = words(1)                  'Item name
             TextBox9.Text = words(2)                  'Fan Type
 
-            '---------- terugzetten numeric controls -----------------
-            '=========This is an updated version =====================
+            '---------- terugzetten numeric controls (Updated version) -----------------
             FindControlRecursive(all_num, Me, GetType(NumericUpDown))
             words = control_words(1).Split(separators, StringSplitOptions.None)     'Split the read file content
+            Restore_num_controls(words, all_num)
 
-            For i = 0 To all_num.Count - 1
-                Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
-                '============ find the stored numeric control list ====
-
-                For j = 0 To all_num.Count - 1
-                    If (j * 2 + 2) < words.Count Then
-                        If grbx.Name = words(j * 2 + 1) Then    '==== Found ====
-                            'Debug.WriteLine("FOUND !! grbx.Name= " & grbx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
-                            If Not (Double.TryParse(words(j * 2 + 2), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
-                            If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
-                                grbx.Value = CDec(ttt)          'OK
-                            Else
-                                grbx.Value = grbx.Minimum       'NOK
-                                MessageBox.Show("Numeric controls value out of outside min-max range, Minimum value is used")
-                            End If
-                            Exit For
-                        End If
-                    Else
-                        MessageBox.Show(grbx.Name & " was NOT Stored in file and is NOT updated")
-                    End If
-                Next
-            Next
-
-            '---------- terugzetten combobox controls -----------------
-            '=========This is an updated version =====================
+            '---------- terugzetten combobox controls (Updated version) -----------------
             FindControlRecursive(all_combo, Me, GetType(ComboBox))
             words = control_words(2).Split(separators, StringSplitOptions.None)     'Split the read file content
+            Restore_combo_controls(words, all_combo)
 
-            For i = 0 To all_combo.Count - 1
-                Dim combobx As ComboBox = CType(all_combo(i), ComboBox)
-                '============ find the stored numeric control list ====
-
-                For j = 0 To all_combo.Count - 1
-                    If (j * 2 + 2) < words.Count Then
-                        If combobx.Name = words(j * 2 + 1) Then    '==== Found ====
-                            'Debug.WriteLine("FOUND !! combobx.Name= " & combobx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
-
-                            If (i < words.Length - 1) Then
-                                combobx.SelectedItem = words(j * 2 + 2)
-                            Else
-                                MessageBox.Show("Warning last combobox not found in file")
-                            End If
-
-                            Exit For
-                        End If
-                    Else
-                        MessageBox.Show(combobx.Name & " was NOT Stored in file and is NOT updated")
-                    End If
-                Next
-            Next
-
-            '---------- terugzetten checkboxes controls -----------------
-            '=========This is an updated version =====================
+            '---------- terugzetten checkboxes controls (Updated version) -----------------
             FindControlRecursive(all_check, Me, GetType(CheckBox))
             words = control_words(3).Split(separators, StringSplitOptions.None)    'Split the read file content
+            Restore_checkbox_controls(words, all_check)
 
-            For i = 0 To all_check.Count - 1
-                Dim chbx As CheckBox = CType(all_check(i), CheckBox)
-                '============ find the stored numeric control list ====
-
-                For j = 0 To all_check.Count - 1
-                    If (j * 2 + 2) < words.Count Then
-                        If chbx.Name = words(j * 2 + 1) Then    '==== Found ====
-                            'Debug.WriteLine("FOUND !! chbx.Name= " & chbx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
-                            If CBool(words(j * 2 + 2)) = True Then
-                                chbx.Checked = True
-                            Else
-                                chbx.Checked = False
-                            End If
-
-                            Exit For
-                            End If
-                        Else
-                        MessageBox.Show(chbx.Name & " was NOT Stored in file and is NOT updated")
-                    End If
-                Next
-            Next
-
-            '---------- terugzetten Radio button controls -----------------
-            '=========This is an updated version =====================
+            '---------- terugzetten Radio button controls (Updated version) -----------------
             FindControlRecursive(all_radio, Me, GetType(RadioButton))
             words = control_words(4).Split(separators, StringSplitOptions.None)    'Split the read file content
-
-            For i = 0 To all_radio.Count - 1
-                Dim radiobt As RadioButton = CType(all_radio(i), RadioButton)
-                '============ find the stored numeric control list ====
-
-                For j = 0 To all_radio.Count - 1
-                    If (j * 2 + 2) < words.Count Then
-                        If radiobt.Name = words(j * 2 + 1) Then    '==== Found ====
-                            'Debug.WriteLine("j= " & j.ToString & ", FOUND !! radiobt.Name= " & radiobt.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
-                            Boolean.TryParse(words(j * 2 + 2), radiobt.Checked)
-                            Exit For
-                        End If
-                    Else
-                        MessageBox.Show(radiobt.Name & " was NOT Stored in file and is NOT updated")
-                    End If
-                Next
-            Next
+            Restore_radiobutton_controls(words, all_radio)
 
             '---------- terugzetten Notes -- ---------------
             If control_words.Count > 5 Then
@@ -1759,6 +1676,96 @@ Public Class Form1
                 MessageBox.Show("Warning Notes not found in file")
             End If
         End If
+    End Sub
+
+    Private Sub Restore_num_controls(words As String(), all_num As List(Of Control))
+        Dim ttt As Double
+
+        For i = 0 To all_num.Count - 1
+            Dim updown As NumericUpDown = CType(all_num(i), NumericUpDown)
+            '============ find the stored numeric control list ====
+
+            For j = 0 To all_num.Count - 1
+                If (j * 2 + 2) < words.Count Then
+                    If updown.Name = words(j * 2 + 1) Then    '==== Found ====
+                        'Debug.WriteLine("FOUND !! updown.Name= " & updown.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                        If Not (Double.TryParse(words(j * 2 + 2), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
+                        If ttt <= updown.Maximum And ttt >= updown.Minimum Then
+                            updown.Value = CDec(ttt)          'OK
+                        Else
+                            updown.Value = updown.Minimum       'NOK
+                            MessageBox.Show("Numeric controls value out of outside min-max range, Minimum value is used")
+                        End If
+                        Exit For
+                    End If
+                Else
+                    MessageBox.Show(updown.Name & " was NOT Stored in file and is NOT updated")
+                End If
+            Next
+        Next
+    End Sub
+    Private Sub Restore_combo_controls(words As String(), all_combo As List(Of Control))
+        For i = 0 To all_combo.Count - 1
+            Dim combobx As ComboBox = CType(all_combo(i), ComboBox)
+            '============ find the stored numeric control list ====
+
+            For j = 0 To all_combo.Count - 1
+                If (j * 2 + 2) < words.Count Then
+                    If combobx.Name = words(j * 2 + 1) Then    '==== Found ====
+                        'Debug.WriteLine("FOUND !! combobx.Name= " & combobx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                        If (i < words.Length - 1) Then
+                            combobx.SelectedItem = words(j * 2 + 2)
+                        Else
+                            MessageBox.Show("Warning last combobox not found in file")
+                        End If
+                        Exit For
+                    End If
+                Else
+                    MessageBox.Show(combobx.Name & " was NOT Stored in file and is NOT updated")
+                End If
+            Next
+        Next
+    End Sub
+
+    Private Sub Restore_checkbox_controls(words As String(), all_check As List(Of Control))
+        For i = 0 To all_check.Count - 1
+            Dim chbx As CheckBox = CType(all_check(i), CheckBox)
+            '============ find the stored numeric control list ====
+
+            For j = 0 To all_check.Count - 1
+                If (j * 2 + 2) < words.Count Then
+                    If chbx.Name = words(j * 2 + 1) Then    '==== Found ====
+                        'Debug.WriteLine("FOUND !! chbx.Name= " & chbx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                        If CBool(words(j * 2 + 2)) = True Then
+                            chbx.Checked = True
+                        Else
+                            chbx.Checked = False
+                        End If
+
+                        Exit For
+                    End If
+                Else
+                    MessageBox.Show(chbx.Name & " was NOT Stored in file and is NOT updated")
+                End If
+            Next
+        Next
+    End Sub
+    Private Sub Restore_radiobutton_controls(words As String(), all_radio As List(Of Control))
+        For i = 0 To all_radio.Count - 1
+            Dim radiobut As RadioButton = CType(all_radio(i), RadioButton)
+            '============ find the stored numeric control list ====
+            For j = 0 To all_radio.Count - 1
+                If (j * 2 + 2) < words.Count Then
+                    If radiobut.Name = words(j * 2 + 1) Then    '==== Found ====
+                        'Debug.WriteLine("j= " & j.ToString & ", FOUND !! radiobut.Name= " & radiobt.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                        Boolean.TryParse(words(j * 2 + 2), radiobut.Checked)
+                        Exit For
+                    End If
+                Else
+                    MessageBox.Show(radiobut.Name & " was NOT Stored in file and is NOT updated")
+                End If
+            Next
+        Next
     End Sub
 
     '----------- Find all controls on form1------
@@ -1774,8 +1781,6 @@ Public Class Form1
         Next
         Return list
     End Function
-
-
 
     Public Function HardDisc_Id() As String
         'Add system.management as reference !!
