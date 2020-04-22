@@ -339,6 +339,7 @@ Public Class Form1
         Example_5()
         Bearing_support_stiffnes()
         Calc_sequence()
+        Timer1.Enabled = True
     End Sub
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
         Bearing_support_stiffnes()
@@ -1538,7 +1539,7 @@ Public Class Form1
     'Save control settings and case_x_conditions to file
     Private Sub Save_tofile()
         Dim temp_string As String
-        Dim filename As String = "Campbell_select_" & TextBox7.Text & "_" & TextBox8.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk"
+        Dim filename As String = "Campbell_select_" & TextBox7.Text & "_" & TextBox8.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk5"
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
         Dim i As Integer
 
@@ -1549,12 +1550,12 @@ Public Class Form1
         temp_string = TextBox7.Text & ";" & TextBox8.Text & ";" & TextBox9.Text & ";"
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
-        '-------- find all numeric, combobox, checkbox and radiobutton controls -----------------
+        '-------- find all numeric controls -----------------
         FindControlRecursive(all_num, Me, GetType(NumericUpDown))   'Find the control
         all_num = all_num.OrderBy(Function(x) x.Name).ToList()      'Alphabetical order
         For i = 0 To all_num.Count - 1
-            Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
-            temp_string &= grbx.Value.ToString & ";"
+            Dim numbt As NumericUpDown = CType(all_num(i), NumericUpDown)
+            temp_string &= numbt.Name & ";" & numbt.Value.ToString & ";"
         Next
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
@@ -1562,8 +1563,8 @@ Public Class Form1
         FindControlRecursive(all_combo, Me, GetType(ComboBox))      'Find the control
         all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()   'Alphabetical order
         For i = 0 To all_combo.Count - 1
-            Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
-            temp_string &= grbx.SelectedItem.ToString & ";"
+            Dim combt As ComboBox = CType(all_combo(i), ComboBox)
+            temp_string &= combt.Name & ";" & combt.SelectedItem.ToString & ";"
         Next
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
@@ -1571,8 +1572,8 @@ Public Class Form1
         FindControlRecursive(all_check, Me, GetType(CheckBox))      'Find the control
         all_check = all_check.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
         For i = 0 To all_check.Count - 1
-            Dim grbx As CheckBox = CType(all_check(i), CheckBox)
-            temp_string &= grbx.Checked.ToString & ";"
+            Dim chkbt As CheckBox = CType(all_check(i), CheckBox)
+            temp_string &= chkbt.Name & ";" & chkbt.Checked.ToString & ";"
         Next
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
@@ -1580,8 +1581,8 @@ Public Class Form1
         FindControlRecursive(all_radio, Me, GetType(RadioButton))   'Find the control
         all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
         For i = 0 To all_radio.Count - 1
-            Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
-            temp_string &= grbx.Checked.ToString & ";"
+            Dim radbt As RadioButton = CType(all_radio(i), RadioButton)
+            temp_string &= radbt.Name & ";" & radbt.Checked.ToString & ";"
         Next
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
@@ -1608,7 +1609,9 @@ Public Class Form1
             MessageBox.Show("Line 5062, " & ex.Message)  ' Show the exception's message.
         End Try
     End Sub
-
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Read_file()
+    End Sub
     'Retrieve control settings and case_x_conditions from file
     'Split the file string into 5 separate strings
     'Each string represents a control type (combobox, checkbox,..)
@@ -1630,7 +1633,7 @@ Public Class Form1
         End If
 
         OpenFileDialog1.Title = "Open a Text File"
-        OpenFileDialog1.Filter = "VTK Files|*.vtk"
+        OpenFileDialog1.Filter = "VTK Files|*.vtk5"
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim readText As String = File.ReadAllText(OpenFileDialog1.FileName, Encoding.ASCII)
@@ -1640,69 +1643,113 @@ Public Class Form1
             words = control_words(0).Split(separators, StringSplitOptions.None) 'Split first line the read file content
             TextBox7.Text = words(0)                  'Project number
             TextBox8.Text = words(1)                  'Item name
-            TextBox9.Text = words(2)                  'Fan yupe
+            TextBox9.Text = words(2)                  'Fan Type
 
             '---------- terugzetten numeric controls -----------------
+            '=========This is an updated version =====================
             FindControlRecursive(all_num, Me, GetType(NumericUpDown))
-            all_num = all_num.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
             words = control_words(1).Split(separators, StringSplitOptions.None)     'Split the read file content
+
             For i = 0 To all_num.Count - 1
                 Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
-                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal numeric controls--
-                If (i < words.Length - 1) Then
-                    If Not (Double.TryParse(words(i + 1), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
-                    If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
-                        grbx.Value = CDec(ttt)          'OK
+                '============ find the stored numeric control list ====
+
+                For j = 0 To all_num.Count - 1
+                    If (j * 2 + 2) < words.Count Then
+                        If grbx.Name = words(j * 2 + 1) Then    '==== Found ====
+                            'Debug.WriteLine("FOUND !! grbx.Name= " & grbx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                            If Not (Double.TryParse(words(j * 2 + 2), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
+                            If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
+                                grbx.Value = CDec(ttt)          'OK
+                            Else
+                                grbx.Value = grbx.Minimum       'NOK
+                                MessageBox.Show("Numeric controls value out of outside min-max range, Minimum value is used")
+                            End If
+                            Exit For
+                        End If
                     Else
-                        grbx.Value = grbx.Minimum       'NOK
-                        MessageBox.Show("Numeric controls value out of ousode min-max range, Minimum value is used")
+                        MessageBox.Show(grbx.Name & " was NOT Stored in file and is NOT updated")
                     End If
-                Else
-                    MessageBox.Show("Warning last Numeric controls not found in file")  'NOK
-                End If
+                Next
             Next
 
             '---------- terugzetten combobox controls -----------------
+            '=========This is an updated version =====================
             FindControlRecursive(all_combo, Me, GetType(ComboBox))
-            all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(2).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(2).Split(separators, StringSplitOptions.None)     'Split the read file content
+
             For i = 0 To all_combo.Count - 1
-                Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
-                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
-                If (i < words.Length - 1) Then
-                    grbx.SelectedItem = words(i + 1)
-                Else
-                    MessageBox.Show("Warning last combobox not found in file")
-                End If
+                Dim combobx As ComboBox = CType(all_combo(i), ComboBox)
+                '============ find the stored numeric control list ====
+
+                For j = 0 To all_combo.Count - 1
+                    If (j * 2 + 2) < words.Count Then
+                        If combobx.Name = words(j * 2 + 1) Then    '==== Found ====
+                            'Debug.WriteLine("FOUND !! combobx.Name= " & combobx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+
+                            If (i < words.Length - 1) Then
+                                combobx.SelectedItem = words(j * 2 + 2)
+                            Else
+                                MessageBox.Show("Warning last combobox not found in file")
+                            End If
+
+                            Exit For
+                        End If
+                    Else
+                        MessageBox.Show(combobx.Name & " was NOT Stored in file and is NOT updated")
+                    End If
+                Next
             Next
 
-            '---------- terugzetten checkbox controls -----------------
+            '---------- terugzetten checkboxes controls -----------------
+            '=========This is an updated version =====================
             FindControlRecursive(all_check, Me, GetType(CheckBox))
-            all_check = all_check.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(3).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(3).Split(separators, StringSplitOptions.None)    'Split the read file content
+
             For i = 0 To all_check.Count - 1
-                Dim grbx As CheckBox = CType(all_check(i), CheckBox)
-                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal checkboxes--
-                If (i < words.Length - 1) Then
-                    Boolean.TryParse(words(i + 1), grbx.Checked)
-                Else
-                    MessageBox.Show("Warning last checkbox not found in file")
-                End If
+                Dim chbx As CheckBox = CType(all_check(i), CheckBox)
+                '============ find the stored numeric control list ====
+
+                For j = 0 To all_check.Count - 1
+                    If (j * 2 + 2) < words.Count Then
+                        If chbx.Name = words(j * 2 + 1) Then    '==== Found ====
+                            'Debug.WriteLine("FOUND !! chbx.Name= " & chbx.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                            If CBool(words(j * 2 + 2)) = True Then
+                                chbx.Checked = True
+                            Else
+                                chbx.Checked = False
+                            End If
+
+                            Exit For
+                            End If
+                        Else
+                        MessageBox.Show(chbx.Name & " was NOT Stored in file and is NOT updated")
+                    End If
+                Next
             Next
 
-            '---------- terugzetten radiobuttons controls -----------------
+            '---------- terugzetten Radio button controls -----------------
+            '=========This is an updated version =====================
             FindControlRecursive(all_radio, Me, GetType(RadioButton))
-            all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()                  'Alphabetical order
-            words = control_words(4).Split(separators, StringSplitOptions.None) 'Split the read file content
+            words = control_words(4).Split(separators, StringSplitOptions.None)    'Split the read file content
+
             For i = 0 To all_radio.Count - 1
-                Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
-                '--- dit deel voorkomt problemen bij het uitbreiden van het aantal radiobuttons--
-                If (i < words.Length - 1) Then
-                    Boolean.TryParse(words(i + 1), grbx.Checked)
-                Else
-                    MessageBox.Show("Warning last radiobutton not found in file")
-                End If
+                Dim radiobt As RadioButton = CType(all_radio(i), RadioButton)
+                '============ find the stored numeric control list ====
+
+                For j = 0 To all_radio.Count - 1
+                    If (j * 2 + 2) < words.Count Then
+                        If radiobt.Name = words(j * 2 + 1) Then    '==== Found ====
+                            'Debug.WriteLine("j= " & j.ToString & ", FOUND !! radiobt.Name= " & radiobt.Name & ", words(j *2)= " & words(j * 2) & ", words(j*2+1)= " & words(j * 2 + 1) & ", words(j*2+2)= " & words(j * 2 + 2))
+                            Boolean.TryParse(words(j * 2 + 2), radiobt.Checked)
+                            Exit For
+                        End If
+                    Else
+                        MessageBox.Show(radiobt.Name & " was NOT Stored in file and is NOT updated")
+                    End If
+                Next
             Next
+
             '---------- terugzetten Notes -- ---------------
             If control_words.Count > 5 Then
                 words = control_words(5).Split(separators, StringSplitOptions.None) 'Split the read file content
@@ -1728,10 +1775,7 @@ Public Class Form1
         Return list
     End Function
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Read_file()
 
-    End Sub
 
     Public Function HardDisc_Id() As String
         'Add system.management as reference !!
@@ -1943,7 +1987,7 @@ Public Class Form1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
             oPara2.Range.Text = "HorI_polarontal Vibration Analyses of the NDE bearing support of a 'between bearings' fan" & vbCrLf
-            oPara2.Range.InsertParagraphAfter()
+                        oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
             'Insert a table, fill it with data and change the column widths.
@@ -2374,7 +2418,11 @@ Public Class Form1
         TabControl1.SelectedIndex = 0
     End Sub
 
-    Private Sub GroupBox11_Enter(sender As Object, e As EventArgs) Handles GroupBox11.Enter
-
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If Directory.Exists(dirpath_Eng) Then
+            Label207.Visible = False
+        Else
+            Label207.Visible = True
+        End If
     End Sub
 End Class

@@ -22,13 +22,14 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -230,6 +231,10 @@ Partial Class Form1
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+        Me.Label207 = New System.Windows.Forms.Label()
+        Me.Label162 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label115 = New System.Windows.Forms.Label()
         Me.TextBox55 = New System.Windows.Forms.TextBox()
@@ -238,9 +243,6 @@ Partial Class Form1
         Me.NumericUpDown11 = New System.Windows.Forms.NumericUpDown()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.NumericUpDown10 = New System.Windows.Forms.NumericUpDown()
-        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
-        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
-        Me.Label162 = New System.Windows.Forms.Label()
         Me.Label161 = New System.Windows.Forms.Label()
         Me.GroupBox31 = New System.Windows.Forms.GroupBox()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
@@ -518,6 +520,7 @@ Partial Class Form1
         Me.Label149 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -576,9 +579,6 @@ Partial Class Form1
         Me.GroupBox9.SuspendLayout()
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox18.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
@@ -587,6 +587,9 @@ Partial Class Form1
         Me.SplitContainer3.Panel1.SuspendLayout()
         Me.SplitContainer3.Panel2.SuspendLayout()
         Me.SplitContainer3.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox31.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
@@ -2876,10 +2879,10 @@ Partial Class Form1
         Me.RadioButton1.Checked = True
         Me.RadioButton1.Location = New System.Drawing.Point(6, 18)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(72, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(99, 17)
         Me.RadioButton1.TabIndex = 77
         Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Overhung"
+        Me.RadioButton1.Text = "Overhung (no1)"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'TextBox9
@@ -2924,7 +2927,7 @@ Partial Class Form1
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(130, 20)
         Me.TextBox7.TabIndex = 72
-        Me.TextBox7.Text = "P18.1076"
+        Me.TextBox7.Text = "--"
         '
         'Label17
         '
@@ -2936,6 +2939,69 @@ Partial Class Form1
         Me.Label17.TabIndex = 71
         Me.Label17.Text = "Fan-Dissy type"
         '
+        'SplitContainer2
+        '
+        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer2.Name = "SplitContainer2"
+        Me.SplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer2.Panel1
+        '
+        Me.SplitContainer2.Panel1.Controls.Add(Me.SplitContainer3)
+        '
+        'SplitContainer2.Panel2
+        '
+        Me.SplitContainer2.Panel2.Controls.Add(Me.Button4)
+        Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox12)
+        Me.SplitContainer2.Size = New System.Drawing.Size(797, 770)
+        Me.SplitContainer2.SplitterDistance = 688
+        Me.SplitContainer2.TabIndex = 40
+        '
+        'SplitContainer3
+        '
+        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer3.Name = "SplitContainer3"
+        Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer3.Panel1
+        '
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label207)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label162)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox1)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label161)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox31)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label130)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label128)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Label129)
+        '
+        'SplitContainer3.Panel2
+        '
+        Me.SplitContainer3.Panel2.Controls.Add(Me.Chart1)
+        Me.SplitContainer3.Size = New System.Drawing.Size(797, 688)
+        Me.SplitContainer3.SplitterDistance = 194
+        Me.SplitContainer3.TabIndex = 39
+        '
+        'Label207
+        '
+        Me.Label207.AutoSize = True
+        Me.Label207.BackColor = System.Drawing.Color.Tomato
+        Me.Label207.Location = New System.Drawing.Point(579, 111)
+        Me.Label207.Name = "Label207"
+        Me.Label207.Size = New System.Drawing.Size(156, 13)
+        Me.Label207.TabIndex = 86
+        Me.Label207.Text = "VTK network NOT DETECTED"
+        '
+        'Label162
+        '
+        Me.Label162.AutoSize = True
+        Me.Label162.Location = New System.Drawing.Point(236, 84)
+        Me.Label162.Name = "Label162"
+        Me.Label162.Size = New System.Drawing.Size(235, 13)
+        Me.Label162.TabIndex = 85
+        Me.Label162.Text = "Avoid rubber or steel springs under the fan frame"
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.Label115)
@@ -2945,9 +3011,9 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.NumericUpDown11)
         Me.GroupBox1.Controls.Add(Me.Label13)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown10)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 107)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 104)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(439, 76)
+        Me.GroupBox1.Size = New System.Drawing.Size(439, 84)
         Me.GroupBox1.TabIndex = 59
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Rotational inertia impeller"
@@ -3030,58 +3096,6 @@ Partial Class Form1
         Me.NumericUpDown10.TabIndex = 47
         Me.NumericUpDown10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.NumericUpDown10.Value = New Decimal(New Integer() {18, 0, 0, 196608})
-        '
-        'SplitContainer2
-        '
-        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer2.Name = "SplitContainer2"
-        Me.SplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitContainer2.Panel1
-        '
-        Me.SplitContainer2.Panel1.Controls.Add(Me.SplitContainer3)
-        '
-        'SplitContainer2.Panel2
-        '
-        Me.SplitContainer2.Panel2.Controls.Add(Me.Button4)
-        Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox12)
-        Me.SplitContainer2.Size = New System.Drawing.Size(797, 770)
-        Me.SplitContainer2.SplitterDistance = 688
-        Me.SplitContainer2.TabIndex = 40
-        '
-        'SplitContainer3
-        '
-        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer3.Name = "SplitContainer3"
-        Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitContainer3.Panel1
-        '
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Label162)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox1)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Label161)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBox31)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Label130)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Label128)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Label129)
-        '
-        'SplitContainer3.Panel2
-        '
-        Me.SplitContainer3.Panel2.Controls.Add(Me.Chart1)
-        Me.SplitContainer3.Size = New System.Drawing.Size(797, 688)
-        Me.SplitContainer3.SplitterDistance = 194
-        Me.SplitContainer3.TabIndex = 39
-        '
-        'Label162
-        '
-        Me.Label162.AutoSize = True
-        Me.Label162.Location = New System.Drawing.Point(236, 84)
-        Me.Label162.Name = "Label162"
-        Me.Label162.Size = New System.Drawing.Size(235, 13)
-        Me.Label162.TabIndex = 85
-        Me.Label162.Text = "Avoid rubber or steel springs under the fan frame"
         '
         'Label161
         '
@@ -3167,17 +3181,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea3)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        Legend3.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend3)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.Chart1.Series.Add(Series3)
         Me.Chart1.Size = New System.Drawing.Size(797, 490)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -3394,16 +3408,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend4)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart2.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.Chart2.Series.Add(Series4)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -6156,6 +6170,10 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "Campbell*"
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6164,7 +6182,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Campbell diagram for shafts, V2.4a"
+        Me.Text = "Campbell diagram for shafts, V2.4b"
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
@@ -6240,10 +6258,6 @@ Partial Class Form1
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox18.ResumeLayout(False)
         Me.GroupBox18.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -6253,6 +6267,10 @@ Partial Class Form1
         Me.SplitContainer3.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.NumericUpDown11, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox31.ResumeLayout(False)
         Me.GroupBox31.PerformLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -6844,4 +6862,6 @@ Partial Class Form1
     Friend WithEvents TextBox110 As TextBox
     Friend WithEvents TextBox109 As TextBox
     Friend WithEvents Label206 As Label
+    Friend WithEvents Label207 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
