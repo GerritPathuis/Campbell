@@ -1533,11 +1533,11 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Save_tofile()
+        Save_tofile_vtk5()
     End Sub
 
     'Save control settings and case_x_conditions to file
-    Private Sub Save_tofile()
+    Private Sub Save_tofile_vtk5()
         Dim temp_string As String
         Dim filename As String = "Campbell_select_" & TextBox7.Text & "_" & TextBox8.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk5"
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
@@ -1610,15 +1610,14 @@ Public Class Form1
         End Try
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Read_file()
+        Read_file_vtk5()
     End Sub
     'Retrieve control settings and case_x_conditions from file
     'Split the file string into 5 separate strings
     'Each string represents a control type (combobox, checkbox,..)
     'Then split up the secton string into part to read into the parameters
-    Private Sub Read_file()
+    Private Sub Read_file_vtk5()
         Dim control_words(), words() As String
-        Dim i As Integer
         Dim k As Integer = 0
         Dim all_num As New List(Of Control)
         Dim all_combo As New List(Of Control)
