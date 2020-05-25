@@ -48,7 +48,7 @@ Public Class Form1
     "eccentricity of the vertical load should not cause uplift.",
     " ",
     "Supply rotor machine weight is 2500 kg",
-    "Inertia block weight shall be > 2.5 x 2500= 6250 kg"}
+    "Inertia block weight shall be > 3.0 x 2500= 7500 kg"}
 
     Public Shared bearing_support() As String = {
     "VTK bearing support structures",
