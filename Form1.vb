@@ -1611,6 +1611,7 @@ Public Class Form1
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Read_file_vtk5()
+        Calc_sequence()
     End Sub
     'Retrieve control settings and case_x_conditions from file
     'Split the file string into 5 separate strings
