@@ -204,6 +204,11 @@ Public Class Form1
         "Walzlager(d100 mm) = 500 - 1000 kN/mm" & vbCrLf &
         "FS Dynamics used probably 18 kN/mm on Bedum 3"
 
+        TextBox37.Text =
+        "Fundation weight > 3x rotor weight (impeller + as)" & vbCrLf &
+        "Weight reduces the natural frequency and therefore" & vbCrLf &
+        "reduces the swing amplitude" & vbCrLf
+
         TextBox92.Text =
         "Project P2006.1050, Tata Big fan" & vbCrLf &
         "Diameter 4130 mm, 750 [rpm], impeller weight 7600 [kg]" & vbCrLf &
@@ -301,9 +306,16 @@ Public Class Form1
         "Longitudinal force 25% dead weight applied along axis" & vbCrLf &
         "Lateral and Longitudinal force do not work concurrently" & vbCrLf &
         "Anchor stress not exceed 120 N/mm2" & vbCrLf &
-        "Anchor coorosion allowence 3 mm" & vbCrLf &
+        "Anchor corrosion allowence 3 mm" & vbCrLf &
         "Concrete bearing stress not exceed 5 N/mm2" & vbCrLf &
         "" & vbCrLf
+
+        TextBox112.Text =
+        "The eigen frequency must be below the lowest operating speed frequency " &
+        "of the fan" & vbCrLf & vbCrLf &
+        "For example" & vbCrLf &
+        "VSD operate between 600 and 1000 rpm (10 and 16.7Hz)" & vbCrLf &
+        "The machine weight and 10Hz give a max spring stiffness" & vbCrLf
 
         TextBox71.Text =
         "Possible NDE bearing support vibration problem solutions" & vbCrLf & vbCrLf &

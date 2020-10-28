@@ -24,12 +24,12 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -521,6 +521,7 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.TextBox112 = New System.Windows.Forms.TextBox()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.NumericUpDown28, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -700,7 +701,7 @@ Partial Class Form1
         Me.GroupBox16.Controls.Add(Me.Label64)
         Me.GroupBox16.Controls.Add(Me.NumericUpDown28)
         Me.GroupBox16.Controls.Add(Me.NumericUpDown29)
-        Me.GroupBox16.Location = New System.Drawing.Point(901, 527)
+        Me.GroupBox16.Location = New System.Drawing.Point(901, 412)
         Me.GroupBox16.Name = "GroupBox16"
         Me.GroupBox16.Size = New System.Drawing.Size(310, 102)
         Me.GroupBox16.TabIndex = 69
@@ -772,15 +773,16 @@ Partial Class Form1
         '
         'GroupBox15
         '
+        Me.GroupBox15.Controls.Add(Me.TextBox112)
         Me.GroupBox15.Controls.Add(Me.Label65)
         Me.GroupBox15.Controls.Add(Me.TextBox42)
         Me.GroupBox15.Controls.Add(Me.Label66)
         Me.GroupBox15.Controls.Add(Me.Label67)
         Me.GroupBox15.Controls.Add(Me.NumericUpDown30)
         Me.GroupBox15.Controls.Add(Me.NumericUpDown31)
-        Me.GroupBox15.Location = New System.Drawing.Point(901, 407)
+        Me.GroupBox15.Location = New System.Drawing.Point(901, 201)
         Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.Size = New System.Drawing.Size(310, 102)
+        Me.GroupBox15.Size = New System.Drawing.Size(310, 205)
         Me.GroupBox15.TabIndex = 68
         Me.GroupBox15.TabStop = False
         Me.GroupBox15.Text = "Veerconstante motor support berekenen met eigen frequentie"
@@ -791,9 +793,9 @@ Partial Class Form1
         Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label65.Location = New System.Drawing.Point(9, 42)
         Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(144, 18)
+        Me.Label65.Size = New System.Drawing.Size(208, 18)
         Me.Label65.TabIndex = 62
-        Me.Label65.Text = "Eigen frequentie [Hz]"
+        Me.Label65.Text = "Natural frequency support [Hz]"
         '
         'TextBox42
         '
@@ -811,9 +813,9 @@ Partial Class Form1
         Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label66.Location = New System.Drawing.Point(9, 17)
         Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(188, 18)
+        Me.Label66.Size = New System.Drawing.Size(170, 18)
         Me.Label66.TabIndex = 29
-        Me.Label66.Text = "Gewicht motor support [kg]"
+        Me.Label66.Text = "Complete fan weight [kg]"
         '
         'Label67
         '
@@ -821,9 +823,9 @@ Partial Class Form1
         Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label67.Location = New System.Drawing.Point(9, 68)
         Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(198, 18)
+        Me.Label67.Size = New System.Drawing.Size(208, 18)
         Me.Label67.TabIndex = 28
-        Me.Label67.Text = "Federcons. support [kN/mm]"
+        Me.Label67.Text = "Comb spring support [kN/mm]"
         '
         'NumericUpDown30
         '
@@ -835,7 +837,7 @@ Partial Class Form1
         Me.NumericUpDown30.Size = New System.Drawing.Size(65, 20)
         Me.NumericUpDown30.TabIndex = 32
         Me.NumericUpDown30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown30.Value = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown30.Value = New Decimal(New Integer() {3000, 0, 0, 0})
         '
         'NumericUpDown31
         '
@@ -846,7 +848,7 @@ Partial Class Form1
         Me.NumericUpDown31.Size = New System.Drawing.Size(65, 20)
         Me.NumericUpDown31.TabIndex = 33
         Me.NumericUpDown31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown31.Value = New Decimal(New Integer() {45, 0, 0, 0})
+        Me.NumericUpDown31.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'GroupBox14
         '
@@ -862,9 +864,9 @@ Partial Class Form1
         Me.GroupBox14.Controls.Add(Me.Label61)
         Me.GroupBox14.Controls.Add(Me.NumericUpDown5)
         Me.GroupBox14.Controls.Add(Me.NumericUpDown23)
-        Me.GroupBox14.Location = New System.Drawing.Point(901, 202)
+        Me.GroupBox14.Location = New System.Drawing.Point(901, 524)
         Me.GroupBox14.Name = "GroupBox14"
-        Me.GroupBox14.Size = New System.Drawing.Size(310, 183)
+        Me.GroupBox14.Size = New System.Drawing.Size(310, 174)
         Me.GroupBox14.TabIndex = 62
         Me.GroupBox14.TabStop = False
         Me.GroupBox14.Text = "Veer konstante staaf/plaat"
@@ -995,8 +997,8 @@ Partial Class Form1
         '
         'TextBox38
         '
-        Me.TextBox38.Enabled = False
-        Me.TextBox38.Location = New System.Drawing.Point(901, 100)
+        Me.TextBox38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox38.Location = New System.Drawing.Point(901, 99)
         Me.TextBox38.Multiline = True
         Me.TextBox38.Name = "TextBox38"
         Me.TextBox38.Size = New System.Drawing.Size(310, 94)
@@ -1005,13 +1007,14 @@ Partial Class Form1
         '
         'TextBox37
         '
-        Me.TextBox37.Enabled = False
-        Me.TextBox37.Location = New System.Drawing.Point(901, 27)
+        Me.TextBox37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox37.Location = New System.Drawing.Point(901, 16)
         Me.TextBox37.Multiline = True
         Me.TextBox37.Name = "TextBox37"
-        Me.TextBox37.Size = New System.Drawing.Size(310, 62)
+        Me.TextBox37.Size = New System.Drawing.Size(310, 77)
         Me.TextBox37.TabIndex = 65
-        Me.TextBox37.Text = "Fundatie gewicht 3x rotor gewicht" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Massa remt de verplaatsing"
+        Me.TextBox37.Text = "Fundatie gewicht > 3x rotor gewicht (impeller + as)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Massa remt de verplaatsing" &
+    ""
         '
         'TextBox29
         '
@@ -1134,9 +1137,9 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(973, 667)
+        Me.Button3.Location = New System.Drawing.Point(485, 599)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 83)
+        Me.Button3.Size = New System.Drawing.Size(248, 52)
         Me.Button3.TabIndex = 4
         Me.Button3.Text = "Button3"
         Me.Button3.UseVisualStyleBackColor = True
@@ -3181,17 +3184,17 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea3)
+        ChartArea5.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea5)
         Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend3.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend3)
+        Legend5.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend5)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart1.Series.Add(Series3)
+        Series5.ChartArea = "ChartArea1"
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.Chart1.Series.Add(Series5)
         Me.Chart1.Size = New System.Drawing.Size(797, 490)
         Me.Chart1.TabIndex = 38
         Me.Chart1.Text = "Chart1"
@@ -3408,16 +3411,16 @@ Partial Class Form1
         '
         'Chart2
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend4)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend6)
         Me.Chart2.Location = New System.Drawing.Point(374, 60)
         Me.Chart2.Name = "Chart2"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart2.Series.Add(Series4)
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.Chart2.Series.Add(Series6)
         Me.Chart2.Size = New System.Drawing.Size(490, 333)
         Me.Chart2.TabIndex = 84
         Me.Chart2.Text = "Chart2"
@@ -6174,6 +6177,16 @@ Partial Class Form1
         '
         Me.Timer1.Interval = 1000
         '
+        'TextBox112
+        '
+        Me.TextBox112.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.TextBox112.Location = New System.Drawing.Point(3, 94)
+        Me.TextBox112.Multiline = True
+        Me.TextBox112.Name = "TextBox112"
+        Me.TextBox112.Size = New System.Drawing.Size(304, 108)
+        Me.TextBox112.TabIndex = 63
+        Me.TextBox112.Text = "The eigen frequency must be below the lowest operating speed f"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6182,7 +6195,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Campbell diagram for shafts, V2.4b"
+        Me.Text = "Campbell diagram for shafts, V2.4c"
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
@@ -6864,4 +6877,5 @@ Partial Class Form1
     Friend WithEvents Label206 As Label
     Friend WithEvents Label207 As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents TextBox112 As TextBox
 End Class
