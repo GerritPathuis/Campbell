@@ -8,7 +8,7 @@ Imports System.Globalization
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
-    Dim form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
+    Public form533(2000, 2) As Double       'Formule 5.33 pagina 330 Machinendynamik
 
     Public Shared based_on() As String = {
     "Based on",
@@ -73,9 +73,9 @@ Public Class Form1
     ""}
 
     '----------- directory's-----------
-    Dim dirpath_Eng As String = "N:\Engineering\VBasic\Campbell_input\"
-    Dim dirpath_Rap As String = "N:\Engineering\VBasic\Campbell_rapport_copy\"
-    Dim dirpath_Home As String = "C:\Temp\"
+    Public dirpath_Eng As String = "N:\Engineering\VBasic\Campbell_input\"
+    Public dirpath_Rap As String = "N:\Engineering\VBasic\Campbell_rapport_copy\"
+    Public dirpath_Home As String = "C:\Temp\"
     'Naam
     'Model
     'Tekst
@@ -1631,7 +1631,7 @@ Public Class Form1
     'Then split up the secton string into part to read into the parameters
     Private Sub Read_file_vtk5()
         Dim control_words(), words() As String
-        Dim k As Integer = 0
+
         Dim all_num As New List(Of Control)
         Dim all_combo As New List(Of Control)
         Dim all_check As New List(Of Control)
@@ -1863,7 +1863,7 @@ Public Class Form1
         '============= torsional stiffness =======
         'https://en.wikipedia.org/wiki/Stiffness
         'https://en.wikipedia.org/wiki/List_of_moments_of_inertia
-        Dim radius As Double = NumericUpDown66.Value    '[m]
+        Dim radius As Double                            '[m]
         Dim R_stiff As Double                           '[N/m]
         Dim L_displac As Double                         '[rad] linear displacement
         Dim R_displac As Double                         '[rad] radial displacement

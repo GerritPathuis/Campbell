@@ -27,7 +27,7 @@
     <InstallUrl>\\DCF1\data2%24\Engineering\VBasic\Campbell\</InstallUrl>
     <ProductName>Campbell</ProductName>
     <PublisherName>Pathuis Heavy Industries</PublisherName>
-    <ApplicationRevision>109</ApplicationRevision>
+    <ApplicationRevision>110</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -43,7 +43,7 @@
     <DocumentationFile>Campbell_diagram.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
