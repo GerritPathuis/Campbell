@@ -1937,7 +1937,9 @@ Public Class Form1
         TextBox75.Text = F_dyn_found.ToString("F0")               '[N]
         TextBox96.Text = ang_speed.ToString("F1")                 '[rad/s]
         TextBox95.Text = un_bal_force.ToString("F0")              '[N]
+        TextBox113.Text = (rpm / 60).ToString("F1")              '[Hz]
     End Sub
+
     Private Sub Calc_Rotary_feeder()
         Dim rps, dia As Double      'Rotary feeder
         Dim lump, a_time As Double  'Lump data
