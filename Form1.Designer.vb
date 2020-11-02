@@ -5883,7 +5883,7 @@ Partial Class Form1
         Me.GroupBox30.Controls.Add(Me.Label155)
         Me.GroupBox30.Location = New System.Drawing.Point(6, 440)
         Me.GroupBox30.Name = "GroupBox30"
-        Me.GroupBox30.Size = New System.Drawing.Size(381, 70)
+        Me.GroupBox30.Size = New System.Drawing.Size(381, 63)
         Me.GroupBox30.TabIndex = 27
         Me.GroupBox30.TabStop = False
         Me.GroupBox30.Text = "DCS value"
@@ -5892,7 +5892,7 @@ Partial Class Form1
         '
         Me.Label156.AutoSize = True
         Me.Label156.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label156.Location = New System.Drawing.Point(18, 42)
+        Me.Label156.Location = New System.Drawing.Point(16, 37)
         Me.Label156.Name = "Label156"
         Me.Label156.Size = New System.Drawing.Size(161, 16)
         Me.Label156.TabIndex = 23
@@ -5902,7 +5902,7 @@ Partial Class Form1
         '
         Me.Label155.AutoSize = True
         Me.Label155.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label155.Location = New System.Drawing.Point(17, 20)
+        Me.Label155.Location = New System.Drawing.Point(17, 17)
         Me.Label155.Name = "Label155"
         Me.Label155.Size = New System.Drawing.Size(159, 16)
         Me.Label155.TabIndex = 22
@@ -5943,7 +5943,7 @@ Partial Class Form1
         '
         Me.Label150.AutoSize = True
         Me.Label150.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label150.Location = New System.Drawing.Point(33, 119)
+        Me.Label150.Location = New System.Drawing.Point(17, 115)
         Me.Label150.Name = "Label150"
         Me.Label150.Size = New System.Drawing.Size(372, 16)
         Me.Label150.TabIndex = 23
@@ -5953,7 +5953,7 @@ Partial Class Form1
         '
         Me.Label151.AutoSize = True
         Me.Label151.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label151.Location = New System.Drawing.Point(33, 56)
+        Me.Label151.Location = New System.Drawing.Point(17, 52)
         Me.Label151.Name = "Label151"
         Me.Label151.Size = New System.Drawing.Size(390, 16)
         Me.Label151.TabIndex = 22
@@ -5963,7 +5963,7 @@ Partial Class Form1
         '
         Me.Label152.AutoSize = True
         Me.Label152.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label152.Location = New System.Drawing.Point(33, 90)
+        Me.Label152.Location = New System.Drawing.Point(17, 86)
         Me.Label152.Name = "Label152"
         Me.Label152.Size = New System.Drawing.Size(318, 16)
         Me.Label152.TabIndex = 21
@@ -5973,7 +5973,7 @@ Partial Class Form1
         '
         Me.Label153.AutoSize = True
         Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label153.Location = New System.Drawing.Point(33, 74)
+        Me.Label153.Location = New System.Drawing.Point(17, 69)
         Me.Label153.Name = "Label153"
         Me.Label153.Size = New System.Drawing.Size(569, 16)
         Me.Label153.TabIndex = 20
@@ -5984,7 +5984,7 @@ Partial Class Form1
         '
         Me.Label154.AutoSize = True
         Me.Label154.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label154.Location = New System.Drawing.Point(32, 26)
+        Me.Label154.Location = New System.Drawing.Point(16, 22)
         Me.Label154.Name = "Label154"
         Me.Label154.Size = New System.Drawing.Size(671, 20)
         Me.Label154.TabIndex = 19
@@ -6045,9 +6045,9 @@ Partial Class Form1
         Me.Label208.AutoSize = True
         Me.Label208.Location = New System.Drawing.Point(14, 259)
         Me.Label208.Name = "Label208"
-        Me.Label208.Size = New System.Drawing.Size(137, 13)
+        Me.Label208.Size = New System.Drawing.Size(140, 13)
         Me.Label208.TabIndex = 29
-        Me.Label208.Text = "calulate with 20mm/s, RMS"
+        Me.Label208.Text = "calulate with 20 mm/s, RMS"
         '
         'TextBox91
         '
@@ -6138,9 +6138,10 @@ Partial Class Form1
         'NumericUpDown60
         '
         Me.NumericUpDown60.BackColor = System.Drawing.Color.Yellow
+        Me.NumericUpDown60.Increment = New Decimal(New Integer() {50, 0, 0, 0})
         Me.NumericUpDown60.Location = New System.Drawing.Point(214, 19)
         Me.NumericUpDown60.Maximum = New Decimal(New Integer() {4000, 0, 0, 0})
-        Me.NumericUpDown60.Minimum = New Decimal(New Integer() {600, 0, 0, 0})
+        Me.NumericUpDown60.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.NumericUpDown60.Name = "NumericUpDown60"
         Me.NumericUpDown60.Size = New System.Drawing.Size(64, 20)
         Me.NumericUpDown60.TabIndex = 19
@@ -6150,6 +6151,7 @@ Partial Class Form1
         'NumericUpDown59
         '
         Me.NumericUpDown59.BackColor = System.Drawing.Color.Yellow
+        Me.NumericUpDown59.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDown59.Location = New System.Drawing.Point(214, 111)
         Me.NumericUpDown59.Maximum = New Decimal(New Integer() {6000, 0, 0, 0})
         Me.NumericUpDown59.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -6162,6 +6164,8 @@ Partial Class Form1
         'NumericUpDown58
         '
         Me.NumericUpDown58.BackColor = System.Drawing.Color.Yellow
+        Me.NumericUpDown58.DecimalPlaces = 1
+        Me.NumericUpDown58.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
         Me.NumericUpDown58.Location = New System.Drawing.Point(214, 42)
         Me.NumericUpDown58.Maximum = New Decimal(New Integer() {630, 0, 0, 0})
         Me.NumericUpDown58.Name = "NumericUpDown58"
