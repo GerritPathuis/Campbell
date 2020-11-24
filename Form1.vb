@@ -132,8 +132,13 @@ Public Class Form1
         hard_disk_list.Add("170228801578")   'VTK laptop, Jeroen
         hard_disk_list.Add("171095402070")   'VTK desktop, Jeroen
 
-        user_list.Add("ABI")
-        hard_disk_list.Add("174741803447")         'VTK desktop, Ab van Iterson <a.van.Iterson@vtk.nl>
+        'user_list.Add("ABI")
+        'hard_disk_list.Add("174741803447")         'VTK desktop, Ab van Iterson <a.van.Iterson@vtk.nl>
+
+        user_list.Add("bertk")
+        'hard_disk_list.Add("WD-WXB1A14C9942")      'VTK oude desktop. BKo
+        hard_disk_list.Add("0025_3886_01E9_11D6.")  'VTK new desktop. BKo (24/11/2020)
+
 
         Pro_user = Environment.UserName     'User name on the screen
         HD_number = HardDisc_Id()           'Harddisk identification
