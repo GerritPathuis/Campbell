@@ -1559,7 +1559,7 @@ Partial Class Form1
         Me.NumericUpDown20.BackColor = System.Drawing.Color.Yellow
         Me.NumericUpDown20.Location = New System.Drawing.Point(288, 32)
         Me.NumericUpDown20.Maximum = New Decimal(New Integer() {5000, 0, 0, 0})
-        Me.NumericUpDown20.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.NumericUpDown20.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDown20.Name = "NumericUpDown20"
         Me.NumericUpDown20.Size = New System.Drawing.Size(62, 20)
         Me.NumericUpDown20.TabIndex = 32
